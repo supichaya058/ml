@@ -1,118 +1,1787 @@
 # ============================================================
-# TEXT FEATURE VECTOR SPACE
-# SPECTER2 Embedding → PCA → Interactive HTML
+# 🌱🌼 AI RESEARCH FLOWER FIELD
+# ORGANIZED FLOWER GROUP VERSION
+#
+# จุดเด่น:
+# - พื้นหลังเป็นทุ่งหญ้า
+# - มีดอกไม้ตกแต่ง
+# - ไม่มีหมี
+# - ไม่มีคำว่า Meadow
+# - Keyword เป็นวงกลม
+# - จัดกลุ่มใหม่แบบเป็นระเบียบ
+# - ลดการชนกันของวงกลม
+# - แต่ละกลุ่มเป็น FLOWER GROUP
+# - Interactive Plotly
+# - Export HTML + PNG + CSV
+# ============================================================
+
+
+# ============================================================
+# 0. INSTALL
+# ============================================================
+
+!pip -q install networkx plotly kaleido pandas numpy
+
+
+# ============================================================
+# 1. IMPORT
 # ============================================================
 
 import pandas as pd
-import plotly.express as px
+import numpy as np
+
+import networkx as nx
+import plotly.graph_objects as go
+
+import re
+import math
+import random
+
+from collections import Counter
+from itertools import combinations
+
 from google.colab import files
 
+
 # ============================================================
-# 1. UPLOAD FILE
+# 2. UPLOAD DATA
 # ============================================================
 
-print("📂 กรุณาเลือกไฟล์ที่มี PC1 และ PC2")
+print("=" * 70)
+print("🌱🌼 AI RESEARCH FLOWER FIELD")
+print("🌸 ORGANIZED FLOWER GROUP VERSION")
+print("=" * 70)
+
+print("\n📂 Upload dataset_clean_final.csv")
+
 uploaded = files.upload()
 
-filename = list(uploaded.keys())[0]
+csv_files = [
+    f for f in uploaded.keys()
+    if f.lower().endswith(".csv")
+]
 
-df = pd.read_csv(filename)
+if not csv_files:
+    raise FileNotFoundError(
+        "ไม่พบไฟล์ CSV"
+    )
 
-print("\n======================================")
-print("โหลดข้อมูลสำเร็จ")
-print("======================================")
-print("ไฟล์:", filename)
-print("จำนวนข้อมูล:", len(df))
-print("Columns:")
-print(df.columns.tolist())
+DATA_PATH = csv_files[0]
+
+df = pd.read_csv(DATA_PATH)
+
+print("\n✅ Dataset:", DATA_PATH)
+print("📚 Articles:", len(df))
 
 
 # ============================================================
-# 2. ตรวจสอบ Column
+# 3. FIND KEYWORD COLUMN
 # ============================================================
 
-required_columns = [
-    "PC1",
-    "PC2",
-    "Subject",
-    "Title"
+keyword_candidates = [
+    "Author_Keywords_normalized",
+    "Author Keywords",
+    "Author_Keywords_clean"
 ]
 
-missing_columns = [
-    col
-    for col in required_columns
-    if col not in df.columns
-]
+KEYWORD_COLUMN = None
 
-if len(missing_columns) > 0:
+for col in keyword_candidates:
 
-    print("\n❌ ไม่พบ Column:")
-    print(missing_columns)
+    if col in df.columns:
 
-    print("\nColumn ที่มีอยู่:")
-    print(df.columns.tolist())
+        KEYWORD_COLUMN = col
+        break
+
+
+if KEYWORD_COLUMN is None:
 
     raise ValueError(
-        "ไฟล์นี้ยังไม่มี Column ที่จำเป็นสำหรับ Visualization"
+        """
+ไม่พบ Keyword column
+
+ต้องมีอย่างใดอย่างหนึ่ง:
+
+Author_Keywords_normalized
+Author Keywords
+Author_Keywords_clean
+"""
+    )
+
+
+print(
+    "🔑 Keyword column:",
+    KEYWORD_COLUMN
+)
+
+
+# ============================================================
+# 4. CLEAN KEYWORDS
+# ============================================================
+
+def clean_keyword(x):
+
+    x = str(x).strip().lower()
+
+    x = re.sub(
+        r"\s+",
+        " ",
+        x
+    )
+
+    return x
+
+
+paper_keywords = []
+
+keyword_frequency = Counter()
+
+
+for text in df[
+    KEYWORD_COLUMN
+].fillna(""):
+
+    keywords = re.split(
+        r"[;,]",
+        str(text)
+    )
+
+    cleaned = []
+
+    for keyword in keywords:
+
+        keyword = clean_keyword(
+            keyword
+        )
+
+        if len(keyword) < 2:
+            continue
+
+        if keyword not in cleaned:
+
+            cleaned.append(
+                keyword
+            )
+
+            keyword_frequency[
+                keyword
+            ] += 1
+
+    paper_keywords.append(
+        cleaned
+    )
+
+
+print(
+    "\n🔑 Unique keywords:",
+    len(keyword_frequency)
+)
+
+
+# ============================================================
+# 5. SETTINGS
+# ============================================================
+
+# จำนวน keyword ที่นำมาแสดง
+TOP_N = 90
+
+# จำนวนครั้งขั้นต่ำที่ keyword 2 ตัวต้องเกิดร่วมกัน
+MIN_EDGE = 5
+
+# keyword สูงสุดในแต่ละกลุ่ม
+MAX_NODES_PER_CLUSTER = 22
+
+# ------------------------------------------------------------
+# ⭐ ปรับตรงนี้ได้ถ้ายังอยากให้กลุ่มห่างกัน
+# ------------------------------------------------------------
+
+GROUP_X_DISTANCE = 5.2
+GROUP_Y_DISTANCE = 4.8
+
+# ขนาดของแต่ละกลุ่ม
+GROUP_SCALE = 1.35
+
+
+# ============================================================
+# 6. TOP KEYWORDS
+# ============================================================
+
+top_keywords = dict(
+
+    keyword_frequency.most_common(
+        TOP_N
+    )
+
+)
+
+top_set = set(
+    top_keywords.keys()
+)
+
+
+print(
+    "\n🌼 Selected keywords:",
+    len(top_keywords)
+)
+
+
+# ============================================================
+# 7. BUILD CO-OCCURRENCE
+# ============================================================
+
+print(
+    "\n🌱 Building keyword network..."
+)
+
+cooccurrence = Counter()
+
+
+for keywords in paper_keywords:
+
+    selected = [
+
+        k
+
+        for k in keywords
+
+        if k in top_set
+
+    ]
+
+    selected = list(
+        set(selected)
+    )
+
+    for a, b in combinations(
+        sorted(selected),
+        2
+    ):
+
+        cooccurrence[
+            (a, b)
+        ] += 1
+
+
+# ============================================================
+# 8. CREATE GRAPH
+# ============================================================
+
+G = nx.Graph()
+
+
+for keyword, freq in top_keywords.items():
+
+    G.add_node(
+        keyword,
+        frequency=freq
+    )
+
+
+for (a, b), weight in cooccurrence.items():
+
+    if weight >= MIN_EDGE:
+
+        G.add_edge(
+            a,
+            b,
+            weight=weight
+        )
+
+
+# ลบ keyword ที่ไม่มีเส้นเชื่อม
+G.remove_nodes_from(
+    list(nx.isolates(G))
+)
+
+
+print(
+    "\n🌼 Nodes:",
+    G.number_of_nodes()
+)
+
+print(
+    "🌿 Edges:",
+    G.number_of_edges()
+)
+
+
+# ============================================================
+# 9. COMMUNITY DETECTION
+# ============================================================
+
+print(
+    "\n🧠 Detecting research groups..."
+)
+
+
+try:
+
+    communities = (
+
+        nx.community
+        .louvain_communities(
+
+            G,
+
+            seed=42,
+
+            weight="weight"
+
+        )
+
+    )
+
+except:
+
+    communities = list(
+
+        nx.community
+        .greedy_modularity_communities(
+
+            G,
+
+            weight="weight"
+
+        )
+
+    )
+
+
+# เรียงจากกลุ่มใหญ่ไปเล็ก
+communities = sorted(
+    communities,
+    key=len,
+    reverse=True
+)
+
+
+# เอาเฉพาะกลุ่มที่มีอย่างน้อย 2 keyword
+communities = [
+
+    c
+
+    for c in communities
+
+    if len(c) >= 2
+
+]
+
+
+node_cluster = {}
+
+
+for cluster_id, community in enumerate(
+    communities
+):
+
+    for node in community:
+
+        node_cluster[
+            node
+        ] = cluster_id
+
+
+print(
+    "🌸 Flower Groups:",
+    len(communities)
+)
+
+
+for i, community in enumerate(
+    communities
+):
+
+    print(
+        f"   Flower Group {i+1}: "
+        f"{len(community)} keywords"
     )
 
 
 # ============================================================
-# 3. Text Feature Vector Space
+# 10. LIMIT NODES PER GROUP
 # ============================================================
 
-fig = px.scatter(
+selected_nodes = set()
 
-    df,
 
-    x="PC1",
+for community in communities:
 
-    y="PC2",
+    ranked = sorted(
 
-    color="Subject",
+        community,
 
-    hover_data=[
-        "Title"
-    ],
+        key=lambda n:
+        G.nodes[n]["frequency"],
 
-    title=(
-        "<b>Text Feature Vector Space</b>"
-        "<br>"
-        "<span style='font-size:13px'>"
-        "SPECTER2 Text Embedding Visualized using PCA"
-        "</span>"
+        reverse=True
+
+    )
+
+    ranked = ranked[
+        :MAX_NODES_PER_CLUSTER
+    ]
+
+    selected_nodes.update(
+        ranked
+    )
+
+
+G = G.subgraph(
+    selected_nodes
+).copy()
+
+
+# สร้าง cluster map ใหม่
+node_cluster = {
+
+    node:
+    node_cluster[node]
+
+    for node in G.nodes()
+
+}
+
+
+print(
+    "\n🌼 Final keywords:",
+    G.number_of_nodes()
+)
+
+
+# ============================================================
+# 11. FLOWER GROUP COLORS
+# ============================================================
+
+flower_colors = [
+
+    "#F59E9E",
+    "#F6C85F",
+    "#8FD3A8",
+    "#8EC5E8",
+    "#C5A6E8",
+    "#F2A7D0",
+    "#A8D8C0",
+    "#F4B183",
+    "#9FA8DA",
+    "#B8D8BA",
+    "#E7B7A3",
+    "#A7C7E7"
+
+]
+
+
+def flower_group_color(i):
+
+    return flower_colors[
+        i % len(flower_colors)
+    ]
+
+
+# ============================================================
+# 12. NEW GROUP POSITION
+#
+# ⭐ สำคัญ
+#
+# เดิมใช้วางรอบวงกลม
+# ตอนนี้เปลี่ยนเป็น GRID
+# เพื่อไม่ให้กลุ่มชนกัน
+# ============================================================
+
+group_centers = {}
+
+
+n_groups = len(
+    communities
+)
+
+
+# จำนวนคอลัมน์
+if n_groups <= 3:
+
+    columns = n_groups
+
+elif n_groups <= 6:
+
+    columns = 3
+
+else:
+
+    columns = 4
+
+
+rows = math.ceil(
+    n_groups / columns
+)
+
+
+# คำนวณจุดเริ่มต้น
+start_x = -(
+    (columns - 1)
+    * GROUP_X_DISTANCE
+    / 2
+)
+
+start_y = (
+    (rows - 1)
+    * GROUP_Y_DISTANCE
+    / 2
+)
+
+
+for i in range(
+    n_groups
+):
+
+    row = i // columns
+    col = i % columns
+
+    cx = (
+        start_x
+        + col
+        * GROUP_X_DISTANCE
+    )
+
+    cy = (
+        start_y
+        - row
+        * GROUP_Y_DISTANCE
+    )
+
+    group_centers[i] = (
+        cx,
+        cy
+    )
+
+
+# ============================================================
+# 13. CREATE LOCAL LAYOUT
+# ============================================================
+
+print(
+    "\n🌼 Arranging keyword circles..."
+)
+
+
+final_pos = {}
+
+
+for group_id, community in enumerate(
+    communities
+):
+
+    nodes = [
+
+        n
+
+        for n in community
+
+        if n in G.nodes()
+
+    ]
+
+    if not nodes:
+        continue
+
+
+    # --------------------------------------------------------
+    # จุดกลางของกลุ่ม
+    # --------------------------------------------------------
+
+    cx, cy = group_centers[
+        group_id
+    ]
+
+
+    # --------------------------------------------------------
+    # ถ้ามี node เดียว
+    # --------------------------------------------------------
+
+    if len(nodes) == 1:
+
+        final_pos[
+            nodes[0]
+        ] = (
+
+            cx,
+            cy
+
+        )
+
+        continue
+
+
+    # --------------------------------------------------------
+    # สร้าง subgraph
+    # --------------------------------------------------------
+
+    subgraph = G.subgraph(
+        nodes
+    ).copy()
+
+
+    # --------------------------------------------------------
+    # Spring layout
+    # --------------------------------------------------------
+
+    local_pos = nx.spring_layout(
+
+        subgraph,
+
+        k=1.25,
+
+        iterations=300,
+
+        seed=42,
+
+        weight="weight"
+
+    )
+
+
+    # --------------------------------------------------------
+    # ลดขนาด cluster
+    # --------------------------------------------------------
+
+    scale = (
+
+        GROUP_SCALE
+
+        + math.sqrt(
+            len(nodes)
+        )
+        * 0.035
+
+    )
+
+
+    for node in nodes:
+
+        x, y = local_pos[
+            node
+        ]
+
+
+        final_pos[
+            node
+        ] = (
+
+            cx + x * scale,
+
+            cy + y * scale
+
+        )
+
+
+# ============================================================
+# 14. EDGE TRACES
+# ============================================================
+
+internal_x = []
+internal_y = []
+
+cross_x = []
+cross_y = []
+
+
+for u, v, data in G.edges(
+    data=True
+):
+
+    x0, y0 = final_pos[u]
+
+    x1, y1 = final_pos[v]
+
+
+    same_group = (
+
+        node_cluster[u]
+        ==
+        node_cluster[v]
+
+    )
+
+
+    if same_group:
+
+        internal_x.extend([
+            x0,
+            x1,
+            None
+        ])
+
+        internal_y.extend([
+            y0,
+            y1,
+            None
+        ])
+
+    else:
+
+        cross_x.extend([
+            x0,
+            x1,
+            None
+        ])
+
+        cross_y.extend([
+            y0,
+            y1,
+            None
+        ])
+
+
+# ============================================================
+# 15. INTERNAL EDGES
+# ============================================================
+
+internal_edge_trace = go.Scatter(
+
+    x=internal_x,
+
+    y=internal_y,
+
+    mode="lines",
+
+    line=dict(
+
+        width=1.6,
+
+        color=(
+            "rgba(65,100,65,0.40)"
+        )
+
     ),
 
-    labels={
+    hoverinfo="none",
 
-        "PC1":
-            "Principal Component 1",
-
-        "PC2":
-            "Principal Component 2",
-
-        "Subject":
-            "Subject"
-
-    }
+    showlegend=False
 
 )
 
 
 # ============================================================
-# 4. จุดบนกราฟ
+# 16. CROSS GROUP EDGES
 # ============================================================
 
-fig.update_traces(
+cross_edge_trace = go.Scatter(
+
+    x=cross_x,
+
+    y=cross_y,
+
+    mode="lines",
+
+    line=dict(
+
+        width=0.7,
+
+        color=(
+            "rgba(80,100,80,0.10)"
+        )
+
+    ),
+
+    hoverinfo="none",
+
+    showlegend=False
+
+)
+
+
+# ============================================================
+# 17. KEYWORD CIRCLES
+# ============================================================
+
+node_x = []
+node_y = []
+
+node_size = []
+node_color = []
+
+node_text = []
+node_hover = []
+
+
+for node in G.nodes():
+
+    x, y = final_pos[node]
+
+    freq = G.nodes[
+        node
+    ]["frequency"]
+
+    group = node_cluster[
+        node
+    ]
+
+    degree = G.degree(
+        node
+    )
+
+
+    node_x.append(x)
+    node_y.append(y)
+
+
+    # --------------------------------------------------------
+    # ขนาดวงกลม
+    # --------------------------------------------------------
+
+    node_size.append(
+
+        18
+        + math.sqrt(freq)
+        * 3.5
+
+    )
+
+
+    node_color.append(
+
+        flower_group_color(
+            group
+        )
+
+    )
+
+
+    node_text.append(
+        node
+    )
+
+
+    node_hover.append(
+
+        f"""
+        <b>🌼 {node}</b>
+        <br><br>
+        📚 Papers:
+        <b>{freq:,}</b>
+        <br>
+        🔗 Connections:
+        <b>{degree}</b>
+        <br>
+        🌸 Flower Group:
+        <b>{group + 1}</b>
+        """
+
+    )
+
+
+node_trace = go.Scatter(
+
+    x=node_x,
+
+    y=node_y,
+
+    mode="markers+text",
+
+    text=node_text,
+
+    textposition="middle center",
+
+    textfont=dict(
+
+        family="Arial",
+
+        size=8,
+
+        color="#24382A"
+
+    ),
+
+    hovertext=node_hover,
+
+    hoverinfo="text",
 
     marker=dict(
 
-        size=7,
+        symbol="circle",
 
-        opacity=0.75,
+        size=node_size,
+
+        color=node_color,
+
+        opacity=0.94,
 
         line=dict(
-            width=0.5
+
+            width=2,
+
+            color="white"
+
+        )
+
+    ),
+
+    showlegend=False
+
+)
+
+
+# ============================================================
+# 18. FLOWER CENTER
+# ============================================================
+
+flower_core_trace = go.Scatter(
+
+    x=node_x,
+
+    y=node_y,
+
+    mode="markers",
+
+    marker=dict(
+
+        symbol="circle",
+
+        size=[
+
+            max(
+                3,
+                s * 0.18
+            )
+
+            for s in node_size
+
+        ],
+
+        color="#FFF3A6",
+
+        opacity=1
+
+    ),
+
+    hoverinfo="none",
+
+    showlegend=False
+
+)
+
+
+# ============================================================
+# 19. GROUP LABELS
+# ============================================================
+
+group_label_x = []
+group_label_y = []
+group_label_text = []
+
+
+for group_id, community in enumerate(
+    communities
+):
+
+    cx, cy = group_centers[
+        group_id
+    ]
+
+
+    nodes = [
+
+        n
+
+        for n in community
+
+        if n in G.nodes()
+
+    ]
+
+
+    if not nodes:
+        continue
+
+
+    top_nodes = sorted(
+
+        nodes,
+
+        key=lambda n:
+        G.nodes[n]["frequency"],
+
+        reverse=True
+
+    )[:3]
+
+
+    label = (
+
+        f"<b>FLOWER GROUP "
+        f"{group_id + 1}</b>"
+
+        "<br>"
+
+        +
+
+        " • ".join(
+            top_nodes
+        )
+
+    )
+
+
+    group_label_x.append(
+        cx
+    )
+
+
+    group_label_y.append(
+        cy + 1.65
+    )
+
+
+    group_label_text.append(
+        label
+    )
+
+
+group_label_trace = go.Scatter(
+
+    x=group_label_x,
+
+    y=group_label_y,
+
+    mode="text",
+
+    text=group_label_text,
+
+    textfont=dict(
+
+        family="Arial",
+
+        size=11,
+
+        color="#38533A"
+
+    ),
+
+    hoverinfo="none",
+
+    showlegend=False
+
+)
+
+
+# ============================================================
+# 20. GRASS BACKGROUND
+# ============================================================
+
+random.seed(100)
+
+grass_x = []
+grass_y = []
+
+
+for i in range(1000):
+
+    grass_x.append(
+
+        random.uniform(
+            -10,
+            10
+        )
+
+    )
+
+    grass_y.append(
+
+        random.uniform(
+            -7.5,
+            7.5
+        )
+
+    )
+
+
+grass_trace = go.Scatter(
+
+    x=grass_x,
+
+    y=grass_y,
+
+    mode="markers",
+
+    marker=dict(
+
+        size=[
+
+            random.choice(
+                [1, 1, 1, 2, 2, 3]
+            )
+
+            for _ in grass_x
+
+        ],
+
+        color=(
+            "rgba(65,110,55,0.18)"
+        )
+
+    ),
+
+    hoverinfo="none",
+
+    showlegend=False
+
+)
+
+
+# ============================================================
+# 21. BACKGROUND FLOWERS
+# ============================================================
+
+random.seed(200)
+
+background_flower_x = []
+background_flower_y = []
+background_flower_symbol = []
+
+
+flower_symbols = [
+    "🌼",
+    "🌸",
+    "🌻",
+    "🌷"
+]
+
+
+for i in range(140):
+
+    x = random.uniform(
+        -9.5,
+        9.5
+    )
+
+    y = random.uniform(
+        -7,
+        7
+    )
+
+
+    background_flower_x.append(
+        x
+    )
+
+    background_flower_y.append(
+        y
+    )
+
+    background_flower_symbol.append(
+
+        random.choice(
+            flower_symbols
+        )
+
+    )
+
+
+background_flowers = go.Scatter(
+
+    x=background_flower_x,
+
+    y=background_flower_y,
+
+    mode="text",
+
+    text=background_flower_symbol,
+
+    textfont=dict(
+
+        size=12
+
+    ),
+
+    hoverinfo="none",
+
+    showlegend=False
+
+)
+
+
+# ============================================================
+# 22. BUTTERFLIES
+# ============================================================
+
+butterflies = [
+
+    (-8.0, 5.8),
+    (7.5, 5.5),
+    (8.0, -5.0),
+    (-7.5, -5.0),
+    (3.0, 6.5),
+    (-3.5, 6.4)
+
+]
+
+
+butterfly_trace = go.Scatter(
+
+    x=[
+        x for x, y in butterflies
+    ],
+
+    y=[
+        y for x, y in butterflies
+    ],
+
+    mode="text",
+
+    text=[
+        "🦋"
+        for _ in butterflies
+    ],
+
+    textfont=dict(
+        size=20
+    ),
+
+    hovertext=[
+        "🦋 Research connection"
+        for _ in butterflies
+    ],
+
+    hoverinfo="text",
+
+    showlegend=False
+
+)
+
+
+# ============================================================
+# 23. CLOUDS
+# ============================================================
+
+cloud_trace = go.Scatter(
+
+    x=[
+        -7,
+        6.5,
+        0
+    ],
+
+    y=[
+        6.8,
+        6.8,
+        7.5
+    ],
+
+    mode="text",
+
+    text=[
+        "☁️",
+        "☁️",
+        "☁️"
+    ],
+
+    textfont=dict(
+
+        size=[
+            35,
+            32,
+            28
+        ]
+
+    ),
+
+    hoverinfo="none",
+
+    showlegend=False
+
+)
+
+
+# ============================================================
+# 24. BACKGROUND HILLS
+# ============================================================
+
+hill_x = [
+
+    -10,
+    -8.5,
+    -7,
+    -5.5,
+    -4,
+    -2.5,
+    -1,
+    0.5,
+    2,
+    3.5,
+    5,
+    6.5,
+    8,
+    10
+
+]
+
+
+hill_y = [
+
+    4.3,
+    5.8,
+    4.5,
+    6.0,
+    4.4,
+    5.7,
+    4.3,
+    5.9,
+    4.4,
+    5.8,
+    4.5,
+    5.9,
+    4.4,
+    5.2
+
+]
+
+
+hill_trace = go.Scatter(
+
+    x=hill_x,
+
+    y=hill_y,
+
+    mode="lines",
+
+    fill="tozeroy",
+
+    line=dict(
+
+        color="#78966E",
+
+        width=1
+
+    ),
+
+    fillcolor=(
+        "rgba(120,150,110,0.18)"
+    ),
+
+    hoverinfo="none",
+
+    showlegend=False
+
+)
+
+
+# ============================================================
+# 25. LEGEND
+# ============================================================
+
+legend_traces = []
+
+
+for group_id, community in enumerate(
+    communities
+):
+
+    nodes = [
+
+        n
+
+        for n in community
+
+        if n in G.nodes()
+
+    ]
+
+
+    if not nodes:
+        continue
+
+
+    top_nodes = sorted(
+
+        nodes,
+
+        key=lambda n:
+        G.nodes[n]["frequency"],
+
+        reverse=True
+
+    )[:5]
+
+
+    description = (
+        "<br>".join(
+            top_nodes
+        )
+    )
+
+
+    legend_traces.append(
+
+        go.Scatter(
+
+            x=[None],
+
+            y=[None],
+
+            mode="markers",
+
+            marker=dict(
+
+                size=14,
+
+                color=flower_group_color(
+                    group_id
+                ),
+
+                line=dict(
+
+                    color="white",
+
+                    width=1
+
+                )
+
+            ),
+
+            name=(
+
+                f"🌸 Flower Group "
+                f"{group_id + 1}"
+
+            ),
+
+            hovertext=(
+
+                f"<b>Flower Group "
+                f"{group_id + 1}</b>"
+
+                f"<br><br>"
+
+                f"{description}"
+
+            ),
+
+            hoverinfo="text"
+
+        )
+
+    )
+
+
+# ============================================================
+# 26. BUILD FIGURE
+# ============================================================
+
+fig = go.Figure()
+
+
+# Background
+
+fig.add_trace(
+    hill_trace
+)
+
+fig.add_trace(
+    cloud_trace
+)
+
+fig.add_trace(
+    grass_trace
+)
+
+fig.add_trace(
+    background_flowers
+)
+
+
+# Network
+
+fig.add_trace(
+    cross_edge_trace
+)
+
+fig.add_trace(
+    internal_edge_trace
+)
+
+fig.add_trace(
+    flower_core_trace
+)
+
+fig.add_trace(
+    node_trace
+)
+
+
+# Decoration
+
+fig.add_trace(
+    butterfly_trace
+)
+
+fig.add_trace(
+    group_label_trace
+)
+
+
+# Legend
+
+for trace in legend_traces:
+
+    fig.add_trace(
+        trace
+    )
+
+
+# ============================================================
+# 27. DASHBOARD
+# ============================================================
+
+article_count = len(df)
+
+unique_keywords = len(
+    keyword_frequency
+)
+
+visible_keywords = G.number_of_nodes()
+
+group_count = len(
+    communities
+)
+
+
+dashboard = (
+
+    "<b>🌱 RESEARCH FLOWER FIELD</b>"
+
+    "<br><br>"
+
+    f"📚 Articles: "
+    f"<b>{article_count:,}</b>"
+
+    "<br>"
+
+    f"🔑 Keywords: "
+    f"<b>{unique_keywords:,}</b>"
+
+    "<br>"
+
+    f"🌼 Showing: "
+    f"<b>{visible_keywords}</b>"
+
+    "<br>"
+
+    f"🌸 Flower groups: "
+    f"<b>{group_count}</b>"
+
+    "<br><br>"
+
+    "<b>HOW TO READ</b>"
+
+    "<br>"
+
+    "🌼 Larger circle = more papers"
+
+    "<br>"
+
+    "🌿 Dark line = stronger connection"
+
+    "<br>"
+
+    "🌸 Same group = related keywords"
+
+)
+
+
+fig.add_annotation(
+
+    x=0.015,
+
+    y=0.025,
+
+    xref="paper",
+
+    yref="paper",
+
+    text=dashboard,
+
+    showarrow=False,
+
+    align="left",
+
+    bgcolor=(
+        "rgba(247,244,232,0.94)"
+    ),
+
+    bordercolor="#78966E",
+
+    borderwidth=1,
+
+    borderpad=13,
+
+    font=dict(
+
+        family="Arial",
+
+        color="#26382A",
+
+        size=11
+
+    )
+
+)
+
+
+# ============================================================
+# 28. FINAL STYLE
+# ============================================================
+
+fig.update_layout(
+
+    title=dict(
+
+        text=(
+
+            "🌱🌼 "
+            "<b>AI RESEARCH FLOWER FIELD</b>"
+
+            "<br>"
+
+            "<sup>"
+            "Research Keywords Growing Together"
+            "</sup>"
+
+        ),
+
+        x=0.5,
+
+        xanchor="center",
+
+        y=0.965,
+
+        font=dict(
+
+            family="Arial",
+
+            size=28,
+
+            color="#24382A"
+
+        )
+
+    ),
+
+
+    paper_bgcolor="#DDEBCF",
+
+    plot_bgcolor="#CFE3B7",
+
+
+    width=1600,
+
+    height=1050,
+
+
+    margin=dict(
+
+        l=40,
+
+        r=260,
+
+        t=130,
+
+        b=40
+
+    ),
+
+
+    xaxis=dict(
+
+        range=[
+            -10,
+            10
+        ],
+
+        showgrid=False,
+
+        zeroline=False,
+
+        showticklabels=False,
+
+        fixedrange=False
+
+    ),
+
+
+    yaxis=dict(
+
+        range=[
+            -8,
+            8
+        ],
+
+        showgrid=False,
+
+        zeroline=False,
+
+        showticklabels=False,
+
+        fixedrange=False
+
+    ),
+
+
+    legend=dict(
+
+        title=dict(
+
+            text=(
+                "<b>🌸 FLOWER GROUPS</b>"
+            ),
+
+            font=dict(
+
+                color="#26382A",
+
+                size=13
+
+            )
+
+        ),
+
+        font=dict(
+
+            color="#26382A",
+
+            size=11
+
+        ),
+
+        bgcolor=(
+            "rgba(247,244,232,0.90)"
+        ),
+
+        bordercolor=(
+            "rgba(60,90,55,0.25)"
+        ),
+
+        borderwidth=1,
+
+        x=1.01,
+
+        y=0.94
+
+    ),
+
+
+    hovermode="closest",
+
+
+    hoverlabel=dict(
+
+        bgcolor="#F7F4E8",
+
+        bordercolor="#78966E",
+
+        font=dict(
+
+            color="#26382A",
+
+            size=13
+
         )
 
     )
@@ -121,112 +1790,275 @@ fig.update_traces(
 
 
 # ============================================================
-# 5. Layout
-# ============================================================
-
-fig.update_layout(
-
-    template="plotly_white",
-
-    height=800,
-
-    title=dict(
-
-        x=0.5,
-
-        xanchor="center"
-
-    ),
-
-    # ------------------------------------------
-    # Legend ด้านล่าง
-    # ------------------------------------------
-
-    legend=dict(
-
-        title="Subject",
-
-        orientation="h",
-
-        yanchor="top",
-
-        y=-0.15,
-
-        xanchor="center",
-
-        x=0.5
-
-    ),
-
-    margin=dict(
-
-        l=70,
-
-        r=70,
-
-        t=100,
-
-        b=170
-
-    ),
-
-    xaxis=dict(
-
-        showgrid=True,
-
-        zeroline=True
-
-    ),
-
-    yaxis=dict(
-
-        showgrid=True,
-
-        zeroline=True
-
-    )
-
-)
-
-
-# ============================================================
-# 6. แสดงกราฟใน Colab
+# 29. SHOW
 # ============================================================
 
 fig.show()
 
 
 # ============================================================
-# 7. บันทึกเป็น HTML
+# 30. SAVE HTML
 # ============================================================
 
-output_file = (
-    "index.html"
+HTML_PATH = (
+
+    "/content/"
+    "AI_Research_Flower_Field_ORGANIZED.html"
+
 )
+
 
 fig.write_html(
 
-    output_file,
+    HTML_PATH,
 
     include_plotlyjs=True
 
 )
 
 
-print("\n======================================")
-print("🎉 สร้าง Visualization สำเร็จ")
-print("======================================")
+# ============================================================
+# 31. SAVE PNG
+# ============================================================
 
-print(
-    "📁",
-    output_file
+PNG_PATH = (
+
+    "/content/"
+    "AI_Research_Flower_Field_ORGANIZED.png"
+
+)
+
+
+try:
+
+    fig.write_image(
+
+        PNG_PATH,
+
+        width=2400,
+
+        height=1700,
+
+        scale=2
+
+    )
+
+    print(
+        "\n🖼️ PNG saved:",
+        PNG_PATH
+    )
+
+except Exception as e:
+
+    print(
+        "\n⚠️ PNG export failed:"
+    )
+
+    print(e)
+
+
+# ============================================================
+# 32. SAVE NODE DATA
+# ============================================================
+
+node_rows = []
+
+
+for node in G.nodes():
+
+    node_rows.append({
+
+        "keyword":
+        node,
+
+        "frequency":
+        G.nodes[node]["frequency"],
+
+        "flower_group":
+        node_cluster[node] + 1,
+
+        "degree":
+        G.degree(node),
+
+        "x":
+        final_pos[node][0],
+
+        "y":
+        final_pos[node][1]
+
+    })
+
+
+nodes_df = pd.DataFrame(
+    node_rows
+)
+
+
+nodes_path = (
+
+    "/content/"
+    "flower_field_organized_nodes.csv"
+
+)
+
+
+nodes_df.to_csv(
+
+    nodes_path,
+
+    index=False,
+
+    encoding="utf-8-sig"
+
 )
 
 
 # ============================================================
-# 8. ดาวน์โหลด HTML
+# 33. SAVE EDGE DATA
+# ============================================================
+
+edge_rows = []
+
+
+for u, v, data in G.edges(
+    data=True
+):
+
+    edge_rows.append({
+
+        "keyword_1":
+        u,
+
+        "keyword_2":
+        v,
+
+        "cooccurrence":
+        data["weight"],
+
+        "flower_group_1":
+        node_cluster[u] + 1,
+
+        "flower_group_2":
+        node_cluster[v] + 1,
+
+        "same_group":
+        node_cluster[u]
+        ==
+        node_cluster[v]
+
+    })
+
+
+edges_df = pd.DataFrame(
+    edge_rows
+)
+
+
+edges_path = (
+
+    "/content/"
+    "flower_field_organized_edges.csv"
+
+)
+
+
+edges_df.to_csv(
+
+    edges_path,
+
+    index=False,
+
+    encoding="utf-8-sig"
+
+)
+
+
+# ============================================================
+# 34. FINAL REPORT
+# ============================================================
+
+print("\n")
+
+print("=" * 70)
+
+print(
+    "🌱🌼 AI RESEARCH FLOWER FIELD — COMPLETE"
+)
+
+print("=" * 70)
+
+
+print(
+    f"\n📚 Articles: {article_count:,}"
+)
+
+print(
+    f"🔑 Unique keywords: {unique_keywords:,}"
+)
+
+print(
+    f"🌼 Visible keywords: {visible_keywords}"
+)
+
+print(
+    f"🌸 Flower groups: {group_count}"
+)
+
+print(
+    f"🔗 Network edges: {G.number_of_edges()}"
+)
+
+
+print(
+    "\n📄 Interactive HTML:"
+)
+
+print(
+    HTML_PATH
+)
+
+
+print(
+    "\n🖼️ PNG:"
+)
+
+print(
+    PNG_PATH
+)
+
+
+print(
+    "\n🌼 Nodes CSV:"
+)
+
+print(
+    nodes_path
+)
+
+
+print(
+    "\n🌿 Edges CSV:"
+)
+
+print(
+    edges_path
+)
+
+
+# ============================================================
+# 35. DOWNLOAD HTML
 # ============================================================
 
 files.download(
-    output_file
+    HTML_PATH
+)
+
+
+print(
+    "\n🎉 เสร็จแล้ว!"
+)
+
+print(
+    "ตอนนี้ keyword ถูกจัดเป็นกลุ่ม"
+    " และกระจายเป็นระเบียบในทุ่งดอกไม้ 🌱🌼"
 )
