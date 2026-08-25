@@ -1,458 +1,484 @@
-# ============================================================
-# 🌱🌼 AI RESEARCH FLOWER FIELD
-# ORGANIZED FLOWER GROUP VERSION
-#
-# จุดเด่น:
-# - พื้นหลังเป็นทุ่งหญ้า
-# - มีดอกไม้ตกแต่ง
-# - ไม่มีหมี
-# - ไม่มีคำว่า Meadow
-# - Keyword เป็นวงกลม
-# - จัดกลุ่มใหม่แบบเป็นระเบียบ
-# - ลดการชนกันของวงกลม
-# - แต่ละกลุ่มเป็น FLOWER GROUP
-# - Interactive Plotly
-# - Export HTML + PNG + CSV
-# ============================================================
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>AI Research Flower Field</title>
 
-# ============================================================
-# 0. INSTALL
-# ============================================================
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 
-!pip -q install networkx plotly kaleido pandas numpy
+<style>
 
+*{
+    box-sizing:border-box;
+}
 
-# ============================================================
-# 1. IMPORT
-# ============================================================
+body{
+    margin:0;
+    font-family:Arial,"Noto Sans Thai",sans-serif;
+    background:#DDEBCF;
+    color:#24382A;
+}
 
-import pandas as pd
-import numpy as np
+/* =========================
+   HEADER
+========================= */
 
-import networkx as nx
-import plotly.graph_objects as go
+header{
+    text-align:center;
+    padding:22px;
+    background:linear-gradient(
+        180deg,
+        #DCECCF,
+        #C8DFB8
+    );
 
-import re
-import math
-import random
+    border-bottom:1px solid #A6BC99;
+}
 
-from collections import Counter
-from itertools import combinations
+header h1{
+    margin:0;
+    font-size:30px;
+}
 
-from google.colab import files
+header p{
+    margin:7px 0 0;
+    opacity:.7;
+}
 
+/* =========================
+   CONTROL PANEL
+========================= */
 
-# ============================================================
-# 2. UPLOAD DATA
-# ============================================================
+.controls{
 
-print("=" * 70)
-print("🌱🌼 AI RESEARCH FLOWER FIELD")
-print("🌸 ORGANIZED FLOWER GROUP VERSION")
-print("=" * 70)
+    display:flex;
+    flex-wrap:wrap;
 
-print("\n📂 Upload dataset_clean_final.csv")
+    gap:12px;
 
-uploaded = files.upload()
+    padding:15px 20px;
 
-csv_files = [
-    f for f in uploaded.keys()
-    if f.lower().endswith(".csv")
-]
+    background:#F7F4E8;
 
-if not csv_files:
-    raise FileNotFoundError(
-        "ไม่พบไฟล์ CSV"
-    )
+    border-bottom:1px solid #C8D5BF;
+}
 
-DATA_PATH = csv_files[0]
+.control{
 
-df = pd.read_csv(DATA_PATH)
+    display:flex;
+    align-items:center;
 
-print("\n✅ Dataset:", DATA_PATH)
-print("📚 Articles:", len(df))
+    gap:6px;
 
+    font-size:13px;
+}
 
-# ============================================================
-# 3. FIND KEYWORD COLUMN
-# ============================================================
+.control input{
 
-keyword_candidates = [
-    "Author_Keywords_normalized",
-    "Author Keywords",
-    "Author_Keywords_clean"
-]
+    width:70px;
 
-KEYWORD_COLUMN = None
+    padding:6px;
 
-for col in keyword_candidates:
+    border:1px solid #A8B89F;
 
-    if col in df.columns:
+    border-radius:6px;
 
-        KEYWORD_COLUMN = col
-        break
+    background:white;
+}
 
+button{
 
-if KEYWORD_COLUMN is None:
+    border:1px solid #8EA584;
 
-    raise ValueError(
-        """
-ไม่พบ Keyword column
+    background:#EDF5E7;
 
-ต้องมีอย่างใดอย่างหนึ่ง:
+    padding:8px 13px;
 
-Author_Keywords_normalized
-Author Keywords
-Author_Keywords_clean
-"""
-    )
+    border-radius:7px;
 
+    cursor:pointer;
 
-print(
-    "🔑 Keyword column:",
-    KEYWORD_COLUMN
-)
+    font-weight:bold;
 
+}
 
-# ============================================================
-# 4. CLEAN KEYWORDS
-# ============================================================
+button:hover{
 
-def clean_keyword(x):
+    background:#DCECD2;
 
-    x = str(x).strip().lower()
+}
 
-    x = re.sub(
-        r"\s+",
-        " ",
-        x
-    )
+/* =========================
+   STATUS
+========================= */
 
-    return x
+#status{
 
+    padding:9px 20px;
 
-paper_keywords = []
+    background:#EAF3E2;
 
-keyword_frequency = Counter()
+    font-size:13px;
 
+    border-bottom:1px solid #CBD9C4;
+}
 
-for text in df[
-    KEYWORD_COLUMN
-].fillna(""):
+/* =========================
+   PLOT
+========================= */
 
-    keywords = re.split(
-        r"[;,]",
-        str(text)
-    )
+#plot{
 
-    cleaned = []
+    width:100%;
 
-    for keyword in keywords:
+    height:
+        calc(100vh - 190px);
 
-        keyword = clean_keyword(
-            keyword
-        )
+    min-height:700px;
+}
 
-        if len(keyword) < 2:
-            continue
+</style>
+</head>
 
-        if keyword not in cleaned:
+<body>
 
-            cleaned.append(
-                keyword
-            )
+<header>
 
-            keyword_frequency[
-                keyword
-            ] += 1
+<h1>
+🌱🌼 AI RESEARCH FLOWER FIELD
+</h1>
 
-    paper_keywords.append(
-        cleaned
-    )
+<p>
+Research Keywords Growing Together
+</p>
 
+</header>
 
-print(
-    "\n🔑 Unique keywords:",
-    len(keyword_frequency)
-)
 
+<div class="controls">
 
-# ============================================================
-# 5. SETTINGS
-# ============================================================
+<div class="control">
 
-# จำนวน keyword ที่นำมาแสดง
-TOP_N = 90
+<label>
+Top Keywords
+</label>
 
-# จำนวนครั้งขั้นต่ำที่ keyword 2 ตัวต้องเกิดร่วมกัน
-MIN_EDGE = 5
+<input
+    id="topN"
+    type="number"
+    value="90"
+    min="5"
+    max="300"
+>
 
-# keyword สูงสุดในแต่ละกลุ่ม
-MAX_NODES_PER_CLUSTER = 22
+</div>
 
-# ------------------------------------------------------------
-# ⭐ ปรับตรงนี้ได้ถ้ายังอยากให้กลุ่มห่างกัน
-# ------------------------------------------------------------
 
-GROUP_X_DISTANCE = 5.2
-GROUP_Y_DISTANCE = 4.8
+<div class="control">
 
-# ขนาดของแต่ละกลุ่ม
-GROUP_SCALE = 1.35
+<label>
+Min Co-occurrence
+</label>
 
+<input
+    id="minEdge"
+    type="number"
+    value="5"
+    min="1"
+    max="100"
+>
 
-# ============================================================
-# 6. TOP KEYWORDS
-# ============================================================
+</div>
 
-top_keywords = dict(
 
-    keyword_frequency.most_common(
-        TOP_N
-    )
+<div class="control">
 
-)
+<label>
+Max Keywords / Group
+</label>
 
-top_set = set(
-    top_keywords.keys()
-)
+<input
+    id="maxCluster"
+    type="number"
+    value="22"
+    min="2"
+    max="100"
+>
 
+</div>
 
-print(
-    "\n🌼 Selected keywords:",
-    len(top_keywords)
-)
 
+<div class="control">
 
-# ============================================================
-# 7. BUILD CO-OCCURRENCE
-# ============================================================
+<label>
+Group X
+</label>
 
-print(
-    "\n🌱 Building keyword network..."
-)
+<input
+    id="groupX"
+    type="number"
+    value="5.2"
+    step="0.1"
+>
 
-cooccurrence = Counter()
+</div>
 
 
-for keywords in paper_keywords:
+<div class="control">
 
-    selected = [
+<label>
+Group Y
+</label>
 
-        k
+<input
+    id="groupY"
+    type="number"
+    value="4.8"
+    step="0.1"
+>
 
-        for k in keywords
+</div>
 
-        if k in top_set
 
-    ]
+<button onclick="generateVisualization()">
 
-    selected = list(
-        set(selected)
-    )
+🌼 Generate
 
-    for a, b in combinations(
-        sorted(selected),
-        2
-    ):
+</button>
 
-        cooccurrence[
-            (a, b)
-        ] += 1
 
+<button onclick="exportPNG()">
 
-# ============================================================
-# 8. CREATE GRAPH
-# ============================================================
+🖼️ Export PNG
 
-G = nx.Graph()
+</button>
 
+</div>
 
-for keyword, freq in top_keywords.items():
 
-    G.add_node(
-        keyword,
-        frequency=freq
-    )
+<div id="status">
 
+🌱 กำลังเตรียมข้อมูล...
 
-for (a, b), weight in cooccurrence.items():
+</div>
 
-    if weight >= MIN_EDGE:
 
-        G.add_edge(
-            a,
-            b,
-            weight=weight
-        )
+<div id="plot"></div>
 
 
-# ลบ keyword ที่ไม่มีเส้นเชื่อม
-G.remove_nodes_from(
-    list(nx.isolates(G))
-)
+<script>
 
+/* =========================================================
+   DATA
+=========================================================
 
-print(
-    "\n🌼 Nodes:",
-    G.number_of_nodes()
-)
+   เอาข้อมูล CSV จริงของคุณมาใส่ตรงนี้
 
-print(
-    "🌿 Edges:",
-    G.number_of_edges()
-)
+   ตัวอย่าง:
 
+   const CSV_DATA = `
+   ID,Author_Keywords_normalized
+   1,"artificial intelligence; machine learning"
+   2,"machine learning; deep learning"
+   3,"artificial intelligence; deep learning"
+   `;
 
-# ============================================================
-# 9. COMMUNITY DETECTION
-# ============================================================
+========================================================= */
 
-print(
-    "\n🧠 Detecting research groups..."
-)
+const CSV_DATA = `PASTE_YOUR_CSV_HERE`;
 
 
-try:
+/* =========================================================
+   CSV PARSER
+========================================================= */
 
-    communities = (
+function parseCSV(text){
 
-        nx.community
-        .louvain_communities(
+    const rows = [];
 
-            G,
+    let row = [];
 
-            seed=42,
+    let value = "";
 
-            weight="weight"
+    let insideQuotes = false;
 
-        )
 
-    )
+    for(let i=0;i<text.length;i++){
 
-except:
+        const char = text[i];
 
-    communities = list(
+        const next = text[i+1];
 
-        nx.community
-        .greedy_modularity_communities(
 
-            G,
+        if(char === '"' && next === '"' && insideQuotes){
 
-            weight="weight"
+            value += '"';
 
-        )
+            i++;
 
-    )
+            continue;
 
+        }
 
-# เรียงจากกลุ่มใหญ่ไปเล็ก
-communities = sorted(
-    communities,
-    key=len,
-    reverse=True
-)
 
+        if(char === '"'){
 
-# เอาเฉพาะกลุ่มที่มีอย่างน้อย 2 keyword
-communities = [
+            insideQuotes = !insideQuotes;
 
-    c
+            continue;
 
-    for c in communities
+        }
 
-    if len(c) >= 2
 
-]
+        if(char === "," && !insideQuotes){
 
+            row.push(value);
 
-node_cluster = {}
+            value="";
 
+            continue;
 
-for cluster_id, community in enumerate(
-    communities
-):
+        }
 
-    for node in community:
 
-        node_cluster[
-            node
-        ] = cluster_id
+        if(
+            (char === "\n" || char === "\r")
+            &&
+            !insideQuotes
+        ){
 
+            if(char === "\r" && next === "\n"){
 
-print(
-    "🌸 Flower Groups:",
-    len(communities)
-)
+                i++;
 
+            }
 
-for i, community in enumerate(
-    communities
-):
 
-    print(
-        f"   Flower Group {i+1}: "
-        f"{len(community)} keywords"
-    )
+            row.push(value);
 
+            value="";
 
-# ============================================================
-# 10. LIMIT NODES PER GROUP
-# ============================================================
 
-selected_nodes = set()
+            if(row.some(v => v.trim() !== "")){
 
+                rows.push(row);
 
-for community in communities:
+            }
 
-    ranked = sorted(
 
-        community,
+            row=[];
 
-        key=lambda n:
-        G.nodes[n]["frequency"],
+            continue;
 
-        reverse=True
+        }
 
-    )
 
-    ranked = ranked[
-        :MAX_NODES_PER_CLUSTER
-    ]
+        value += char;
 
-    selected_nodes.update(
-        ranked
-    )
+    }
 
 
-G = G.subgraph(
-    selected_nodes
-).copy()
+    if(value.length || row.length){
 
+        row.push(value);
 
-# สร้าง cluster map ใหม่
-node_cluster = {
+        rows.push(row);
 
-    node:
-    node_cluster[node]
+    }
 
-    for node in G.nodes()
+
+    if(rows.length === 0){
+
+        return [];
+
+    }
+
+
+    const headers = rows[0].map(
+        h => h.trim()
+    );
+
+
+    return rows.slice(1).map(row => {
+
+        const obj={};
+
+        headers.forEach(
+            (header,index)=>{
+
+                obj[header] =
+                    row[index] ?? "";
+
+            }
+        );
+
+        return obj;
+
+    });
 
 }
 
 
-print(
-    "\n🌼 Final keywords:",
-    G.number_of_nodes()
-)
+/* =========================================================
+   CLEAN KEYWORD
+========================================================= */
+
+function cleanKeyword(value){
+
+    return String(value ?? "")
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g," ");
+
+}
 
 
-# ============================================================
-# 11. FLOWER GROUP COLORS
-# ============================================================
+/* =========================================================
+   FIND KEYWORD COLUMN
+========================================================= */
 
-flower_colors = [
+function findKeywordColumn(rows){
+
+    const candidates=[
+
+        "Author_Keywords_normalized",
+
+        "Author Keywords",
+
+        "Author_Keywords_clean"
+
+    ];
+
+
+    for(const column of candidates){
+
+        if(
+            rows.length > 0 &&
+            Object.prototype.hasOwnProperty.call(
+                rows[0],
+                column
+            )
+        ){
+
+            return column;
+
+        }
+
+    }
+
+
+    return null;
+
+}
+
+
+/* =========================================================
+   COLORS
+========================================================= */
+
+const FLOWER_COLORS=[
 
     "#F59E9E",
     "#F6C85F",
@@ -467,1598 +493,2096 @@ flower_colors = [
     "#E7B7A3",
     "#A7C7E7"
 
-]
+];
 
 
-def flower_group_color(i):
+/* =========================================================
+   RANDOM
+========================================================= */
 
-    return flower_colors[
-        i % len(flower_colors)
-    ]
+function seededRandom(seed){
 
-
-# ============================================================
-# 12. NEW GROUP POSITION
-#
-# ⭐ สำคัญ
-#
-# เดิมใช้วางรอบวงกลม
-# ตอนนี้เปลี่ยนเป็น GRID
-# เพื่อไม่ให้กลุ่มชนกัน
-# ============================================================
-
-group_centers = {}
+    let x = seed >>> 0;
 
 
-n_groups = len(
-    communities
-)
+    return function(){
+
+        x =
+            (1664525*x + 1013904223)
+            >>> 0;
+
+        return x / 4294967296;
+
+    };
+
+}
 
 
-# จำนวนคอลัมน์
-if n_groups <= 3:
+/* =========================================================
+   COMMUNITY DETECTION
+=========================================================
 
-    columns = n_groups
+   Browser version of the grouping process.
+========================================================= */
 
-elif n_groups <= 6:
+function detectCommunities(nodes,edges){
 
-    columns = 3
-
-else:
-
-    columns = 4
+    const adjacency = new Map();
 
 
-rows = math.ceil(
-    n_groups / columns
-)
+    nodes.forEach(node=>{
+
+        adjacency.set(
+            node,
+            new Map()
+        );
+
+    });
 
 
-# คำนวณจุดเริ่มต้น
-start_x = -(
-    (columns - 1)
-    * GROUP_X_DISTANCE
-    / 2
-)
+    edges.forEach(edge=>{
 
-start_y = (
-    (rows - 1)
-    * GROUP_Y_DISTANCE
-    / 2
-)
+        adjacency
+            .get(edge.a)
+            .set(edge.b,edge.weight);
 
+        adjacency
+            .get(edge.b)
+            .set(edge.a,edge.weight);
 
-for i in range(
-    n_groups
-):
-
-    row = i // columns
-    col = i % columns
-
-    cx = (
-        start_x
-        + col
-        * GROUP_X_DISTANCE
-    )
-
-    cy = (
-        start_y
-        - row
-        * GROUP_Y_DISTANCE
-    )
-
-    group_centers[i] = (
-        cx,
-        cy
-    )
+    });
 
 
-# ============================================================
-# 13. CREATE LOCAL LAYOUT
-# ============================================================
-
-print(
-    "\n🌼 Arranging keyword circles..."
-)
+    const labels = new Map();
 
 
-final_pos = {}
+    nodes.forEach(node=>{
+
+        labels.set(node,node);
+
+    });
 
 
-for group_id, community in enumerate(
-    communities
-):
-
-    nodes = [
-
-        n
-
-        for n in community
-
-        if n in G.nodes()
-
-    ]
-
-    if not nodes:
-        continue
+    const random =
+        seededRandom(42);
 
 
-    # --------------------------------------------------------
-    # จุดกลางของกลุ่ม
-    # --------------------------------------------------------
+    for(let iteration=0;
+        iteration<50;
+        iteration++){
 
-    cx, cy = group_centers[
-        group_id
-    ]
+        let changed=0;
 
 
-    # --------------------------------------------------------
-    # ถ้ามี node เดียว
-    # --------------------------------------------------------
+        const order =
+            [...nodes].sort(
+                ()=>random()-.5
+            );
 
-    if len(nodes) == 1:
 
-        final_pos[
-            nodes[0]
-        ] = (
+        order.forEach(node=>{
 
-            cx,
-            cy
+            const scores=new Map();
 
+
+            for(
+                const [neighbor,weight]
+                of adjacency.get(node)
+            ){
+
+                const label =
+                    labels.get(neighbor);
+
+
+                scores.set(
+                    label,
+                    (scores.get(label)||0)
+                    +weight
+                );
+
+            }
+
+
+            if(scores.size===0){
+
+                return;
+
+            }
+
+
+            let bestLabel =
+                labels.get(node);
+
+            let bestScore=-Infinity;
+
+
+            scores.forEach(
+                (score,label)=>{
+
+                    if(score>bestScore){
+
+                        bestScore=score;
+
+                        bestLabel=label;
+
+                    }
+
+                }
+            );
+
+
+            if(
+                bestLabel !==
+                labels.get(node)
+            ){
+
+                labels.set(
+                    node,
+                    bestLabel
+                );
+
+                changed++;
+
+            }
+
+        });
+
+
+        if(changed===0){
+
+            break;
+
+        }
+
+    }
+
+
+    const groups=new Map();
+
+
+    nodes.forEach(node=>{
+
+        const label =
+            labels.get(node);
+
+
+        if(!groups.has(label)){
+
+            groups.set(label,[]);
+
+        }
+
+
+        groups
+            .get(label)
+            .push(node);
+
+    });
+
+
+    return [...groups.values()]
+
+        .filter(
+            group => group.length>=2
         )
 
-        continue
+        .sort(
+            (a,b)=>b.length-a.length
+        );
 
+}
 
-    # --------------------------------------------------------
-    # สร้าง subgraph
-    # --------------------------------------------------------
 
-    subgraph = G.subgraph(
-        nodes
-    ).copy()
+/* =========================================================
+   GROUP POSITIONS
+========================================================= */
 
+function createGroupCenters(
+    numberOfGroups,
+    distanceX,
+    distanceY
+){
 
-    # --------------------------------------------------------
-    # Spring layout
-    # --------------------------------------------------------
+    const centers={};
 
-    local_pos = nx.spring_layout(
 
-        subgraph,
+    if(numberOfGroups===0){
 
-        k=1.25,
+        return centers;
 
-        iterations=300,
+    }
 
-        seed=42,
 
-        weight="weight"
+    let columns;
 
-    )
 
+    if(numberOfGroups<=3){
 
-    # --------------------------------------------------------
-    # ลดขนาด cluster
-    # --------------------------------------------------------
+        columns=numberOfGroups;
 
-    scale = (
+    }
+    else if(numberOfGroups<=6){
 
-        GROUP_SCALE
+        columns=3;
 
-        + math.sqrt(
-            len(nodes)
-        )
-        * 0.035
+    }
+    else{
 
-    )
+        columns=4;
 
+    }
 
-    for node in nodes:
 
-        x, y = local_pos[
-            node
-        ]
+    const rows =
+        Math.ceil(
+            numberOfGroups / columns
+        );
 
 
-        final_pos[
-            node
-        ] = (
+    const startX =
+        -((columns-1)*distanceX/2);
 
-            cx + x * scale,
 
-            cy + y * scale
+    const startY =
+        ((rows-1)*distanceY/2);
 
-        )
 
+    for(
+        let i=0;
+        i<numberOfGroups;
+        i++
+    ){
 
-# ============================================================
-# 14. EDGE TRACES
-# ============================================================
+        const row =
+            Math.floor(i/columns);
 
-internal_x = []
-internal_y = []
 
-cross_x = []
-cross_y = []
+        const column =
+            i%columns;
 
 
-for u, v, data in G.edges(
-    data=True
-):
+        centers[i]=[
 
-    x0, y0 = final_pos[u]
+            startX +
+            column*distanceX,
 
-    x1, y1 = final_pos[v]
+            startY -
+            row*distanceY
 
+        ];
 
-    same_group = (
+    }
 
-        node_cluster[u]
-        ==
-        node_cluster[v]
 
-    )
+    return centers;
 
+}
 
-    if same_group:
 
-        internal_x.extend([
-            x0,
-            x1,
-            None
-        ])
+/* =========================================================
+   LOCAL LAYOUT
+========================================================= */
 
-        internal_y.extend([
-            y0,
-            y1,
-            None
-        ])
+function localLayout(
+    nodes,
+    edges,
+    centerX,
+    centerY,
+    scale
+){
 
-    else:
+    const positions=new Map();
 
-        cross_x.extend([
-            x0,
-            x1,
-            None
-        ])
 
-        cross_y.extend([
-            y0,
-            y1,
-            None
-        ])
+    if(nodes.length===1){
 
+        positions.set(
+            nodes[0],
+            [centerX,centerY]
+        );
 
-# ============================================================
-# 15. INTERNAL EDGES
-# ============================================================
+        return positions;
 
-internal_edge_trace = go.Scatter(
+    }
 
-    x=internal_x,
 
-    y=internal_y,
+    const random =
+        seededRandom(
+            nodes.length*123
+        );
 
-    mode="lines",
 
-    line=dict(
+    const position=new Map();
 
-        width=1.6,
 
-        color=(
-            "rgba(65,100,65,0.40)"
-        )
+    nodes.forEach(
+        (node,index)=>{
 
-    ),
+            const angle =
+                index/nodes.length *
+                Math.PI*2;
 
-    hoverinfo="none",
 
-    showlegend=False
+            position.set(
+                node,
+                [
 
-)
+                    Math.cos(angle) *
+                    (1+random()*.5),
 
+                    Math.sin(angle) *
+                    (1+random()*.5)
 
-# ============================================================
-# 16. CROSS GROUP EDGES
-# ============================================================
+                ]
+            );
 
-cross_edge_trace = go.Scatter(
+        }
+    );
 
-    x=cross_x,
 
-    y=cross_y,
+    const localEdges =
+        edges.filter(
+            edge =>
+                nodes.includes(edge.a)
+                &&
+                nodes.includes(edge.b)
+        );
 
-    mode="lines",
 
-    line=dict(
+    const k =
+        Math.sqrt(
+            4/nodes.length
+        );
 
-        width=0.7,
 
-        color=(
-            "rgba(80,100,80,0.10)"
-        )
+    for(let iteration=0;
+        iteration<160;
+        iteration++){
 
-    ),
+        const displacement=new Map();
 
-    hoverinfo="none",
 
-    showlegend=False
+        nodes.forEach(node=>{
 
-)
+            displacement.set(
+                node,
+                [0,0]
+            );
 
+        });
 
-# ============================================================
-# 17. KEYWORD CIRCLES
-# ============================================================
 
-node_x = []
-node_y = []
+        /* REPULSION */
 
-node_size = []
-node_color = []
+        for(
+            let i=0;
+            i<nodes.length;
+            i++
+        ){
 
-node_text = []
-node_hover = []
+            for(
+                let j=i+1;
+                j<nodes.length;
+                j++
+            ){
 
+                const a=nodes[i];
 
-for node in G.nodes():
+                const b=nodes[j];
 
-    x, y = final_pos[node]
 
-    freq = G.nodes[
-        node
-    ]["frequency"]
+                let dx =
+                    position.get(a)[0]
+                    -
+                    position.get(b)[0];
 
-    group = node_cluster[
-        node
-    ]
 
-    degree = G.degree(
-        node
-    )
+                let dy =
+                    position.get(a)[1]
+                    -
+                    position.get(b)[1];
 
 
-    node_x.append(x)
-    node_y.append(y)
+                let distance =
+                    Math.sqrt(
+                        dx*dx+dy*dy
+                    );
 
 
-    # --------------------------------------------------------
-    # ขนาดวงกลม
-    # --------------------------------------------------------
+                if(distance===0){
 
-    node_size.append(
+                    distance=.01;
 
-        18
-        + math.sqrt(freq)
-        * 3.5
+                }
 
-    )
 
+                const force =
+                    (k*k)/distance;
 
-    node_color.append(
 
-        flower_group_color(
-            group
-        )
+                dx/=distance;
 
-    )
+                dy/=distance;
 
 
-    node_text.append(
-        node
-    )
+                displacement.get(a)[0]
+                    +=dx*force;
 
 
-    node_hover.append(
+                displacement.get(a)[1]
+                    +=dy*force;
 
-        f"""
-        <b>🌼 {node}</b>
-        <br><br>
-        📚 Papers:
-        <b>{freq:,}</b>
-        <br>
-        🔗 Connections:
-        <b>{degree}</b>
-        <br>
-        🌸 Flower Group:
-        <b>{group + 1}</b>
-        """
 
-    )
+                displacement.get(b)[0]
+                    -=dx*force;
 
 
-node_trace = go.Scatter(
+                displacement.get(b)[1]
+                    -=dy*force;
 
-    x=node_x,
+            }
 
-    y=node_y,
+        }
 
-    mode="markers+text",
 
-    text=node_text,
+        /* ATTRACTION */
 
-    textposition="middle center",
+        localEdges.forEach(edge=>{
 
-    textfont=dict(
+            const a=edge.a;
 
-        family="Arial",
+            const b=edge.b;
 
-        size=8,
 
-        color="#24382A"
+            let dx =
+                position.get(a)[0]
+                -
+                position.get(b)[0];
 
-    ),
 
-    hovertext=node_hover,
+            let dy =
+                position.get(a)[1]
+                -
+                position.get(b)[1];
 
-    hoverinfo="text",
 
-    marker=dict(
+            let distance =
+                Math.sqrt(
+                    dx*dx+dy*dy
+                );
 
-        symbol="circle",
 
-        size=node_size,
+            if(distance===0){
 
-        color=node_color,
+                distance=.01;
 
-        opacity=0.94,
+            }
 
-        line=dict(
 
-            width=2,
+            const force =
+                (distance*distance) /
+                (k*Math.max(1,edge.weight));
 
-            color="white"
 
-        )
+            dx/=distance;
 
-    ),
+            dy/=distance;
 
-    showlegend=False
 
-)
+            displacement.get(a)[0]
+                -=dx*force;
 
 
-# ============================================================
-# 18. FLOWER CENTER
-# ============================================================
+            displacement.get(a)[1]
+                -=dy*force;
 
-flower_core_trace = go.Scatter(
 
-    x=node_x,
+            displacement.get(b)[0]
+                +=dx*force;
 
-    y=node_y,
 
-    mode="markers",
+            displacement.get(b)[1]
+                +=dy*force;
 
-    marker=dict(
+        });
 
-        symbol="circle",
 
-        size=[
+        const temperature =
+            .15 *
+            (1-iteration/160);
 
-            max(
-                3,
-                s * 0.18
+
+        nodes.forEach(node=>{
+
+            const d =
+                displacement.get(node);
+
+
+            const length =
+                Math.sqrt(
+                    d[0]*d[0]+
+                    d[1]*d[1]
+                ) || 1;
+
+
+            position.get(node)[0]
+                +=
+                (d[0]/length)
+                *
+                Math.min(
+                    length,
+                    temperature
+                );
+
+
+            position.get(node)[1]
+                +=
+                (d[1]/length)
+                *
+                Math.min(
+                    length,
+                    temperature
+                );
+
+        });
+
+    }
+
+
+    nodes.forEach(node=>{
+
+        const p =
+            position.get(node);
+
+
+        positions.set(
+            node,
+            [
+
+                centerX+p[0]*scale,
+
+                centerY+p[1]*scale
+
+            ]
+        );
+
+    });
+
+
+    return positions;
+
+}
+
+
+/* =========================================================
+   HTML ESCAPE
+========================================================= */
+
+function escapeHTML(text){
+
+    return String(text)
+
+        .replaceAll("&","&amp;")
+
+        .replaceAll("<","&lt;")
+
+        .replaceAll(">","&gt;")
+
+        .replaceAll('"',"&quot;")
+
+        .replaceAll("'","&#039;");
+
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+function generateVisualization(){
+
+    if(
+        !CSV_DATA ||
+        CSV_DATA ===
+        "PASTE_YOUR_CSV_HERE"
+    ){
+
+        document.getElementById(
+            "status"
+        ).innerHTML=
+
+            "⚠️ กรุณานำข้อมูล CSV จริงมาใส่ในตัวแปร CSV_DATA";
+
+        return;
+
+    }
+
+
+    const rows =
+        parseCSV(CSV_DATA);
+
+
+    if(rows.length===0){
+
+        throw new Error(
+            "CSV ไม่มีข้อมูล"
+        );
+
+    }
+
+
+    const keywordColumn =
+        findKeywordColumn(rows);
+
+
+    if(!keywordColumn){
+
+        document.getElementById(
+            "status"
+        ).innerHTML=
+
+            "❌ ไม่พบ Keyword column";
+
+        return;
+
+    }
+
+
+    const paperKeywords=[];
+
+
+    const frequency=new Map();
+
+
+    rows.forEach(row=>{
+
+        const keywords =
+            String(
+                row[keywordColumn] ?? ""
             )
-
-            for s in node_size
-
-        ],
-
-        color="#FFF3A6",
-
-        opacity=1
-
-    ),
-
-    hoverinfo="none",
-
-    showlegend=False
-
-)
+            .split(/[;,]/);
 
 
-# ============================================================
-# 19. GROUP LABELS
-# ============================================================
-
-group_label_x = []
-group_label_y = []
-group_label_text = []
+        const cleaned=[];
 
 
-for group_id, community in enumerate(
-    communities
-):
+        keywords.forEach(keyword=>{
 
-    cx, cy = group_centers[
-        group_id
-    ]
+            keyword =
+                cleanKeyword(keyword);
 
 
-    nodes = [
+            if(keyword.length<2){
 
-        n
+                return;
 
-        for n in community
-
-        if n in G.nodes()
-
-    ]
+            }
 
 
-    if not nodes:
-        continue
+            if(
+                !cleaned.includes(keyword)
+            ){
+
+                cleaned.push(keyword);
 
 
-    top_nodes = sorted(
+                frequency.set(
+                    keyword,
+                    (frequency.get(keyword)||0)
+                    +1
+                );
 
-        nodes,
+            }
 
-        key=lambda n:
-        G.nodes[n]["frequency"],
-
-        reverse=True
-
-    )[:3]
+        });
 
 
-    label = (
+        paperKeywords.push(
+            cleaned
+        );
 
-        f"<b>FLOWER GROUP "
-        f"{group_id + 1}</b>"
+    });
 
-        "<br>"
 
-        +
+    /* SETTINGS */
 
-        " • ".join(
-            top_nodes
+    const TOP_N =
+        Number(
+            document.getElementById(
+                "topN"
+            ).value
+        );
+
+
+    const MIN_EDGE =
+        Number(
+            document.getElementById(
+                "minEdge"
+            ).value
+        );
+
+
+    const MAX_NODES =
+        Number(
+            document.getElementById(
+                "maxCluster"
+            ).value
+        );
+
+
+    const GROUP_X =
+        Number(
+            document.getElementById(
+                "groupX"
+            ).value
+        );
+
+
+    const GROUP_Y =
+        Number(
+            document.getElementById(
+                "groupY"
+            ).value
+        );
+
+
+    /* TOP KEYWORDS */
+
+    const topKeywords =
+        [...frequency.entries()]
+
+        .sort(
+            (a,b)=>b[1]-a[1]
         )
 
-    )
+        .slice(
+            0,
+            TOP_N
+        );
 
 
-    group_label_x.append(
-        cx
-    )
-
-
-    group_label_y.append(
-        cy + 1.65
-    )
-
-
-    group_label_text.append(
-        label
-    )
-
-
-group_label_trace = go.Scatter(
-
-    x=group_label_x,
-
-    y=group_label_y,
-
-    mode="text",
-
-    text=group_label_text,
-
-    textfont=dict(
-
-        family="Arial",
-
-        size=11,
-
-        color="#38533A"
-
-    ),
-
-    hoverinfo="none",
-
-    showlegend=False
-
-)
-
-
-# ============================================================
-# 20. GRASS BACKGROUND
-# ============================================================
-
-random.seed(100)
-
-grass_x = []
-grass_y = []
-
-
-for i in range(1000):
-
-    grass_x.append(
-
-        random.uniform(
-            -10,
-            10
-        )
-
-    )
-
-    grass_y.append(
-
-        random.uniform(
-            -7.5,
-            7.5
-        )
-
-    )
-
-
-grass_trace = go.Scatter(
-
-    x=grass_x,
-
-    y=grass_y,
-
-    mode="markers",
-
-    marker=dict(
-
-        size=[
-
-            random.choice(
-                [1, 1, 1, 2, 2, 3]
+    const topSet =
+        new Set(
+            topKeywords.map(
+                x=>x[0]
             )
+        );
 
-            for _ in grass_x
 
-        ],
+    const topFrequency =
+        new Map(topKeywords);
 
-        color=(
-            "rgba(65,110,55,0.18)"
-        )
 
-    ),
+    /* CO-OCCURRENCE */
 
-    hoverinfo="none",
+    const pairCounts=new Map();
 
-    showlegend=False
 
-)
+    paperKeywords.forEach(keywords=>{
 
+        const selected =
+            [...new Set(
+                keywords.filter(
+                    keyword =>
+                        topSet.has(keyword)
+                )
+            )]
+            .sort();
 
-# ============================================================
-# 21. BACKGROUND FLOWERS
-# ============================================================
 
-random.seed(200)
+        for(
+            let i=0;
+            i<selected.length;
+            i++
+        ){
 
-background_flower_x = []
-background_flower_y = []
-background_flower_symbol = []
+            for(
+                let j=i+1;
+                j<selected.length;
+                j++
+            ){
 
+                const key =
+                    selected[i]
+                    +
+                    "\u0001"
+                    +
+                    selected[j];
 
-flower_symbols = [
-    "🌼",
-    "🌸",
-    "🌻",
-    "🌷"
-]
 
+                pairCounts.set(
+                    key,
+                    (pairCounts.get(key)||0)
+                    +1
+                );
 
-for i in range(140):
+            }
 
-    x = random.uniform(
-        -9.5,
-        9.5
-    )
+        }
 
-    y = random.uniform(
-        -7,
-        7
-    )
+    });
 
 
-    background_flower_x.append(
-        x
-    )
+    /* EDGES */
 
-    background_flower_y.append(
-        y
-    )
+    const edges=[];
 
-    background_flower_symbol.append(
 
-        random.choice(
-            flower_symbols
-        )
+    pairCounts.forEach(
+        (weight,key)=>{
 
-    )
+            if(weight>=MIN_EDGE){
 
+                const [
+                    a,
+                    b
+                ] =
+                    key.split(
+                        "\u0001"
+                    );
 
-background_flowers = go.Scatter(
 
-    x=background_flower_x,
+                edges.push({
 
-    y=background_flower_y,
+                    a:a,
 
-    mode="text",
+                    b:b,
 
-    text=background_flower_symbol,
+                    weight:weight
 
-    textfont=dict(
+                });
 
-        size=12
+            }
 
-    ),
+        }
+    );
 
-    hoverinfo="none",
 
-    showlegend=False
+    /* NODES */
 
-)
+    const connected=new Set();
 
 
-# ============================================================
-# 22. BUTTERFLIES
-# ============================================================
+    edges.forEach(edge=>{
 
-butterflies = [
+        connected.add(edge.a);
 
-    (-8.0, 5.8),
-    (7.5, 5.5),
-    (8.0, -5.0),
-    (-7.5, -5.0),
-    (3.0, 6.5),
-    (-3.5, 6.4)
+        connected.add(edge.b);
 
-]
+    });
 
 
-butterfly_trace = go.Scatter(
+    let nodes =
+        [...topSet]
+        .filter(
+            node =>
+                connected.has(node)
+        );
 
-    x=[
-        x for x, y in butterflies
-    ],
 
-    y=[
-        y for x, y in butterflies
-    ],
+    /* GROUP */
 
-    mode="text",
+    let communities =
+        detectCommunities(
+            nodes,
+            edges
+        );
 
-    text=[
-        "🦋"
-        for _ in butterflies
-    ],
 
-    textfont=dict(
-        size=20
-    ),
+    const nodeCluster=new Map();
 
-    hovertext=[
-        "🦋 Research connection"
-        for _ in butterflies
-    ],
 
-    hoverinfo="text",
+    communities.forEach(
+        (community,groupID)=>{
 
-    showlegend=False
-
-)
-
-
-# ============================================================
-# 23. CLOUDS
-# ============================================================
-
-cloud_trace = go.Scatter(
-
-    x=[
-        -7,
-        6.5,
-        0
-    ],
-
-    y=[
-        6.8,
-        6.8,
-        7.5
-    ],
-
-    mode="text",
-
-    text=[
-        "☁️",
-        "☁️",
-        "☁️"
-    ],
-
-    textfont=dict(
-
-        size=[
-            35,
-            32,
-            28
-        ]
-
-    ),
-
-    hoverinfo="none",
-
-    showlegend=False
-
-)
-
-
-# ============================================================
-# 24. BACKGROUND HILLS
-# ============================================================
-
-hill_x = [
-
-    -10,
-    -8.5,
-    -7,
-    -5.5,
-    -4,
-    -2.5,
-    -1,
-    0.5,
-    2,
-    3.5,
-    5,
-    6.5,
-    8,
-    10
-
-]
-
-
-hill_y = [
-
-    4.3,
-    5.8,
-    4.5,
-    6.0,
-    4.4,
-    5.7,
-    4.3,
-    5.9,
-    4.4,
-    5.8,
-    4.5,
-    5.9,
-    4.4,
-    5.2
-
-]
-
-
-hill_trace = go.Scatter(
-
-    x=hill_x,
-
-    y=hill_y,
-
-    mode="lines",
-
-    fill="tozeroy",
-
-    line=dict(
-
-        color="#78966E",
-
-        width=1
-
-    ),
-
-    fillcolor=(
-        "rgba(120,150,110,0.18)"
-    ),
-
-    hoverinfo="none",
-
-    showlegend=False
-
-)
-
-
-# ============================================================
-# 25. LEGEND
-# ============================================================
-
-legend_traces = []
-
-
-for group_id, community in enumerate(
-    communities
-):
-
-    nodes = [
-
-        n
-
-        for n in community
-
-        if n in G.nodes()
-
-    ]
-
-
-    if not nodes:
-        continue
-
-
-    top_nodes = sorted(
-
-        nodes,
-
-        key=lambda n:
-        G.nodes[n]["frequency"],
-
-        reverse=True
-
-    )[:5]
-
-
-    description = (
-        "<br>".join(
-            top_nodes
-        )
-    )
-
-
-    legend_traces.append(
-
-        go.Scatter(
-
-            x=[None],
-
-            y=[None],
-
-            mode="markers",
-
-            marker=dict(
-
-                size=14,
-
-                color=flower_group_color(
-                    group_id
-                ),
-
-                line=dict(
-
-                    color="white",
-
-                    width=1
-
+            community
+                .sort(
+                    (a,b)=>
+                        topFrequency.get(b)
+                        -
+                        topFrequency.get(a)
                 )
 
-            ),
+                .slice(
+                    0,
+                    MAX_NODES
+                )
 
-            name=(
+                .forEach(node=>{
 
-                f"🌸 Flower Group "
-                f"{group_id + 1}"
+                    nodeCluster.set(
+                        node,
+                        groupID
+                    );
 
-            ),
+                });
 
-            hovertext=(
+        }
+    );
 
-                f"<b>Flower Group "
-                f"{group_id + 1}</b>"
 
-                f"<br><br>"
+    nodes =
+        [...nodeCluster.keys()];
 
-                f"{description}"
 
-            ),
+    const selectedSet =
+        new Set(nodes);
 
-            hoverinfo="text"
 
-        )
+    const visibleEdges =
+        edges.filter(
+            edge =>
+                selectedSet.has(edge.a)
+                &&
+                selectedSet.has(edge.b)
+        );
 
-    )
 
+    /* GROUP CENTERS */
 
-# ============================================================
-# 26. BUILD FIGURE
-# ============================================================
+    const centers =
+        createGroupCenters(
+            communities.length,
+            GROUP_X,
+            GROUP_Y
+        );
 
-fig = go.Figure()
 
+    /* POSITIONS */
 
-# Background
+    const positions=new Map();
 
-fig.add_trace(
-    hill_trace
-)
 
-fig.add_trace(
-    cloud_trace
-)
+    communities.forEach(
+        (community,groupID)=>{
 
-fig.add_trace(
-    grass_trace
-)
+            const groupNodes =
+                community.filter(
+                    node =>
+                        selectedSet.has(node)
+                );
 
-fig.add_trace(
-    background_flowers
-)
 
+            if(groupNodes.length===0){
 
-# Network
+                return;
 
-fig.add_trace(
-    cross_edge_trace
-)
+            }
 
-fig.add_trace(
-    internal_edge_trace
-)
 
-fig.add_trace(
-    flower_core_trace
-)
+            const [
+                centerX,
+                centerY
+            ] =
+                centers[groupID];
 
-fig.add_trace(
-    node_trace
-)
 
+            const scale =
+                1.35 +
+                Math.sqrt(
+                    groupNodes.length
+                )*.035;
 
-# Decoration
 
-fig.add_trace(
-    butterfly_trace
-)
+            const localPositions =
+                localLayout(
+                    groupNodes,
+                    visibleEdges,
+                    centerX,
+                    centerY,
+                    scale
+                );
 
-fig.add_trace(
-    group_label_trace
-)
 
+            localPositions.forEach(
+                (position,node)=>{
 
-# Legend
+                    positions.set(
+                        node,
+                        position
+                    );
 
-for trace in legend_traces:
+                }
+            );
 
-    fig.add_trace(
-        trace
-    )
+        }
+    );
 
 
-# ============================================================
-# 27. DASHBOARD
-# ============================================================
+    /* =====================================================
+       EDGE TRACES
+    ===================================================== */
 
-article_count = len(df)
+    const internalX=[];
 
-unique_keywords = len(
-    keyword_frequency
-)
+    const internalY=[];
 
-visible_keywords = G.number_of_nodes()
+    const crossX=[];
 
-group_count = len(
-    communities
-)
+    const crossY=[];
 
 
-dashboard = (
+    visibleEdges.forEach(edge=>{
 
-    "<b>🌱 RESEARCH FLOWER FIELD</b>"
+        const [
+            x0,
+            y0
+        ] =
+            positions.get(
+                edge.a
+            );
 
-    "<br><br>"
 
-    f"📚 Articles: "
-    f"<b>{article_count:,}</b>"
+        const [
+            x1,
+            y1
+        ] =
+            positions.get(
+                edge.b
+            );
 
-    "<br>"
 
-    f"🔑 Keywords: "
-    f"<b>{unique_keywords:,}</b>"
-
-    "<br>"
-
-    f"🌼 Showing: "
-    f"<b>{visible_keywords}</b>"
-
-    "<br>"
-
-    f"🌸 Flower groups: "
-    f"<b>{group_count}</b>"
-
-    "<br><br>"
-
-    "<b>HOW TO READ</b>"
-
-    "<br>"
-
-    "🌼 Larger circle = more papers"
-
-    "<br>"
-
-    "🌿 Dark line = stronger connection"
-
-    "<br>"
-
-    "🌸 Same group = related keywords"
-
-)
-
-
-fig.add_annotation(
-
-    x=0.015,
-
-    y=0.025,
-
-    xref="paper",
-
-    yref="paper",
-
-    text=dashboard,
-
-    showarrow=False,
-
-    align="left",
-
-    bgcolor=(
-        "rgba(247,244,232,0.94)"
-    ),
-
-    bordercolor="#78966E",
-
-    borderwidth=1,
-
-    borderpad=13,
-
-    font=dict(
-
-        family="Arial",
-
-        color="#26382A",
-
-        size=11
-
-    )
-
-)
-
-
-# ============================================================
-# 28. FINAL STYLE
-# ============================================================
-
-fig.update_layout(
-
-    title=dict(
-
-        text=(
-
-            "🌱🌼 "
-            "<b>AI RESEARCH FLOWER FIELD</b>"
-
-            "<br>"
-
-            "<sup>"
-            "Research Keywords Growing Together"
-            "</sup>"
-
-        ),
-
-        x=0.5,
-
-        xanchor="center",
-
-        y=0.965,
-
-        font=dict(
-
-            family="Arial",
-
-            size=28,
-
-            color="#24382A"
-
-        )
-
-    ),
-
-
-    paper_bgcolor="#DDEBCF",
-
-    plot_bgcolor="#CFE3B7",
-
-
-    width=1600,
-
-    height=1050,
-
-
-    margin=dict(
-
-        l=40,
-
-        r=260,
-
-        t=130,
-
-        b=40
-
-    ),
-
-
-    xaxis=dict(
-
-        range=[
-            -10,
-            10
-        ],
-
-        showgrid=False,
-
-        zeroline=False,
-
-        showticklabels=False,
-
-        fixedrange=False
-
-    ),
-
-
-    yaxis=dict(
-
-        range=[
-            -8,
-            8
-        ],
-
-        showgrid=False,
-
-        zeroline=False,
-
-        showticklabels=False,
-
-        fixedrange=False
-
-    ),
-
-
-    legend=dict(
-
-        title=dict(
-
-            text=(
-                "<b>🌸 FLOWER GROUPS</b>"
-            ),
-
-            font=dict(
-
-                color="#26382A",
-
-                size=13
-
+        const sameGroup =
+            nodeCluster.get(
+                edge.a
             )
+            ===
+            nodeCluster.get(
+                edge.b
+            );
 
-        ),
 
-        font=dict(
+        if(sameGroup){
 
-            color="#26382A",
+            internalX.push(
+                x0,
+                x1,
+                null
+            );
 
-            size=11
+            internalY.push(
+                y0,
+                y1,
+                null
+            );
 
-        ),
+        }
+        else{
 
-        bgcolor=(
-            "rgba(247,244,232,0.90)"
-        ),
+            crossX.push(
+                x0,
+                x1,
+                null
+            );
 
-        bordercolor=(
-            "rgba(60,90,55,0.25)"
-        ),
+            crossY.push(
+                y0,
+                y1,
+                null
+            );
 
-        borderwidth=1,
+        }
 
-        x=1.01,
+    });
 
-        y=0.94
 
-    ),
+    const crossTrace={
 
+        x:crossX,
 
-    hovermode="closest",
+        y:crossY,
 
+        mode:"lines",
 
-    hoverlabel=dict(
+        line:{
 
-        bgcolor="#F7F4E8",
+            width:.7,
 
-        bordercolor="#78966E",
+            color:
+                "rgba(80,100,80,.10)"
 
-        font=dict(
+        },
 
-            color="#26382A",
+        hoverinfo:"none",
 
-            size=13
+        showlegend:false
 
-        )
+    };
 
-    )
 
-)
+    const internalTrace={
 
+        x:internalX,
 
-# ============================================================
-# 29. SHOW
-# ============================================================
+        y:internalY,
 
-fig.show()
+        mode:"lines",
 
+        line:{
 
-# ============================================================
-# 30. SAVE HTML
-# ============================================================
+            width:1.6,
 
-HTML_PATH = (
+            color:
+                "rgba(65,100,65,.40)"
 
-    "/content/"
-    "AI_Research_Flower_Field_ORGANIZED.html"
+        },
 
-)
+        hoverinfo:"none",
 
+        showlegend:false
 
-fig.write_html(
+    };
 
-    HTML_PATH,
 
-    include_plotlyjs=True
+    /* =====================================================
+       KEYWORDS
+    ===================================================== */
 
-)
+    const nodeX=[];
 
+    const nodeY=[];
 
-# ============================================================
-# 31. SAVE PNG
-# ============================================================
+    const nodeSize=[];
 
-PNG_PATH = (
+    const nodeColor=[];
 
-    "/content/"
-    "AI_Research_Flower_Field_ORGANIZED.png"
+    const nodeText=[];
 
-)
+    const nodeHover=[];
 
 
-try:
+    nodes.forEach(node=>{
 
-    fig.write_image(
+        const [
+            x,
+            y
+        ] =
+            positions.get(node);
 
-        PNG_PATH,
 
-        width=2400,
+        const frequencyValue =
+            topFrequency.get(node);
 
-        height=1700,
 
-        scale=2
+        const group =
+            nodeCluster.get(node);
 
-    )
 
-    print(
-        "\n🖼️ PNG saved:",
-        PNG_PATH
-    )
+        let degree=0;
 
-except Exception as e:
 
-    print(
-        "\n⚠️ PNG export failed:"
-    )
+        visibleEdges.forEach(edge=>{
 
-    print(e)
+            if(
+                edge.a===node ||
+                edge.b===node
+            ){
 
+                degree++;
 
-# ============================================================
-# 32. SAVE NODE DATA
-# ============================================================
+            }
 
-node_rows = []
+        });
 
 
-for node in G.nodes():
+        nodeX.push(x);
 
-    node_rows.append({
+        nodeY.push(y);
 
-        "keyword":
-        node,
 
-        "frequency":
-        G.nodes[node]["frequency"],
+        nodeSize.push(
 
-        "flower_group":
-        node_cluster[node] + 1,
+            18 +
+            Math.sqrt(
+                frequencyValue
+            )*3.5
 
-        "degree":
-        G.degree(node),
+        );
 
-        "x":
-        final_pos[node][0],
 
-        "y":
-        final_pos[node][1]
+        nodeColor.push(
 
-    })
+            FLOWER_COLORS[
+                group %
+                FLOWER_COLORS.length
+            ]
 
+        );
 
-nodes_df = pd.DataFrame(
-    node_rows
-)
 
+        nodeText.push(node);
 
-nodes_path = (
 
-    "/content/"
-    "flower_field_organized_nodes.csv"
+        nodeHover.push(
 
-)
+            `<b>🌼 ${escapeHTML(node)}</b>
+             <br><br>
+             📚 Papers:
+             <b>${frequencyValue.toLocaleString()}</b>
+             <br>
+             🔗 Connections:
+             <b>${degree}</b>
+             <br>
+             🌸 Flower Group:
+             <b>${group+1}</b>`
 
+        );
 
-nodes_df.to_csv(
+    });
 
-    nodes_path,
 
-    index=False,
+    /* FLOWER CORE */
 
-    encoding="utf-8-sig"
+    const flowerCore={
 
-)
+        x:nodeX,
 
+        y:nodeY,
 
-# ============================================================
-# 33. SAVE EDGE DATA
-# ============================================================
+        mode:"markers",
 
-edge_rows = []
+        marker:{
 
+            symbol:"circle",
 
-for u, v, data in G.edges(
-    data=True
-):
+            size:
+                nodeSize.map(
+                    s =>
+                        Math.max(
+                            3,
+                            s*.18
+                        )
+                ),
 
-    edge_rows.append({
+            color:"#FFF3A6"
 
-        "keyword_1":
-        u,
+        },
 
-        "keyword_2":
-        v,
+        hoverinfo:"none",
 
-        "cooccurrence":
-        data["weight"],
+        showlegend:false
 
-        "flower_group_1":
-        node_cluster[u] + 1,
+    };
 
-        "flower_group_2":
-        node_cluster[v] + 1,
 
-        "same_group":
-        node_cluster[u]
-        ==
-        node_cluster[v]
+    /* NODE TRACE */
 
-    })
+    const nodeTrace={
 
+        x:nodeX,
 
-edges_df = pd.DataFrame(
-    edge_rows
-)
+        y:nodeY,
 
+        mode:"markers+text",
 
-edges_path = (
+        text:nodeText,
 
-    "/content/"
-    "flower_field_organized_edges.csv"
+        textposition:
+            "middle center",
 
-)
+        textfont:{
 
+            family:"Arial",
 
-edges_df.to_csv(
+            size:8,
 
-    edges_path,
+            color:"#24382A"
 
-    index=False,
+        },
 
-    encoding="utf-8-sig"
+        hovertext:nodeHover,
 
-)
+        hoverinfo:"text",
 
+        marker:{
 
-# ============================================================
-# 34. FINAL REPORT
-# ============================================================
+            symbol:"circle",
 
-print("\n")
+            size:nodeSize,
 
-print("=" * 70)
+            color:nodeColor,
 
-print(
-    "🌱🌼 AI RESEARCH FLOWER FIELD — COMPLETE"
-)
+            opacity:.94,
 
-print("=" * 70)
+            line:{
 
+                width:2,
 
-print(
-    f"\n📚 Articles: {article_count:,}"
-)
+                color:"white"
 
-print(
-    f"🔑 Unique keywords: {unique_keywords:,}"
-)
+            }
 
-print(
-    f"🌼 Visible keywords: {visible_keywords}"
-)
+        },
 
-print(
-    f"🌸 Flower groups: {group_count}"
-)
+        showlegend:false
 
-print(
-    f"🔗 Network edges: {G.number_of_edges()}"
-)
+    };
 
 
-print(
-    "\n📄 Interactive HTML:"
-)
+    /* =====================================================
+       BACKGROUND GRASS
+    ===================================================== */
 
-print(
-    HTML_PATH
-)
+    const randomGrass =
+        seededRandom(100);
 
 
-print(
-    "\n🖼️ PNG:"
-)
+    const grassX=[];
 
-print(
-    PNG_PATH
-)
+    const grassY=[];
 
 
-print(
-    "\n🌼 Nodes CSV:"
-)
+    for(
+        let i=0;
+        i<1000;
+        i++
+    ){
 
-print(
-    nodes_path
-)
+        grassX.push(
+            -10+
+            randomGrass()*20
+        );
 
 
-print(
-    "\n🌿 Edges CSV:"
-)
+        grassY.push(
+            -7.5+
+            randomGrass()*15
+        );
 
-print(
-    edges_path
-)
+    }
 
 
-# ============================================================
-# 35. DOWNLOAD HTML
-# ============================================================
+    const grassTrace={
 
-files.download(
-    HTML_PATH
-)
+        x:grassX,
 
+        y:grassY,
 
-print(
-    "\n🎉 เสร็จแล้ว!"
-)
+        mode:"markers",
 
-print(
-    "ตอนนี้ keyword ถูกจัดเป็นกลุ่ม"
-    " และกระจายเป็นระเบียบในทุ่งดอกไม้ 🌱🌼"
-)
+        marker:{
+
+            size:2,
+
+            color:
+                "rgba(65,110,55,.18)"
+
+        },
+
+        hoverinfo:"none",
+
+        showlegend:false
+
+    };
+
+
+    /* =====================================================
+       BACKGROUND FLOWERS
+    ===================================================== */
+
+    const randomFlower =
+        seededRandom(200);
+
+
+    const flowerSymbols=[
+        "🌼",
+        "🌸",
+        "🌻",
+        "🌷"
+    ];
+
+
+    const flowerX=[];
+
+    const flowerY=[];
+
+    const flowerText=[];
+
+
+    for(
+        let i=0;
+        i<140;
+        i++
+    ){
+
+        flowerX.push(
+            -9.5+
+            randomFlower()*19
+        );
+
+
+        flowerY.push(
+            -7+
+            randomFlower()*14
+        );
+
+
+        flowerText.push(
+
+            flowerSymbols[
+                Math.floor(
+                    randomFlower() *
+                    flowerSymbols.length
+                )
+            ]
+
+        );
+
+    }
+
+
+    const flowersTrace={
+
+        x:flowerX,
+
+        y:flowerY,
+
+        mode:"text",
+
+        text:flowerText,
+
+        textfont:{
+
+            size:12
+
+        },
+
+        hoverinfo:"none",
+
+        showlegend:false
+
+    };
+
+
+    /* =====================================================
+       BUTTERFLIES
+    ===================================================== */
+
+    const butterflies=[
+
+        [-8,5.8],
+
+        [7.5,5.5],
+
+        [8,-5],
+
+        [-7.5,-5],
+
+        [3,6.5],
+
+        [-3.5,6.4]
+
+    ];
+
+
+    const butterflyTrace={
+
+        x:
+            butterflies.map(
+                p=>p[0]
+            ),
+
+        y:
+            butterflies.map(
+                p=>p[1]
+            ),
+
+        mode:"text",
+
+        text:
+            butterflies.map(
+                ()=>"🦋"
+            ),
+
+        textfont:{
+
+            size:20
+
+        },
+
+        hoverinfo:"none",
+
+        showlegend:false
+
+    };
+
+
+    /* =====================================================
+       CLOUDS
+    ===================================================== */
+
+    const cloudTrace={
+
+        x:[
+            -7,
+            6.5,
+            0
+        ],
+
+        y:[
+            6.8,
+            6.8,
+            7.5
+        ],
+
+        mode:"text",
+
+        text:[
+            "☁️",
+            "☁️",
+            "☁️"
+        ],
+
+        textfont:{
+
+            size:30
+
+        },
+
+        hoverinfo:"none",
+
+        showlegend:false
+
+    };
+
+
+    /* =====================================================
+       GROUP LABELS
+    ===================================================== */
+
+    const labelX=[];
+
+    const labelY=[];
+
+    const labelText=[];
+
+
+    communities.forEach(
+        (community,groupID)=>{
+
+            const groupNodes =
+                community.filter(
+                    node =>
+                        selectedSet.has(node)
+                );
+
+
+            if(groupNodes.length===0){
+
+                return;
+
+            }
+
+
+            const [
+                cx,
+                cy
+            ] =
+                centers[groupID];
+
+
+            const top3 =
+                [...groupNodes]
+
+                .sort(
+                    (a,b)=>
+                        topFrequency.get(b)
+                        -
+                        topFrequency.get(a)
+                )
+
+                .slice(0,3);
+
+
+            labelX.push(cx);
+
+            labelY.push(cy+1.65);
+
+
+            labelText.push(
+
+                `<b>FLOWER GROUP ${groupID+1}</b>
+                 <br>
+                 ${top3
+                    .map(
+                        escapeHTML
+                    )
+                    .join(" • ")}`
+
+            );
+
+        }
+    );
+
+
+    const labelTrace={
+
+        x:labelX,
+
+        y:labelY,
+
+        mode:"text",
+
+        text:labelText,
+
+        textfont:{
+
+            family:"Arial",
+
+            size:11,
+
+            color:"#38533A"
+
+        },
+
+        hoverinfo:"none",
+
+        showlegend:false
+
+    };
+
+
+    /* =====================================================
+       LEGEND
+    ===================================================== */
+
+    const legendTraces=[];
+
+
+    communities.forEach(
+        (community,groupID)=>{
+
+            const groupNodes =
+                community.filter(
+                    node =>
+                        selectedSet.has(node)
+                );
+
+
+            if(
+                groupNodes.length===0
+            ){
+
+                return;
+
+            }
+
+
+            legendTraces.push({
+
+                x:[null],
+
+                y:[null],
+
+                mode:"markers",
+
+                marker:{
+
+                    size:14,
+
+                    color:
+                        FLOWER_COLORS[
+                            groupID %
+                            FLOWER_COLORS.length
+                        ],
+
+                    line:{
+
+                        color:"white",
+
+                        width:1
+
+                    }
+
+                },
+
+                name:
+                    `🌸 Flower Group ${groupID+1}`,
+
+                hoverinfo:"name"
+
+            });
+
+        }
+    );
+
+
+    /* =====================================================
+       HILLS
+    ===================================================== */
+
+    const hillX=[
+
+        -10,-8.5,-7,-5.5,-4,
+        -2.5,-1,.5,2,3.5,
+        5,6.5,8,10
+
+    ];
+
+
+    const hillY=[
+
+        4.3,5.8,4.5,6,
+        4.4,5.7,4.3,5.9,
+        4.4,5.8,4.5,5.9,
+        4.4,5.2
+
+    ];
+
+
+    const hillTrace={
+
+        x:hillX,
+
+        y:hillY,
+
+        mode:"lines",
+
+        fill:"tozeroy",
+
+        line:{
+
+            color:"#78966E",
+
+            width:1
+
+        },
+
+        fillcolor:
+            "rgba(120,150,110,.18)",
+
+        hoverinfo:"none",
+
+        showlegend:false
+
+    };
+
+
+    /* =====================================================
+       DASHBOARD
+    ===================================================== */
+
+    const dashboard=
+
+        `<b>🌱 RESEARCH FLOWER FIELD</b>
+        <br><br>
+        📚 Articles:
+        <b>${rows.length.toLocaleString()}</b>
+        <br>
+        🔑 Keywords:
+        <b>${frequency.size.toLocaleString()}</b>
+        <br>
+        🌼 Showing:
+        <b>${nodes.length}</b>
+        <br>
+        🌸 Flower Groups:
+        <b>${communities.length}</b>
+        <br>
+        🌿 Connections:
+        <b>${visibleEdges.length}</b>
+        <br><br>
+        <b>HOW TO READ</b>
+        <br>
+        🌼 Larger circle = more papers
+        <br>
+        🌿 Dark line = stronger connection
+        <br>
+        🌸 Same group = related keywords`;
+
+
+    /* =====================================================
+       PLOT
+    ===================================================== */
+
+    const data=[
+
+        hillTrace,
+
+        cloudTrace,
+
+        grassTrace,
+
+        flowersTrace,
+
+        crossTrace,
+
+        internalTrace,
+
+        flowerCore,
+
+        nodeTrace,
+
+        butterflyTrace,
+
+        labelTrace,
+
+        ...legendTraces
+
+    ];
+
+
+    const layout={
+
+        title:{
+
+            text:
+                "🌱🌼 <b>AI RESEARCH FLOWER FIELD</b>"
+                +
+                "<br><sup>"
+                +
+                "Research Keywords Growing Together"
+                +
+                "</sup>",
+
+            x:.5,
+
+            xanchor:"center",
+
+            y:.97,
+
+            font:{
+
+                family:"Arial",
+
+                size:28,
+
+                color:"#24382A"
+
+            }
+
+        },
+
+
+        paper_bgcolor:"#DDEBCF",
+
+        plot_bgcolor:"#CFE3B7",
+
+
+        margin:{
+
+            l:40,
+
+            r:260,
+
+            t:130,
+
+            b:40
+
+        },
+
+
+        xaxis:{
+
+            range:[
+                -10,
+                10
+            ],
+
+            showgrid:false,
+
+            zeroline:false,
+
+            showticklabels:false
+
+        },
+
+
+        yaxis:{
+
+            range:[
+                -8,
+                8
+            ],
+
+            showgrid:false,
+
+            zeroline:false,
+
+            showticklabels:false
+
+        },
+
+
+        legend:{
+
+            title:{
+
+                text:
+                    "<b>🌸 FLOWER GROUPS</b>"
+
+            },
+
+            bgcolor:
+                "rgba(247,244,232,.90)",
+
+            bordercolor:
+                "rgba(60,90,55,.25)",
+
+            borderwidth:1,
+
+            x:1.01,
+
+            y:.94
+
+        },
+
+
+        hovermode:
+            "closest",
+
+
+        hoverlabel:{
+
+            bgcolor:"#F7F4E8",
+
+            bordercolor:"#78966E",
+
+            font:{
+
+                color:"#26382A",
+
+                size:13
+
+            }
+
+        },
+
+
+        annotations:[{
+
+            x:.015,
+
+            y:.025,
+
+            xref:"paper",
+
+            yref:"paper",
+
+            text:dashboard,
+
+            showarrow:false,
+
+            align:"left",
+
+            bgcolor:
+                "rgba(247,244,232,.94)",
+
+            bordercolor:"#78966E",
+
+            borderwidth:1,
+
+            borderpad:13,
+
+            font:{
+
+                family:"Arial",
+
+                color:"#26382A",
+
+                size:11
+
+            }
+
+        }]
+
+    };
+
+
+    Plotly.newPlot(
+
+        "plot",
+
+        data,
+
+        layout,
+
+        {
+
+            responsive:true,
+
+            displaylogo:false
+
+        }
+
+    );
+
+
+    document.getElementById(
+        "status"
+    ).innerHTML=
+
+        `✅ สำเร็จ |
+        Articles: <b>${rows.length.toLocaleString()}</b>
+        |
+        Keywords: <b>${frequency.size.toLocaleString()}</b>
+        |
+        Showing: <b>${nodes.length}</b>
+        |
+        Flower Groups: <b>${communities.length}</b>
+        |
+        Edges: <b>${visibleEdges.length}</b>`;
+
+}
+
+
+/* =========================================================
+   EXPORT PNG
+========================================================= */
+
+function exportPNG(){
+
+    Plotly.downloadImage(
+
+        "plot",
+
+        {
+
+            format:"png",
+
+            filename:
+                "AI_Research_Flower_Field",
+
+            width:2400,
+
+            height:1700,
+
+            scale:2
+
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+window.addEventListener(
+    "load",
+    ()=>{
+        if(
+            CSV_DATA !==
+            "PASTE_YOUR_CSV_HERE"
+        ){
+
+            generateVisualization();
+
+        }
+        else{
+
+            document.getElementById(
+                "status"
+            ).innerHTML=
+
+                "📊 ใส่ข้อมูล CSV ในตัวแปร CSV_DATA แล้วกด Generate";
+
+        }
+    }
+);
+
+</script>
+
+</body>
+</html>
