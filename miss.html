@@ -920,70 +920,6 @@ body{
 
 
 /* =========================================================
-   ✨ FEATURE VECTOR — LIGHT EFFECT
-========================================================= */
-
-/* แสงนุ่มตามพื้นหลัง */
-
-.feature-field::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:-20%;
-
-    z-index:1;
-
-    pointer-events:none;
-
-    background:
-
-        radial-gradient(
-            circle at 28% 35%,
-            rgba(255,180,210,.24),
-            transparent 18%
-        ),
-
-        radial-gradient(
-            circle at 72% 35%,
-            rgba(175,210,255,.24),
-            transparent 18%
-        ),
-
-        radial-gradient(
-            circle at 30% 78%,
-            rgba(255,220,130,.20),
-            transparent 18%
-        ),
-
-        radial-gradient(
-            circle at 72% 78%,
-            rgba(180,225,165,.22),
-            transparent 18%
-        );
-
-    filter:blur(20px);
-
-    animation:
-        featureAmbientLight 7s ease-in-out infinite alternate;
-}
-
-@keyframes featureAmbientLight{
-
-    0%{
-        opacity:.55;
-        transform:scale(.96);
-    }
-
-    100%{
-        opacity:1;
-        transform:scale(1.04);
-    }
-}
-
-
-/* =========================================================
    SOFT GROUP BACKGROUND
 ========================================================= */
 
@@ -1150,84 +1086,10 @@ body{
     cursor:pointer;
 
     transition:
-        transform .25s ease,
-        filter .25s ease;
-}
+        transform .28s cubic-bezier(.2,.8,.2,1),
+        filter .3s ease;
 
-
-/* =========================================================
-   ✨ FEATURE FLOWER GLOW
-========================================================= */
-
-.feature-flower .emoji{
-
-    line-height:1;
-
-    position:relative;
-
-    filter:
-        drop-shadow(
-            0 0 5px
-            rgba(255,255,255,.95)
-        )
-        drop-shadow(
-            0 0 10px
-            rgba(255,190,215,.55)
-        )
-        drop-shadow(
-            0 3px 4px
-            rgba(60,70,60,.15)
-        );
-
-    animation:
-        flowerGlow 3.5s ease-in-out infinite;
-}
-
-
-/* สี glow แยกตามกลุ่ม */
-
-.feature-group.ai
-~ .feature-flower .emoji{
-
-    filter:
-        drop-shadow(0 0 5px rgba(255,255,255,.9))
-        drop-shadow(0 0 12px rgba(255,140,190,.55))
-        drop-shadow(0 3px 4px rgba(60,70,60,.15));
-}
-
-@keyframes flowerGlow{
-
-    0%,100%{
-        filter:
-            drop-shadow(
-                0 0 4px
-                rgba(255,255,255,.85)
-            )
-            drop-shadow(
-                0 0 8px
-                rgba(255,190,215,.35)
-            )
-            drop-shadow(
-                0 3px 4px
-                rgba(60,70,60,.15)
-            );
-    }
-
-    50%{
-        filter:
-            drop-shadow(
-                0 0 7px
-                rgba(255,255,255,1)
-            )
-            drop-shadow(
-                0 0 17px
-                rgba(255,190,215,.70)
-            )
-            drop-shadow(
-                0 0 27px
-                rgba(255,220,180,.28)
-            );
-    }
+    user-select:none;
 }
 
 .feature-flower:hover{
@@ -1243,6 +1105,23 @@ body{
         );
 
     z-index:30;
+}
+
+.feature-flower .emoji{
+
+    position:relative;
+
+    line-height:1;
+
+    filter:
+        drop-shadow(
+            0 3px 4px
+            rgba(60,70,60,.15)
+        );
+
+    transition:
+        filter .3s ease,
+        transform .3s ease;
 }
 
 .feature-flower .label{
@@ -1271,6 +1150,10 @@ body{
     font-size:10px;
 
     color:#4d5d4e;
+
+    transition:
+        box-shadow .3s ease,
+        border-color .3s ease;
 }
 
 .feature-flower .count{
@@ -1280,6 +1163,256 @@ body{
     color:#849085;
 
     font-size:9px;
+
+    transition:
+        color .3s ease;
+}
+
+
+/* =========================================================
+   FEATURE FLOWER SELECTED — YELLOW GLOW
+========================================================= */
+
+.feature-flower.selected{
+
+    z-index:50;
+
+    transform:
+        translate(-50%,-50%)
+        scale(1.10);
+
+    animation:
+        featureFlowerSelected .75s ease-out;
+}
+
+
+/*
+   แสงที่ตัวดอกไม้
+*/
+
+.feature-flower.selected .emoji{
+
+    filter:
+
+        drop-shadow(
+            0 0 5px
+            rgba(255,220,100,1)
+        )
+
+        drop-shadow(
+            0 0 12px
+            rgba(255,200,70,.95)
+        )
+
+        drop-shadow(
+            0 0 22px
+            rgba(255,215,100,.78)
+        )
+
+        drop-shadow(
+            0 0 35px
+            rgba(255,225,130,.45)
+        );
+
+    animation:
+        featureSoftFlowerGlow .8s ease-out;
+}
+
+
+/*
+   ป้ายชื่อก็เรืองเล็กน้อย
+*/
+
+.feature-flower.selected .label{
+
+    border-color:
+        rgba(255,205,90,.65);
+
+    box-shadow:
+
+        0 0 8px
+        rgba(255,210,90,.30),
+
+        0 3px 10px
+        rgba(70,80,60,.08);
+}
+
+
+/*
+   ตัวเลข frequency เปลี่ยนเป็นสีทองนิด ๆ
+*/
+
+.feature-flower.selected .count{
+
+    color:#b28a32;
+}
+
+
+/*
+   วงแสงด้านหลังดอกไม้
+*/
+
+.feature-flower.selected::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    /*
+       วางจุดศูนย์กลางไว้บริเวณดอกไม้
+    */
+
+    top:27px;
+
+    width:82px;
+    height:82px;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(255,225,110,.52) 0%,
+            rgba(255,215,90,.30) 35%,
+            rgba(255,210,80,.14) 55%,
+            transparent 76%
+        );
+
+    filter:blur(2px);
+
+    z-index:-1;
+
+    pointer-events:none;
+
+    animation:
+        featureYellowGlow 1s ease-out;
+}
+
+
+/* =========================================================
+   FEATURE SELECT ANIMATION
+========================================================= */
+
+@keyframes featureSoftFlowerGlow{
+
+    0%{
+
+        filter:
+            drop-shadow(
+                0 0 2px
+                rgba(255,220,100,.4)
+            );
+    }
+
+    40%{
+
+        filter:
+
+            drop-shadow(
+                0 0 7px
+                rgba(255,220,100,1)
+            )
+
+            drop-shadow(
+                0 0 18px
+                rgba(255,200,70,.95)
+            )
+
+            drop-shadow(
+                0 0 30px
+                rgba(255,215,100,.8)
+            );
+    }
+
+    100%{
+
+        filter:
+
+            drop-shadow(
+                0 0 5px
+                rgba(255,220,100,1)
+            )
+
+            drop-shadow(
+                0 0 12px
+                rgba(255,200,70,.9)
+            )
+
+            drop-shadow(
+                0 0 22px
+                rgba(255,215,100,.7)
+            )
+
+            drop-shadow(
+                0 0 35px
+                rgba(255,225,130,.4)
+            );
+    }
+
+}
+
+
+@keyframes featureYellowGlow{
+
+    0%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(.55);
+
+        opacity:0;
+    }
+
+    30%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+
+        opacity:1;
+    }
+
+    100%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.65);
+
+        opacity:0;
+    }
+
+}
+
+
+@keyframes featureFlowerSelected{
+
+    0%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+    }
+
+    35%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.18);
+    }
+
+    100%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.10);
+    }
+
 }
 
 
@@ -1310,70 +1443,22 @@ body{
     stroke-linecap:round;
 
     stroke-opacity:.18;
-
-    filter:
-        drop-shadow(
-            0 0 3px
-            rgba(255,255,255,.7)
-        );
-
-    animation:
-        linePulse 4s ease-in-out infinite;
 }
 
 .feature-line.ai{
-
     stroke:#d77d9d;
-
-    filter:
-        drop-shadow(
-            0 0 4px
-            rgba(255,120,170,.45)
-        );
 }
 
 .feature-line.vision{
-
     stroke:#7099d0;
-
-    filter:
-        drop-shadow(
-            0 0 4px
-            rgba(110,160,255,.45)
-        );
 }
 
 .feature-line.data{
-
     stroke:#d5a34b;
-
-    filter:
-        drop-shadow(
-            0 0 4px
-            rgba(255,190,80,.45)
-        );
 }
 
 .feature-line.tech{
-
     stroke:#7da46f;
-
-    filter:
-        drop-shadow(
-            0 0 4px
-            rgba(130,210,110,.45)
-        );
-}
-
-@keyframes linePulse{
-
-    0%,100%{
-        stroke-opacity:.16;
-    }
-
-    50%{
-        stroke-opacity:.38;
-    }
 }
 
 
@@ -1447,37 +1532,9 @@ body{
 
     box-shadow:
         0 10px 30px
-        rgba(90,110,80,.13),
-
-        0 0 18px
-        rgba(255,180,210,.55),
-
-        0 0 40px
-        rgba(255,215,160,.25);
+        rgba(90,110,80,.13);
 
     font-size:45px;
-
-    animation:
-        centerLight 3.5s ease-in-out infinite;
-}
-
-@keyframes centerLight{
-
-    0%,100%{
-        transform:scale(1);
-        box-shadow:
-            0 10px 30px rgba(90,110,80,.13),
-            0 0 15px rgba(255,180,210,.45),
-            0 0 32px rgba(255,215,160,.20);
-    }
-
-    50%{
-        transform:scale(1.06);
-        box-shadow:
-            0 12px 35px rgba(90,110,80,.15),
-            0 0 24px rgba(255,180,210,.75),
-            0 0 55px rgba(255,215,160,.35);
-    }
 }
 
 .feature-center .title{
@@ -1499,10 +1556,6 @@ body{
     font-weight:800;
 
     color:#536354;
-
-    box-shadow:
-        0 0 12px
-        rgba(255,255,255,.8);
 }
 
 
@@ -1636,63 +1689,6 @@ body{
         );
 }
 
-
-/* =========================================================
-   ✨ CO-OCCURRENCE AMBIENT LIGHT
-========================================================= */
-
-.co-field::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:-20%;
-
-    z-index:1;
-
-    pointer-events:none;
-
-    background:
-
-        radial-gradient(
-            circle at 25% 42%,
-            rgba(255,150,200,.27),
-            transparent 19%
-        ),
-
-        radial-gradient(
-            circle at 75% 40%,
-            rgba(150,195,255,.27),
-            transparent 19%
-        ),
-
-        radial-gradient(
-            circle at 50% 82%,
-            rgba(255,205,110,.25),
-            transparent 20%
-        );
-
-    filter:blur(24px);
-
-    animation:
-        coAmbientLight 8s ease-in-out infinite alternate;
-}
-
-@keyframes coAmbientLight{
-
-    0%{
-        opacity:.45;
-        transform:scale(.95);
-    }
-
-    100%{
-        opacity:1;
-        transform:scale(1.06);
-    }
-}
-
-
 .co-community{
 
     position:absolute;
@@ -1805,7 +1801,7 @@ body{
 
 
 /* =========================================================
-   ✨ CO-OCCURRENCE FLOWERS GLOW
+   CO-OCCURRENCE FLOWERS
 ========================================================= */
 
 .co-flower{
@@ -1819,13 +1815,16 @@ body{
     display:flex;
 
     flex-direction:column;
+
     align-items:center;
 
     cursor:pointer;
 
     transition:
-        transform .25s ease,
-        filter .25s ease;
+        transform .28s cubic-bezier(.2,.8,.2,1),
+        filter .3s ease;
+
+    user-select:none;
 }
 
 .co-flower:hover{
@@ -1838,10 +1837,6 @@ body{
         drop-shadow(
             0 7px 10px
             rgba(60,80,60,.20)
-        )
-        drop-shadow(
-            0 0 16px
-            rgba(255,190,220,.65)
         );
 
     z-index:30;
@@ -1851,61 +1846,15 @@ body{
 
     line-height:1;
 
-    position:relative;
-
     filter:
-        drop-shadow(
-            0 0 5px
-            rgba(255,255,255,.95)
-        )
-        drop-shadow(
-            0 0 11px
-            rgba(255,180,215,.55)
-        )
         drop-shadow(
             0 4px 4px
             rgba(70,80,70,.14)
         );
 
-    animation:
-        coFlowerGlow 4s ease-in-out infinite;
-}
-
-@keyframes coFlowerGlow{
-
-    0%,100%{
-
-        filter:
-            drop-shadow(
-                0 0 4px
-                rgba(255,255,255,.85)
-            )
-            drop-shadow(
-                0 0 8px
-                rgba(255,180,215,.35)
-            )
-            drop-shadow(
-                0 4px 4px
-                rgba(70,80,70,.14)
-            );
-    }
-
-    50%{
-
-        filter:
-            drop-shadow(
-                0 0 8px
-                rgba(255,255,255,1)
-            )
-            drop-shadow(
-                0 0 18px
-                rgba(255,180,215,.75)
-            )
-            drop-shadow(
-                0 0 28px
-                rgba(255,220,170,.30)
-            );
-    }
+    transition:
+        filter .3s ease,
+        transform .3s ease;
 }
 
 .co-flower .name{
@@ -1929,9 +1878,9 @@ body{
 
     white-space:nowrap;
 
-    box-shadow:
-        0 0 8px
-        rgba(255,255,255,.65);
+    transition:
+        box-shadow .3s ease,
+        border-color .3s ease;
 }
 
 .co-flower .count{
@@ -1946,7 +1895,225 @@ body{
 
 
 /* =========================================================
-   CO-OCCURRENCE SVG
+   SELECTED FLOWER — SOFT YELLOW GLOW
+========================================================= */
+
+.co-flower.selected{
+
+    z-index:50;
+
+    transform:
+        translate(-50%,-50%)
+        scale(1.10);
+
+    animation:
+        flowerSelected .75s ease-out;
+}
+
+.co-flower.selected .icon{
+
+    filter:
+        drop-shadow(
+            0 0 5px
+            rgba(255,220,100,1)
+        )
+
+        drop-shadow(
+            0 0 12px
+            rgba(255,200,70,.95)
+        )
+
+        drop-shadow(
+            0 0 22px
+            rgba(255,215,100,.78)
+        )
+
+        drop-shadow(
+            0 0 35px
+            rgba(255,225,130,.45)
+        );
+
+    animation:
+        softFlowerGlow .8s ease-out;
+}
+
+.co-flower.selected .name{
+
+    border-color:
+        rgba(255,205,90,.65);
+
+    box-shadow:
+        0 0 8px
+        rgba(255,210,90,.30),
+
+        0 3px 10px
+        rgba(70,80,60,.08);
+}
+
+
+/*
+   แสงวงกลมนุ่ม ๆ หลังดอกไม้
+*/
+
+.co-flower.selected::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:28px;
+
+    width:70px;
+    height:70px;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,225,110,.50) 0%,
+            rgba(255,215,90,.28) 35%,
+            rgba(255,210,80,.12) 55%,
+            transparent 75%
+        );
+
+    filter:
+        blur(2px);
+
+    z-index:-1;
+
+    pointer-events:none;
+
+    animation:
+        yellowGlow 1s ease-out;
+}
+
+
+/*
+   animation ตอนเลือก
+*/
+
+@keyframes softFlowerGlow{
+
+    0%{
+
+        filter:
+            drop-shadow(
+                0 0 2px
+                rgba(255,220,100,.4)
+            );
+    }
+
+    40%{
+
+        filter:
+            drop-shadow(
+                0 0 7px
+                rgba(255,220,100,1)
+            )
+
+            drop-shadow(
+                0 0 18px
+                rgba(255,200,70,.95)
+            )
+
+            drop-shadow(
+                0 0 30px
+                rgba(255,215,100,.8)
+            );
+    }
+
+    100%{
+
+        filter:
+            drop-shadow(
+                0 0 5px
+                rgba(255,220,100,1)
+            )
+
+            drop-shadow(
+                0 0 12px
+                rgba(255,200,70,.9)
+            )
+
+            drop-shadow(
+                0 0 22px
+                rgba(255,215,100,.7)
+            )
+
+            drop-shadow(
+                0 0 35px
+                rgba(255,225,130,.4)
+            );
+    }
+
+}
+
+
+@keyframes yellowGlow{
+
+    0%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(.55);
+
+        opacity:0;
+    }
+
+    30%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+
+        opacity:1;
+    }
+
+    100%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.65);
+
+        opacity:0;
+    }
+
+}
+
+
+@keyframes flowerSelected{
+
+    0%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+    }
+
+    35%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.18);
+    }
+
+    100%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.10);
+    }
+
+}
+
+
+/* =========================================================
+   CO SVG
 ========================================================= */
 
 .co-svg{
@@ -1974,55 +2141,23 @@ body{
     stroke-opacity:.32;
 
     stroke-linecap:round;
-
-    filter:
-        drop-shadow(
-            0 0 4px
-            rgba(170,200,150,.45)
-        );
-
-    animation:
-        coLinePulse 4s ease-in-out infinite;
 }
 
 .co-line.medium{
 
     stroke-width:2.5;
     stroke-opacity:.43;
-
-    filter:
-        drop-shadow(
-            0 0 5px
-            rgba(130,175,120,.55)
-        );
 }
 
 .co-line.strong{
 
     stroke-width:3.5;
     stroke-opacity:.55;
-
-    filter:
-        drop-shadow(
-            0 0 6px
-            rgba(100,160,100,.70)
-        );
-}
-
-@keyframes coLinePulse{
-
-    0%,100%{
-        stroke-opacity:.20;
-    }
-
-    50%{
-        stroke-opacity:.55;
-    }
 }
 
 
 /* =========================================================
-   CO-OCCURRENCE CENTER
+   CO CENTER
 ========================================================= */
 
 .co-center{
@@ -2112,13 +2247,7 @@ body{
 
     box-shadow:
         0 8px 24px
-        rgba(60,80,60,.16),
-
-        0 0 18px
-        rgba(255,160,200,.55),
-
-        0 0 40px
-        rgba(255,210,150,.28);
+        rgba(60,80,60,.16);
 
     animation:
         centerBloom 4s ease-in-out infinite;
@@ -2145,32 +2274,17 @@ body{
 
     box-shadow:
         0 0 0 5px
-        rgba(255,241,166,.28),
-
-        0 0 14px
-        rgba(255,235,140,.9);
+        rgba(255,241,166,.28);
 }
 
 @keyframes centerBloom{
 
     0%,100%{
-
         transform:scale(1);
-
-        box-shadow:
-            0 8px 24px rgba(60,80,60,.16),
-            0 0 15px rgba(255,160,200,.45),
-            0 0 32px rgba(255,210,150,.20);
     }
 
     50%{
-
-        transform:scale(1.06);
-
-        box-shadow:
-            0 10px 28px rgba(60,80,60,.18),
-            0 0 25px rgba(255,160,200,.75),
-            0 0 55px rgba(255,210,150,.38);
+        transform:scale(1.05);
     }
 }
 
@@ -2191,10 +2305,6 @@ body{
 
     font-size:11px;
     font-weight:800;
-
-    box-shadow:
-        0 0 12px
-        rgba(255,255,255,.75);
 }
 
 
@@ -2508,7 +2618,9 @@ footer{
 <section class="grid">
 
 
-<!-- TOP KEYWORDS -->
+<!-- =========================================================
+     TOP KEYWORDS
+========================================================= -->
 
 <div class="card">
 
@@ -2536,7 +2648,9 @@ footer{
 </div>
 
 
-<!-- TOP AUTHORS -->
+<!-- =========================================================
+     TOP AUTHORS
+========================================================= -->
 
 <div class="card">
 
@@ -2564,7 +2678,9 @@ footer{
 </div>
 
 
-<!-- PUBLICATIONS BY YEAR -->
+<!-- =========================================================
+     PUBLICATIONS BY YEAR
+========================================================= -->
 
 <div class="card">
 
@@ -2592,7 +2708,9 @@ footer{
 </div>
 
 
-<!-- RESEARCH AREAS -->
+<!-- =========================================================
+     RESEARCH AREAS
+========================================================= -->
 
 <div class="card">
 
@@ -2611,6 +2729,7 @@ footer{
         </div>
 
     </div>
+
 
     <div
         id="subjects"
@@ -2663,7 +2782,9 @@ footer{
         <div class="research-legend">
 
             🌸 Click a petal to bloom<br>
+
             📏 Larger petal = more articles<br>
+
             🌿 Each petal = one research area
 
         </div>
@@ -2754,6 +2875,7 @@ footer{
 
         </div>
 
+
     </div>
 
 
@@ -2761,15 +2883,28 @@ footer{
 
         <b>🌺 How to read this garden</b><br>
 
-        🌸 Flowers represent research keywords.<br>
+        🌸
+        Flowers represent research keywords.
 
-        🌿 Lines represent keyword co-occurrence relationships.<br>
+        <br>
 
-        🌺 The central flower represents the main research theme.<br>
+        🌿
+        Lines represent keyword co-occurrence relationships.
 
-        📏 Larger flowers represent keywords with higher frequency.<br>
+        <br>
 
-        🦋 Butterflies are decorative only.
+        🌺
+        The central flower represents the main research theme.
+
+        <br>
+
+        📏
+        Larger flowers represent keywords with higher frequency.
+
+        <br>
+
+        🦋
+        Butterflies are decorative only.
 
     </div>
 
@@ -2876,9 +3011,20 @@ footer{
             class="feature-flower"
             style="left:15%;top:38%"
         >
-            <div class="emoji" style="font-size:47px">🌸</div>
-            <div class="label">Machine Learning</div>
-            <div class="count">970</div>
+
+            <div
+                class="emoji"
+                style="font-size:47px"
+            >🌸</div>
+
+            <div class="label">
+                Machine Learning
+            </div>
+
+            <div class="count">
+                970
+            </div>
+
         </div>
 
 
@@ -2886,9 +3032,20 @@ footer{
             class="feature-flower"
             style="left:29%;top:35%"
         >
-            <div class="emoji" style="font-size:60px">🌸</div>
-            <div class="label">Artificial Intelligence</div>
-            <div class="count">1,260</div>
+
+            <div
+                class="emoji"
+                style="font-size:60px"
+            >🌸</div>
+
+            <div class="label">
+                Artificial Intelligence
+            </div>
+
+            <div class="count">
+                1,260
+            </div>
+
         </div>
 
 
@@ -2896,9 +3053,20 @@ footer{
             class="feature-flower"
             style="left:42%;top:39%"
         >
-            <div class="emoji" style="font-size:43px">🌸</div>
-            <div class="label">Deep Learning</div>
-            <div class="count">760</div>
+
+            <div
+                class="emoji"
+                style="font-size:43px"
+            >🌸</div>
+
+            <div class="label">
+                Deep Learning
+            </div>
+
+            <div class="count">
+                760
+            </div>
+
         </div>
 
 
@@ -2906,9 +3074,20 @@ footer{
             class="feature-flower"
             style="left:22%;top:53%"
         >
-            <div class="emoji" style="font-size:35px">🌸</div>
-            <div class="label">Neural Networks</div>
-            <div class="count">460</div>
+
+            <div
+                class="emoji"
+                style="font-size:35px"
+            >🌸</div>
+
+            <div class="label">
+                Neural Networks
+            </div>
+
+            <div class="count">
+                460
+            </div>
+
         </div>
 
 
@@ -2916,9 +3095,20 @@ footer{
             class="feature-flower"
             style="left:36%;top:55%"
         >
-            <div class="emoji" style="font-size:33px">🌸</div>
-            <div class="label">Classification</div>
-            <div class="count">350</div>
+
+            <div
+                class="emoji"
+                style="font-size:33px"
+            >🌸</div>
+
+            <div class="label">
+                Classification
+            </div>
+
+            <div class="count">
+                350
+            </div>
+
         </div>
 
 
@@ -2928,9 +3118,20 @@ footer{
             class="feature-flower"
             style="left:61%;top:36%"
         >
-            <div class="emoji" style="font-size:46px">🌼</div>
-            <div class="label">Computer Vision</div>
-            <div class="count">520</div>
+
+            <div
+                class="emoji"
+                style="font-size:46px"
+            >🌼</div>
+
+            <div class="label">
+                Computer Vision
+            </div>
+
+            <div class="count">
+                520
+            </div>
+
         </div>
 
 
@@ -2938,9 +3139,20 @@ footer{
             class="feature-flower"
             style="left:75%;top:35%"
         >
-            <div class="emoji" style="font-size:36px">🌼</div>
-            <div class="label">Image Processing</div>
-            <div class="count">150</div>
+
+            <div
+                class="emoji"
+                style="font-size:36px"
+            >🌼</div>
+
+            <div class="label">
+                Image Processing
+            </div>
+
+            <div class="count">
+                150
+            </div>
+
         </div>
 
 
@@ -2948,9 +3160,20 @@ footer{
             class="feature-flower"
             style="left:69%;top:52%"
         >
-            <div class="emoji" style="font-size:36px">🌼</div>
-            <div class="label">Natural Language Processing</div>
-            <div class="count">285</div>
+
+            <div
+                class="emoji"
+                style="font-size:36px"
+            >🌼</div>
+
+            <div class="label">
+                Natural Language Processing
+            </div>
+
+            <div class="count">
+                285
+            </div>
+
         </div>
 
 
@@ -2958,9 +3181,20 @@ footer{
             class="feature-flower"
             style="left:83%;top:51%"
         >
-            <div class="emoji" style="font-size:31px">🌼</div>
-            <div class="label">Large Language Models</div>
-            <div class="count">120</div>
+
+            <div
+                class="emoji"
+                style="font-size:31px"
+            >🌼</div>
+
+            <div class="label">
+                Large Language Models
+            </div>
+
+            <div class="count">
+                120
+            </div>
+
         </div>
 
 
@@ -2968,9 +3202,20 @@ footer{
             class="feature-flower"
             style="left:80%;top:64%"
         >
-            <div class="emoji" style="font-size:31px">🌼</div>
-            <div class="label">Transformer</div>
-            <div class="count">130</div>
+
+            <div
+                class="emoji"
+                style="font-size:31px"
+            >🌼</div>
+
+            <div class="label">
+                Transformer
+            </div>
+
+            <div class="count">
+                130
+            </div>
+
         </div>
 
 
@@ -2980,9 +3225,20 @@ footer{
             class="feature-flower"
             style="left:19%;top:78%"
         >
-            <div class="emoji" style="font-size:36px">🌻</div>
-            <div class="label">Big Data</div>
-            <div class="count">260</div>
+
+            <div
+                class="emoji"
+                style="font-size:36px"
+            >🌻</div>
+
+            <div class="label">
+                Big Data
+            </div>
+
+            <div class="count">
+                260
+            </div>
+
         </div>
 
 
@@ -2990,9 +3246,20 @@ footer{
             class="feature-flower"
             style="left:32%;top:82%"
         >
-            <div class="emoji" style="font-size:33px">🌻</div>
-            <div class="label">Data Mining</div>
-            <div class="count">240</div>
+
+            <div
+                class="emoji"
+                style="font-size:33px"
+            >🌻</div>
+
+            <div class="label">
+                Data Mining
+            </div>
+
+            <div class="count">
+                240
+            </div>
+
         </div>
 
 
@@ -3000,9 +3267,20 @@ footer{
             class="feature-flower"
             style="left:43%;top:75%"
         >
-            <div class="emoji" style="font-size:34px">🌻</div>
-            <div class="label">Cloud Computing</div>
-            <div class="count">220</div>
+
+            <div
+                class="emoji"
+                style="font-size:34px"
+            >🌻</div>
+
+            <div class="label">
+                Cloud Computing
+            </div>
+
+            <div class="count">
+                220
+            </div>
+
         </div>
 
 
@@ -3010,9 +3288,20 @@ footer{
             class="feature-flower"
             style="left:29%;top:69%"
         >
-            <div class="emoji" style="font-size:31px">🌻</div>
-            <div class="label">Algorithm</div>
-            <div class="count">145</div>
+
+            <div
+                class="emoji"
+                style="font-size:31px"
+            >🌻</div>
+
+            <div class="label">
+                Algorithm
+            </div>
+
+            <div class="count">
+                145
+            </div>
+
         </div>
 
 
@@ -3022,9 +3311,20 @@ footer{
             class="feature-flower"
             style="left:61%;top:78%"
         >
-            <div class="emoji" style="font-size:36px">🌷</div>
-            <div class="label">Internet of Things</div>
-            <div class="count">310</div>
+
+            <div
+                class="emoji"
+                style="font-size:36px"
+            >🌷</div>
+
+            <div class="label">
+                Internet of Things
+            </div>
+
+            <div class="count">
+                310
+            </div>
+
         </div>
 
 
@@ -3032,9 +3332,20 @@ footer{
             class="feature-flower"
             style="left:73%;top:81%"
         >
-            <div class="emoji" style="font-size:34px">🌷</div>
-            <div class="label">Robotics</div>
-            <div class="count">190</div>
+
+            <div
+                class="emoji"
+                style="font-size:34px"
+            >🌷</div>
+
+            <div class="label">
+                Robotics
+            </div>
+
+            <div class="count">
+                190
+            </div>
+
         </div>
 
 
@@ -3042,9 +3353,20 @@ footer{
             class="feature-flower"
             style="left:84%;top:76%"
         >
-            <div class="emoji" style="font-size:31px">🌷</div>
-            <div class="label">Optimization</div>
-            <div class="count">180</div>
+
+            <div
+                class="emoji"
+                style="font-size:31px"
+            >🌷</div>
+
+            <div class="label">
+                Optimization
+            </div>
+
+            <div class="count">
+                180
+            </div>
+
         </div>
 
 
@@ -3056,7 +3378,6 @@ footer{
             🌷 = Emerging Technology<br>
             📏 Flower size = Keyword frequency<br>
             🌿 Lines = Keyword relationship<br>
-            ✨ Glow = Research activity<br>
             🦋 = Decoration
 
         </div>
@@ -3196,18 +3517,61 @@ const YEARS = [
 ];
 
 
+/* =========================================================
+   RESEARCH AREAS
+========================================================= */
+
 const RESEARCH_AREAS = [
 
-    {subject:"Computer Science",count:2400},
-    {subject:"Engineering",count:1050},
-    {subject:"Mathematics",count:620},
-    {subject:"Decision Sciences",count:430},
-    {subject:"Physics",count:300},
-    {subject:"Materials Science",count:250},
-    {subject:"Medicine",count:210},
-    {subject:"Business",count:180},
-    {subject:"Social Sciences",count:150},
-    {subject:"Others",count:113}
+    {
+        subject:"Computer Science",
+        count:2400
+    },
+
+    {
+        subject:"Engineering",
+        count:1050
+    },
+
+    {
+        subject:"Mathematics",
+        count:620
+    },
+
+    {
+        subject:"Decision Sciences",
+        count:430
+    },
+
+    {
+        subject:"Physics",
+        count:300
+    },
+
+    {
+        subject:"Materials Science",
+        count:250
+    },
+
+    {
+        subject:"Medicine",
+        count:210
+    },
+
+    {
+        subject:"Business",
+        count:180
+    },
+
+    {
+        subject:"Social Sciences",
+        count:150
+    },
+
+    {
+        subject:"Others",
+        count:113
+    }
 
 ];
 
@@ -3520,28 +3884,40 @@ function baseLayout(){
 
 
 /* =========================================================
-   RESEARCH AREAS
+   RESEARCH AREAS — PETAL FLOWER
 ========================================================= */
 
 (function(){
 
     const field =
-        document.getElementById("subjects");
+        document.getElementById(
+            "subjects"
+        );
 
     const detail =
-        document.getElementById("researchDetail");
+        document.getElementById(
+            "researchDetail"
+        );
 
     const detailIcon =
-        document.getElementById("researchDetailIcon");
+        document.getElementById(
+            "researchDetailIcon"
+        );
 
     const detailTitle =
-        document.getElementById("researchDetailTitle");
+        document.getElementById(
+            "researchDetailTitle"
+        );
 
     const detailCount =
-        document.getElementById("researchDetailCount");
+        document.getElementById(
+            "researchDetailCount"
+        );
 
     const detailPercent =
-        document.getElementById("researchDetailPercent");
+        document.getElementById(
+            "researchDetailPercent"
+        );
 
 
     const total =
@@ -3588,19 +3964,13 @@ function baseLayout(){
         RESEARCH_AREAS.length;
 
 
-    const max =
-        Math.max(
-            ...RESEARCH_AREAS.map(
-                x=>x.count
-            )
-        );
-
-
     RESEARCH_AREAS.forEach(
         (item,index)=>{
 
             const petal =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
             petal.className =
                 "research-petal";
@@ -3627,15 +3997,25 @@ function baseLayout(){
             );
 
 
+            const max =
+                Math.max(
+                    ...RESEARCH_AREAS.map(
+                        x=>x.count
+                    )
+                );
+
+            const minWidth = 110;
+            const maxWidth = 180;
+
             const ratio =
                 Math.sqrt(
                     item.count/max
                 );
 
-
             const width =
-                110 +
-                ratio*70;
+                minWidth +
+                ratio*
+                (maxWidth-minWidth);
 
 
             petal.style.width =
@@ -3813,15 +4193,20 @@ function baseLayout(){
 
 /* =========================================================
    KEYWORD CO-OCCURRENCE GARDEN
+   ORIGINAL GLOW — KEPT
 ========================================================= */
 
 (function(){
 
     const field =
-        document.getElementById("coField");
+        document.getElementById(
+            "coField"
+        );
 
     const svg =
-        document.getElementById("coSvg");
+        document.getElementById(
+            "coSvg"
+        );
 
 
     const flowers = [
@@ -3936,14 +4321,19 @@ function baseLayout(){
         ["Artificial Intelligence","Computer Vision",2],
         ["Artificial Intelligence","Natural Language Processing",2],
         ["Artificial Intelligence","Big Data",2],
+
         ["Machine Learning","Deep Learning",3],
         ["Machine Learning","Neural Networks",2],
         ["Machine Learning","Classification",2],
+
         ["Deep Learning","Neural Networks",3],
         ["Deep Learning","Computer Vision",2],
         ["Deep Learning","Natural Language Processing",2],
+
         ["Computer Vision","Image Processing",3],
+
         ["Natural Language Processing","Large Language Models",3],
+
         ["Big Data","Data Mining",3],
         ["Big Data","Cloud Computing",2],
         ["Data Mining","Cloud Computing",2]
@@ -3960,11 +4350,17 @@ function baseLayout(){
         );
 
 
+    /* =====================================================
+       CREATE FLOWERS
+    ===================================================== */
+
     flowers.forEach(
         item=>{
 
             const flower =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
             flower.className =
                 "co-flower";
@@ -3989,7 +4385,9 @@ function baseLayout(){
 
 
             const icon =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
             icon.className =
                 "icon";
@@ -4002,7 +4400,9 @@ function baseLayout(){
 
 
             const name =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
             name.className =
                 "name";
@@ -4012,7 +4412,9 @@ function baseLayout(){
 
 
             const count =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
             count.className =
                 "count";
@@ -4021,9 +4423,17 @@ function baseLayout(){
                 item.count.toLocaleString();
 
 
-            flower.appendChild(icon);
-            flower.appendChild(name);
-            flower.appendChild(count);
+            flower.appendChild(
+                icon
+            );
+
+            flower.appendChild(
+                name
+            );
+
+            flower.appendChild(
+                count
+            );
 
 
             flower.title =
@@ -4032,9 +4442,68 @@ function baseLayout(){
                 item.count;
 
 
+            flower.addEventListener(
+                "click",
+                function(event){
+
+                    event.stopPropagation();
+
+
+                    field
+                        .querySelectorAll(
+                            ".co-flower"
+                        )
+                        .forEach(
+                            other=>{
+
+                                other.classList.remove(
+                                    "selected"
+                                );
+
+                            }
+                        );
+
+
+                    flower.classList.remove(
+                        "selected"
+                    );
+
+                    void flower.offsetWidth;
+
+
+                    flower.classList.add(
+                        "selected"
+                    );
+
+                }
+            );
+
+
             field.appendChild(
                 flower
             );
+
+        }
+    );
+
+
+    field.addEventListener(
+        "click",
+        function(){
+
+            field
+                .querySelectorAll(
+                    ".co-flower"
+                )
+                .forEach(
+                    flower=>{
+
+                        flower.classList.remove(
+                            "selected"
+                        );
+
+                    }
+                );
 
         }
     );
@@ -4092,6 +4561,7 @@ function baseLayout(){
                     getFlower(
                         connection[1]
                     );
+
 
                 if(
                     !from ||
@@ -4315,6 +4785,102 @@ function baseLayout(){
 
     ];
 
+
+    /* =====================================================
+       FEATURE VECTOR FLOWER CLICK
+       NEW — SAME GLOW BEHAVIOR AS CO GARDEN
+    ===================================================== */
+
+    const featureFlowers =
+        field.querySelectorAll(
+            ".feature-flower"
+        );
+
+
+    featureFlowers.forEach(
+        flower=>{
+
+            flower.addEventListener(
+                "click",
+                function(event){
+
+                    /*
+                       ไม่ให้ click bubble ไปถึง
+                       feature-field
+                    */
+
+                    event.stopPropagation();
+
+
+                    /*
+                       เอาแสงออกจากดอกอื่นทั้งหมด
+                    */
+
+                    featureFlowers.forEach(
+                        other=>{
+
+                            other.classList.remove(
+                                "selected"
+                            );
+
+                        }
+                    );
+
+
+                    /*
+                       รีเซ็ต animation
+                       เพื่อให้กดดอกเดิมซ้ำแล้ว
+                       animation เล่นใหม่
+                    */
+
+                    flower.classList.remove(
+                        "selected"
+                    );
+
+                    void flower.offsetWidth;
+
+
+                    /*
+                       เพิ่มแสงสีเหลือง
+                    */
+
+                    flower.classList.add(
+                        "selected"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /*
+       คลิกพื้นที่ว่าง
+       → ปิดแสง
+    */
+
+    field.addEventListener(
+        "click",
+        function(){
+
+            featureFlowers.forEach(
+                flower=>{
+
+                    flower.classList.remove(
+                        "selected"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       DRAW FEATURE CONNECTIONS
+    ===================================================== */
 
     function draw(){
 
