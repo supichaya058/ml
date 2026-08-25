@@ -323,87 +323,165 @@ body{
 
 
 /* =========================================================
-   RESEARCH AREAS — SIMPLE & EASY TO READ
+   RESEARCH AREAS
+   FLOWER GARDEN VERSION
 ========================================================= */
 
 .research-field{
 
     position:relative;
 
-    min-height:500px;
-
-    padding:24px 28px 80px;
+    height:610px;
 
     overflow:hidden;
 
     background:
 
         radial-gradient(
-            circle at 10% 15%,
-            rgba(255,190,215,.13),
-            transparent 24%
+            ellipse at 18% 25%,
+            rgba(255,192,216,.22),
+            transparent 30%
         ),
 
         radial-gradient(
-            circle at 90% 20%,
-            rgba(190,215,250,.13),
-            transparent 24%
+            ellipse at 82% 22%,
+            rgba(190,215,250,.20),
+            transparent 30%
         ),
 
         radial-gradient(
-            circle at 15% 85%,
-            rgba(250,220,160,.13),
-            transparent 24%
+            ellipse at 25% 82%,
+            rgba(255,224,155,.22),
+            transparent 28%
         ),
 
         radial-gradient(
-            circle at 85% 85%,
-            rgba(190,225,185,.15),
-            transparent 24%
+            ellipse at 75% 82%,
+            rgba(195,228,186,.22),
+            transparent 30%
         ),
 
         linear-gradient(
             180deg,
-            #fbfdf9,
-            #edf6e9
+            #fbfdf9 0%,
+            #f2f8ed 55%,
+            #e7f2e2 100%
         );
 }
 
 
 /* =========================================================
-   RESEARCH INTRO
+   SOFT GARDEN GLOW
+========================================================= */
+
+.research-field::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:420px;
+    height:180px;
+
+    left:50%;
+    bottom:-90px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(130,170,110,.18),
+            transparent 70%
+        );
+
+    filter:blur(10px);
+
+    pointer-events:none;
+}
+
+
+/* =========================================================
+   GRASS DECORATION
+========================================================= */
+
+.research-grass{
+
+    position:absolute;
+
+    bottom:0;
+
+    width:100%;
+
+    height:90px;
+
+    pointer-events:none;
+
+    z-index:3;
+
+    background:
+
+        linear-gradient(
+            175deg,
+            transparent 0 46%,
+            rgba(125,166,113,.12) 47% 49%,
+            transparent 50%
+        ) 0 20px / 45px 60px repeat-x,
+
+        linear-gradient(
+            185deg,
+            transparent 0 46%,
+            rgba(110,155,101,.10) 47% 49%,
+            transparent 50%
+        ) 20px 5px / 55px 70px repeat-x;
+}
+
+
+/* =========================================================
+   INTRO
 ========================================================= */
 
 .research-intro{
+
+    position:absolute;
+
+    left:20px;
+    top:18px;
+
+    z-index:40;
 
     display:flex;
 
     align-items:center;
 
-    gap:12px;
+    gap:10px;
 
-    margin-bottom:20px;
+    max-width:310px;
 
-    padding:13px 16px;
+    padding:10px 13px;
 
     background:
-        rgba(255,255,255,.82);
+        rgba(255,255,255,.86);
 
     border:
         1px solid
-        #dce7d7;
+        rgba(218,230,214,.9);
 
     border-radius:16px;
 
     box-shadow:
-        0 4px 12px
-        rgba(70,90,70,.05);
+        0 5px 16px
+        rgba(70,90,70,.07);
+
+    backdrop-filter:
+        blur(8px);
 }
 
 .research-intro-icon{
 
-    width:40px;
-    height:40px;
+    width:35px;
+    height:35px;
 
     flex-shrink:0;
 
@@ -416,25 +494,17 @@ body{
     background:
         linear-gradient(
             135deg,
-            #f8c9da,
-            #fff0b1
+            #ffd2e1,
+            #fff0ad
         );
 
-    font-size:21px;
-
-    box-shadow:
-        0 4px 10px
-        rgba(80,90,70,.08);
-}
-
-.research-intro-text{
-
-    min-width:0;
+    font-size:18px;
 }
 
 .research-intro-title{
 
-    font-size:13px;
+    font-size:11px;
+
     font-weight:800;
 
     color:#4f624f;
@@ -444,231 +514,403 @@ body{
 
     margin-top:3px;
 
-    font-size:10px;
+    font-size:9px;
 
-    color:#8b968c;
+    color:#8a968b;
 
-    line-height:1.5;
+    line-height:1.4;
 }
 
 
 /* =========================================================
-   RESEARCH LIST
+   GARDEN TITLE
 ========================================================= */
 
-.research-list{
+.research-garden-title{
+
+    position:absolute;
+
+    left:50%;
+    top:21px;
+
+    transform:
+        translateX(-50%);
+
+    z-index:30;
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    background:
+        rgba(255,255,255,.82);
+
+    border:
+        1px solid
+        #dce8d8;
+
+    box-shadow:
+        0 5px 14px
+        rgba(70,90,70,.06);
+
+    color:#60705f;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    letter-spacing:.3px;
+
+    white-space:nowrap;
+}
+
+
+/* =========================================================
+   RESEARCH TOTAL
+========================================================= */
+
+.research-total{
+
+    position:absolute;
+
+    right:20px;
+    top:18px;
+
+    z-index:40;
+
+    padding:9px 13px;
+
+    border-radius:15px;
+
+    background:
+        rgba(255,255,255,.84);
+
+    border:
+        1px solid
+        #dce7d7;
+
+    box-shadow:
+        0 4px 12px
+        rgba(70,90,70,.06);
+
+    text-align:right;
+
+    color:#819080;
+
+    font-size:8px;
+}
+
+.research-total strong{
+
+    display:block;
+
+    margin-bottom:1px;
+
+    color:#506550;
+
+    font-size:14px;
+}
+
+
+/* =========================================================
+   RESEARCH FLOWER
+========================================================= */
+
+.research-flower{
+
+    position:absolute;
+
+    z-index:15;
+
+    transform:
+        translate(-50%,-50%);
 
     display:flex;
 
     flex-direction:column;
 
-    gap:9px;
+    align-items:center;
+
+    cursor:pointer;
+
+    user-select:none;
+
+    transition:
+        transform .3s cubic-bezier(.2,.8,.2,1),
+        filter .3s ease;
+
+    animation:
+        flowerFloat 5s ease-in-out infinite;
+}
+
+.research-flower:hover{
+
+    z-index:50;
+
+    transform:
+        translate(-50%,-50%)
+        scale(1.10);
+
+    filter:
+        drop-shadow(
+            0 8px 13px
+            rgba(60,80,60,.18)
+        );
+}
+
+
+/* =========================================================
+   FLOWER BLOOM
+========================================================= */
+
+.research-bloom{
 
     position:relative;
+
+    width:var(--flower-size);
+    height:var(--flower-size);
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+}
+
+
+/* =========================================================
+   PETALS
+========================================================= */
+
+.research-petal{
+
+    position:absolute;
+
+    width:38%;
+    height:58%;
+
+    left:50%;
+    top:50%;
+
+    transform-origin:
+        50% 82%;
+
+    border-radius:
+        55% 55% 48% 48%;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.95),
+            var(--flower-light) 32%,
+            var(--flower-color) 100%
+        );
+
+    box-shadow:
+        inset
+        0 2px 4px
+        rgba(255,255,255,.7),
+
+        0 3px 6px
+        rgba(80,90,70,.08);
+}
+
+
+/* 8 PETALS */
+
+.research-petal.p1{
+
+    transform:
+        translate(-50%,-50%)
+        rotate(0deg)
+        translateY(-26%);
+}
+
+.research-petal.p2{
+
+    transform:
+        translate(-50%,-50%)
+        rotate(45deg)
+        translateY(-26%);
+}
+
+.research-petal.p3{
+
+    transform:
+        translate(-50%,-50%)
+        rotate(90deg)
+        translateY(-26%);
+}
+
+.research-petal.p4{
+
+    transform:
+        translate(-50%,-50%)
+        rotate(135deg)
+        translateY(-26%);
+}
+
+.research-petal.p5{
+
+    transform:
+        translate(-50%,-50%)
+        rotate(180deg)
+        translateY(-26%);
+}
+
+.research-petal.p6{
+
+    transform:
+        translate(-50%,-50%)
+        rotate(225deg)
+        translateY(-26%);
+}
+
+.research-petal.p7{
+
+    transform:
+        translate(-50%,-50%)
+        rotate(270deg)
+        translateY(-26%);
+}
+
+.research-petal.p8{
+
+    transform:
+        translate(-50%,-50%)
+        rotate(315deg)
+        translateY(-26%);
+}
+
+
+/* =========================================================
+   FLOWER CENTER
+========================================================= */
+
+.research-center{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:27%;
+    height:27%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+            circle at 35% 30%,
+            #fffbd7,
+            #ffe99b 55%,
+            #e7c768 100%
+        );
+
+    border:
+        2px solid
+        rgba(255,255,255,.9);
+
+    box-shadow:
+
+        inset
+        0 2px 4px
+        rgba(255,255,255,.8),
+
+        0 3px 7px
+        rgba(100,90,50,.12);
 
     z-index:5;
 }
 
 
 /* =========================================================
-   RESEARCH ROW
+   TOP 3 HALO
 ========================================================= */
 
-.research-row{
+.research-flower.top-one .research-bloom::before,
+.research-flower.top-two .research-bloom::before,
+.research-flower.top-three .research-bloom::before{
 
-    position:relative;
+    content:"";
 
-    display:grid;
+    position:absolute;
 
-    grid-template-columns:
-        34px
-        minmax(145px,190px)
-        1fr
-        85px;
+    left:50%;
+    top:50%;
 
-    align-items:center;
+    width:112%;
+    height:112%;
 
-    gap:12px;
+    transform:
+        translate(-50%,-50%);
 
-    min-height:48px;
+    border-radius:50%;
 
-    padding:8px 12px;
+    border:
+        2px solid
+        rgba(255,220,100,.35);
+
+    animation:
+        haloPulse 3s ease-in-out infinite;
+}
+
+.research-flower.top-one .research-bloom::before{
+
+    border-color:
+        rgba(244,193,67,.48);
+}
+
+.research-flower.top-two .research-bloom::before{
+
+    border-color:
+        rgba(170,190,196,.40);
+}
+
+.research-flower.top-three .research-bloom::before{
+
+    border-color:
+        rgba(203,158,102,.40);
+}
+
+
+/* =========================================================
+   FLOWER LABEL
+========================================================= */
+
+.research-flower-label{
+
+    margin-top:4px;
+
+    min-width:105px;
+
+    max-width:145px;
+
+    padding:5px 9px;
+
+    text-align:center;
+
+    border-radius:14px;
 
     background:
         rgba(255,255,255,.90);
 
     border:
         1px solid
-        #dfe8db;
-
-    border-radius:15px;
-
-    cursor:pointer;
+        rgba(215,226,211,.9);
 
     box-shadow:
-        0 3px 10px
-        rgba(70,90,70,.045);
+        0 3px 9px
+        rgba(60,80,60,.06);
 
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease,
-        border-color .25s ease,
-        background .25s ease;
-}
-
-.research-row:hover{
-
-    transform:
-        translateX(4px);
-
-    border-color:
-        #cdddc7;
-
-    box-shadow:
-        0 7px 17px
-        rgba(70,90,70,.09);
-}
-
-
-/* =========================================================
-   SELECTED RESEARCH ROW
-========================================================= */
-
-.research-row.selected{
-
-    background:
-        linear-gradient(
-            90deg,
-            #fffdf0,
-            #fff8d9
-        );
-
-    border-color:
-        rgba(235,199,91,.75);
-
-    box-shadow:
-        0 7px 20px
-        rgba(210,175,65,.13);
-
-    transform:
-        translateX(5px);
-}
-
-.research-row.selected
-.research-row-icon{
-
-    box-shadow:
-        0 0 0 4px
-        rgba(255,220,100,.20),
-
-        0 4px 10px
-        rgba(210,175,65,.18);
-}
-
-
-/* =========================================================
-   RANK
-========================================================= */
-
-.research-rank{
-
-    width:26px;
-    height:26px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:#f0f5ed;
-
-    color:#758375;
+    color:#4f604f;
 
     font-size:9px;
 
     font-weight:800;
-}
-
-
-/* TOP 3 RANK
-========================================================= */
-
-.research-row:nth-child(1)
-.research-rank{
-
-    background:#fff0a8;
-    color:#9a7b1f;
-}
-
-.research-row:nth-child(2)
-.research-rank{
-
-    background:#e5edf0;
-    color:#60747b;
-}
-
-.research-row:nth-child(3)
-.research-rank{
-
-    background:#f1dfc7;
-    color:#876842;
-}
-
-
-/* =========================================================
-   ICON
-========================================================= */
-
-.research-row-icon{
-
-    position:absolute;
-
-    left:42px;
-
-    width:30px;
-    height:30px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.9),
-            var(--research-color)
-        );
-
-    font-size:16px;
-
-    box-shadow:
-        0 3px 8px
-        rgba(70,90,70,.08);
-
-    transition:
-        box-shadow .25s ease,
-        transform .25s ease;
-}
-
-
-/* =========================================================
-   NAME
-========================================================= */
-
-.research-row-name{
-
-    padding-left:35px;
-
-    font-size:11px;
-
-    font-weight:800;
-
-    color:#506051;
 
     white-space:nowrap;
 
@@ -677,127 +919,219 @@ body{
     text-overflow:ellipsis;
 }
 
+.research-flower-count{
+
+    margin-top:2px;
+
+    color:#879487;
+
+    font-size:8px;
+
+    font-weight:700;
+}
+
 
 /* =========================================================
-   BAR AREA
+   RANK BADGE
 ========================================================= */
 
-.research-bar-area{
+.research-rank-badge{
 
-    position:relative;
+    position:absolute;
 
-    height:18px;
+    right:-3px;
+    top:-2px;
+
+    min-width:20px;
+    height:20px;
 
     display:flex;
 
     align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.94);
+
+    border:
+        1px solid
+        #dce6d8;
+
+    box-shadow:
+        0 3px 8px
+        rgba(60,80,60,.10);
+
+    color:#748274;
+
+    font-size:7px;
+
+    font-weight:900;
+
+    z-index:20;
+}
+
+.top-one .research-rank-badge{
+
+    background:#fff0a6;
+    color:#98761c;
+    border-color:#ead17a;
+}
+
+.top-two .research-rank-badge{
+
+    background:#edf3f5;
+    color:#62777e;
+}
+
+.top-three .research-rank-badge{
+
+    background:#f5e4ce;
+    color:#896d4d;
 }
 
 
 /* =========================================================
-   BAR BACKGROUND
+   FLOWER HOVER
 ========================================================= */
 
-.research-bar-bg{
+.research-flower:hover
+.research-flower-label{
 
-    width:100%;
+    border-color:
+        var(--flower-color);
 
-    height:9px;
+    box-shadow:
+        0 0 10px
+        color-mix(
+            in srgb,
+            var(--flower-color) 25%,
+            transparent
+        ),
 
-    border-radius:20px;
-
-    background:#edf2ea;
-
-    overflow:hidden;
+        0 4px 10px
+        rgba(70,80,60,.08);
 }
 
 
 /* =========================================================
-   BAR
+   SELECTED FLOWER
 ========================================================= */
 
-.research-bar{
+.research-flower.selected{
 
-    height:100%;
+    z-index:70;
 
-    width:var(--bar-width);
+    transform:
+        translate(-50%,-50%)
+        scale(1.13);
 
-    border-radius:20px;
+    animation:
+        selectedFlower .75s ease-out;
+}
+
+.research-flower.selected .research-bloom{
+
+    filter:
+
+        drop-shadow(
+            0 0 5px
+            rgba(255,220,100,1)
+        )
+
+        drop-shadow(
+            0 0 12px
+            rgba(255,205,70,.95)
+        )
+
+        drop-shadow(
+            0 0 24px
+            rgba(255,220,100,.75)
+        )
+
+        drop-shadow(
+            0 0 38px
+            rgba(255,225,130,.45)
+        );
+}
+
+.research-flower.selected .research-flower-label{
+
+    border-color:
+        rgba(244,198,76,.75);
 
     background:
         linear-gradient(
             90deg,
-            var(--research-light),
-            var(--research-color)
+            #fffdf0,
+            #fff8d7
         );
 
     box-shadow:
-        0 2px 6px
-        rgba(80,100,80,.08);
 
-    transition:
-        width .65s cubic-bezier(.2,.8,.2,1);
+        0 0 12px
+        rgba(255,215,90,.35),
+
+        0 4px 12px
+        rgba(70,80,60,.09);
 }
 
 
 /* =========================================================
-   PERCENT
+   YELLOW CLICK GLOW
 ========================================================= */
 
-.research-percent{
+.research-flower.selected::after{
+
+    content:"";
 
     position:absolute;
 
-    right:5px;
+    left:50%;
+    top:calc(
+        var(--flower-size) / 2
+    );
 
-    top:50%;
+    width:
+        calc(
+            var(--flower-size) * 1.7
+        );
+
+    height:
+        calc(
+            var(--flower-size) * 1.7
+        );
 
     transform:
-        translateY(-50%);
+        translate(-50%,-50%);
 
-    padding:
-        2px 6px;
-
-    border-radius:8px;
+    border-radius:50%;
 
     background:
-        rgba(255,255,255,.76);
 
-    font-size:8px;
+        radial-gradient(
+            circle,
+            rgba(255,225,100,.55) 0%,
+            rgba(255,215,90,.28) 35%,
+            rgba(255,210,80,.12) 55%,
+            transparent 74%
+        );
 
-    color:#788478;
+    filter:
+        blur(3px);
 
-    font-weight:700;
+    z-index:-1;
+
+    pointer-events:none;
+
+    animation:
+        researchYellowGlow 1s ease-out;
 }
 
 
 /* =========================================================
-   COUNT
-========================================================= */
-
-.research-row-count{
-
-    text-align:right;
-
-    font-size:10px;
-
-    color:#758176;
-
-    font-weight:700;
-
-    white-space:nowrap;
-}
-
-.research-row-count strong{
-
-    color:#4e624f;
-
-    font-size:12px;
-}
-
-
-/* =========================================================
-   RESEARCH DETAIL
+   DETAIL PANEL
 ========================================================= */
 
 .research-detail{
@@ -805,13 +1139,13 @@ body{
     position:absolute;
 
     left:50%;
-    bottom:16px;
+    bottom:17px;
 
     transform:
         translateX(-50%)
-        translateY(12px);
+        translateY(15px);
 
-    z-index:20;
+    z-index:100;
 
     width:
         min(
@@ -819,26 +1153,26 @@ body{
             430px
         );
 
-    padding:11px 16px;
+    padding:11px 15px;
 
     display:flex;
 
     align-items:center;
 
-    gap:12px;
+    gap:11px;
 
     background:
         rgba(255,255,255,.96);
 
     border:
         1px solid
-        #e0e8dc;
+        #dfe8db;
 
-    border-radius:16px;
+    border-radius:17px;
 
     box-shadow:
-        0 10px 28px
-        rgba(60,80,60,.13);
+        0 12px 30px
+        rgba(60,80,60,.15);
 
     opacity:0;
 
@@ -862,8 +1196,8 @@ body{
 
 .research-detail-icon{
 
-    width:34px;
-    height:34px;
+    width:38px;
+    height:38px;
 
     flex-shrink:0;
 
@@ -877,16 +1211,15 @@ body{
     background:
         linear-gradient(
             135deg,
-            #fff1b0,
-            #f8c9d9
+            #fff0ae,
+            #ffd1df
         );
 
-    font-size:17px;
-}
+    font-size:18px;
 
-.research-detail-info{
-
-    min-width:0;
+    box-shadow:
+        0 4px 10px
+        rgba(80,90,70,.08);
 }
 
 .research-detail-title{
@@ -895,7 +1228,7 @@ body{
 
     font-weight:800;
 
-    color:#4e604f;
+    color:#4f604f;
 }
 
 .research-detail-count{
@@ -904,16 +1237,174 @@ body{
 
     font-size:10px;
 
-    color:#89958a;
+    color:#7f8b80;
 }
 
 .research-detail-percent{
 
     margin-top:2px;
 
-    font-size:9px;
+    font-size:8px;
 
-    color:#a0aaa1;
+    color:#a0aaa0;
+}
+
+
+/* =========================================================
+   DECORATIVE BUTTERFLIES
+========================================================= */
+
+.research-butterfly{
+
+    position:absolute;
+
+    z-index:80;
+
+    pointer-events:none;
+
+    opacity:.72;
+
+    animation:
+        researchFly 6s ease-in-out infinite;
+}
+
+.research-butterfly.b1{
+
+    left:4%;
+    bottom:28%;
+
+    font-size:25px;
+}
+
+.research-butterfly.b2{
+
+    right:4%;
+    top:27%;
+
+    font-size:28px;
+
+    animation-delay:1.5s;
+}
+
+.research-butterfly.b3{
+
+    left:46%;
+    bottom:14%;
+
+    font-size:20px;
+
+    animation-delay:2.3s;
+}
+
+.research-butterfly.b4{
+
+    right:24%;
+    top:12%;
+
+    font-size:18px;
+
+    animation-delay:3s;
+}
+
+
+/* =========================================================
+   FLOWER FLOAT
+========================================================= */
+
+@keyframes flowerFloat{
+
+    0%,100%{
+        margin-top:0;
+    }
+
+    50%{
+        margin-top:-3px;
+    }
+}
+
+@keyframes haloPulse{
+
+    0%,100%{
+        opacity:.45;
+        transform:
+            translate(-50%,-50%)
+            scale(.98);
+    }
+
+    50%{
+        opacity:.9;
+        transform:
+            translate(-50%,-50%)
+            scale(1.04);
+    }
+}
+
+@keyframes selectedFlower{
+
+    0%{
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+    }
+
+    35%{
+        transform:
+            translate(-50%,-50%)
+            scale(1.22);
+    }
+
+    100%{
+        transform:
+            translate(-50%,-50%)
+            scale(1.13);
+    }
+}
+
+@keyframes researchYellowGlow{
+
+    0%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(.45);
+
+        opacity:0;
+    }
+
+    30%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+
+        opacity:1;
+    }
+
+    100%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.55);
+
+        opacity:0;
+    }
+}
+
+@keyframes researchFly{
+
+    0%,100%{
+
+        transform:
+            translate(0,0)
+            rotate(-5deg);
+    }
+
+    50%{
+
+        transform:
+            translate(14px,-15px)
+            rotate(7deg);
+    }
 }
 
 
@@ -925,31 +1416,31 @@ body{
 
     position:absolute;
 
-    right:18px;
-    top:18px;
+    left:18px;
+    top:92px;
 
-    z-index:10;
+    z-index:40;
 
     padding:8px 11px;
 
     border-radius:13px;
 
     background:
-        rgba(255,255,255,.82);
+        rgba(255,255,255,.76);
 
     border:
         1px solid
-        #dbe6d7;
+        #dce7d7;
 
     box-shadow:
-        0 3px 10px
+        0 4px 10px
         rgba(70,90,70,.05);
 
-    font-size:9px;
+    font-size:8px;
+
+    line-height:1.7;
 
     color:#718071;
-
-    line-height:1.6;
 }
 
 
@@ -1000,7 +1491,7 @@ body{
 
 
 /* =========================================================
-   SOFT GROUP BACKGROUND
+   FEATURE GROUP
 ========================================================= */
 
 .feature-group{
@@ -1250,7 +1741,7 @@ body{
 
 
 /* =========================================================
-   FEATURE FLOWER SELECTED
+   FEATURE SELECTED
 ========================================================= */
 
 .feature-flower.selected{
@@ -2443,66 +2934,47 @@ footer{
         grid-template-columns:1fr;
     }
 
-    .feature-field{
-        height:850px;
+    .research-field{
+        height:650px;
     }
 
-    .research-field{
-        min-height:540px;
+    .feature-field{
+        height:850px;
     }
 
 }
 
 @media(max-width:700px){
 
-    .research-row{
-
-        grid-template-columns:
-            30px
-            minmax(115px,135px)
-            1fr
-            70px;
-
-        gap:8px;
-
-        padding:7px 8px;
+    .research-field{
+        height:700px;
     }
 
-    .research-row-icon{
-
-        left:36px;
-
-        width:27px;
-        height:27px;
-
-        font-size:14px;
+    .research-intro{
+        max-width:250px;
     }
 
-    .research-row-name{
-
-        padding-left:30px;
-
-        font-size:9px;
-    }
-
-    .research-row-count{
-
-        font-size:8px;
-    }
-
-    .research-row-count strong{
-
-        font-size:10px;
-    }
-
-    .research-percent{
-
+    .research-garden-title{
         display:none;
     }
 
     .research-legend{
-
         display:none;
+    }
+
+    .research-total{
+        right:12px;
+        top:16px;
+    }
+
+    .research-flower-label{
+        min-width:85px;
+        max-width:110px;
+        font-size:8px;
+    }
+
+    .research-flower-count{
+        font-size:7px;
     }
 
 }
@@ -2518,79 +2990,24 @@ footer{
     }
 
     .research-field{
-
-        min-height:650px;
-
-        padding:
-            15px 12px 78px;
+        height:850px;
     }
 
     .research-intro{
-
-        margin-bottom:12px;
-    }
-
-    .research-intro-sub{
-
-        font-size:9px;
-    }
-
-    .research-row{
-
-        grid-template-columns:
-            27px
-            minmax(100px,115px)
-            1fr
-            58px;
-
-        gap:6px;
-
-        min-height:45px;
-    }
-
-    .research-row-icon{
-
-        left:32px;
-
-        width:25px;
-        height:25px;
-
-        font-size:13px;
-    }
-
-    .research-row-name{
-
-        padding-left:28px;
-
-        font-size:8px;
-    }
-
-    .research-row-count{
-
-        font-size:7px;
-    }
-
-    .research-row-count strong{
-
-        font-size:9px;
-    }
-
-    .research-rank{
-
-        width:23px;
-        height:23px;
-
-        font-size:8px;
+        left:12px;
+        top:12px;
     }
 
     .research-detail{
-
-        bottom:10px;
-
         width:
             calc(100% - 24px);
 
-        padding:9px 12px;
+        bottom:10px;
+    }
+
+    .research-butterfly.b3,
+    .research-butterfly.b4{
+        display:none;
     }
 
     .feature-field{
@@ -2645,42 +3062,37 @@ footer{
 
 @media(max-width:480px){
 
-    .research-row{
-
-        grid-template-columns:
-            25px
-            100px
-            1fr
-            52px;
+    .research-field{
+        height:900px;
     }
 
-    .research-row-icon{
-
-        left:29px;
+    .research-intro{
+        max-width:230px;
     }
 
-    .research-row-name{
+    .research-flower-label{
+        min-width:72px;
+        max-width:90px;
 
-        padding-left:27px;
+        padding:
+            4px 6px;
+
+        font-size:7px;
     }
 
-    .research-bar-bg{
-
-        height:7px;
+    .research-flower-count{
+        font-size:6px;
     }
 
     .research-detail-title{
-
         font-size:10px;
     }
 
     .research-detail-count{
-
         font-size:9px;
     }
 
     .research-detail-percent{
-
         font-size:8px;
     }
 
@@ -2908,7 +3320,7 @@ footer{
 
 
 <!-- =========================================================
-     RESEARCH AREAS — NEW SIMPLE VERSION
+     RESEARCH AREAS — FLOWER GARDEN
 ========================================================= -->
 
 <div class="card">
@@ -2920,7 +3332,7 @@ footer{
         </div>
 
         <div class="card-sub">
-            Research subjects ranked by number of articles
+            Research subjects represented as a blooming flower field
         </div>
 
         <div class="card-flower">
@@ -2943,17 +3355,37 @@ footer{
                 🌱
             </div>
 
-            <div class="research-intro-text">
+            <div>
 
                 <div class="research-intro-title">
-                    What research areas are most prominent?
+                    Research Areas Garden
                 </div>
 
                 <div class="research-intro-sub">
-                    Longer bars = more articles · Click an area to see details
+                    Larger flowers = more articles · Click a flower for details
                 </div>
 
             </div>
+
+        </div>
+
+
+        <!-- CENTER TITLE -->
+
+        <div class="research-garden-title">
+            🌼 Research Areas Blooming Together 🌼
+        </div>
+
+
+        <!-- TOTAL -->
+
+        <div class="research-total">
+
+            <strong id="researchTotal">
+                0
+            </strong>
+
+            AREA ARTICLES
 
         </div>
 
@@ -2962,19 +3394,42 @@ footer{
 
         <div class="research-legend">
 
-            📊 Bar length = article count<br>
-            🔢 Rank = research position<br>
-            ✨ Click = highlight area
+            🌸 Flower size = article count<br>
+            🏆 Top 3 = highlighted<br>
+            ✨ Click flower = details
 
         </div>
 
 
-        <!-- RESEARCH LIST -->
+        <!-- BUTTERFLIES -->
+
+        <div class="research-butterfly b1">
+            🦋
+        </div>
+
+        <div class="research-butterfly b2">
+            🦋
+        </div>
+
+        <div class="research-butterfly b3">
+            🦋
+        </div>
+
+        <div class="research-butterfly b4">
+            🦋
+        </div>
+
+
+        <!-- FLOWERS GENERATED BY JS -->
 
         <div
-            id="researchList"
-            class="research-list">
+            id="researchFlowers">
         </div>
+
+
+        <!-- GRASS -->
+
+        <div class="research-grass"></div>
 
 
         <!-- DETAIL -->
@@ -2990,7 +3445,7 @@ footer{
                 🌸
             </div>
 
-            <div class="research-detail-info">
+            <div>
 
                 <div
                     id="researchDetailTitle"
@@ -3007,7 +3462,7 @@ footer{
                 <div
                     id="researchDetailPercent"
                     class="research-detail-percent">
-                    42.1% of all research-area articles
+                    43.1% of all research-area articles
                 </div>
 
             </div>
@@ -4139,14 +4594,20 @@ function baseLayout(){
 
 
 /* =========================================================
-   RESEARCH AREAS — SIMPLE LIST
+   RESEARCH AREAS
+   BEAUTIFUL FLOWER GARDEN
 ========================================================= */
 
 (function(){
 
-    const list =
+    const field =
         document.getElementById(
-            "researchList"
+            "subjects"
+        );
+
+    const flowerContainer =
+        document.getElementById(
+            "researchFlowers"
         );
 
     const detail =
@@ -4174,10 +4635,15 @@ function baseLayout(){
             "researchDetailPercent"
         );
 
+    const totalElement =
+        document.getElementById(
+            "researchTotal"
+        );
 
-    /*
-       เรียงจากมาก → น้อย
-    */
+
+    /* -----------------------------------------
+       SORT
+    ----------------------------------------- */
 
     const areas =
         [...RESEARCH_AREAS].sort(
@@ -4186,9 +4652,9 @@ function baseLayout(){
         );
 
 
-    /*
-       จำนวนบทความรวมของทุก Research Area
-    */
+    /* -----------------------------------------
+       TOTAL
+    ----------------------------------------- */
 
     const total =
         areas.reduce(
@@ -4197,11 +4663,13 @@ function baseLayout(){
             0
         );
 
+    totalElement.textContent =
+        total.toLocaleString();
 
-    /*
-       ค่าสูงสุด
-       ใช้คำนวณความยาว bar
-    */
+
+    /* -----------------------------------------
+       MAX
+    ----------------------------------------- */
 
     const max =
         Math.max(
@@ -4211,111 +4679,271 @@ function baseLayout(){
         );
 
 
+    /*
+       ตำแหน่งของดอกไม้
+
+       ตั้งใจจัดเป็นสวน
+       ไม่เรียงเป็นตาราง
+    */
+
+    const positions = [
+
+        [50,48],   // Computer Science
+
+        [24,38],   // Engineering
+
+        [76,38],   // Mathematics
+
+        [34,66],   // Decision Sciences
+
+        [66,66],   // Physics
+
+        [15,68],   // Materials
+
+        [85,67],   // Medicine
+
+        [27,83],   // Business
+
+        [73,83],   // Social Sciences
+
+        [50,84]    // Others
+
+    ];
+
+
+    /* -----------------------------------------
+       CREATE FLOWERS
+    ----------------------------------------- */
+
     areas.forEach(
         (item,index)=>{
 
-            const row =
+            const flower =
                 document.createElement(
                     "div"
                 );
 
-            row.className =
-                "research-row";
+            flower.className =
+                "research-flower";
 
 
-            /*
-               เปอร์เซ็นต์
-            */
+            /* --------------------------------
+               TOP 3
+            -------------------------------- */
 
-            const percent =
-                (
-                    item.count /
-                    total *
-                    100
-                ).toFixed(1);
+            if(index===0){
+
+                flower.classList.add(
+                    "top-one"
+                );
+
+            }
+
+            if(index===1){
+
+                flower.classList.add(
+                    "top-two"
+                );
+
+            }
+
+            if(index===2){
+
+                flower.classList.add(
+                    "top-three"
+                );
+
+            }
 
 
-            /*
-               ความยาว bar
-               ใช้ sqrt เพื่อไม่ให้
-               Computer Science ยาวเกินไป
-            */
+            /* --------------------------------
+               POSITION
+            -------------------------------- */
 
-            const barWidth =
+            flower.style.left =
+                positions[index][0]+"%";
+
+            flower.style.top =
+                positions[index][1]+"%";
+
+
+            /* --------------------------------
+               SIZE
+
+               sqrt ทำให้ดอกไม้
+               ไม่ต่างกันจนเกินไป
+            -------------------------------- */
+
+            const ratio =
                 Math.sqrt(
                     item.count/max
-                )*100;
+                );
 
 
-            row.style.setProperty(
-                "--bar-width",
-                barWidth+"%"
+            const flowerSize =
+                48 +
+                ratio*55;
+
+
+            flower.style.setProperty(
+                "--flower-size",
+                flowerSize+"px"
             );
 
-            row.style.setProperty(
-                "--research-color",
+
+            flower.style.setProperty(
+                "--flower-color",
                 item.color
             );
 
-            row.style.setProperty(
-                "--research-light",
+
+            flower.style.setProperty(
+                "--flower-light",
                 item.light
             );
 
 
-            row.innerHTML = `
+            /* --------------------------------
+               RANK
+            -------------------------------- */
 
-                <div class="research-rank">
-                    ${index+1}
-                </div>
+            const rank =
+                document.createElement(
+                    "div"
+                );
 
-                <div
-                    class="research-row-icon"
-                    title="${item.subject}"
-                >
-                    ${item.icon}
-                </div>
+            rank.className =
+                "research-rank-badge";
 
-                <div class="research-row-name">
-                    ${item.subject}
-                </div>
-
-                <div class="research-bar-area">
-
-                    <div class="research-bar-bg">
-
-                        <div
-                            class="research-bar">
-                        </div>
-
-                    </div>
-
-                    <div class="research-percent">
-                        ${percent}%
-                    </div>
-
-                </div>
-
-                <div class="research-row-count">
-
-                    <strong>
-                        ${item.count.toLocaleString()}
-                    </strong>
-
-                    <br>
-
-                    articles
-
-                </div>
-
-            `;
+            rank.textContent =
+                "#"+(index+1);
 
 
-            /*
+            /* --------------------------------
+               BLOOM
+            -------------------------------- */
+
+            const bloom =
+                document.createElement(
+                    "div"
+                );
+
+            bloom.className =
+                "research-bloom";
+
+
+            /* --------------------------------
+               PETALS
+            -------------------------------- */
+
+            for(
+                let i=1;
+                i<=8;
+                i++
+            ){
+
+                const petal =
+                    document.createElement(
+                        "div"
+                    );
+
+                petal.className =
+                    "research-petal p"+i;
+
+                bloom.appendChild(
+                    petal
+                );
+
+            }
+
+
+            /* --------------------------------
+               CENTER
+            -------------------------------- */
+
+            const center =
+                document.createElement(
+                    "div"
+                );
+
+            center.className =
+                "research-center";
+
+            bloom.appendChild(
+                center
+            );
+
+
+            /* --------------------------------
+               LABEL
+            -------------------------------- */
+
+            const label =
+                document.createElement(
+                    "div"
+                );
+
+            label.className =
+                "research-flower-label";
+
+            label.textContent =
+                item.subject;
+
+
+            /* --------------------------------
+               COUNT
+            -------------------------------- */
+
+            const count =
+                document.createElement(
+                    "div"
+                );
+
+            count.className =
+                "research-flower-count";
+
+            count.textContent =
+                item.count.toLocaleString()+
+                " articles";
+
+
+            /* --------------------------------
+               BUILD
+            -------------------------------- */
+
+            flower.appendChild(
+                bloom
+            );
+
+            flower.appendChild(
+                rank
+            );
+
+            flower.appendChild(
+                label
+            );
+
+            flower.appendChild(
+                count
+            );
+
+
+            /* --------------------------------
+               TOOLTIP
+            -------------------------------- */
+
+            flower.title =
+                item.subject+
+                "\n"+
+                item.count.toLocaleString()+
+                " articles";
+
+
+            /* --------------------------------
                CLICK
-            */
+            -------------------------------- */
 
-            row.addEventListener(
+            flower.addEventListener(
                 "click",
                 function(event){
 
@@ -4323,13 +4951,12 @@ function baseLayout(){
 
 
                     /*
-                       เอา selected
-                       ออกจาก row อื่น
+                       remove selection
                     */
 
-                    list
+                    flowerContainer
                         .querySelectorAll(
-                            ".research-row"
+                            ".research-flower"
                         )
                         .forEach(
                             other=>{
@@ -4343,16 +4970,28 @@ function baseLayout(){
 
 
                     /*
-                       เลือก row นี้
+                       select
                     */
 
-                    row.classList.add(
+                    flower.classList.add(
                         "selected"
                     );
 
 
                     /*
-                       แสดงรายละเอียด
+                       percentage
+                    */
+
+                    const percent =
+                        (
+                            item.count /
+                            total *
+                            100
+                        ).toFixed(1);
+
+
+                    /*
+                       detail
                     */
 
                     detailIcon.textContent =
@@ -4378,48 +5017,44 @@ function baseLayout(){
             );
 
 
-            list.appendChild(
-                row
+            flowerContainer.appendChild(
+                flower
             );
 
         }
     );
 
 
-    /*
-       คลิกพื้นที่ว่าง
-       → ปิด selection
-    */
+    /* -----------------------------------------
+       CLICK EMPTY AREA
+    ----------------------------------------- */
 
-    document
-        .getElementById("subjects")
-        .addEventListener(
-            "click",
-            function(){
+    field.addEventListener(
+        "click",
+        function(){
 
-                list
-                    .querySelectorAll(
-                        ".research-row"
-                    )
-                    .forEach(
-                        row =>
-                            row.classList.remove(
-                                "selected"
-                            )
-                    );
+            flowerContainer
+                .querySelectorAll(
+                    ".research-flower"
+                )
+                .forEach(
+                    flower=>{
 
-                detail.classList.remove(
-                    "show"
+                        flower.classList.remove(
+                            "selected"
+                        );
+
+                    }
                 );
 
-            }
-        );
 
+            detail.classList.remove(
+                "show"
+            );
 
-    /*
-       ไม่ให้คลิก detail
-       แล้วปิดตัวเอง
-    */
+        }
+    );
+
 
     detail.addEventListener(
         "click",
@@ -4700,10 +5335,6 @@ function baseLayout(){
                             }
                         );
 
-
-                    flower.classList.remove(
-                        "selected"
-                    );
 
                     void flower.offsetWidth;
 
@@ -5049,10 +5680,6 @@ function baseLayout(){
                         }
                     );
 
-
-                    flower.classList.remove(
-                        "selected"
-                    );
 
                     void flower.offsetWidth;
 
