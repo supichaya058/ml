@@ -201,7 +201,7 @@ fig.show()
 # ============================================================
 
 output_file = (
-    "05_text_feature_vector_space.html"
+    "index.html"
 )
 
 fig.write_html(
