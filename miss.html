@@ -1537,6 +1537,11 @@ body{
     color:#b07820;
 }
 
+
+/* =========================================================
+   CO-OCCURRENCE FLOWERS
+========================================================= */
+
 .co-flower{
 
     position:absolute;
@@ -1548,13 +1553,16 @@ body{
     display:flex;
 
     flex-direction:column;
+
     align-items:center;
 
     cursor:pointer;
 
     transition:
-        transform .25s ease,
-        filter .25s ease;
+        transform .28s cubic-bezier(.2,.8,.2,1),
+        filter .3s ease;
+
+    user-select:none;
 }
 
 .co-flower:hover{
@@ -1581,6 +1589,10 @@ body{
             0 4px 4px
             rgba(70,80,70,.14)
         );
+
+    transition:
+        filter .3s ease,
+        transform .3s ease;
 }
 
 .co-flower .name{
@@ -1603,6 +1615,10 @@ body{
     color:#536053;
 
     white-space:nowrap;
+
+    transition:
+        box-shadow .3s ease,
+        border-color .3s ease;
 }
 
 .co-flower .count{
@@ -1614,6 +1630,229 @@ body{
     font-size:9px;
     font-weight:700;
 }
+
+
+/* =========================================================
+   SELECTED FLOWER — SOFT YELLOW GLOW
+========================================================= */
+
+.co-flower.selected{
+
+    z-index:50;
+
+    transform:
+        translate(-50%,-50%)
+        scale(1.10);
+
+    animation:
+        flowerSelected .75s ease-out;
+}
+
+.co-flower.selected .icon{
+
+    filter:
+        drop-shadow(
+            0 0 5px
+            rgba(255,220,100,1)
+        )
+
+        drop-shadow(
+            0 0 12px
+            rgba(255,200,70,.95)
+        )
+
+        drop-shadow(
+            0 0 22px
+            rgba(255,215,100,.78)
+        )
+
+        drop-shadow(
+            0 0 35px
+            rgba(255,225,130,.45)
+        );
+
+    animation:
+        softFlowerGlow .8s ease-out;
+}
+
+.co-flower.selected .name{
+
+    border-color:
+        rgba(255,205,90,.65);
+
+    box-shadow:
+        0 0 8px
+        rgba(255,210,90,.30),
+
+        0 3px 10px
+        rgba(70,80,60,.08);
+}
+
+
+/*
+   แสงวงกลมนุ่ม ๆ หลังดอกไม้
+*/
+
+.co-flower.selected::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:28px;
+
+    width:70px;
+    height:70px;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,225,110,.50) 0%,
+            rgba(255,215,90,.28) 35%,
+            rgba(255,210,80,.12) 55%,
+            transparent 75%
+        );
+
+    filter:
+        blur(2px);
+
+    z-index:-1;
+
+    pointer-events:none;
+
+    animation:
+        yellowGlow 1s ease-out;
+}
+
+
+/*
+   animation ตอนเลือก
+*/
+
+@keyframes softFlowerGlow{
+
+    0%{
+
+        filter:
+            drop-shadow(
+                0 0 2px
+                rgba(255,220,100,.4)
+            );
+    }
+
+    40%{
+
+        filter:
+            drop-shadow(
+                0 0 7px
+                rgba(255,220,100,1)
+            )
+
+            drop-shadow(
+                0 0 18px
+                rgba(255,200,70,.95)
+            )
+
+            drop-shadow(
+                0 0 30px
+                rgba(255,215,100,.8)
+            );
+    }
+
+    100%{
+
+        filter:
+            drop-shadow(
+                0 0 5px
+                rgba(255,220,100,1)
+            )
+
+            drop-shadow(
+                0 0 12px
+                rgba(255,200,70,.9)
+            )
+
+            drop-shadow(
+                0 0 22px
+                rgba(255,215,100,.7)
+            )
+
+            drop-shadow(
+                0 0 35px
+                rgba(255,225,130,.4)
+            );
+    }
+
+}
+
+
+@keyframes yellowGlow{
+
+    0%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(.55);
+
+        opacity:0;
+    }
+
+    30%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+
+        opacity:1;
+    }
+
+    100%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.65);
+
+        opacity:0;
+    }
+
+}
+
+
+@keyframes flowerSelected{
+
+    0%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+    }
+
+    35%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.18);
+    }
+
+    100%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.10);
+    }
+
+}
+
+
+/* =========================================================
+   CO SVG
+========================================================= */
 
 .co-svg{
 
@@ -1653,6 +1892,11 @@ body{
     stroke-width:3.5;
     stroke-opacity:.55;
 }
+
+
+/* =========================================================
+   CO CENTER
+========================================================= */
 
 .co-center{
 
@@ -1800,6 +2044,11 @@ body{
     font-size:11px;
     font-weight:800;
 }
+
+
+/* =========================================================
+   CO LEGEND
+========================================================= */
 
 .co-legend{
 
@@ -2021,7 +2270,6 @@ footer{
 </header>
 
 
-
 <main class="container">
 
 
@@ -2101,7 +2349,6 @@ footer{
 </section>
 
 
-
 <!-- =========================================================
      DASHBOARD
 ========================================================= -->
@@ -2139,7 +2386,6 @@ footer{
 </div>
 
 
-
 <!-- =========================================================
      TOP AUTHORS
 ========================================================= -->
@@ -2168,7 +2414,6 @@ footer{
     </div>
 
 </div>
-
 
 
 <!-- =========================================================
@@ -2201,7 +2446,6 @@ footer{
 </div>
 
 
-
 <!-- =========================================================
      RESEARCH AREAS
 ========================================================= -->
@@ -2225,16 +2469,10 @@ footer{
     </div>
 
 
-    <!-- =====================================================
-         NEW PETAL RESEARCH AREA VISUALIZATION
-    ===================================================== -->
-
     <div
         id="subjects"
         class="research-field"
     >
-
-        <!-- CENTER FLOWER -->
 
         <div class="research-center">
 
@@ -2246,8 +2484,6 @@ footer{
 
         </div>
 
-
-        <!-- DETAIL PANEL -->
 
         <div
             id="researchDetail"
@@ -2281,8 +2517,6 @@ footer{
         </div>
 
 
-        <!-- LEGEND -->
-
         <div class="research-legend">
 
             🌸 Click a petal to bloom<br>
@@ -2296,7 +2530,6 @@ footer{
     </div>
 
 </div>
-
 
 
 <!-- =========================================================
@@ -2416,7 +2649,6 @@ footer{
 </div>
 
 
-
 <!-- =========================================================
      FEATURE VECTOR GARDEN
 ========================================================= -->
@@ -2444,7 +2676,6 @@ footer{
         class="feature-field"
         id="featureField"
     >
-
 
         <div class="feature-group ai"></div>
 
@@ -2945,7 +3176,6 @@ footer{
 </main>
 
 
-
 <footer>
 
     🌱🌸 AI Research Visualization
@@ -2953,7 +3183,6 @@ footer{
     · 🦋🌼
 
 </footer>
-
 
 
 <script>
@@ -3437,38 +3666,21 @@ function baseLayout(){
         );
 
 
-    /*
-       สีของกลีบดอกแต่ละกลีบ
-    */
-
     const petalColors = [
 
         ["#e8f7df","#a9d58f"],
-
         ["#e3f0fb","#9fc1df"],
-
         ["#fff4d5","#e7c76e"],
-
         ["#fde5e5","#dfa0a0"],
-
         ["#eee5fa","#bea4dc"],
-
         ["#f8e2ee","#dda9c1"],
-
         ["#def3ec","#91c8b5"],
-
         ["#f9e9d8","#d9b383"],
-
         ["#e8edf5","#aab8cd"],
-
         ["#e3f1df","#9dc49a"]
 
     ];
 
-
-    /*
-       ดอกไม้/ไอคอนเล็ก ๆ
-    */
 
     const petalIcons = [
 
@@ -3486,10 +3698,6 @@ function baseLayout(){
     ];
 
 
-    /*
-       จัด 10 กลีบรอบจุดกลาง
-    */
-
     const count =
         RESEARCH_AREAS.length;
 
@@ -3506,17 +3714,9 @@ function baseLayout(){
                 "research-petal";
 
 
-            /*
-               มุมของแต่ละกลีบ
-            */
-
             const rotation =
                 (360/count)*index - 90;
 
-
-            /*
-               ให้กลีบอยู่รอบศูนย์กลาง
-            */
 
             const distance =
                 window.innerWidth <= 650
@@ -3534,10 +3734,6 @@ function baseLayout(){
                 distance+"px"
             );
 
-
-            /*
-               ขนาดกลีบตามจำนวนบทความ
-            */
 
             const max =
                 Math.max(
@@ -3564,10 +3760,6 @@ function baseLayout(){
                 width+"px";
 
 
-            /*
-               สี
-            */
-
             const colors =
                 petalColors[index];
 
@@ -3582,10 +3774,6 @@ function baseLayout(){
                 colors[1]
             );
 
-
-            /*
-               HTML ของกลีบ
-            */
 
             petal.innerHTML = `
 
@@ -3621,20 +3809,12 @@ function baseLayout(){
             `;
 
 
-            /*
-               CLICK
-            */
-
             petal.addEventListener(
                 "click",
                 function(event){
 
                     event.stopPropagation();
 
-
-                    /*
-                       ปิดกลีบอื่น
-                    */
 
                     document
                         .querySelectorAll(
@@ -3656,10 +3836,6 @@ function baseLayout(){
                             }
                         );
 
-
-                    /*
-                       เปิดกลีบที่กด
-                    */
 
                     const isActive =
                         petal.classList.toggle(
@@ -3718,10 +3894,6 @@ function baseLayout(){
     );
 
 
-    /*
-       คลิกพื้นที่ว่างเพื่อปิด
-    */
-
     field.addEventListener(
         "click",
         function(){
@@ -3744,10 +3916,6 @@ function baseLayout(){
         }
     );
 
-
-    /*
-       ป้องกันการคลิก detail แล้วปิดตัวเอง
-    */
 
     detail.addEventListener(
         "click",
@@ -3890,14 +4058,19 @@ function baseLayout(){
         ["Artificial Intelligence","Computer Vision",2],
         ["Artificial Intelligence","Natural Language Processing",2],
         ["Artificial Intelligence","Big Data",2],
+
         ["Machine Learning","Deep Learning",3],
         ["Machine Learning","Neural Networks",2],
         ["Machine Learning","Classification",2],
+
         ["Deep Learning","Neural Networks",3],
         ["Deep Learning","Computer Vision",2],
         ["Deep Learning","Natural Language Processing",2],
+
         ["Computer Vision","Image Processing",3],
+
         ["Natural Language Processing","Large Language Models",3],
+
         ["Big Data","Data Mining",3],
         ["Big Data","Cloud Computing",2],
         ["Data Mining","Cloud Computing",2]
@@ -3913,6 +4086,10 @@ function baseLayout(){
             1260
         );
 
+
+    /* =====================================================
+       CREATE FLOWERS
+    ===================================================== */
 
     flowers.forEach(
         item=>{
@@ -4002,6 +4179,60 @@ function baseLayout(){
                 item.count;
 
 
+            /* =================================================
+               CLICK FLOWER — YELLOW GLOW
+            ================================================= */
+
+            flower.addEventListener(
+                "click",
+                function(event){
+
+                    event.stopPropagation();
+
+
+                    /*
+                       เอา selected ออกจากดอกไม้อื่น
+                    */
+
+                    field
+                        .querySelectorAll(
+                            ".co-flower"
+                        )
+                        .forEach(
+                            other=>{
+
+                                other.classList.remove(
+                                    "selected"
+                                );
+
+                            }
+                        );
+
+
+                    /*
+                       รีเซ็ต animation
+                       เพื่อให้เอฟเฟกต์เล่นใหม่ทุกครั้ง
+                    */
+
+                    flower.classList.remove(
+                        "selected"
+                    );
+
+                    void flower.offsetWidth;
+
+
+                    /*
+                       เพิ่มแสงสีเหลือง
+                    */
+
+                    flower.classList.add(
+                        "selected"
+                    );
+
+                }
+            );
+
+
             field.appendChild(
                 flower
             );
@@ -4009,6 +4240,36 @@ function baseLayout(){
         }
     );
 
+
+    /* =====================================================
+       CLICK EMPTY AREA — REMOVE GLOW
+    ===================================================== */
+
+    field.addEventListener(
+        "click",
+        function(){
+
+            field
+                .querySelectorAll(
+                    ".co-flower"
+                )
+                .forEach(
+                    flower=>{
+
+                        flower.classList.remove(
+                            "selected"
+                        );
+
+                    }
+                );
+
+        }
+    );
+
+
+    /* =====================================================
+       GET FLOWER POSITION
+    ===================================================== */
 
     function getFlower(keyword){
 
@@ -4029,6 +4290,10 @@ function baseLayout(){
 
     }
 
+
+    /* =====================================================
+       DRAW NETWORK
+    ===================================================== */
 
     function drawNetwork(){
 
@@ -4062,6 +4327,7 @@ function baseLayout(){
                     getFlower(
                         connection[1]
                     );
+
 
                 if(
                     !from ||
