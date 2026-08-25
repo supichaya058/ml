@@ -20,67 +20,79 @@ body{
     margin:0;
     font-family:
         "Segoe UI",
-        "Arial",
+        Arial,
         sans-serif;
     background:
         linear-gradient(
             180deg,
-            #fff9fc 0%,
-            #f9fbff 50%,
-            #f7fff9 100%
+            #fff8fc 0%,
+            #faf8ff 48%,
+            #f5fff9 100%
         );
-    color:#4b4650;
+    color:#514956;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* =====================================================
+   HERO
+===================================================== */
 
 .hero{
     position:relative;
     overflow:hidden;
-    padding:45px 35px 55px;
+    padding:48px 25px 58px;
     text-align:center;
+
     background:
         linear-gradient(
             135deg,
             #fff0f7,
-            #f7f2ff,
-            #effcff
+            #f7f1ff,
+            #effdff
         );
-    border-bottom:1px solid #f1e8f0;
+
+    border-bottom:1px solid #f0e5ef;
 }
 
 .hero h1{
     margin:0;
-    font-size:42px;
+
+    font-size:43px;
     font-weight:800;
+
+    color:#6d5876;
     letter-spacing:-1px;
-    color:#6c5878;
 }
 
 .hero p{
     margin:10px 0 0;
-    color:#9b8da0;
-    font-size:16px;
+
+    font-size:17px;
+    color:#988b9d;
 }
 
 .hero .subtitle{
     margin-top:5px;
-    font-size:14px;
-    color:#b09eae;
+
+    font-size:13px;
+    color:#afa0af;
 }
 
-/* =========================
+/* =====================================================
    BUTTERFLIES
-========================= */
+===================================================== */
 
 .butterfly{
     position:absolute;
-    font-size:30px;
-    animation:
-        floatButterfly 6s ease-in-out infinite;
+
+    font-size:31px;
+
     pointer-events:none;
+
+    animation:
+        butterflyFloat
+        6s
+        ease-in-out
+        infinite;
 }
 
 .b1{
@@ -90,494 +102,721 @@ body{
 
 .b2{
     right:10%;
-    top:80px;
-    animation-delay:1.5s;
+    top:70px;
+
+    animation-delay:1.4s;
 }
 
 .b3{
-    left:18%;
+    left:19%;
     bottom:20px;
+
     font-size:24px;
-    animation-delay:3s;
+
+    animation-delay:2.5s;
 }
 
 .b4{
     right:20%;
     bottom:15px;
-    font-size:23px;
-    animation-delay:2s;
+
+    font-size:25px;
+
+    animation-delay:3.5s;
 }
 
-@keyframes floatButterfly{
+@keyframes butterflyFloat{
+
     0%,100%{
-        transform:translate(0,0) rotate(-5deg);
+        transform:
+            translate(0,0)
+            rotate(-5deg);
     }
 
     50%{
-        transform:translate(12px,-15px) rotate(8deg);
+        transform:
+            translate(13px,-14px)
+            rotate(7deg);
     }
 }
 
-/* =========================
-   CONTROL BAR
-========================= */
+/* =====================================================
+   CONTROLS
+===================================================== */
 
 .controls{
     max-width:1200px;
+
     margin:25px auto 0;
+
     padding:0 20px;
 }
 
 .control-card{
-    background:rgba(255,255,255,.88);
-    border:1px solid #eee4ed;
+    background:
+        rgba(255,255,255,.9);
+
+    border:1px solid #eee3ed;
+
     border-radius:25px;
+
     padding:20px;
+
     box-shadow:
-        0 10px 30px rgba(143,116,145,.08);
+        0 10px 30px
+        rgba(132,106,139,.08);
 }
 
 .control-grid{
+
     display:grid;
+
     grid-template-columns:
         repeat(4,1fr);
+
     gap:15px;
 }
 
 .control-item label{
+
     display:block;
-    font-size:12px;
-    color:#a294a5;
+
     margin-bottom:7px;
+
+    font-size:12px;
+
+    color:#9d909f;
 }
 
 .control-item input{
+
     width:100%;
+
     padding:11px 14px;
+
     border-radius:14px;
+
     border:1px solid #eadfea;
+
     outline:none;
+
+    background:white;
+
     font-size:14px;
-    background:#fff;
 }
 
 .control-item input:focus{
-    border-color:#d7b9d7;
+
+    border-color:#d6b5d5;
 }
 
 .generate{
-    margin-top:17px;
+
     display:flex;
+
     justify-content:center;
+
+    margin-top:17px;
 }
 
 button{
-    border:0;
+
+    border:none;
+
     padding:12px 28px;
+
     border-radius:18px;
+
     cursor:pointer;
-    font-weight:700;
-    font-size:14px;
+
     color:white;
+
+    font-size:14px;
+
+    font-weight:700;
+
     background:
         linear-gradient(
             135deg,
             #dba8ca,
-            #b9a9df
+            #b9a7df
         );
+
     box-shadow:
-        0 8px 20px rgba(184,153,198,.25);
+        0 8px 20px
+        rgba(184,153,198,.25);
+
     transition:.2s;
 }
 
 button:hover{
-    transform:translateY(-2px);
+
+    transform:
+        translateY(-2px);
 }
 
-/* =========================
+/* =====================================================
    DASHBOARD
-========================= */
+===================================================== */
 
 .dashboard{
+
     max-width:1200px;
+
     margin:25px auto 60px;
+
     padding:0 20px;
 }
 
 .section-title{
-    margin:30px 0 15px;
-    display:flex;
-    align-items:center;
-    gap:9px;
-}
 
-.section-title h2{
-    margin:0;
-    color:#65546c;
-    font-size:22px;
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    margin:32px 0 15px;
 }
 
 .section-title span{
-    font-size:22px;
+
+    font-size:23px;
 }
 
-/* =========================
+.section-title h2{
+
+    margin:0;
+
+    font-size:22px;
+
+    color:#67566d;
+}
+
+/* =====================================================
    STAT CARDS
-========================= */
+===================================================== */
 
 .stats{
+
     display:grid;
+
     grid-template-columns:
         repeat(4,1fr);
+
     gap:16px;
 }
 
 .stat{
-    background:white;
-    border:1px solid #eee6ef;
-    border-radius:23px;
-    padding:22px;
-    box-shadow:
-        0 10px 28px rgba(121,100,127,.07);
+
     position:relative;
+
     overflow:hidden;
+
+    background:white;
+
+    border:1px solid #eee5ef;
+
+    border-radius:23px;
+
+    padding:22px;
+
+    box-shadow:
+        0 10px 28px
+        rgba(121,100,127,.07);
 }
 
 .stat::after{
+
     content:"🌸";
+
     position:absolute;
-    right:14px;
-    bottom:8px;
-    font-size:42px;
-    opacity:.15;
+
+    right:13px;
+
+    bottom:6px;
+
+    font-size:43px;
+
+    opacity:.14;
 }
 
 .stat-title{
-    color:#a395a5;
+
     font-size:13px;
+
+    color:#a294a5;
 }
 
 .stat-value{
-    font-size:31px;
-    font-weight:800;
+
     margin-top:5px;
+
+    font-size:31px;
+
+    font-weight:800;
+
     color:#6d5c73;
 }
 
-/* =========================
-   CARDS
-========================= */
+/* =====================================================
+   GENERAL CARDS
+===================================================== */
 
 .grid-2{
+
     display:grid;
+
     grid-template-columns:
         1fr 1fr;
+
     gap:20px;
 }
 
 .card{
-    background:rgba(255,255,255,.93);
-    border:1px solid #eee6ef;
+
+    background:
+        rgba(255,255,255,.94);
+
+    border:1px solid #eee5ef;
+
     border-radius:25px;
+
     padding:22px;
+
     box-shadow:
-        0 10px 30px rgba(130,110,140,.07);
+        0 10px 30px
+        rgba(130,110,140,.07);
 }
 
 .card h3{
+
     margin:0 0 15px;
+
     font-size:17px;
+
     color:#6b5b70;
 }
 
 .chart-box{
-    height:300px;
+
     position:relative;
+
+    height:300px;
 }
 
-/* =========================
-   TOP AUTHORS
-========================= */
+/* =====================================================
+   AUTHORS
+===================================================== */
 
 .author-list{
+
     display:flex;
+
     flex-direction:column;
+
     gap:10px;
 }
 
 .author{
+
     display:flex;
+
     align-items:center;
+
     gap:10px;
+
     padding:10px 12px;
+
     border-radius:15px;
+
     background:
         linear-gradient(
             90deg,
-            #fff1f8,
+            #fff0f7,
             #fff8fc
         );
 }
 
 .author-flower{
+
     font-size:23px;
 }
 
 .author-name{
+
     flex:1;
-    font-weight:600;
+
     font-size:14px;
+
+    font-weight:600;
 }
 
 .author-count{
-    font-weight:700;
+
     color:#c48cb0;
-}
 
-/* =========================
-   FEATURE VECTOR
-========================= */
-
-.feature-card{
-    min-height:470px;
-}
-
-.feature-field{
-    position:relative;
-    width:100%;
-    height:390px;
-    overflow:hidden;
-    border-radius:22px;
-    background:
-        radial-gradient(
-            circle at 20% 20%,
-            #fff4fa,
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 80% 30%,
-            #f5efff,
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 50% 90%,
-            #effcf5,
-            transparent 30%
-        ),
-        #fffdfd;
-}
-
-.feature-flower{
-    position:absolute;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    transform:translate(-50%,-50%);
-    cursor:pointer;
-    transition:
-        transform .25s ease;
-}
-
-.feature-flower:hover{
-    transform:
-        translate(-50%,-50%)
-        scale(1.18);
-}
-
-.feature-flower .emoji{
-    font-size:42px;
-    line-height:1;
-}
-
-.feature-flower .label{
-    margin-top:5px;
-    font-size:11px;
     font-weight:700;
-    color:#786c7a;
-    background:rgba(255,255,255,.8);
-    padding:3px 8px;
-    border-radius:10px;
-    white-space:nowrap;
 }
 
-/* =========================
-   SUBJECT AREA
-========================= */
+/* =====================================================
+   SUBJECTS
+===================================================== */
 
 .subject-list{
+
     display:flex;
+
     flex-wrap:wrap;
+
     gap:12px;
 }
 
 .subject{
+
     padding:11px 15px;
+
     border-radius:20px;
+
     background:
         linear-gradient(
             135deg,
             #fff1f8,
             #f7f0ff
         );
-    border:1px solid #f0e4f0;
+
+    border:1px solid #eee1ee;
+
     font-size:13px;
+
     font-weight:600;
 }
 
 .subject span{
-    color:#bd89aa;
+
+    color:#bb88a9;
 }
 
-/* =========================
-   KEYWORD CO-OCCURRENCE
-========================= */
+/* =====================================================
+   FEATURE VECTOR
+   ไม่มีวงกลม
+   ไม่มีเส้นล้อม
+===================================================== */
+
+.feature-card{
+
+    min-height:470px;
+}
+
+.feature-field{
+
+    position:relative;
+
+    width:100%;
+
+    height:390px;
+
+    overflow:hidden;
+
+    border-radius:22px;
+
+    background:
+
+        radial-gradient(
+            circle at 20% 20%,
+            #fff2fa,
+            transparent 28%
+        ),
+
+        radial-gradient(
+            circle at 80% 25%,
+            #f4efff,
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 50% 90%,
+            #effcf5,
+            transparent 30%
+        ),
+
+        #fffdfd;
+}
+
+.feature-flower{
+
+    position:absolute;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    transform:
+        translate(-50%,-50%);
+
+    cursor:pointer;
+
+    transition:
+        transform .25s ease;
+}
+
+.feature-flower:hover{
+
+    transform:
+        translate(-50%,-50%)
+        scale(1.18);
+}
+
+.feature-flower .emoji{
+
+    line-height:1;
+}
+
+.feature-flower .label{
+
+    margin-top:6px;
+
+    padding:3px 8px;
+
+    border-radius:10px;
+
+    background:
+        rgba(255,255,255,.82);
+
+    color:#766a79;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    white-space:nowrap;
+}
+
+/* =====================================================
+   KEYWORD CO-OCCURRENCE GARDEN
+   อันนี้คือ GARDEN เดียว
+===================================================== */
 
 .network-card{
+
     margin-top:20px;
 }
 
 .network-wrap{
+
     position:relative;
+
     height:650px;
+
     overflow:hidden;
+
     border-radius:28px;
+
     background:
+
         radial-gradient(
             circle at 15% 20%,
             rgba(255,218,237,.45),
             transparent 25%
         ),
+
         radial-gradient(
             circle at 85% 25%,
             rgba(223,214,255,.45),
             transparent 25%
         ),
+
         radial-gradient(
             circle at 45% 85%,
             rgba(216,249,229,.45),
             transparent 25%
         ),
+
         #fffdfd;
+
     border:1px solid #f0e6ef;
 }
 
-/* subtle garden dots */
-
 .network-wrap::before{
+
     content:"";
+
     position:absolute;
+
     inset:0;
-    opacity:.25;
+
+    opacity:.23;
+
     background-image:
-        radial-gradient(#d8c9d9 1px,transparent 1px);
+        radial-gradient(
+            #d7c7d8 1px,
+            transparent 1px
+        );
+
     background-size:24px 24px;
 }
 
 #network{
+
     width:100%;
+
     height:100%;
+
     position:relative;
+
     z-index:2;
 }
 
 .link{
-    stroke:#cbbbc9;
-    stroke-opacity:.35;
+
+    stroke:#c7b7c6;
+
+    stroke-opacity:.38;
+
     transition:.2s;
 }
 
 .link:hover{
-    stroke-opacity:.75;
+
+    stroke-opacity:.8;
 }
 
 .node{
+
     cursor:pointer;
 }
 
 .node-flower{
-    font-size:27px;
+
     pointer-events:none;
 }
 
 .node-label{
+
     font-size:11px;
+
     font-weight:700;
+
     fill:#6d6370;
+
     pointer-events:none;
 }
 
+/* =====================================================
+   LEGEND
+===================================================== */
+
 .network-legend{
+
     position:absolute;
+
     top:18px;
+
     left:18px;
+
     z-index:5;
+
     display:flex;
+
     flex-wrap:wrap;
+
     gap:8px;
 }
 
 .legend-item{
-    background:rgba(255,255,255,.84);
-    border:1px solid #eee5ed;
-    border-radius:14px;
+
     padding:6px 10px;
+
+    border-radius:14px;
+
+    background:
+        rgba(255,255,255,.85);
+
+    border:1px solid #eee5ed;
+
     font-size:11px;
 }
 
 .legend-dot{
+
     display:inline-block;
+
     width:9px;
+
     height:9px;
+
     border-radius:50%;
+
     margin-right:4px;
 }
 
-/* =========================
+/* =====================================================
    TOOLTIP
-========================= */
+===================================================== */
 
 .tooltip{
+
     position:fixed;
+
     z-index:1000;
+
     pointer-events:none;
+
     padding:10px 13px;
+
     border-radius:13px;
-    background:rgba(70,60,72,.94);
+
+    background:
+        rgba(70,60,72,.94);
+
     color:white;
+
     font-size:12px;
+
     opacity:0;
+
     transition:opacity .15s;
 }
 
-/* =========================
+/* =====================================================
    FOOTER
-========================= */
+===================================================== */
 
 .footer{
-    text-align:center;
+
     padding:30px;
+
+    text-align:center;
+
     color:#a99eaa;
+
     font-size:12px;
 }
 
-/* =========================
+/* =====================================================
    RESPONSIVE
-========================= */
+===================================================== */
 
 @media(max-width:900px){
 
     .control-grid,
     .stats{
+
         grid-template-columns:
             repeat(2,1fr);
     }
 
     .grid-2{
+
         grid-template-columns:1fr;
     }
 
     .hero h1{
+
         font-size:31px;
     }
 }
@@ -586,10 +825,12 @@ button:hover{
 
     .control-grid,
     .stats{
+
         grid-template-columns:1fr;
     }
 
     .network-wrap{
+
         height:520px;
     }
 }
@@ -597,11 +838,13 @@ button:hover{
 </style>
 </head>
 
+
 <body>
 
-<!-- =========================
+
+<!-- =====================================================
      HERO
-========================= -->
+===================================================== -->
 
 <header class="hero">
 
@@ -610,9 +853,13 @@ button:hover{
     <div class="butterfly b3">🦋</div>
     <div class="butterfly b4">🦋</div>
 
-    <h1>🌱 AI Research Flower Field</h1>
+    <h1>
+        🌱 AI Research Flower Field
+    </h1>
 
-    <p>Research Keywords Growing Together</p>
+    <p>
+        Research Keywords Growing Together
+    </p>
 
     <div class="subtitle">
         Bibliometric Visualization Dashboard
@@ -621,9 +868,9 @@ button:hover{
 </header>
 
 
-<!-- =========================
+<!-- =====================================================
      CONTROLS
-========================= -->
+===================================================== -->
 
 <section class="controls">
 
@@ -632,48 +879,77 @@ button:hover{
         <div class="control-grid">
 
             <div class="control-item">
-                <label>Top Keywords</label>
+
+                <label>
+                    Top Keywords
+                </label>
+
                 <input
                     id="topKeywords"
                     type="number"
                     value="25"
                     min="5"
                     max="100">
+
             </div>
 
+
             <div class="control-item">
-                <label>Min Co-occurrence</label>
+
+                <label>
+                    Min Co-occurrence
+                </label>
+
                 <input
                     id="minCo"
                     type="number"
                     value="2"
                     min="1">
+
             </div>
 
+
             <div class="control-item">
-                <label>Max Keywords / Group</label>
+
+                <label>
+                    Max Keywords / Group
+                </label>
+
                 <input
                     id="maxGroup"
                     type="number"
                     value="10"
                     min="3"
                     max="30">
+
             </div>
 
+
             <div class="control-item">
-                <label>Group X / Y</label>
+
+                <label>
+                    Group X / Y
+                </label>
+
                 <input
                     id="groupXY"
                     type="text"
                     value="5.2 / 4.8">
+
             </div>
 
         </div>
 
+
         <div class="generate">
-            <button onclick="generateDashboard()">
+
+            <button
+                onclick="generateDashboard()">
+
                 🌼 Generate Garden
+
             </button>
+
         </div>
 
     </div>
@@ -681,22 +957,32 @@ button:hover{
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      DASHBOARD
-========================= -->
+===================================================== -->
 
 <main class="dashboard">
 
-    <!-- STATISTICS -->
+
+    <!-- =================================================
+         RESEARCH OVERVIEW
+    ================================================= -->
 
     <div class="section-title">
+
         <span>🌷</span>
-        <h2>Research Overview</h2>
+
+        <h2>
+            Research Overview
+        </h2>
+
     </div>
+
 
     <section class="stats">
 
         <div class="stat">
+
             <div class="stat-title">
                 Publications
             </div>
@@ -704,12 +990,16 @@ button:hover{
             <div
                 class="stat-value"
                 id="statPublications">
+
                 0
+
             </div>
+
         </div>
 
 
         <div class="stat">
+
             <div class="stat-title">
                 Keywords
             </div>
@@ -717,12 +1007,16 @@ button:hover{
             <div
                 class="stat-value"
                 id="statKeywords">
+
                 0
+
             </div>
+
         </div>
 
 
         <div class="stat">
+
             <div class="stat-title">
                 Authors
             </div>
@@ -730,12 +1024,16 @@ button:hover{
             <div
                 class="stat-value"
                 id="statAuthors">
+
                 0
+
             </div>
+
         </div>
 
 
         <div class="stat">
+
             <div class="stat-title">
                 Research Areas
             </div>
@@ -743,21 +1041,33 @@ button:hover{
             <div
                 class="stat-value"
                 id="statSubjects">
+
                 0
+
             </div>
+
         </div>
 
     </section>
 
 
-    <!-- TOP KEYWORDS + YEAR -->
+    <!-- =================================================
+         TOP KEYWORDS + YEAR
+    ================================================= -->
 
     <div class="section-title">
+
         <span>🌸</span>
-        <h2>Research Growth</h2>
+
+        <h2>
+            Research Growth
+        </h2>
+
     </div>
 
+
     <section class="grid-2">
+
 
         <div class="card">
 
@@ -766,7 +1076,11 @@ button:hover{
             </h3>
 
             <div class="chart-box">
-                <canvas id="keywordChart"></canvas>
+
+                <canvas
+                    id="keywordChart">
+                </canvas>
+
             </div>
 
         </div>
@@ -779,22 +1093,36 @@ button:hover{
             </h3>
 
             <div class="chart-box">
-                <canvas id="yearChart"></canvas>
+
+                <canvas
+                    id="yearChart">
+                </canvas>
+
             </div>
 
         </div>
 
+
     </section>
 
 
-    <!-- AUTHORS + SUBJECT -->
+    <!-- =================================================
+         AUTHORS + SUBJECT
+    ================================================= -->
 
     <div class="section-title">
+
         <span>🌺</span>
-        <h2>Research Community</h2>
+
+        <h2>
+            Research Community
+        </h2>
+
     </div>
 
+
     <section class="grid-2">
+
 
         <div class="card">
 
@@ -823,15 +1151,24 @@ button:hover{
 
         </div>
 
+
     </section>
 
 
-    <!-- FEATURE VECTOR -->
+    <!-- =================================================
+         FEATURE VECTOR
+    ================================================= -->
 
     <div class="section-title">
+
         <span>🌸</span>
-        <h2>Feature Vector Garden</h2>
+
+        <h2>
+            Feature Vector Garden
+        </h2>
+
     </div>
+
 
     <section class="card feature-card">
 
@@ -847,12 +1184,21 @@ button:hover{
     </section>
 
 
-    <!-- KEYWORD CO-OCCURRENCE -->
+    <!-- =================================================
+         ONLY ONE GARDEN
+         KEYWORD CO-OCCURRENCE
+    ================================================= -->
 
     <div class="section-title">
+
         <span>🌺</span>
-        <h2>Keyword Co-occurrence Garden</h2>
+
+        <h2>
+            Keyword Co-occurrence Garden
+        </h2>
+
     </div>
+
 
     <section class="card network-card">
 
@@ -862,16 +1208,22 @@ button:hover{
 
         <div class="network-wrap">
 
+
             <div
                 id="networkLegend"
                 class="network-legend">
             </div>
 
-            <svg id="network"></svg>
+
+            <svg
+                id="network">
+            </svg>
+
 
         </div>
 
     </section>
+
 
 </main>
 
@@ -894,29 +1246,11 @@ button:hover{
 
 <script>
 
-/* =========================================================
+/* =====================================================
    CSV DATA
-   =========================================================
 
-   ใส่ CSV ของเราไว้ตรงนี้
-
-   ไม่ต้อง Upload File
-   ไม่ต้องเลือกไฟล์
-
-   ตัวอย่าง Column ที่รองรับ:
-
-   Title
-   Author
-   Authors
-   Year
-   Keywords
-   Author Keywords
-   Subject
-   Subject Area
-
-   ถ้า CSV ของเราชื่อ column ต่างจากนี้
-   สามารถเพิ่มชื่อ column ในฟังก์ชัน getColumn() ได้
-========================================================= */
+   เอา CSV ของจริงมาใส่ตรงนี้
+===================================================== */
 
 const CSV_DATA = `
 Title,Authors,Year,Keywords,Subject
@@ -933,21 +1267,23 @@ AI Image Analysis,"Lee, David; Brown, Anna",2025,"Computer Vision; Artificial In
 `;
 
 
-/* =========================================================
-   GLOBAL DATA
-========================================================= */
+/* =====================================================
+   GLOBAL
+===================================================== */
 
-let DATA = [];
+let DATA=[];
 
-let keywordChart = null;
-let yearChart = null;
+let keywordChart=null;
+
+let yearChart=null;
 
 
-/* =========================================================
-   EMOJI FLOWERS
-========================================================= */
+/* =====================================================
+   FLOWERS
+===================================================== */
 
-const FLOWERS = [
+const FLOWERS=[
+
     "🌸",
     "🌼",
     "🌷",
@@ -956,14 +1292,16 @@ const FLOWERS = [
     "🪻",
     "💮",
     "🏵️"
+
 ];
 
 
-/* =========================================================
-   CLUSTER COLORS
-========================================================= */
+/* =====================================================
+   COLORS
+===================================================== */
 
-const CLUSTER_COLORS = [
+const CLUSTER_COLORS=[
+
     "#e5a7c5",
     "#b9a7df",
     "#9ecdb4",
@@ -972,94 +1310,19 @@ const CLUSTER_COLORS = [
     "#ddb0a5",
     "#c5b0dc",
     "#b8d5c2"
+
 ];
 
 
-/* =========================================================
-   CSV PARSE
-========================================================= */
-
-function parseCSV(){
-
-    const result =
-        Papa.parse(
-            CSV_DATA.trim(),
-            {
-                header:true,
-                skipEmptyLines:true
-            }
-        );
-
-    DATA =
-        result.data.map(
-            row => {
-
-                return {
-                    title:
-                        getColumn(
-                            row,
-                            [
-                                "Title",
-                                "Document Title",
-                                "Article Title"
-                            ]
-                        ),
-
-                    authors:
-                        getColumn(
-                            row,
-                            [
-                                "Authors",
-                                "Author",
-                                "Author Names"
-                            ]
-                        ),
-
-                    year:
-                        getColumn(
-                            row,
-                            [
-                                "Year",
-                                "Publication Year"
-                            ]
-                        ),
-
-                    keywords:
-                        getColumn(
-                            row,
-                            [
-                                "Keywords",
-                                "Author Keywords",
-                                "Author keyword",
-                                "Keyword"
-                            ]
-                        ),
-
-                    subject:
-                        getColumn(
-                            row,
-                            [
-                                "Subject",
-                                "Subject Area",
-                                "Subject Areas",
-                                "Categories"
-                            ]
-                        )
-                };
-
-            }
-        );
-
-}
-
-
-/* =========================================================
+/* =====================================================
    GET COLUMN
-========================================================= */
+===================================================== */
 
-function getColumn(row, names){
+function getColumn(row,names){
 
-    for(const name of names){
+    for(
+        const name of names
+    ){
 
         if(
             row[name] !== undefined &&
@@ -1078,74 +1341,159 @@ function getColumn(row, names){
 }
 
 
-/* =========================================================
+/* =====================================================
+   PARSE CSV
+===================================================== */
+
+function parseCSV(){
+
+    const result=
+        Papa.parse(
+            CSV_DATA.trim(),
+            {
+                header:true,
+                skipEmptyLines:true
+            }
+        );
+
+
+    DATA=result.data.map(row=>({
+
+        title:
+            getColumn(
+                row,
+                [
+                    "Title",
+                    "Document Title",
+                    "Article Title"
+                ]
+            ),
+
+        authors:
+            getColumn(
+                row,
+                [
+                    "Authors",
+                    "Author",
+                    "Author Names"
+                ]
+            ),
+
+        year:
+            getColumn(
+                row,
+                [
+                    "Year",
+                    "Publication Year"
+                ]
+            ),
+
+        keywords:
+            getColumn(
+                row,
+                [
+                    "Keywords",
+                    "Author Keywords",
+                    "Author keyword",
+                    "Keyword"
+                ]
+            ),
+
+        subject:
+            getColumn(
+                row,
+                [
+                    "Subject",
+                    "Subject Area",
+                    "Subject Areas",
+                    "Categories"
+                ]
+            )
+
+    }));
+
+}
+
+
+/* =====================================================
    NORMALIZE
-========================================================= */
+===================================================== */
 
 function normalizeText(text){
 
-    return String(text || "")
+    return String(text||"")
         .trim()
         .replace(/\s+/g," ");
 
 }
 
 
-/* =========================================================
+/* =====================================================
    SPLIT KEYWORDS
-========================================================= */
+===================================================== */
 
 function splitKeywords(text){
 
-    if(!text) return [];
+    if(!text){
+
+        return [];
+
+    }
 
     return text
         .split(/[;,|]/)
-        .map(x =>
-            normalizeText(x)
+        .map(
+            x =>
+                normalizeText(x)
         )
         .filter(Boolean);
 
 }
 
 
-/* =========================================================
+/* =====================================================
    SPLIT AUTHORS
-========================================================= */
+===================================================== */
 
 function splitAuthors(text){
 
-    if(!text) return [];
+    if(!text){
+
+        return [];
+
+    }
 
     return text
         .split(/[;|]/)
-        .map(x =>
-            normalizeText(x)
+        .map(
+            x =>
+                normalizeText(x)
         )
         .filter(Boolean);
 
 }
 
 
-/* =========================================================
+/* =====================================================
    KEYWORD FREQUENCY
-========================================================= */
+   ใช้สำหรับคำนวณข้อมูลเท่านั้น
+   ไม่ได้สร้าง Garden ใหม่
+===================================================== */
 
 function getKeywordFrequency(){
 
-    const map = new Map();
+    const map=new Map();
 
-    DATA.forEach(row => {
 
-        const keywords =
-            splitKeywords(
-                row.keywords
-            );
+    DATA.forEach(row=>{
 
-        keywords.forEach(keyword => {
+        splitKeywords(
+            row.keywords
+        ).forEach(keyword=>{
 
-            const key =
+            const key=
                 keyword.toLowerCase();
+
 
             if(!map.has(key)){
 
@@ -1159,37 +1507,42 @@ function getKeywordFrequency(){
 
             }
 
+
             map.get(key).count++;
 
         });
 
     });
 
-    return Array.from(map.values())
-        .sort(
-            (a,b) =>
-                b.count-a.count
-        );
+
+    return Array.from(
+        map.values()
+    ).sort(
+        (a,b)=>
+            b.count-a.count
+    );
 
 }
 
 
-/* =========================================================
+/* =====================================================
    AUTHORS
-========================================================= */
+===================================================== */
 
 function getAuthors(){
 
-    const map = new Map();
+    const map=new Map();
 
-    DATA.forEach(row => {
+
+    DATA.forEach(row=>{
 
         splitAuthors(
             row.authors
-        ).forEach(author => {
+        ).forEach(author=>{
 
-            const key =
+            const key=
                 author.toLowerCase();
+
 
             if(!map.has(key)){
 
@@ -1203,133 +1556,168 @@ function getAuthors(){
 
             }
 
+
             map.get(key).count++;
 
         });
 
     });
 
-    return Array.from(map.values())
-        .sort(
-            (a,b) =>
-                b.count-a.count
-        );
+
+    return Array.from(
+        map.values()
+    ).sort(
+        (a,b)=>
+            b.count-a.count
+    );
 
 }
 
 
-/* =========================================================
+/* =====================================================
    SUBJECTS
-========================================================= */
+===================================================== */
 
 function getSubjects(){
 
-    const map = new Map();
+    const map=new Map();
 
-    DATA.forEach(row => {
 
-        if(!row.subject) return;
+    DATA.forEach(row=>{
 
-        const subjects =
-            row.subject
-                .split(/[;,|]/)
-                .map(x =>
+        if(!row.subject){
+
+            return;
+
+        }
+
+
+        row.subject
+            .split(/[;,|]/)
+            .map(
+                x =>
                     normalizeText(x)
-                )
-                .filter(Boolean);
+            )
+            .filter(Boolean)
+            .forEach(subject=>{
 
-        subjects.forEach(subject => {
+                const key=
+                    subject.toLowerCase();
 
-            const key =
-                subject.toLowerCase();
 
-            if(!map.has(key)){
+                if(!map.has(key)){
 
-                map.set(
-                    key,
-                    {
-                        name:subject,
-                        count:0
-                    }
-                );
+                    map.set(
+                        key,
+                        {
+                            name:subject,
+                            count:0
+                        }
+                    );
 
-            }
+                }
 
-            map.get(key).count++;
 
-        });
+                map.get(key).count++;
+
+            });
 
     });
 
-    return Array.from(map.values())
-        .sort(
-            (a,b) =>
-                b.count-a.count
-        );
+
+    return Array.from(
+        map.values()
+    ).sort(
+        (a,b)=>
+            b.count-a.count
+    );
 
 }
 
 
-/* =========================================================
-   STATISTICS
-========================================================= */
+/* =====================================================
+   STATS
+===================================================== */
 
 function updateStats(){
 
-    const keywords =
+    const keywords=
         getKeywordFrequency();
 
-    const authors =
+    const authors=
         getAuthors();
 
-    const subjects =
+    const subjects=
         getSubjects();
 
+
     document
-        .getElementById("statPublications")
-        .textContent =
+        .getElementById(
+            "statPublications"
+        )
+        .textContent=
         DATA.length;
 
+
     document
-        .getElementById("statKeywords")
-        .textContent =
+        .getElementById(
+            "statKeywords"
+        )
+        .textContent=
         keywords.length;
 
-    document
-        .getElementById("statAuthors")
-        .textContent =
-        authors.length;
 
     document
-        .getElementById("statSubjects")
-        .textContent =
+        .getElementById(
+            "statAuthors"
+        )
+        .textContent=
+        authors.length;
+
+
+    document
+        .getElementById(
+            "statSubjects"
+        )
+        .textContent=
         subjects.length;
 
 }
 
 
-/* =========================================================
-   TOP KEYWORD CHART
-========================================================= */
+/* =====================================================
+   TOP KEYWORDS CHART
+===================================================== */
 
 function createKeywordChart(){
 
-    const keywords =
+    const keywords=
         getKeywordFrequency();
 
-    const top =
-        keywords.slice(
-            0,
-            Number(
-                document
-                    .getElementById("topKeywords")
-                    .value
-            )
+
+    const limit=
+        Number(
+            document
+                .getElementById(
+                    "topKeywords"
+                )
+                .value
         );
 
-    const ctx =
+
+    const top=
+        keywords.slice(
+            0,
+            limit
+        );
+
+
+    const ctx=
         document
-            .getElementById("keywordChart");
+            .getElementById(
+                "keywordChart"
+            );
+
 
     if(keywordChart){
 
@@ -1337,7 +1725,8 @@ function createKeywordChart(){
 
     }
 
-    keywordChart =
+
+    keywordChart=
         new Chart(
             ctx,
             {
@@ -1348,20 +1737,20 @@ function createKeywordChart(){
 
                     labels:
                         top.map(
-                            x => x.name
+                            x=>x.name
                         ),
 
                     datasets:[{
 
                         data:
                             top.map(
-                                x => x.count
+                                x=>x.count
                             ),
 
-                        borderRadius:8,
-
                         backgroundColor:
-                            "#dfb4cd"
+                            "#dfb4cd",
+
+                        borderRadius:8
 
                     }]
 
@@ -1374,14 +1763,17 @@ function createKeywordChart(){
                     maintainAspectRatio:false,
 
                     plugins:{
+
                         legend:{
                             display:false
                         }
+
                     },
 
                     scales:{
 
                         x:{
+
                             grid:{
                                 display:false
                             },
@@ -1391,14 +1783,17 @@ function createKeywordChart(){
                                     size:10
                                 }
                             }
+
                         },
 
                         y:{
+
                             beginAtZero:true,
 
                             ticks:{
                                 stepSize:1
                             }
+
                         }
 
                     }
@@ -1411,40 +1806,57 @@ function createKeywordChart(){
 }
 
 
-/* =========================================================
+/* =====================================================
    YEAR CHART
-========================================================= */
+===================================================== */
 
 function createYearChart(){
 
-    const map = new Map();
+    const map=new Map();
 
-    DATA.forEach(row => {
 
-        const year =
-            normalizeText(row.year);
+    DATA.forEach(row=>{
 
-        if(!year) return;
+        const year=
+            normalizeText(
+                row.year
+            );
+
+
+        if(!year){
+
+            return;
+
+        }
+
 
         map.set(
             year,
-            (map.get(year) || 0)+1
+            (map.get(year)||0)+1
         );
 
     });
 
-    const years =
-        Array.from(map.keys())
-            .sort();
 
-    const counts =
+    const years=
+        Array.from(
+            map.keys()
+        ).sort();
+
+
+    const counts=
         years.map(
-            year => map.get(year)
+            year =>
+                map.get(year)
         );
 
-    const ctx =
+
+    const ctx=
         document
-            .getElementById("yearChart");
+            .getElementById(
+                "yearChart"
+            );
+
 
     if(yearChart){
 
@@ -1452,7 +1864,8 @@ function createYearChart(){
 
     }
 
-    yearChart =
+
+    yearChart=
         new Chart(
             ctx,
             {
@@ -1467,7 +1880,8 @@ function createYearChart(){
 
                         data:counts,
 
-                        borderColor:"#b9a4d4",
+                        borderColor:
+                            "#b9a4d4",
 
                         backgroundColor:
                             "rgba(203,181,221,.18)",
@@ -1492,25 +1906,31 @@ function createYearChart(){
                     maintainAspectRatio:false,
 
                     plugins:{
+
                         legend:{
                             display:false
                         }
+
                     },
 
                     scales:{
 
                         y:{
+
                             beginAtZero:true,
 
                             ticks:{
                                 stepSize:1
                             }
+
                         },
 
                         x:{
+
                             grid:{
                                 display:false
                             }
+
                         }
 
                     }
@@ -1523,219 +1943,274 @@ function createYearChart(){
 }
 
 
-/* =========================================================
-   TOP AUTHORS
-========================================================= */
+/* =====================================================
+   AUTHORS
+===================================================== */
 
 function renderAuthors(){
 
-    const list =
+    const list=
         document
-            .getElementById("authorList");
+            .getElementById(
+                "authorList"
+            );
 
-    list.innerHTML = "";
 
-    const authors =
-        getAuthors()
-            .slice(0,8);
+    list.innerHTML="";
 
-    authors.forEach(
-        (author,index) => {
 
-            const div =
-                document.createElement(
-                    "div"
-                );
+    getAuthors()
+        .slice(0,8)
+        .forEach(
+            (author,index)=>{
 
-            div.className =
-                "author";
+                const div=
+                    document.createElement(
+                        "div"
+                    );
 
-            div.innerHTML = `
 
-                <div class="author-flower">
-                    ${FLOWERS[index % FLOWERS.length]}
-                </div>
+                div.className=
+                    "author";
 
-                <div class="author-name">
-                    ${escapeHTML(author.name)}
-                </div>
 
-                <div class="author-count">
-                    ${author.count}
-                </div>
+                div.innerHTML=`
 
-            `;
+                    <div class="author-flower">
 
-            list.appendChild(div);
+                        ${
+                            FLOWERS[
+                                index %
+                                FLOWERS.length
+                            ]
+                        }
 
-        }
-    );
+                    </div>
+
+                    <div class="author-name">
+
+                        ${
+                            escapeHTML(
+                                author.name
+                            )
+                        }
+
+                    </div>
+
+                    <div class="author-count">
+
+                        ${author.count}
+
+                    </div>
+
+                `;
+
+
+                list.appendChild(div);
+
+            }
+        );
 
 }
 
 
-/* =========================================================
+/* =====================================================
    SUBJECTS
-========================================================= */
+===================================================== */
 
 function renderSubjects(){
 
-    const list =
+    const list=
         document
-            .getElementById("subjectList");
+            .getElementById(
+                "subjectList"
+            );
 
-    list.innerHTML = "";
 
-    const subjects =
-        getSubjects()
-            .slice(0,12);
+    list.innerHTML="";
 
-    subjects.forEach(
-        (subject,index) => {
 
-            const div =
-                document.createElement(
-                    "div"
-                );
+    getSubjects()
+        .slice(0,12)
+        .forEach(
+            (subject,index)=>{
 
-            div.className =
-                "subject";
+                const div=
+                    document.createElement(
+                        "div"
+                    );
 
-            div.innerHTML = `
 
-                ${FLOWERS[index % FLOWERS.length]}
+                div.className=
+                    "subject";
 
-                ${escapeHTML(subject.name)}
 
-                <span>
-                    ${subject.count}
-                </span>
+                div.innerHTML=`
 
-            `;
+                    ${
+                        FLOWERS[
+                            index %
+                            FLOWERS.length
+                        ]
+                    }
 
-            list.appendChild(div);
+                    ${
+                        escapeHTML(
+                            subject.name
+                        )
+                    }
 
-        }
-    );
+                    <span>
+                        ${subject.count}
+                    </span>
+
+                `;
+
+
+                list.appendChild(div);
+
+            }
+        );
 
 }
 
 
-/* =========================================================
-   FEATURE VECTOR GARDEN
-========================================================= */
+/* =====================================================
+   FEATURE VECTOR
+===================================================== */
 
 function renderFeatureVector(){
 
-    const field =
+    const field=
         document
-            .getElementById("featureField");
-
-    field.innerHTML = "";
-
-    const keywords =
-        getKeywordFrequency()
-            .slice(
-                0,
-                Math.min(
-                    18,
-                    Number(
-                        document
-                            .getElementById("topKeywords")
-                            .value
-                    )
-                )
+            .getElementById(
+                "featureField"
             );
 
-    const width =
+
+    field.innerHTML="";
+
+
+    const keywords=
+        getKeywordFrequency()
+            .slice(0,18);
+
+
+    const width=
         field.clientWidth;
 
-    const height =
+
+    const height=
         field.clientHeight;
 
-    keywords.forEach(
-        (keyword,index) => {
 
-            const flower =
+    keywords.forEach(
+        (keyword,index)=>{
+
+            const flower=
                 document.createElement(
                     "div"
                 );
 
-            flower.className =
+
+            flower.className=
                 "feature-flower";
 
-            /*
-             * กระจายดอกไม้แบบไม่ใช้
-             * วงกลมล้อมรอบ
-             */
 
-            const angle =
-                index * 2.399;
+            const angle=
+                index*2.399;
 
-            const radius =
+
+            const radius=
                 Math.min(
                     width,
                     height
-                ) * .34;
+                )*.34;
 
-            const centerX =
+
+            const centerX=
                 width/2;
 
-            const centerY =
+
+            const centerY=
                 height/2;
 
-            const x =
-                centerX +
-                Math.cos(angle) *
-                radius *
-                (0.55 +
-                 (index%3)*.18);
 
-            const y =
-                centerY +
-                Math.sin(angle) *
-                radius *
-                (0.55 +
-                 (index%4)*.14);
+            const x=
+                centerX+
+                Math.cos(angle)*
+                radius*
+                (
+                    .55+
+                    (index%3)*.18
+                );
 
-            const size =
-                28 +
+
+            const y=
+                centerY+
+                Math.sin(angle)*
+                radius*
+                (
+                    .55+
+                    (index%4)*.14
+                );
+
+
+            const size=
+                28+
                 keyword.count*5;
 
-            flower.style.left =
+
+            flower.style.left=
                 Math.max(
                     50,
                     Math.min(
                         width-50,
                         x
                     )
-                ) + "px";
+                )+"px";
 
-            flower.style.top =
+
+            flower.style.top=
                 Math.max(
                     45,
                     Math.min(
                         height-45,
                         y
                     )
-                ) + "px";
+                )+"px";
 
-            flower.innerHTML = `
+
+            flower.innerHTML=`
 
                 <div
                     class="emoji"
-                    style="font-size:${size}px">
-                    ${FLOWERS[index % FLOWERS.length]}
+                    style="
+                        font-size:${size}px;
+                    "
+                >
+
+                    ${
+                        FLOWERS[
+                            index %
+                            FLOWERS.length
+                        ]
+                    }
+
                 </div>
 
                 <div class="label">
-                    ${escapeHTML(keyword.name)}
+
+                    ${
+                        escapeHTML(
+                            keyword.name
+                        )
+                    }
+
                 </div>
 
             `;
 
-            flower.title =
-                `${keyword.name} · Frequency ${keyword.count}`;
 
             field.appendChild(
                 flower
@@ -1747,34 +2222,44 @@ function renderFeatureVector(){
 }
 
 
-/* =========================================================
-   CO-OCCURRENCE
-========================================================= */
+/* =====================================================
+   BUILD CO-OCCURRENCE
+===================================================== */
 
 function buildCoOccurrence(){
 
-    const frequency =
+    const frequency=
         getKeywordFrequency();
 
-    const topLimit =
+
+    const limit=
         Number(
             document
-                .getElementById("topKeywords")
+                .getElementById(
+                    "topKeywords"
+                )
                 .value
         );
 
-    const minCo =
+
+    const minCo=
         Number(
             document
-                .getElementById("minCo")
+                .getElementById(
+                    "minCo"
+                )
                 .value
         );
 
-    const topKeywords =
-        frequency
-            .slice(0,topLimit);
 
-    const allowed =
+    const topKeywords=
+        frequency.slice(
+            0,
+            limit
+        );
+
+
+    const allowed=
         new Set(
             topKeywords.map(
                 x =>
@@ -1782,21 +2267,31 @@ function buildCoOccurrence(){
             )
         );
 
-    const nodes =
+
+    const nodes=
         topKeywords.map(
-            x => ({
-                id:x.name.toLowerCase(),
-                name:x.name,
-                frequency:x.count
+            x=>({
+
+                id:
+                    x.name.toLowerCase(),
+
+                name:
+                    x.name,
+
+                frequency:
+                    x.count
+
             })
         );
 
-    const edgeMap =
+
+    const edgeMap=
         new Map();
 
-    DATA.forEach(row => {
 
-        const keywords =
+    DATA.forEach(row=>{
+
+        const keywords=
             splitKeywords(
                 row.keywords
             )
@@ -1809,8 +2304,10 @@ function buildCoOccurrence(){
                     allowed.has(x)
             );
 
-        const unique =
+
+        const unique=
             [...new Set(keywords)];
+
 
         for(
             let i=0;
@@ -1824,16 +2321,18 @@ function buildCoOccurrence(){
                 j++
             ){
 
-                const a =
+                const a=
                     unique[i];
 
-                const b =
+                const b=
                     unique[j];
 
-                const key =
+
+                const key=
                     [a,b]
                         .sort()
                         .join("|||");
+
 
                 edgeMap.set(
                     key,
@@ -1846,28 +2345,40 @@ function buildCoOccurrence(){
 
     });
 
-    const links =
+
+    const links=
         Array.from(
             edgeMap.entries()
         )
         .filter(
             ([key,value]) =>
-                value >= minCo
+                value>=minCo
         )
         .map(
-            ([key,value]) => {
+            ([key,value])=>{
 
-                const parts =
-                    key.split("|||");
+                const parts=
+                    key.split(
+                        "|||"
+                    );
+
 
                 return {
-                    source:parts[0],
-                    target:parts[1],
-                    weight:value
+
+                    source:
+                        parts[0],
+
+                    target:
+                        parts[1],
+
+                    weight:
+                        value
+
                 };
 
             }
         );
+
 
     return {
         nodes,
@@ -1877,28 +2388,34 @@ function buildCoOccurrence(){
 }
 
 
-/* =========================================================
-   CLUSTERING
-========================================================= */
+/* =====================================================
+   CLUSTER
+===================================================== */
 
-function createClusters(nodes,links){
+function createClusters(
+    nodes,
+    links
+){
 
-    const graph =
+    const graph=
         new Map();
 
+
     nodes.forEach(
-        node =>
+        node=>
             graph.set(
                 node.id,
                 []
             )
     );
 
-    links.forEach(link => {
+
+    links.forEach(link=>{
 
         graph
             .get(link.source)
             .push(link.target);
+
 
         graph
             .get(link.target)
@@ -1906,44 +2423,68 @@ function createClusters(nodes,links){
 
     });
 
-    const visited =
+
+    const visited=
         new Set();
 
-    const clusters = [];
 
-    nodes.forEach(node => {
+    const clusters=[];
+
+
+    nodes.forEach(node=>{
 
         if(
-            visited.has(node.id)
+            visited.has(
+                node.id
+            )
         ){
+
             return;
+
         }
 
-        const cluster = [];
 
-        const queue =
-            [node.id];
+        const cluster=[];
 
-        visited.add(node.id);
+        const queue=[
+            node.id
+        ];
+
+
+        visited.add(
+            node.id
+        );
+
 
         while(queue.length){
 
-            const current =
+            const current=
                 queue.shift();
 
-            cluster.push(current);
 
-            const neighbors =
-                graph.get(current) || [];
+            cluster.push(
+                current
+            );
+
+
+            const neighbors=
+                graph.get(
+                    current
+                )||[];
+
 
             neighbors.forEach(
-                neighbor => {
+                neighbor=>{
 
                     if(
-                        !visited.has(neighbor)
+                        !visited.has(
+                            neighbor
+                        )
                     ){
 
-                        visited.add(neighbor);
+                        visited.add(
+                            neighbor
+                        );
 
                         queue.push(
                             neighbor
@@ -1956,50 +2497,53 @@ function createClusters(nodes,links){
 
         }
 
-        clusters.push(cluster);
+
+        clusters.push(
+            cluster
+        );
 
     });
 
-    /*
-     * ถ้ามี cluster ใหญ่มาก
-     * จะยังคงให้ layout
-     * แยกพื้นที่ตามกลุ่ม
-     */
 
     return clusters;
 
 }
 
 
-/* =========================================================
-   NETWORK
-========================================================= */
+/* =====================================================
+   RENDER KEYWORD CO-OCCURRENCE GARDEN
+===================================================== */
 
 function renderNetwork(){
 
-    const result =
+    const result=
         buildCoOccurrence();
 
-    const nodes =
+
+    const nodes=
         result.nodes;
 
-    const links =
+
+    const links=
         result.links;
 
-    const clusters =
+
+    const clusters=
         createClusters(
             nodes,
             links
         );
 
-    const clusterMap =
+
+    const clusterMap=
         new Map();
 
+
     clusters.forEach(
-        (cluster,index) => {
+        (cluster,index)=>{
 
             cluster.forEach(
-                id =>
+                id=>
                     clusterMap.set(
                         id,
                         index
@@ -2009,44 +2553,56 @@ function renderNetwork(){
         }
     );
 
-    const svg =
-        d3.select("#network");
+
+    const svg=
+        d3.select(
+            "#network"
+        );
+
 
     svg.selectAll("*")
         .remove();
 
-    const container =
+
+    const container=
         document.querySelector(
             ".network-wrap"
         );
 
-    const width =
+
+    const width=
         container.clientWidth;
 
-    const height =
+
+    const height=
         container.clientHeight;
+
 
     svg.attr(
         "viewBox",
         `0 0 ${width} ${height}`
     );
 
-    /* ======================
-       LEGEND
-    ====================== */
 
-    const legend =
+    /* =================================================
+       LEGEND
+    ================================================= */
+
+    const legend=
         document.getElementById(
             "networkLegend"
         );
 
-    legend.innerHTML = "";
 
-    const maxLegend =
+    legend.innerHTML="";
+
+
+    const maxLegend=
         Math.min(
             clusters.length,
             8
         );
+
 
     for(
         let i=0;
@@ -2054,124 +2610,63 @@ function renderNetwork(){
         i++
     ){
 
-        const item =
+        const item=
             document.createElement(
                 "div"
             );
 
-        item.className =
+
+        item.className=
             "legend-item";
 
-        item.innerHTML = `
+
+        item.innerHTML=`
 
             <span
                 class="legend-dot"
                 style="
-                background:
-                ${CLUSTER_COLORS[
-                    i %
-                    CLUSTER_COLORS.length
-                ]};
-                ">
-            </span>
+                    background:
+                    ${
+                        CLUSTER_COLORS[
+                            i %
+                            CLUSTER_COLORS.length
+                        ]
+                    };
+                "
+            ></span>
 
             Cluster ${i+1}
 
         `;
 
-        legend.appendChild(item);
+
+        legend.appendChild(
+            item
+        );
 
     }
 
 
-    /* ======================
-       INITIAL POSITION
-    ====================== */
+    /* =================================================
+       FORCE SIMULATION
+    ================================================= */
 
-    const centers = [];
-
-    const clusterCount =
-        clusters.length;
-
-    clusters.forEach(
-        (cluster,index) => {
-
-            const angle =
-                (
-                    index /
-                    Math.max(
-                        clusterCount,
-                        1
-                    )
-                ) *
-                Math.PI *
-                2;
-
-            const radius =
-                Math.min(
-                    width,
-                    height
-                ) * .28;
-
-            centers.push({
-
-                x:
-                    width/2 +
-                    Math.cos(angle) *
-                    radius,
-
-                y:
-                    height/2 +
-                    Math.sin(angle) *
-                    radius
-
-            });
-
-        }
-    );
-
-
-    nodes.forEach(
-        (node,index) => {
-
-            const clusterIndex =
-                clusterMap.get(
-                    node.id
-                ) || 0;
-
-            const center =
-                centers[
-                    clusterIndex %
-                    centers.length
-                ];
-
-            node.x =
-                center.x +
-                (Math.random()-.5) *
-                130;
-
-            node.y =
-                center.y +
-                (Math.random()-.5) *
-                130;
-
-        }
-    );
-
-
-    /* ======================
-       SIMULATION
-    ====================== */
-
-    const simulation =
-        d3.forceSimulation(nodes)
+    const simulation=
+        d3.forceSimulation(
+            nodes
+        )
 
         .force(
             "link",
-            d3.forceLink(links)
-                .id(d => d.id)
-                .distance(105)
-                .strength(.45)
+            d3.forceLink(
+                links
+            )
+            .id(
+                d =>
+                    d.id
+            )
+            .distance(105)
+            .strength(.45)
         )
 
         .force(
@@ -2193,7 +2688,7 @@ function renderNetwork(){
             d3.forceCollide()
                 .radius(
                     d =>
-                        25 +
+                        25+
                         Math.sqrt(
                             d.frequency
                         )*4
@@ -2201,11 +2696,11 @@ function renderNetwork(){
         );
 
 
-    /* ======================
-       LINKS
-    ====================== */
+    /* =================================================
+       CONNECTION LINES
+    ================================================= */
 
-    const link =
+    const link=
         svg.append("g")
         .selectAll("line")
         .data(links)
@@ -2219,16 +2714,17 @@ function renderNetwork(){
             d =>
                 Math.min(
                     6,
-                    1+d.weight*.7
+                    1+
+                    d.weight*.7
                 )
         );
 
 
-    /* ======================
-       NODES
-    ====================== */
+    /* =================================================
+       FLOWER NODES
+    ================================================= */
 
-    const node =
+    const node=
         svg.append("g")
         .selectAll("g")
         .data(nodes)
@@ -2238,98 +2734,134 @@ function renderNetwork(){
             "node"
         )
         .call(
+
             d3.drag()
-                .on(
-                    "start",
-                    dragstarted
-                )
-                .on(
-                    "drag",
-                    dragged
-                )
-                .on(
-                    "end",
-                    dragended
-                )
+
+            .on(
+                "start",
+                dragstarted
+            )
+
+            .on(
+                "drag",
+                dragged
+            )
+
+            .on(
+                "end",
+                dragended
+            )
+
         );
 
 
+    /* =================================================
+       FLOWER
+    ================================================= */
+
     node.append("text")
+
         .attr(
             "class",
             "node-flower"
         )
+
         .attr(
             "text-anchor",
             "middle"
         )
+
         .attr(
             "dominant-baseline",
             "middle"
         )
+
         .text(
-            (d,i) =>
-                FLOWERS[
-                    (
-                        clusterMap.get(
-                            d.id
-                        ) || 0
-                    ) %
+            (d,i)=>{
+
+                const cluster=
+                    clusterMap.get(
+                        d.id
+                    )||0;
+
+
+                return FLOWERS[
+                    cluster %
                     FLOWERS.length
-                ]
+                ];
+
+            }
         )
+
         .style(
             "font-size",
             d =>
-                `${28 +
-                    d.frequency*5}px`
+                `${
+                    28+
+                    d.frequency*5
+                }px`
         );
 
 
+    /* =================================================
+       KEYWORD LABEL
+    ================================================= */
+
     node.append("text")
+
         .attr(
             "class",
             "node-label"
         )
+
         .attr(
             "text-anchor",
             "middle"
         )
+
         .attr(
             "dy",
             d =>
-                34 +
+                34+
                 Math.sqrt(
                     d.frequency
                 )*4
         )
+
         .text(
             d =>
                 d.name
         );
 
 
-    /* ======================
+    /* =================================================
        TOOLTIP
-    ====================== */
+    ================================================= */
 
-    const tooltip =
+    const tooltip=
         document.getElementById(
             "tooltip"
         );
 
+
     node
+
         .on(
             "mouseenter",
             function(event,d){
 
-                tooltip.style.opacity =
+                tooltip.style.opacity=
                     1;
 
-                tooltip.innerHTML = `
+
+                tooltip.innerHTML=`
 
                     <strong>
-                        ${escapeHTML(d.name)}
+                        ${
+                            escapeHTML(
+                                d.name
+                            )
+                        }
                     </strong>
 
                     <br>
@@ -2341,102 +2873,132 @@ function renderNetwork(){
 
             }
         )
+
         .on(
             "mousemove",
             function(event){
 
-                tooltip.style.left =
-                    (event.clientX+12)
-                    +"px";
+                tooltip.style.left=
+                    event.clientX+
+                    12+
+                    "px";
 
-                tooltip.style.top =
-                    (event.clientY+12)
-                    +"px";
+
+                tooltip.style.top=
+                    event.clientY+
+                    12+
+                    "px";
 
             }
         )
+
         .on(
             "mouseleave",
             function(){
 
-                tooltip.style.opacity =
+                tooltip.style.opacity=
                     0;
 
             }
         );
 
 
-    /* ======================
-       TICK
-    ====================== */
+    /* =================================================
+       SIMULATION TICK
+    ================================================= */
 
     simulation.on(
         "tick",
-        () => {
+        ()=>{
 
             link
+
                 .attr(
                     "x1",
-                    d => d.source.x
+                    d =>
+                        d.source.x
                 )
+
                 .attr(
                     "y1",
-                    d => d.source.y
+                    d =>
+                        d.source.y
                 )
+
                 .attr(
                     "x2",
-                    d => d.target.x
+                    d =>
+                        d.target.x
                 )
+
                 .attr(
                     "y2",
-                    d => d.target.y
+                    d =>
+                        d.target.y
                 );
 
 
             node.attr(
                 "transform",
-                d =>
-                    `translate(
-                        ${Math.max(
-                            45,
+                d=>{
+
+                    const x=
+                        Math.max(
+                            50,
                             Math.min(
-                                width-45,
+                                width-50,
                                 d.x
                             )
-                        )},
-                        ${Math.max(
-                            45,
+                        );
+
+
+                    const y=
+                        Math.max(
+                            50,
                             Math.min(
-                                height-45,
+                                height-50,
                                 d.y
                             )
-                        )}
-                    )`
+                        );
+
+
+                    return `
+                        translate(
+                            ${x},
+                            ${y}
+                        )
+                    `;
+
+                }
             );
 
         }
     );
 
 
-    /* ======================
-       DRAG
-    ====================== */
+    /* =================================================
+       DRAG FUNCTIONS
+    ================================================= */
 
     function dragstarted(
         event,
         d
     ){
 
-        if(!event.active){
+        if(
+            !event.active
+        ){
 
-            simulation.alphaTarget(
-                .3
-            ).restart();
+            simulation
+                .alphaTarget(.3)
+                .restart();
 
         }
 
-        d.fx = d.x;
-        d.fy = d.y;
+
+        d.fx=d.x;
+
+        d.fy=d.y;
 
     }
 
@@ -2446,10 +3008,10 @@ function renderNetwork(){
         d
     ){
 
-        d.fx =
+        d.fx=
             event.x;
 
-        d.fy =
+        d.fy=
             event.y;
 
     }
@@ -2460,56 +3022,66 @@ function renderNetwork(){
         d
     ){
 
-        if(!event.active){
+        if(
+            !event.active
+        ){
 
-            simulation.alphaTarget(
-                0
-            );
+            simulation
+                .alphaTarget(0);
 
         }
 
-        d.fx = null;
-        d.fy = null;
+
+        d.fx=null;
+
+        d.fy=null;
 
     }
 
 }
 
 
-/* =========================================================
+/* =====================================================
    ESCAPE HTML
-========================================================= */
+===================================================== */
 
 function escapeHTML(text){
 
-    return String(text || "")
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+    return String(
+        text||""
+    )
+
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+
+    .replace(
+        /</g,
+        "&lt;"
+    )
+
+    .replace(
+        />/g,
+        "&gt;"
+    )
+
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+
+    .replace(
+        /'/g,
+        "&#039;"
+    );
 
 }
 
 
-/* =========================================================
-   GENERATE DASHBOARD
-========================================================= */
+/* =====================================================
+   GENERATE
+===================================================== */
 
 function generateDashboard(){
 
@@ -2532,13 +3104,13 @@ function generateDashboard(){
 }
 
 
-/* =========================================================
+/* =====================================================
    START
-========================================================= */
+===================================================== */
 
 window.addEventListener(
     "load",
-    () => {
+    ()=>{
 
         generateDashboard();
 
@@ -2546,13 +3118,13 @@ window.addEventListener(
 );
 
 
-/* =========================================================
+/* =====================================================
    RESIZE
-========================================================= */
+===================================================== */
 
 window.addEventListener(
     "resize",
-    () => {
+    ()=>{
 
         renderFeatureVector();
 
