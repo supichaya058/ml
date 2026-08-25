@@ -22,7 +22,6 @@
 
 body{
     margin:0;
-
     font-family:
         "Segoe UI",
         "Noto Sans",
@@ -81,9 +80,7 @@ body{
 
 .header-inner{
     position:relative;
-
     z-index:5;
-
     text-align:center;
 }
 
@@ -96,7 +93,8 @@ body{
 
     font-weight:800;
 
-    letter-spacing:1px;
+    letter-spacing:
+        1px;
 
     color:#365d3a;
 
@@ -135,7 +133,6 @@ body{
 
 .header-butterfly{
     font-size:38px;
-
     opacity:.8;
 }
 
@@ -143,7 +140,6 @@ body{
 .header-butterfly.one{
     left:9%;
     top:24%;
-
     transform:rotate(-12deg);
 }
 
@@ -151,14 +147,12 @@ body{
 .header-butterfly.two{
     right:10%;
     top:65%;
-
     transform:rotate(12deg);
 }
 
 
 .header-flower{
     font-size:52px;
-
     opacity:.75;
 }
 
@@ -181,9 +175,7 @@ body{
 
 .container{
     width:min(1400px,94%);
-
-    margin:
-        40px auto 70px;
+    margin:40px auto 70px;
 }
 
 
@@ -349,166 +341,30 @@ body{
 
 /* =========================================================
    RESEARCH AREAS
-   FLOWER BAR GRAPH
 ========================================================= */
 
 .research-field{
     position:relative;
 
-    min-height:700px;
+    min-height:620px;
 
     margin-top:12px;
 
-    padding:
-        22px 12px 18px;
+    padding:20px 10px 10px;
 
     overflow:hidden;
 
-    border-radius:26px;
+    border-radius:24px;
 
     background:
         linear-gradient(
             180deg,
-            #fbfff8 0%,
-            #f5fbf0 55%,
-            #f0f8eb 100%
+            rgba(249,255,245,.95),
+            rgba(242,250,238,.92)
         );
 
     border:
         1px solid rgba(111,145,105,.13);
-
-    box-shadow:
-        inset 0 0 45px rgba(112,150,105,.035);
-}
-
-
-/* ---------------------------------------------------------
-   SOFT BACKGROUND BLOOMS
---------------------------------------------------------- */
-
-.research-field::before{
-    content:"";
-
-    position:absolute;
-
-    width:420px;
-    height:420px;
-
-    left:-180px;
-    top:120px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(245,191,211,.14),
-            transparent 70%
-        );
-
-    pointer-events:none;
-}
-
-
-.research-field::after{
-    content:"";
-
-    position:absolute;
-
-    width:430px;
-    height:430px;
-
-    right:-190px;
-    bottom:-90px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(241,213,139,.15),
-            transparent 70%
-        );
-
-    pointer-events:none;
-}
-
-
-/* ---------------------------------------------------------
-   DECORATIVE FLOWERS
-   แยก layer จากข้อความและกราฟ
---------------------------------------------------------- */
-
-.research-decoration{
-    position:absolute;
-
-    z-index:1;
-
-    pointer-events:none;
-
-    user-select:none;
-
-    line-height:1;
-
-    filter:
-        drop-shadow(
-            0 5px 8px
-            rgba(80,105,75,.08)
-        );
-}
-
-
-.research-decoration.f1{
-    left:12px;
-    top:115px;
-
-    font-size:42px;
-
-    transform:
-        rotate(-13deg);
-}
-
-
-.research-decoration.f2{
-    right:15px;
-    top:150px;
-
-    font-size:39px;
-
-    transform:
-        rotate(12deg);
-}
-
-
-.research-decoration.f3{
-    left:18px;
-    bottom:155px;
-
-    font-size:43px;
-
-    transform:
-        rotate(8deg);
-}
-
-
-.research-decoration.f4{
-    right:18px;
-    bottom:125px;
-
-    font-size:48px;
-
-    transform:
-        rotate(-10deg);
-}
-
-
-.research-decoration.f5{
-    left:48%;
-    bottom:10px;
-
-    font-size:29px;
-
-    opacity:.35;
 }
 
 
@@ -518,11 +374,9 @@ body{
 
 .research-intro{
     position:relative;
-
     z-index:10;
 
     display:flex;
-
     align-items:center;
 
     gap:15px;
@@ -531,42 +385,33 @@ body{
         18px 22px;
 
     margin:
-        0 22px 16px;
+        0 12px 15px;
 
-    border-radius:20px;
+    border-radius:18px;
 
     background:
-        rgba(255,255,255,.90);
+        rgba(255,255,255,.82);
 
     border:
         1px solid rgba(110,145,104,.13);
-
-    box-shadow:
-        0 7px 20px rgba(70,100,65,.045);
 }
 
 
 .research-intro-icon{
-    width:50px;
-    height:50px;
+    width:48px;
+    height:48px;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
     flex-shrink:0;
 
-    border-radius:16px;
+    border-radius:15px;
 
-    background:
-        linear-gradient(
-            145deg,
-            #edf8e7,
-            #f8fbe9
-        );
+    background:#f0f8e9;
 
-    font-size:28px;
+    font-size:27px;
 }
 
 
@@ -589,7 +434,7 @@ body{
 
 
 /* ---------------------------------------------------------
-   GRAPH CARD
+   GRAPH AREA
 --------------------------------------------------------- */
 
 .research-chart-wrap{
@@ -598,158 +443,29 @@ body{
     z-index:5;
 
     margin:
-        0 22px;
+        0 12px;
 
     padding:
-        14px 15px 8px;
+        10px;
 
-    min-height:465px;
+    min-height:470px;
 
-    border-radius:23px;
+    border-radius:22px;
 
     background:
-        rgba(255,255,255,.96);
+        rgba(255,255,255,.94);
 
     border:
         1px solid rgba(110,145,104,.10);
 
     box-shadow:
-        0 8px 25px rgba(70,100,65,.045);
+        inset 0 0 30px rgba(120,155,110,.035);
 }
 
-
-/* ---------------------------------------------------------
-   RANK BADGES
---------------------------------------------------------- */
-
-.rank-title{
-    position:absolute;
-
-    left:20px;
-    top:13px;
-
-    z-index:20;
-
-    padding:
-        5px 10px;
-
-    border-radius:12px;
-
-    background:
-        #f4f8ef;
-
-    color:#8a9985;
-
-    font-size:10px;
-
-    font-weight:800;
-
-    letter-spacing:.6px;
-
-    pointer-events:none;
-}
-
-
-/* ---------------------------------------------------------
-   CHART
---------------------------------------------------------- */
 
 #subjectsChart{
     width:100%;
-    height:440px;
-}
-
-
-/* ---------------------------------------------------------
-   GRAPH FLOWER RAIL
-   ดอกไม้ไม่ทับข้อความ
---------------------------------------------------------- */
-
-.research-flower-rail{
-    position:absolute;
-
-    right:7px;
-
-    top:80px;
-    bottom:20px;
-
-    width:38px;
-
-    z-index:8;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:space-around;
-
-    align-items:center;
-
-    pointer-events:none;
-
-    user-select:none;
-}
-
-
-.research-flower-rail span{
-    display:block;
-
-    line-height:1;
-
-    font-size:24px;
-
-    opacity:.72;
-
-    filter:
-        drop-shadow(
-            0 3px 5px
-            rgba(80,100,70,.08)
-        );
-}
-
-
-.research-flower-rail span:nth-child(2){
-    font-size:20px;
-}
-
-
-.research-flower-rail span:nth-child(3){
-    font-size:25px;
-}
-
-
-.research-flower-rail span:nth-child(4){
-    font-size:21px;
-}
-
-
-.research-flower-rail span:nth-child(5){
-    font-size:25px;
-}
-
-
-.research-flower-rail span:nth-child(6){
-    font-size:21px;
-}
-
-
-.research-flower-rail span:nth-child(7){
-    font-size:24px;
-}
-
-
-.research-flower-rail span:nth-child(8){
-    font-size:20px;
-}
-
-
-.research-flower-rail span:nth-child(9){
-    font-size:24px;
-}
-
-
-.research-flower-rail span:nth-child(10){
-    font-size:21px;
+    height:460px;
 }
 
 
@@ -759,31 +475,23 @@ body{
 
 .research-legend{
     position:relative;
-
     z-index:10;
 
     display:flex;
-
     justify-content:center;
-
-    align-items:center;
-
     flex-wrap:wrap;
 
-    gap:9px 20px;
+    gap:10px 25px;
 
     margin:
-        15px 22px 0;
+        14px 12px 0;
 
-    padding:14px 18px;
+    padding:14px;
 
-    border-radius:17px;
+    border-radius:16px;
 
     background:
-        rgba(255,255,255,.82);
-
-    border:
-        1px solid rgba(110,145,104,.09);
+        rgba(255,255,255,.78);
 
     color:#7e8e7b;
 
@@ -793,33 +501,26 @@ body{
 }
 
 
-.research-legend span{
-    color:#c2cdbd;
-}
-
-
 /* ---------------------------------------------------------
    DETAIL
 --------------------------------------------------------- */
 
 .research-detail{
     position:relative;
-
     z-index:10;
 
     display:flex;
-
     align-items:center;
 
     gap:15px;
 
     margin:
-        15px 22px 0;
+        15px 12px 0;
 
     padding:
         16px 20px;
 
-    border-radius:19px;
+    border-radius:18px;
 
     background:
         linear-gradient(
@@ -834,11 +535,10 @@ body{
 
 
 .research-detail-icon{
-    width:50px;
-
-    text-align:center;
-
     font-size:34px;
+
+    width:48px;
+    text-align:center;
 }
 
 
@@ -868,6 +568,73 @@ body{
     font-size:12px;
 
     color:#9aa699;
+}
+
+
+/* =========================================================
+   RESEARCH AREA FLOWERS
+========================================================= */
+
+.research-decoration{
+    position:absolute;
+
+    z-index:2;
+
+    pointer-events:none;
+
+    user-select:none;
+
+    opacity:.55;
+}
+
+
+.research-decoration.f1{
+    left:1%;
+    top:8%;
+
+    font-size:45px;
+
+    transform:rotate(-12deg);
+}
+
+
+.research-decoration.f2{
+    right:1%;
+    top:15%;
+
+    font-size:38px;
+
+    transform:rotate(10deg);
+}
+
+
+.research-decoration.f3{
+    left:2%;
+    bottom:15%;
+
+    font-size:42px;
+
+    transform:rotate(8deg);
+}
+
+
+.research-decoration.f4{
+    right:2%;
+    bottom:10%;
+
+    font-size:50px;
+
+    transform:rotate(-10deg);
+}
+
+
+.research-decoration.f5{
+    left:48%;
+    bottom:1%;
+
+    font-size:30px;
+
+    opacity:.3;
 }
 
 
@@ -1042,8 +809,7 @@ body{
 
     border-radius:15px;
 
-    background:
-        rgba(255,255,255,.9);
+    background:rgba(255,255,255,.9);
 
     font-size:14px;
 
@@ -1217,8 +983,7 @@ body{
 
     border-radius:20px;
 
-    background:
-        rgba(255,255,255,.82);
+    background:rgba(255,255,255,.82);
 
     font-size:12px;
 
@@ -1289,8 +1054,7 @@ body{
 
     border-radius:15px;
 
-    background:
-        rgba(255,255,255,.9);
+    background:rgba(255,255,255,.9);
 
     font-weight:800;
 
@@ -1303,8 +1067,7 @@ body{
 
     z-index:6;
 
-    transform:
-        translate(-50%,-50%);
+    transform:translate(-50%,-50%);
 
     text-align:center;
 
@@ -1380,8 +1143,7 @@ body{
 ========================================================= */
 
 .footer{
-    padding:
-        35px 20px 45px;
+    padding:35px 20px 45px;
 
     text-align:center;
 
@@ -1432,7 +1194,6 @@ body{
 
     .card{
         padding:18px;
-
         border-radius:22px;
     }
 
@@ -1447,15 +1208,10 @@ body{
     }
 
 
-    /* -----------------------------------------
-       RESEARCH AREAS MOBILE
-    ----------------------------------------- */
-
     .research-field{
-        min-height:700px;
+        min-height:650px;
 
-        padding:
-            12px 5px 15px;
+        padding:12px 5px;
     }
 
 
@@ -1467,92 +1223,34 @@ body{
     }
 
 
-    .research-intro-title{
-        font-size:15px;
-    }
-
-
-    .research-intro-sub{
-        font-size:12px;
-    }
-
-
     .research-chart-wrap{
-        margin:
-            0 5px;
+        margin:0 5px;
 
-        padding:
-            8px 3px 4px;
+        padding:5px;
 
-        min-height:490px;
+        min-height:440px;
     }
 
 
     #subjectsChart{
-        height:465px;
-    }
-
-
-    .research-flower-rail{
-        right:2px;
-
-        top:95px;
-        bottom:20px;
-
-        width:26px;
-    }
-
-
-    .research-flower-rail span{
-        font-size:18px;
+        height:430px;
     }
 
 
     .research-legend{
         margin:
             10px 5px 0;
-
-        padding:12px 8px;
-
-        font-size:11px;
     }
 
 
     .research-detail{
         margin:
             10px 5px 0;
-
-        padding:
-            14px;
     }
 
 
     .research-decoration{
-        opacity:.25;
-    }
-
-
-    .research-decoration.f1{
-        left:-4px;
-        font-size:30px;
-    }
-
-
-    .research-decoration.f2{
-        right:-3px;
-        font-size:29px;
-    }
-
-
-    .research-decoration.f3{
-        left:-3px;
-        font-size:30px;
-    }
-
-
-    .research-decoration.f4{
-        right:-3px;
-        font-size:32px;
+        opacity:.28;
     }
 
 
@@ -1820,7 +1518,7 @@ body{
         </div>
 
         <div class="card-sub">
-            Research subjects ranked by number of articles
+            Research subjects shown as proportional article shares
         </div>
 
         <div class="card-flower">
@@ -1836,12 +1534,7 @@ body{
     >
 
 
-        <!-- =============================================
-             DECORATIVE FLOWERS
-             ไม่มี click
-             ไม่มี glow
-             ไม่บังข้อความ
-        ============================================== -->
+        <!-- DECORATIVE FLOWERS -->
 
         <div class="research-decoration f1">
             🌸
@@ -1864,9 +1557,7 @@ body{
         </div>
 
 
-        <!-- =============================================
-             INTRO
-        ============================================== -->
+        <!-- INTRO -->
 
         <div class="research-intro">
 
@@ -1881,7 +1572,7 @@ body{
                 </div>
 
                 <div class="research-intro-sub">
-                    Longer bars = more articles · Ranked from highest to lowest
+                    Larger slices = more articles
                 </div>
 
             </div>
@@ -1889,80 +1580,35 @@ body{
         </div>
 
 
-        <!-- =============================================
-             GRAPH
-        ============================================== -->
+        <!-- GRAPH -->
 
         <div class="research-chart-wrap">
-
-            <div class="rank-title">
-                RANK
-            </div>
-
 
             <div
                 id="subjectsChart">
             </div>
 
-
-            <!-- FLOWER RAIL
-                 อยู่ข้างกราฟ
-                 ไม่ทับชื่อ
-                 ไม่ทับตัวเลข -->
-
-            <div
-                class="research-flower-rail"
-                aria-hidden="true"
-            >
-
-                <span>🌸</span>
-                <span>🌷</span>
-                <span>🌼</span>
-                <span>🌻</span>
-                <span>🌺</span>
-                <span>🌿</span>
-                <span>🍃</span>
-                <span>🌱</span>
-                <span>🌾</span>
-                <span>🌼</span>
-
-            </div>
-
         </div>
 
 
-        <!-- =============================================
-             LEGEND
-        ============================================== -->
+        <!-- LEGEND -->
 
         <div class="research-legend">
 
-            <span>
-                📊 Bar length = article count
-            </span>
+            📊 Slice size = article count
 
-            <span>
-                •
-            </span>
+            <span>•</span>
 
-            <span>
-                🔢 Rank = research position
-            </span>
+            🔢 10 research areas
 
-            <span>
-                •
-            </span>
+            <span>•</span>
 
-            <span>
-                🌸 Flowers = decoration only
-            </span>
+            🌸 Flowers = decoration only
 
         </div>
 
 
-        <!-- =============================================
-             DETAIL
-        ============================================== -->
+        <!-- DETAIL -->
 
         <div
             id="researchDetail"
@@ -1992,7 +1638,7 @@ body{
                 <div
                     id="researchDetailPercent"
                     class="research-detail-percent">
-                    42.1% of all research-area articles
+                    23.2% of all research-area articles
                 </div>
 
             </div>
@@ -2676,21 +2322,13 @@ body{
 ========================================================= */
 
 const plotConfig = {
-
     responsive:true,
-
     displaylogo:false,
-
-    displayModeBar:false,
-
-    staticPlot:false,
-
     modeBarButtonsToRemove:[
         "lasso2d",
         "select2d",
         "autoScale2d"
     ]
-
 };
 
 
@@ -2704,7 +2342,6 @@ const fontFamily =
 ========================================================= */
 
 const keywordNames = [
-
     "Artificial Intelligence",
     "Machine Learning",
     "Deep Learning",
@@ -2715,12 +2352,10 @@ const keywordNames = [
     "Big Data",
     "Robotics",
     "Internet of Things"
-
 ];
 
 
 const keywordValues = [
-
     1260,
     970,
     760,
@@ -2731,16 +2366,12 @@ const keywordValues = [
     260,
     190,
     310
-
 ];
 
 
 Plotly.newPlot(
-
     "keywords",
-
     [{
-
         type:"bar",
 
         x:keywordValues,
@@ -2749,19 +2380,16 @@ Plotly.newPlot(
 
         orientation:"h",
 
-        text:
-            keywordValues.map(
-                v => v.toLocaleString()
-            ),
+        text:keywordValues.map(
+            v => v.toLocaleString()
+        ),
 
         textposition:"outside",
 
         cliponaxis:false,
 
         marker:{
-
             color:[
-
                 "#efb3c7",
                 "#f3c4d4",
                 "#f6ccd9",
@@ -2772,24 +2400,20 @@ Plotly.newPlot(
                 "#efd38f",
                 "#d9b7e6",
                 "#c9dfb8"
-
             ],
 
             line:{
                 width:0
             }
-
         },
 
         hovertemplate:
             "<b>%{y}</b><br>" +
             "Articles: %{x:,}" +
             "<extra></extra>"
-
     }],
 
     {
-
         margin:{
             l:190,
             r:70,
@@ -2797,11 +2421,9 @@ Plotly.newPlot(
             b:45
         },
 
-        paper_bgcolor:
-            "rgba(0,0,0,0)",
+        paper_bgcolor:"rgba(0,0,0,0)",
 
-        plot_bgcolor:
-            "rgba(0,0,0,0)",
+        plot_bgcolor:"rgba(0,0,0,0)",
 
         font:{
             family:fontFamily,
@@ -2809,29 +2431,23 @@ Plotly.newPlot(
         },
 
         xaxis:{
-
             title:"Number of Articles",
 
             gridcolor:"#edf1e9",
 
             zeroline:false
-
         },
 
         yaxis:{
-
             autorange:"reversed",
 
             tickfont:{
                 size:12
             }
-
         }
-
     },
 
     plotConfig
-
 );
 
 
@@ -2841,7 +2457,6 @@ Plotly.newPlot(
 ========================================================= */
 
 const authorNames = [
-
     "Smith J.",
     "Wang Y.",
     "Zhang Y.",
@@ -2852,12 +2467,10 @@ const authorNames = [
     "Lee S.",
     "Garcia M.",
     "Patel R."
-
 ];
 
 
 const authorValues = [
-
     82,
     76,
     71,
@@ -2868,16 +2481,12 @@ const authorValues = [
     54,
     51,
     48
-
 ];
 
 
 Plotly.newPlot(
-
     "authors",
-
     [{
-
         type:"bar",
 
         x:authorValues,
@@ -2900,11 +2509,9 @@ Plotly.newPlot(
             "<b>%{y}</b><br>" +
             "Publications: %{x}" +
             "<extra></extra>"
-
     }],
 
     {
-
         margin:{
             l:130,
             r:65,
@@ -2912,11 +2519,9 @@ Plotly.newPlot(
             b:45
         },
 
-        paper_bgcolor:
-            "rgba(0,0,0,0)",
+        paper_bgcolor:"rgba(0,0,0,0)",
 
-        plot_bgcolor:
-            "rgba(0,0,0,0)",
+        plot_bgcolor:"rgba(0,0,0,0)",
 
         font:{
             family:fontFamily,
@@ -2924,23 +2529,19 @@ Plotly.newPlot(
         },
 
         xaxis:{
-
             title:"Publications",
 
             gridcolor:"#edf1e9",
 
             zeroline:false
-
         },
 
         yaxis:{
             autorange:"reversed"
         }
-
     },
 
     plotConfig
-
 );
 
 
@@ -2950,17 +2551,13 @@ Plotly.newPlot(
 ========================================================= */
 
 const years = [
-
-    2010,2011,2012,2013,
-    2014,2015,2016,2017,
-    2018,2019,2020,2021,
+    2010,2011,2012,2013,2014,2015,
+    2016,2017,2018,2019,2020,2021,
     2022,2023,2024,2025
-
 ];
 
 
 const publicationValues = [
-
     85,
     105,
     125,
@@ -2977,16 +2574,12 @@ const publicationValues = [
     700,
     780,
     813
-
 ];
 
 
 Plotly.newPlot(
-
     "years",
-
     [{
-
         type:"scatter",
 
         mode:"lines+markers",
@@ -2996,45 +2589,31 @@ Plotly.newPlot(
         y:publicationValues,
 
         line:{
-
             color:"#87a979",
-
             width:4,
-
             shape:"spline"
-
         },
 
         marker:{
-
             size:9,
-
             color:"#e8b7ca",
-
             line:{
-
                 color:"#ffffff",
-
                 width:2
-
             }
-
         },
 
         fill:"tozeroy",
 
-        fillcolor:
-            "rgba(173,202,158,.16)",
+        fillcolor:"rgba(173,202,158,.16)",
 
         hovertemplate:
             "<b>%{x}</b><br>" +
             "Articles: %{y:,}" +
             "<extra></extra>"
-
     }],
 
     {
-
         margin:{
             l:65,
             r:30,
@@ -3042,11 +2621,9 @@ Plotly.newPlot(
             b:55
         },
 
-        paper_bgcolor:
-            "rgba(0,0,0,0)",
+        paper_bgcolor:"rgba(0,0,0,0)",
 
-        plot_bgcolor:
-            "rgba(0,0,0,0)",
+        plot_bgcolor:"rgba(0,0,0,0)",
 
         font:{
             family:fontFamily,
@@ -3054,7 +2631,6 @@ Plotly.newPlot(
         },
 
         xaxis:{
-
             title:"Publication Year",
 
             dtick:1,
@@ -3062,37 +2638,28 @@ Plotly.newPlot(
             gridcolor:"#edf1e9",
 
             zeroline:false
-
         },
 
         yaxis:{
-
             title:"Number of Articles",
 
             gridcolor:"#edf1e9",
 
             zeroline:false
-
         }
-
     },
 
     plotConfig
-
 );
 
 
 
 /* =========================================================
    RESEARCH AREAS
-   🌸 FLOWER BAR GRAPH
-   ไม่มี CLICK
-   ไม่มี GLOW
-   ไม่มี CLICK EFFECT
+   ⭐ DONUT / CIRCLE CHART
 ========================================================= */
 
 const researchAreas = [
-
     "Computer Science",
     "Engineering",
     "Medicine",
@@ -3103,12 +2670,10 @@ const researchAreas = [
     "Materials Science",
     "Energy",
     "Business & Management"
-
 ];
 
 
 const researchCounts = [
-
     2400,
     1850,
     1430,
@@ -3119,12 +2684,10 @@ const researchCounts = [
     530,
     410,
     350
-
 ];
 
 
 const researchIcons = [
-
     "🌸",
     "🌷",
     "🌼",
@@ -3135,248 +2698,289 @@ const researchIcons = [
     "🌱",
     "🌾",
     "🌼"
-
 ];
 
-
-/* ---------------------------------------------------------
-   BAR COLORS
---------------------------------------------------------- */
 
 const researchColors = [
-
-    "#e8aec5",
-    "#e6bfd4",
-    "#f1cf89",
-    "#e8c887",
-    "#c5ddb6",
-    "#b7d5bf",
-    "#c4d9b0",
-    "#d4c1dd",
-    "#d2cc98",
-    "#c2d9bc"
-
+    "#e9b3c7",
+    "#e7bfd4",
+    "#f1d38e",
+    "#e8ca8a",
+    "#c9dfb8",
+    "#b9d8c2",
+    "#c8dcb1",
+    "#d8c4df",
+    "#d5cf9c",
+    "#c7ddc0"
 ];
 
 
-/* ---------------------------------------------------------
-   GRAPH
---------------------------------------------------------- */
+const totalResearch =
+    researchCounts.reduce(
+        (a,b) => a+b,
+        0
+    );
+
 
 Plotly.newPlot(
-
     "subjectsChart",
 
     [{
+        type:"pie",
 
-        type:"bar",
+        labels:researchAreas,
 
-        orientation:"h",
+        values:researchCounts,
 
-        y:researchAreas,
+        hole:.52,
 
-        x:researchCounts,
+        sort:false,
 
-        text:
-            researchCounts.map(
-                v => v.toLocaleString()
-            ),
+        direction:"clockwise",
+
+        rotation:-35,
+
+        textinfo:"label+percent",
 
         textposition:"outside",
 
-        cliponaxis:false,
-
-        marker:{
-
-            color:researchColors,
-
-            line:{
-                width:0
-            }
-
+        outsidetextfont:{
+            family:fontFamily,
+            size:11,
+            color:"#566754"
         },
 
+        marker:{
+            colors:researchColors,
+
+            line:{
+                color:"#ffffff",
+                width:3
+            }
+        },
+
+        pull:[
+            .035,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+
         hovertemplate:
-
-            "<b>%{y}</b><br>" +
-
-            "Articles: %{x:,}" +
-
+            "<b>%{label}</b><br>" +
+            "Articles: %{value:,}<br>" +
+            "Share: %{percent}" +
             "<extra></extra>"
-
     }],
 
     {
-
         margin:{
-
-            l:185,
-
-            r:70,
-
-            t:28,
-
-            b:55
-
+            l:30,
+            r:30,
+            t:25,
+            b:25
         },
 
+        paper_bgcolor:"rgba(0,0,0,0)",
 
-        height:440,
-
-
-        paper_bgcolor:
-            "rgba(0,0,0,0)",
-
-        plot_bgcolor:
-            "rgba(0,0,0,0)",
-
+        plot_bgcolor:"rgba(0,0,0,0)",
 
         font:{
-
             family:fontFamily,
-
             color:"#647463"
-
         },
 
+        showlegend:true,
 
-        xaxis:{
+        legend:{
+            orientation:"h",
 
-            title:"Number of Articles",
+            x:.5,
+            xanchor:"center",
 
-            range:[
+            y:-.02,
 
-                0,
-
-                Math.max(...researchCounts) * 1.18
-
-            ],
-
-            gridcolor:"#edf1e9",
-
-            zeroline:false,
-
-            showline:false,
-
-            fixedrange:true
-
-        },
-
-
-        yaxis:{
-
-            autorange:"reversed",
-
-            fixedrange:true,
-
-            tickfont:{
-
-                size:12,
-
-                color:"#536453"
-
-            }
-
-        },
-
-
-        bargap:.28,
-
-
-        hoverlabel:{
-
-            bgcolor:"#ffffff",
-
-            bordercolor:"#dfe9dc",
+            yanchor:"top",
 
             font:{
+                size:10,
+                color:"#687768"
+            },
 
-                family:fontFamily,
+            bgcolor:"rgba(255,255,255,.65)",
 
-                size:12,
+            bordercolor:"rgba(110,145,104,.10)",
 
-                color:"#536453"
+            borderwidth:1
+        },
 
+        annotations:[
+
+            {
+                x:0.5,
+                y:0.54,
+
+                xref:"paper",
+                yref:"paper",
+
+                text:
+                    "<b>10</b>",
+
+                showarrow:false,
+
+                font:{
+                    family:fontFamily,
+                    size:34,
+                    color:"#456147"
+                }
+            },
+
+            {
+                x:0.5,
+                y:0.43,
+
+                xref:"paper",
+                yref:"paper",
+
+                text:
+                    "Research Areas",
+
+                showarrow:false,
+
+                font:{
+                    family:fontFamily,
+                    size:12,
+                    color:"#899789"
+                }
             }
 
-        }
-
+        ]
     },
 
     plotConfig
-
 );
 
 
 
 /* =========================================================
    RESEARCH AREA DETAIL
-   แสดงข้อมูลเริ่มต้นเท่านั้น
-   ไม่มี CLICK EVENT
 ========================================================= */
 
-const totalResearch =
-
-    researchCounts.reduce(
-
-        (a,b) => a+b,
-
-        0
-
-    );
-
-
 const topPercent =
-
     (
-
         researchCounts[0] /
-
         totalResearch *
-
         100
-
     ).toFixed(1);
 
 
 document.getElementById(
-
     "researchDetailIcon"
-
 ).textContent =
-
     researchIcons[0];
 
 
 document.getElementById(
-
     "researchDetailTitle"
-
 ).textContent =
-
     researchAreas[0];
 
 
 document.getElementById(
-
     "researchDetailCount"
-
 ).textContent =
-
     researchCounts[0].toLocaleString()
-
     + " Articles";
 
 
 document.getElementById(
-
     "researchDetailPercent"
-
 ).textContent =
-
     topPercent
-
     + "% of all research-area articles";
+
+
+
+/* =========================================================
+   CLICK RESEARCH AREA
+   Update detail card when clicking a slice
+========================================================= */
+
+const subjectsChart =
+    document.getElementById(
+        "subjectsChart"
+    );
+
+
+subjectsChart.on(
+    "plotly_click",
+    function(event){
+
+        if(
+            !event.points ||
+            !event.points.length
+        ){
+            return;
+        }
+
+
+        const point =
+            event.points[0];
+
+
+        const index =
+            point.pointNumber;
+
+
+        const area =
+            researchAreas[index];
+
+
+        const count =
+            researchCounts[index];
+
+
+        const percent =
+            (
+                count /
+                totalResearch *
+                100
+            ).toFixed(1);
+
+
+        document.getElementById(
+            "researchDetailIcon"
+        ).textContent =
+            researchIcons[index];
+
+
+        document.getElementById(
+            "researchDetailTitle"
+        ).textContent =
+            area;
+
+
+        document.getElementById(
+            "researchDetailCount"
+        ).textContent =
+            count.toLocaleString()
+            + " Articles";
+
+
+        document.getElementById(
+            "researchDetailPercent"
+        ).textContent =
+            percent
+            + "% of all research-area articles";
+
+    }
+);
 
 
 
@@ -3387,25 +2991,18 @@ document.getElementById(
 function drawCoLines(){
 
     const field =
-        document.getElementById(
-            "coField"
-        );
+        document.getElementById("coField");
 
     const svg =
-        document.getElementById(
-            "coSvg"
-        );
+        document.getElementById("coSvg");
 
     const rect =
         field.getBoundingClientRect();
 
 
     svg.setAttribute(
-
         "viewBox",
-
         `0 0 ${rect.width} ${rect.height}`
-
     );
 
 
@@ -3413,11 +3010,8 @@ function drawCoLines(){
 
 
     const center = {
-
         x:rect.width/2,
-
         y:rect.height/2
-
     };
 
 
@@ -3472,17 +3066,12 @@ function drawCoLines(){
 
 
     points.forEach(
-
         point => {
 
             const line =
-
                 document.createElementNS(
-
                     "http://www.w3.org/2000/svg",
-
                     "line"
-
                 );
 
 
@@ -3491,36 +3080,30 @@ function drawCoLines(){
                 center.x
             );
 
-
             line.setAttribute(
                 "y1",
                 center.y
             );
-
 
             line.setAttribute(
                 "x2",
                 point.x
             );
 
-
             line.setAttribute(
                 "y2",
                 point.y
             );
-
 
             line.setAttribute(
                 "stroke",
                 "#b9cbb4"
             );
 
-
             line.setAttribute(
                 "stroke-width",
                 "2"
             );
-
 
             line.setAttribute(
                 "stroke-opacity",
@@ -3531,7 +3114,6 @@ function drawCoLines(){
             svg.appendChild(line);
 
         }
-
     );
 
 }
@@ -3541,11 +3123,8 @@ drawCoLines();
 
 
 window.addEventListener(
-
     "resize",
-
     drawCoLines
-
 );
 
 
@@ -3561,23 +3140,18 @@ function drawFeatureLines(){
             "featureField"
         );
 
-
     const svg =
         document.getElementById(
             "featureSvg"
         );
-
 
     const rect =
         field.getBoundingClientRect();
 
 
     svg.setAttribute(
-
         "viewBox",
-
         `0 0 ${rect.width} ${rect.height}`
-
     );
 
 
@@ -3585,11 +3159,8 @@ function drawFeatureLines(){
 
 
     const center = {
-
         x:rect.width*.50,
-
         y:rect.height*.50
-
     };
 
 
@@ -3620,17 +3191,12 @@ function drawFeatureLines(){
 
 
     points.forEach(
-
         ([x,y]) => {
 
             const line =
-
                 document.createElementNS(
-
                     "http://www.w3.org/2000/svg",
-
                     "line"
-
                 );
 
 
@@ -3639,36 +3205,30 @@ function drawFeatureLines(){
                 center.x
             );
 
-
             line.setAttribute(
                 "y1",
                 center.y
             );
-
 
             line.setAttribute(
                 "x2",
                 rect.width*x
             );
 
-
             line.setAttribute(
                 "y2",
                 rect.height*y
             );
-
 
             line.setAttribute(
                 "stroke",
                 "#b8cdb2"
             );
 
-
             line.setAttribute(
                 "stroke-width",
                 "1.5"
             );
-
 
             line.setAttribute(
                 "stroke-opacity",
@@ -3679,7 +3239,6 @@ function drawFeatureLines(){
             svg.appendChild(line);
 
         }
-
     );
 
 }
@@ -3689,11 +3248,8 @@ drawFeatureLines();
 
 
 window.addEventListener(
-
     "resize",
-
     drawFeatureLines
-
 );
 
 
@@ -3703,26 +3259,19 @@ window.addEventListener(
 ========================================================= */
 
 window.addEventListener(
-
     "resize",
-
     () => {
 
         [
-
             "keywords",
             "authors",
             "years",
             "subjectsChart"
-
         ].forEach(
-
             id => {
 
                 const element =
-
                     document.getElementById(id);
-
 
                 if(element){
 
@@ -3733,11 +3282,9 @@ window.addEventListener(
                 }
 
             }
-
         );
 
     }
-
 );
 
 </script>
