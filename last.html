@@ -25,11 +25,14 @@ html{
 
 body{
     margin:0;
+
     font-family:
         Arial,
         "Noto Sans Thai",
         sans-serif;
+
     background:#f5f8f2;
+
     color:#405442;
 }
 
@@ -42,10 +45,10 @@ body{
 
     position:relative;
     overflow:hidden;
+
     padding:35px 30px;
 
     background:
-
         radial-gradient(
             circle at 10% 30%,
             rgba(255,255,255,.9),
@@ -141,19 +144,16 @@ body{
 @keyframes fly{
 
     0%,100%{
-
         transform:
             translate(0,0)
             rotate(-5deg);
     }
 
     50%{
-
         transform:
             translate(15px,-12px)
             rotate(6deg);
     }
-
 }
 
 
@@ -195,6 +195,7 @@ body{
         #dce7d7;
 
     border-radius:20px;
+
     padding:20px;
 
     box-shadow:
@@ -226,7 +227,6 @@ body{
     margin-top:6px;
 
     color:#426a48;
-
     font-size:29px;
     font-weight:800;
 }
@@ -236,7 +236,6 @@ body{
     margin-top:4px;
 
     color:#9aa39b;
-
     font-size:12px;
 }
 
@@ -304,7 +303,6 @@ body{
     margin-top:4px;
 
     color:#8a968b;
-
     font-size:12px;
 }
 
@@ -321,6 +319,637 @@ body{
 .plot{
 
     height:500px;
+}
+
+
+/* =========================================================
+   RESEARCH AREAS — SIMPLE & EASY TO READ
+========================================================= */
+
+.research-field{
+
+    position:relative;
+
+    min-height:500px;
+
+    padding:24px 28px 80px;
+
+    overflow:hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 10% 15%,
+            rgba(255,190,215,.13),
+            transparent 24%
+        ),
+
+        radial-gradient(
+            circle at 90% 20%,
+            rgba(190,215,250,.13),
+            transparent 24%
+        ),
+
+        radial-gradient(
+            circle at 15% 85%,
+            rgba(250,220,160,.13),
+            transparent 24%
+        ),
+
+        radial-gradient(
+            circle at 85% 85%,
+            rgba(190,225,185,.15),
+            transparent 24%
+        ),
+
+        linear-gradient(
+            180deg,
+            #fbfdf9,
+            #edf6e9
+        );
+}
+
+
+/* =========================================================
+   RESEARCH INTRO
+========================================================= */
+
+.research-intro{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:20px;
+
+    padding:13px 16px;
+
+    background:
+        rgba(255,255,255,.82);
+
+    border:
+        1px solid
+        #dce7d7;
+
+    border-radius:16px;
+
+    box-shadow:
+        0 4px 12px
+        rgba(70,90,70,.05);
+}
+
+.research-intro-icon{
+
+    width:40px;
+    height:40px;
+
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f8c9da,
+            #fff0b1
+        );
+
+    font-size:21px;
+
+    box-shadow:
+        0 4px 10px
+        rgba(80,90,70,.08);
+}
+
+.research-intro-text{
+
+    min-width:0;
+}
+
+.research-intro-title{
+
+    font-size:13px;
+    font-weight:800;
+
+    color:#4f624f;
+}
+
+.research-intro-sub{
+
+    margin-top:3px;
+
+    font-size:10px;
+
+    color:#8b968c;
+
+    line-height:1.5;
+}
+
+
+/* =========================================================
+   RESEARCH LIST
+========================================================= */
+
+.research-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:9px;
+
+    position:relative;
+
+    z-index:5;
+}
+
+
+/* =========================================================
+   RESEARCH ROW
+========================================================= */
+
+.research-row{
+
+    position:relative;
+
+    display:grid;
+
+    grid-template-columns:
+        34px
+        minmax(145px,190px)
+        1fr
+        85px;
+
+    align-items:center;
+
+    gap:12px;
+
+    min-height:48px;
+
+    padding:8px 12px;
+
+    background:
+        rgba(255,255,255,.90);
+
+    border:
+        1px solid
+        #dfe8db;
+
+    border-radius:15px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 3px 10px
+        rgba(70,90,70,.045);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease,
+        background .25s ease;
+}
+
+.research-row:hover{
+
+    transform:
+        translateX(4px);
+
+    border-color:
+        #cdddc7;
+
+    box-shadow:
+        0 7px 17px
+        rgba(70,90,70,.09);
+}
+
+
+/* =========================================================
+   SELECTED RESEARCH ROW
+========================================================= */
+
+.research-row.selected{
+
+    background:
+        linear-gradient(
+            90deg,
+            #fffdf0,
+            #fff8d9
+        );
+
+    border-color:
+        rgba(235,199,91,.75);
+
+    box-shadow:
+        0 7px 20px
+        rgba(210,175,65,.13);
+
+    transform:
+        translateX(5px);
+}
+
+.research-row.selected
+.research-row-icon{
+
+    box-shadow:
+        0 0 0 4px
+        rgba(255,220,100,.20),
+
+        0 4px 10px
+        rgba(210,175,65,.18);
+}
+
+
+/* =========================================================
+   RANK
+========================================================= */
+
+.research-rank{
+
+    width:26px;
+    height:26px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#f0f5ed;
+
+    color:#758375;
+
+    font-size:9px;
+
+    font-weight:800;
+}
+
+
+/* TOP 3 RANK
+========================================================= */
+
+.research-row:nth-child(1)
+.research-rank{
+
+    background:#fff0a8;
+    color:#9a7b1f;
+}
+
+.research-row:nth-child(2)
+.research-rank{
+
+    background:#e5edf0;
+    color:#60747b;
+}
+
+.research-row:nth-child(3)
+.research-rank{
+
+    background:#f1dfc7;
+    color:#876842;
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.research-row-icon{
+
+    position:absolute;
+
+    left:42px;
+
+    width:30px;
+    height:30px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.9),
+            var(--research-color)
+        );
+
+    font-size:16px;
+
+    box-shadow:
+        0 3px 8px
+        rgba(70,90,70,.08);
+
+    transition:
+        box-shadow .25s ease,
+        transform .25s ease;
+}
+
+
+/* =========================================================
+   NAME
+========================================================= */
+
+.research-row-name{
+
+    padding-left:35px;
+
+    font-size:11px;
+
+    font-weight:800;
+
+    color:#506051;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+
+/* =========================================================
+   BAR AREA
+========================================================= */
+
+.research-bar-area{
+
+    position:relative;
+
+    height:18px;
+
+    display:flex;
+
+    align-items:center;
+}
+
+
+/* =========================================================
+   BAR BACKGROUND
+========================================================= */
+
+.research-bar-bg{
+
+    width:100%;
+
+    height:9px;
+
+    border-radius:20px;
+
+    background:#edf2ea;
+
+    overflow:hidden;
+}
+
+
+/* =========================================================
+   BAR
+========================================================= */
+
+.research-bar{
+
+    height:100%;
+
+    width:var(--bar-width);
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--research-light),
+            var(--research-color)
+        );
+
+    box-shadow:
+        0 2px 6px
+        rgba(80,100,80,.08);
+
+    transition:
+        width .65s cubic-bezier(.2,.8,.2,1);
+}
+
+
+/* =========================================================
+   PERCENT
+========================================================= */
+
+.research-percent{
+
+    position:absolute;
+
+    right:5px;
+
+    top:50%;
+
+    transform:
+        translateY(-50%);
+
+    padding:
+        2px 6px;
+
+    border-radius:8px;
+
+    background:
+        rgba(255,255,255,.76);
+
+    font-size:8px;
+
+    color:#788478;
+
+    font-weight:700;
+}
+
+
+/* =========================================================
+   COUNT
+========================================================= */
+
+.research-row-count{
+
+    text-align:right;
+
+    font-size:10px;
+
+    color:#758176;
+
+    font-weight:700;
+
+    white-space:nowrap;
+}
+
+.research-row-count strong{
+
+    color:#4e624f;
+
+    font-size:12px;
+}
+
+
+/* =========================================================
+   RESEARCH DETAIL
+========================================================= */
+
+.research-detail{
+
+    position:absolute;
+
+    left:50%;
+    bottom:16px;
+
+    transform:
+        translateX(-50%)
+        translateY(12px);
+
+    z-index:20;
+
+    width:
+        min(
+            calc(100% - 40px),
+            430px
+        );
+
+    padding:11px 16px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    background:
+        rgba(255,255,255,.96);
+
+    border:
+        1px solid
+        #e0e8dc;
+
+    border-radius:16px;
+
+    box-shadow:
+        0 10px 28px
+        rgba(60,80,60,.13);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:
+        opacity .25s ease,
+        transform .25s ease;
+}
+
+.research-detail.show{
+
+    opacity:1;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+
+    pointer-events:auto;
+}
+
+.research-detail-icon{
+
+    width:34px;
+    height:34px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff1b0,
+            #f8c9d9
+        );
+
+    font-size:17px;
+}
+
+.research-detail-info{
+
+    min-width:0;
+}
+
+.research-detail-title{
+
+    font-size:11px;
+
+    font-weight:800;
+
+    color:#4e604f;
+}
+
+.research-detail-count{
+
+    margin-top:2px;
+
+    font-size:10px;
+
+    color:#89958a;
+}
+
+.research-detail-percent{
+
+    margin-top:2px;
+
+    font-size:9px;
+
+    color:#a0aaa1;
+}
+
+
+/* =========================================================
+   RESEARCH LEGEND
+========================================================= */
+
+.research-legend{
+
+    position:absolute;
+
+    right:18px;
+    top:18px;
+
+    z-index:10;
+
+    padding:8px 11px;
+
+    border-radius:13px;
+
+    background:
+        rgba(255,255,255,.82);
+
+    border:
+        1px solid
+        #dbe6d7;
+
+    box-shadow:
+        0 3px 10px
+        rgba(70,90,70,.05);
+
+    font-size:9px;
+
+    color:#718071;
+
+    line-height:1.6;
 }
 
 
@@ -394,7 +1023,6 @@ body{
     top:17%;
 
     background:
-
         radial-gradient(
             ellipse,
             rgba(255,190,215,.20),
@@ -412,7 +1040,6 @@ body{
     top:17%;
 
     background:
-
         radial-gradient(
             ellipse,
             rgba(180,210,250,.20),
@@ -430,7 +1057,6 @@ body{
     bottom:5%;
 
     background:
-
         radial-gradient(
             ellipse,
             rgba(247,211,143,.20),
@@ -448,7 +1074,6 @@ body{
     bottom:5%;
 
     background:
-
         radial-gradient(
             ellipse,
             rgba(190,225,182,.22),
@@ -465,7 +1090,6 @@ body{
 .group-title{
 
     position:absolute;
-
     z-index:15;
 
     padding:8px 16px;
@@ -484,7 +1108,6 @@ body{
         rgba(70,90,70,.06);
 
     font-size:12px;
-
     font-weight:800;
 
     backdrop-filter:blur(4px);
@@ -494,6 +1117,7 @@ body{
 
     left:14%;
     top:18%;
+
     color:#c9577d;
 }
 
@@ -501,6 +1125,7 @@ body{
 
     right:14%;
     top:18%;
+
     color:#527bb5;
 }
 
@@ -508,6 +1133,7 @@ body{
 
     left:22%;
     bottom:11%;
+
     color:#b07820;
 }
 
@@ -515,6 +1141,7 @@ body{
 
     right:22%;
     bottom:11%;
+
     color:#5d8755;
 }
 
@@ -526,7 +1153,6 @@ body{
 .feature-flower{
 
     position:absolute;
-
     z-index:10;
 
     transform:
@@ -535,14 +1161,15 @@ body{
     display:flex;
 
     flex-direction:column;
-
     align-items:center;
 
     cursor:pointer;
 
     transition:
-        transform .25s ease,
-        filter .25s ease;
+        transform .28s cubic-bezier(.2,.8,.2,1),
+        filter .3s ease;
+
+    user-select:none;
 }
 
 .feature-flower:hover{
@@ -562,6 +1189,8 @@ body{
 
 .feature-flower .emoji{
 
+    position:relative;
+
     line-height:1;
 
     filter:
@@ -569,6 +1198,10 @@ body{
             0 3px 4px
             rgba(60,70,60,.15)
         );
+
+    transition:
+        filter .3s ease,
+        transform .3s ease;
 }
 
 .feature-flower .label{
@@ -597,6 +1230,10 @@ body{
     font-size:10px;
 
     color:#4d5d4e;
+
+    transition:
+        box-shadow .3s ease,
+        border-color .3s ease;
 }
 
 .feature-flower .count{
@@ -606,6 +1243,229 @@ body{
     color:#849085;
 
     font-size:9px;
+
+    transition:
+        color .3s ease;
+}
+
+
+/* =========================================================
+   FEATURE FLOWER SELECTED
+========================================================= */
+
+.feature-flower.selected{
+
+    z-index:50;
+
+    transform:
+        translate(-50%,-50%)
+        scale(1.10);
+
+    animation:
+        featureFlowerSelected .75s ease-out;
+}
+
+.feature-flower.selected .emoji{
+
+    filter:
+
+        drop-shadow(
+            0 0 5px
+            rgba(255,220,100,1)
+        )
+
+        drop-shadow(
+            0 0 12px
+            rgba(255,200,70,.95)
+        )
+
+        drop-shadow(
+            0 0 22px
+            rgba(255,215,100,.78)
+        )
+
+        drop-shadow(
+            0 0 35px
+            rgba(255,225,130,.45)
+        );
+
+    animation:
+        featureSoftFlowerGlow .8s ease-out;
+}
+
+.feature-flower.selected .label{
+
+    border-color:
+        rgba(255,205,90,.65);
+
+    box-shadow:
+
+        0 0 8px
+        rgba(255,210,90,.30),
+
+        0 3px 10px
+        rgba(70,80,60,.08);
+}
+
+.feature-flower.selected .count{
+
+    color:#b28a32;
+}
+
+.feature-flower.selected::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:27px;
+
+    width:82px;
+    height:82px;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(255,225,110,.52) 0%,
+            rgba(255,215,90,.30) 35%,
+            rgba(255,210,80,.14) 55%,
+            transparent 76%
+        );
+
+    filter:blur(2px);
+
+    z-index:-1;
+
+    pointer-events:none;
+
+    animation:
+        featureYellowGlow 1s ease-out;
+}
+
+
+/* =========================================================
+   FEATURE ANIMATIONS
+========================================================= */
+
+@keyframes featureSoftFlowerGlow{
+
+    0%{
+
+        filter:
+            drop-shadow(
+                0 0 2px
+                rgba(255,220,100,.4)
+            );
+    }
+
+    40%{
+
+        filter:
+
+            drop-shadow(
+                0 0 7px
+                rgba(255,220,100,1)
+            )
+
+            drop-shadow(
+                0 0 18px
+                rgba(255,200,70,.95)
+            )
+
+            drop-shadow(
+                0 0 30px
+                rgba(255,215,100,.8)
+            );
+    }
+
+    100%{
+
+        filter:
+
+            drop-shadow(
+                0 0 5px
+                rgba(255,220,100,1)
+            )
+
+            drop-shadow(
+                0 0 12px
+                rgba(255,200,70,.9)
+            )
+
+            drop-shadow(
+                0 0 22px
+                rgba(255,215,100,.7)
+            )
+
+            drop-shadow(
+                0 0 35px
+                rgba(255,225,130,.4)
+            );
+    }
+
+}
+
+@keyframes featureYellowGlow{
+
+    0%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(.55);
+
+        opacity:0;
+    }
+
+    30%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+
+        opacity:1;
+    }
+
+    100%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.65);
+
+        opacity:0;
+    }
+
+}
+
+@keyframes featureFlowerSelected{
+
+    0%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+    }
+
+    35%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.18);
+    }
+
+    100%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.10);
+    }
+
 }
 
 
@@ -674,7 +1534,6 @@ body{
     display:flex;
 
     flex-direction:column;
-
     align-items:center;
 }
 
@@ -747,7 +1606,6 @@ body{
         #dce7d7;
 
     font-size:12px;
-
     font-weight:800;
 
     color:#536354;
@@ -776,6 +1634,7 @@ body{
 
     left:3%;
     top:14%;
+
     font-size:34px;
 }
 
@@ -783,7 +1642,9 @@ body{
 
     left:48%;
     top:7%;
+
     font-size:25px;
+
     animation-delay:1.3s;
 }
 
@@ -791,7 +1652,9 @@ body{
 
     right:4%;
     top:14%;
+
     font-size:36px;
+
     animation-delay:.6s;
 }
 
@@ -799,7 +1662,9 @@ body{
 
     left:8%;
     bottom:13%;
+
     font-size:27px;
+
     animation-delay:2s;
 }
 
@@ -807,7 +1672,9 @@ body{
 
     right:9%;
     bottom:14%;
+
     font-size:30px;
+
     animation-delay:1.7s;
 }
 
@@ -875,11 +1742,6 @@ body{
         );
 }
 
-
-/* =========================================================
-   CO-OCCURRENCE COMMUNITY
-========================================================= */
-
 .co-community{
 
     position:absolute;
@@ -901,7 +1763,6 @@ body{
     top:45%;
 
     background:
-
         radial-gradient(
             circle,
             rgba(255,193,216,.18),
@@ -919,7 +1780,6 @@ body{
     top:44%;
 
     background:
-
         radial-gradient(
             circle,
             rgba(190,214,252,.18),
@@ -937,7 +1797,6 @@ body{
     top:83%;
 
     background:
-
         radial-gradient(
             circle,
             rgba(249,218,158,.18),
@@ -946,15 +1805,9 @@ body{
         );
 }
 
-
-/* =========================================================
-   CO GROUP TITLES
-========================================================= */
-
 .co-group-title{
 
     position:absolute;
-
     z-index:15;
 
     padding:7px 14px;
@@ -969,7 +1822,6 @@ body{
         #dce6d8;
 
     font-size:11px;
-
     font-weight:800;
 }
 
@@ -977,6 +1829,7 @@ body{
 
     left:10%;
     top:11%;
+
     color:#c9577d;
 }
 
@@ -984,6 +1837,7 @@ body{
 
     right:10%;
     top:11%;
+
     color:#527bb5;
 }
 
@@ -1006,7 +1860,6 @@ body{
 .co-flower{
 
     position:absolute;
-
     z-index:10;
 
     transform:
@@ -1021,8 +1874,10 @@ body{
     cursor:pointer;
 
     transition:
-        transform .25s ease,
-        filter .25s ease;
+        transform .28s cubic-bezier(.2,.8,.2,1),
+        filter .3s ease;
+
+    user-select:none;
 }
 
 .co-flower:hover{
@@ -1049,6 +1904,10 @@ body{
             0 4px 4px
             rgba(70,80,70,.14)
         );
+
+    transition:
+        filter .3s ease,
+        transform .3s ease;
 }
 
 .co-flower .name{
@@ -1071,6 +1930,10 @@ body{
     color:#536053;
 
     white-space:nowrap;
+
+    transition:
+        box-shadow .3s ease,
+        border-color .3s ease;
 }
 
 .co-flower .count{
@@ -1080,8 +1943,218 @@ body{
     color:#899589;
 
     font-size:9px;
-
     font-weight:700;
+}
+
+
+/* =========================================================
+   CO SELECTED
+========================================================= */
+
+.co-flower.selected{
+
+    z-index:50;
+
+    transform:
+        translate(-50%,-50%)
+        scale(1.10);
+
+    animation:
+        flowerSelected .75s ease-out;
+}
+
+.co-flower.selected .icon{
+
+    filter:
+        drop-shadow(
+            0 0 5px
+            rgba(255,220,100,1)
+        )
+
+        drop-shadow(
+            0 0 12px
+            rgba(255,200,70,.95)
+        )
+
+        drop-shadow(
+            0 0 22px
+            rgba(255,215,100,.78)
+        )
+
+        drop-shadow(
+            0 0 35px
+            rgba(255,225,130,.45)
+        );
+
+    animation:
+        softFlowerGlow .8s ease-out;
+}
+
+.co-flower.selected .name{
+
+    border-color:
+        rgba(255,205,90,.65);
+
+    box-shadow:
+        0 0 8px
+        rgba(255,210,90,.30),
+
+        0 3px 10px
+        rgba(70,80,60,.08);
+}
+
+.co-flower.selected::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:28px;
+
+    width:70px;
+    height:70px;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,225,110,.50) 0%,
+            rgba(255,215,90,.28) 35%,
+            rgba(255,210,80,.12) 55%,
+            transparent 75%
+        );
+
+    filter:
+        blur(2px);
+
+    z-index:-1;
+
+    pointer-events:none;
+
+    animation:
+        yellowGlow 1s ease-out;
+}
+
+
+/* =========================================================
+   CO ANIMATIONS
+========================================================= */
+
+@keyframes softFlowerGlow{
+
+    0%{
+
+        filter:
+            drop-shadow(
+                0 0 2px
+                rgba(255,220,100,.4)
+            );
+    }
+
+    40%{
+
+        filter:
+            drop-shadow(
+                0 0 7px
+                rgba(255,220,100,1)
+            )
+
+            drop-shadow(
+                0 0 18px
+                rgba(255,200,70,.95)
+            )
+
+            drop-shadow(
+                0 0 30px
+                rgba(255,215,100,.8)
+            );
+    }
+
+    100%{
+
+        filter:
+            drop-shadow(
+                0 0 5px
+                rgba(255,220,100,1)
+            )
+
+            drop-shadow(
+                0 0 12px
+                rgba(255,200,70,.9)
+            )
+
+            drop-shadow(
+                0 0 22px
+                rgba(255,215,100,.7)
+            )
+
+            drop-shadow(
+                0 0 35px
+                rgba(255,225,130,.4)
+            );
+    }
+
+}
+
+@keyframes yellowGlow{
+
+    0%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(.55);
+
+        opacity:0;
+    }
+
+    30%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+
+        opacity:1;
+    }
+
+    100%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.65);
+
+        opacity:0;
+    }
+
+}
+
+@keyframes flowerSelected{
+
+    0%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+    }
+
+    35%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.18);
+    }
+
+    100%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.10);
+    }
+
 }
 
 
@@ -1148,26 +2221,122 @@ body{
     display:flex;
 
     flex-direction:column;
-
     align-items:center;
 }
 
 .co-center .icon{
 
-    font-size:78px;
+    width:92px;
+    height:92px;
 
-    line-height:1;
+    position:relative;
 
-    filter:
-        drop-shadow(
-            0 7px 8px
-            rgba(60,80,60,.15)
-        );
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+            circle,
+            #fff6b8 0 13%,
+            transparent 14%
+        ),
+
+        radial-gradient(
+            circle at 50% 18%,
+            #f4a6c2 0 24%,
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 82% 50%,
+            #f4a6c2 0 24%,
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 50% 82%,
+            #f4a6c2 0 24%,
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 18% 50%,
+            #f4a6c2 0 24%,
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 28% 28%,
+            #f7bdd2 0 17%,
+            transparent 18%
+        ),
+
+        radial-gradient(
+            circle at 72% 28%,
+            #f7bdd2 0 17%,
+            transparent 18%
+        ),
+
+        radial-gradient(
+            circle at 72% 72%,
+            #f7bdd2 0 17%,
+            transparent 18%
+        ),
+
+        radial-gradient(
+            circle at 28% 72%,
+            #f7bdd2 0 17%,
+            transparent 18%
+        ),
+
+        #fff;
+
+    box-shadow:
+        0 8px 24px
+        rgba(60,80,60,.16);
+
+    animation:
+        centerBloom 4s ease-in-out infinite;
+}
+
+.co-center .icon::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:17px;
+    height:17px;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:#fff1a6;
+
+    box-shadow:
+        0 0 0 5px
+        rgba(255,241,166,.28);
+}
+
+@keyframes centerBloom{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.05);
+    }
 }
 
 .co-center .name{
 
-    margin-top:6px;
+    margin-top:8px;
 
     padding:7px 14px;
 
@@ -1181,7 +2350,6 @@ body{
         #dce7d7;
 
     font-size:11px;
-
     font-weight:800;
 }
 
@@ -1245,16 +2413,6 @@ body{
 
 
 /* =========================================================
-   TOP AUTHOR CHART
-========================================================= */
-
-.author-plot{
-
-    height:500px;
-}
-
-
-/* =========================================================
    FOOTER
 ========================================================= */
 
@@ -1277,84 +2435,255 @@ footer{
 @media(max-width:1000px){
 
     .kpis{
-
         grid-template-columns:
             repeat(2,1fr);
     }
 
     .grid{
-
         grid-template-columns:1fr;
     }
 
     .feature-field{
-
         height:850px;
     }
+
+    .research-field{
+        min-height:540px;
+    }
+
 }
 
+@media(max-width:700px){
+
+    .research-row{
+
+        grid-template-columns:
+            30px
+            minmax(115px,135px)
+            1fr
+            70px;
+
+        gap:8px;
+
+        padding:7px 8px;
+    }
+
+    .research-row-icon{
+
+        left:36px;
+
+        width:27px;
+        height:27px;
+
+        font-size:14px;
+    }
+
+    .research-row-name{
+
+        padding-left:30px;
+
+        font-size:9px;
+    }
+
+    .research-row-count{
+
+        font-size:8px;
+    }
+
+    .research-row-count strong{
+
+        font-size:10px;
+    }
+
+    .research-percent{
+
+        display:none;
+    }
+
+    .research-legend{
+
+        display:none;
+    }
+
+}
 
 @media(max-width:650px){
 
     .container{
-
         padding:12px;
     }
 
     .kpis{
-
         grid-template-columns:1fr;
     }
 
-    .feature-field{
+    .research-field{
 
+        min-height:650px;
+
+        padding:
+            15px 12px 78px;
+    }
+
+    .research-intro{
+
+        margin-bottom:12px;
+    }
+
+    .research-intro-sub{
+
+        font-size:9px;
+    }
+
+    .research-row{
+
+        grid-template-columns:
+            27px
+            minmax(100px,115px)
+            1fr
+            58px;
+
+        gap:6px;
+
+        min-height:45px;
+    }
+
+    .research-row-icon{
+
+        left:32px;
+
+        width:25px;
+        height:25px;
+
+        font-size:13px;
+    }
+
+    .research-row-name{
+
+        padding-left:28px;
+
+        font-size:8px;
+    }
+
+    .research-row-count{
+
+        font-size:7px;
+    }
+
+    .research-row-count strong{
+
+        font-size:9px;
+    }
+
+    .research-rank{
+
+        width:23px;
+        height:23px;
+
+        font-size:8px;
+    }
+
+    .research-detail{
+
+        bottom:10px;
+
+        width:
+            calc(100% - 24px);
+
+        padding:9px 12px;
+    }
+
+    .feature-field{
         height:1000px;
     }
 
     .feature-group.ai{
-
         width:350px;
         height:280px;
-
         left:2%;
     }
 
     .feature-group.vision{
-
         width:350px;
         height:280px;
-
         right:2%;
         top:37%;
     }
 
     .feature-group.data{
-
         width:320px;
         height:220px;
-
         left:3%;
         bottom:4%;
     }
 
     .feature-group.tech{
-
         width:320px;
         height:220px;
-
         right:3%;
         bottom:4%;
     }
 
     .feature-center{
-
         top:34%;
     }
 
     .co-field{
-
         height:900px;
     }
+
+    .plot{
+        height:430px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE VERY SMALL
+========================================================= */
+
+@media(max-width:480px){
+
+    .research-row{
+
+        grid-template-columns:
+            25px
+            100px
+            1fr
+            52px;
+    }
+
+    .research-row-icon{
+
+        left:29px;
+    }
+
+    .research-row-name{
+
+        padding-left:27px;
+    }
+
+    .research-bar-bg{
+
+        height:7px;
+    }
+
+    .research-detail-title{
+
+        font-size:10px;
+    }
+
+    .research-detail-count{
+
+        font-size:9px;
+    }
+
+    .research-detail-percent{
+
+        font-size:8px;
+    }
+
 }
 
 </style>
@@ -1386,7 +2715,6 @@ footer{
         🌼
     </div>
 
-
     <div class="header-inner">
 
         <h1>
@@ -1401,7 +2729,6 @@ footer{
     </div>
 
 </header>
-
 
 
 <main class="container">
@@ -1483,7 +2810,6 @@ footer{
 </section>
 
 
-
 <!-- =========================================================
      DASHBOARD
 ========================================================= -->
@@ -1521,10 +2847,8 @@ footer{
 </div>
 
 
-
 <!-- =========================================================
      TOP AUTHORS
-     REPLACED PUBLICATIONS BY YEAR
 ========================================================= -->
 
 <div class="card">
@@ -1547,15 +2871,44 @@ footer{
 
     <div
         id="authors"
-        class="author-plot">
+        class="plot">
     </div>
 
 </div>
 
 
+<!-- =========================================================
+     PUBLICATIONS BY YEAR
+========================================================= -->
+
+<div class="card">
+
+    <div class="card-head">
+
+        <div class="card-title">
+            📈 Publications by Year
+        </div>
+
+        <div class="card-sub">
+            Research publication trend
+        </div>
+
+        <div class="card-flower">
+            🌼
+        </div>
+
+    </div>
+
+    <div
+        id="years"
+        class="plot">
+    </div>
+
+</div>
+
 
 <!-- =========================================================
-     RESEARCH AREAS
+     RESEARCH AREAS — NEW SIMPLE VERSION
 ========================================================= -->
 
 <div class="card">
@@ -1567,7 +2920,7 @@ footer{
         </div>
 
         <div class="card-sub">
-            Distribution of research subject areas
+            Research subjects ranked by number of articles
         </div>
 
         <div class="card-flower">
@@ -1576,13 +2929,94 @@ footer{
 
     </div>
 
+
     <div
         id="subjects"
-        class="plot">
+        class="research-field"
+    >
+
+        <!-- INTRO -->
+
+        <div class="research-intro">
+
+            <div class="research-intro-icon">
+                🌱
+            </div>
+
+            <div class="research-intro-text">
+
+                <div class="research-intro-title">
+                    What research areas are most prominent?
+                </div>
+
+                <div class="research-intro-sub">
+                    Longer bars = more articles · Click an area to see details
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- LEGEND -->
+
+        <div class="research-legend">
+
+            📊 Bar length = article count<br>
+            🔢 Rank = research position<br>
+            ✨ Click = highlight area
+
+        </div>
+
+
+        <!-- RESEARCH LIST -->
+
+        <div
+            id="researchList"
+            class="research-list">
+        </div>
+
+
+        <!-- DETAIL -->
+
+        <div
+            id="researchDetail"
+            class="research-detail"
+        >
+
+            <div
+                id="researchDetailIcon"
+                class="research-detail-icon">
+                🌸
+            </div>
+
+            <div class="research-detail-info">
+
+                <div
+                    id="researchDetailTitle"
+                    class="research-detail-title">
+                    Computer Science
+                </div>
+
+                <div
+                    id="researchDetailCount"
+                    class="research-detail-count">
+                    2,400 Articles
+                </div>
+
+                <div
+                    id="researchDetailPercent"
+                    class="research-detail-percent">
+                    42.1% of all research-area articles
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
 </div>
-
 
 
 <!-- =========================================================
@@ -1613,17 +3047,12 @@ footer{
         id="coField"
     >
 
-
-        <!-- SOFT COMMUNITIES -->
-
         <div class="co-community ai"></div>
 
         <div class="co-community vision"></div>
 
         <div class="co-community data"></div>
 
-
-        <!-- GROUP TITLES -->
 
         <div class="co-group-title ai">
             🌸 AI & Machine Learning
@@ -1638,15 +3067,11 @@ footer{
         </div>
 
 
-        <!-- NETWORK -->
-
         <svg
             id="coSvg"
             class="co-svg">
         </svg>
 
-
-        <!-- BUTTERFLIES -->
 
         <div class="butterfly b1">
             🦋
@@ -1665,313 +3090,13 @@ footer{
         </div>
 
 
-        <!-- CENTRAL KEYWORD -->
-
         <div class="co-center">
 
-            <div class="icon">
-                🌹
-            </div>
+            <div class="icon"></div>
 
             <div class="name">
                 Artificial Intelligence
             </div>
-
-        </div>
-
-
-        <!-- AI -->
-
-        <div
-            class="co-flower"
-            data-x="13"
-            data-y="39"
-            data-count="760"
-        >
-
-            <div
-                class="icon"
-                style="font-size:42px"
-            >
-                🌸
-            </div>
-
-            <div class="name">
-                Deep Learning
-            </div>
-
-            <div class="count">
-                760
-            </div>
-
-        </div>
-
-
-        <div
-            class="co-flower"
-            data-x="25"
-            data-y="30"
-            data-count="970"
-        >
-
-            <div
-                class="icon"
-                style="font-size:45px"
-            >
-                🌷
-            </div>
-
-            <div class="name">
-                Machine Learning
-            </div>
-
-            <div class="count">
-                970
-            </div>
-
-        </div>
-
-
-        <div
-            class="co-flower"
-            data-x="34"
-            data-y="43"
-            data-count="460"
-        >
-
-            <div
-                class="icon"
-                style="font-size:34px"
-            >
-                🌼
-            </div>
-
-            <div class="name">
-                Neural Networks
-            </div>
-
-            <div class="count">
-                460
-            </div>
-
-        </div>
-
-
-        <div
-            class="co-flower"
-            data-x="21"
-            data-y="56"
-            data-count="350"
-        >
-
-            <div
-                class="icon"
-                style="font-size:31px"
-            >
-                🌺
-            </div>
-
-            <div class="name">
-                Classification
-            </div>
-
-            <div class="count">
-                350
-            </div>
-
-        </div>
-
-
-        <!-- VISION -->
-
-        <div
-            class="co-flower"
-            data-x="65"
-            data-y="31"
-            data-count="520"
-        >
-
-            <div
-                class="icon"
-                style="font-size:43px"
-            >
-                🌼
-            </div>
-
-            <div class="name">
-                Computer Vision
-            </div>
-
-            <div class="count">
-                520
-            </div>
-
-        </div>
-
-
-        <div
-            class="co-flower"
-            data-x="83"
-            data-y="35"
-            data-count="150"
-        >
-
-            <div
-                class="icon"
-                style="font-size:33px"
-            >
-                🌷
-            </div>
-
-            <div class="name">
-                Image Processing
-            </div>
-
-            <div class="count">
-                150
-            </div>
-
-        </div>
-
-
-        <div
-            class="co-flower"
-            data-x="67"
-            data-y="56"
-            data-count="285"
-        >
-
-            <div
-                class="icon"
-                style="font-size:34px"
-            >
-                🌸
-            </div>
-
-            <div class="name">
-                NLP
-            </div>
-
-            <div class="count">
-                285
-            </div>
-
-        </div>
-
-
-        <div
-            class="co-flower"
-            data-x="83"
-            data-y="56"
-            data-count="120"
-        >
-
-            <div
-                class="icon"
-                style="font-size:30px"
-            >
-                🌺
-            </div>
-
-            <div class="name">
-                Large Language Models
-            </div>
-
-            <div class="count">
-                120
-            </div>
-
-        </div>
-
-
-        <!-- DATA -->
-
-        <div
-            class="co-flower"
-            data-x="36"
-            data-y="79"
-            data-count="260"
-        >
-
-            <div
-                class="icon"
-                style="font-size:35px"
-            >
-                🌻
-            </div>
-
-            <div class="name">
-                Big Data
-            </div>
-
-            <div class="count">
-                260
-            </div>
-
-        </div>
-
-
-        <div
-            class="co-flower"
-            data-x="49"
-            data-y="86"
-            data-count="240"
-        >
-
-            <div
-                class="icon"
-                style="font-size:31px"
-            >
-                🌼
-            </div>
-
-            <div class="name">
-                Data Mining
-            </div>
-
-            <div class="count">
-                240
-            </div>
-
-        </div>
-
-
-        <div
-            class="co-flower"
-            data-x="63"
-            data-y="79"
-            data-count="220"
-        >
-
-            <div
-                class="icon"
-                style="font-size:30px"
-            >
-                🌷
-            </div>
-
-            <div class="name">
-                Cloud Computing
-            </div>
-
-            <div class="count">
-                220
-            </div>
-
-        </div>
-
-
-        <!-- LEGEND -->
-
-        <div class="co-legend">
-
-            🌺 = Main research theme<br>
-            🌸 = AI & Machine Learning<br>
-            🌼 = Vision & Language<br>
-            🌻 = Data & Computing<br>
-            🌿 Lines = Keyword co-occurrence<br>
-            📏 Flower size = Keyword frequency<br>
-            🦋 = Decoration
 
         </div>
 
@@ -2011,7 +3136,6 @@ footer{
 </div>
 
 
-
 <!-- =========================================================
      FEATURE VECTOR GARDEN
 ========================================================= -->
@@ -2040,9 +3164,6 @@ footer{
         id="featureField"
     >
 
-
-        <!-- SOFT GROUP BACKGROUNDS -->
-
         <div class="feature-group ai"></div>
 
         <div class="feature-group vision"></div>
@@ -2051,8 +3172,6 @@ footer{
 
         <div class="feature-group tech"></div>
 
-
-        <!-- BUTTERFLIES -->
 
         <div class="butterfly b1">
             🦋
@@ -2075,8 +3194,6 @@ footer{
         </div>
 
 
-        <!-- GROUP TITLES -->
-
         <div class="group-title ai">
             🌸 AI & Machine Learning
         </div>
@@ -2094,15 +3211,11 @@ footer{
         </div>
 
 
-        <!-- CONNECTIONS -->
-
         <svg
             class="feature-svg"
             id="featureSvg">
         </svg>
 
-
-        <!-- CENTER -->
 
         <div class="feature-center">
 
@@ -2117,7 +3230,7 @@ footer{
         </div>
 
 
-        <!-- AI GROUP -->
+        <!-- AI -->
 
         <div
             class="feature-flower"
@@ -2127,9 +3240,7 @@ footer{
             <div
                 class="emoji"
                 style="font-size:47px"
-            >
-                🌸
-            </div>
+            >🌸</div>
 
             <div class="label">
                 Machine Learning
@@ -2150,9 +3261,7 @@ footer{
             <div
                 class="emoji"
                 style="font-size:60px"
-            >
-                🌹
-            </div>
+            >🌸</div>
 
             <div class="label">
                 Artificial Intelligence
@@ -2173,9 +3282,7 @@ footer{
             <div
                 class="emoji"
                 style="font-size:43px"
-            >
-                🌷
-            </div>
+            >🌸</div>
 
             <div class="label">
                 Deep Learning
@@ -2196,9 +3303,7 @@ footer{
             <div
                 class="emoji"
                 style="font-size:35px"
-            >
-                🌼
-            </div>
+            >🌸</div>
 
             <div class="label">
                 Neural Networks
@@ -2219,9 +3324,7 @@ footer{
             <div
                 class="emoji"
                 style="font-size:33px"
-            >
-                🌺
-            </div>
+            >🌸</div>
 
             <div class="label">
                 Classification
@@ -2234,7 +3337,7 @@ footer{
         </div>
 
 
-        <!-- VISION GROUP -->
+        <!-- VISION -->
 
         <div
             class="feature-flower"
@@ -2244,9 +3347,7 @@ footer{
             <div
                 class="emoji"
                 style="font-size:46px"
-            >
-                🌼
-            </div>
+            >🌼</div>
 
             <div class="label">
                 Computer Vision
@@ -2267,9 +3368,7 @@ footer{
             <div
                 class="emoji"
                 style="font-size:36px"
-            >
-                🌷
-            </div>
+            >🌼</div>
 
             <div class="label">
                 Image Processing
@@ -2290,9 +3389,7 @@ footer{
             <div
                 class="emoji"
                 style="font-size:36px"
-            >
-                🌸
-            </div>
+            >🌼</div>
 
             <div class="label">
                 Natural Language Processing
@@ -2313,9 +3410,7 @@ footer{
             <div
                 class="emoji"
                 style="font-size:31px"
-            >
-                🌺
-            </div>
+            >🌼</div>
 
             <div class="label">
                 Large Language Models
@@ -2336,9 +3431,7 @@ footer{
             <div
                 class="emoji"
                 style="font-size:31px"
-            >
-                🪻
-            </div>
+            >🌼</div>
 
             <div class="label">
                 Transformer
@@ -2351,7 +3444,7 @@ footer{
         </div>
 
 
-        <!-- DATA GROUP -->
+        <!-- DATA -->
 
         <div
             class="feature-flower"
@@ -2361,9 +3454,7 @@ footer{
             <div
                 class="emoji"
                 style="font-size:36px"
-            >
-                🌻
-            </div>
+            >🌻</div>
 
             <div class="label">
                 Big Data
@@ -2384,9 +3475,7 @@ footer{
             <div
                 class="emoji"
                 style="font-size:33px"
-            >
-                🌼
-            </div>
+            >🌻</div>
 
             <div class="label">
                 Data Mining
@@ -2407,9 +3496,7 @@ footer{
             <div
                 class="emoji"
                 style="font-size:34px"
-            >
-                🌷
-            </div>
+            >🌻</div>
 
             <div class="label">
                 Cloud Computing
@@ -2430,9 +3517,7 @@ footer{
             <div
                 class="emoji"
                 style="font-size:31px"
-            >
-                🌸
-            </div>
+            >🌻</div>
 
             <div class="label">
                 Algorithm
@@ -2445,7 +3530,7 @@ footer{
         </div>
 
 
-        <!-- EMERGING TECHNOLOGY -->
+        <!-- TECHNOLOGY -->
 
         <div
             class="feature-flower"
@@ -2455,9 +3540,7 @@ footer{
             <div
                 class="emoji"
                 style="font-size:36px"
-            >
-                🌷
-            </div>
+            >🌷</div>
 
             <div class="label">
                 Internet of Things
@@ -2478,9 +3561,7 @@ footer{
             <div
                 class="emoji"
                 style="font-size:34px"
-            >
-                🌻
-            </div>
+            >🌷</div>
 
             <div class="label">
                 Robotics
@@ -2501,9 +3582,7 @@ footer{
             <div
                 class="emoji"
                 style="font-size:31px"
-            >
-                🌺
-            </div>
+            >🌷</div>
 
             <div class="label">
                 Optimization
@@ -2516,26 +3595,17 @@ footer{
         </div>
 
 
-        <!-- LEGEND -->
-
         <div class="feature-legend">
 
             🌸 = AI & Machine Learning<br>
-
             🌼 = Vision & Language<br>
-
             🌻 = Data & Computing<br>
-
             🌷 = Emerging Technology<br>
-
             📏 Flower size = Keyword frequency<br>
-
             🌿 Lines = Keyword relationship<br>
-
             🦋 = Decoration
 
         </div>
-
 
     </div>
 
@@ -2550,7 +3620,8 @@ footer{
         Artificial Intelligence,
         Machine Learning,
         Deep Learning,
-        Neural Networks
+        Neural Networks,
+        Classification
 
         <br>
 
@@ -2560,7 +3631,8 @@ footer{
         Computer Vision,
         Image Processing,
         NLP,
-        Large Language Models
+        Large Language Models,
+        Transformer
 
         <br>
 
@@ -2569,7 +3641,8 @@ footer{
         —
         Big Data,
         Data Mining,
-        Cloud Computing
+        Cloud Computing,
+        Algorithm
 
         <br>
 
@@ -2590,7 +3663,6 @@ footer{
 </main>
 
 
-
 <footer>
 
     🌱🌸 AI Research Visualization
@@ -2598,7 +3670,6 @@ footer{
     · 🦋🌼
 
 </footer>
-
 
 
 <script>
@@ -2609,222 +3680,152 @@ footer{
 
 const TOP_KEYWORDS = [
 
-    {
-        keyword:"artificial intelligence",
-        count:1260
-    },
+    {keyword:"artificial intelligence",count:1260},
+    {keyword:"machine learning",count:970},
+    {keyword:"deep learning",count:760},
+    {keyword:"computer vision",count:520},
+    {keyword:"neural networks",count:460},
+    {keyword:"feature extraction",count:390},
+    {keyword:"classification",count:350},
+    {keyword:"internet of things",count:310},
+    {keyword:"natural language processing",count:285},
+    {keyword:"big data",count:260},
+    {keyword:"data mining",count:240},
+    {keyword:"cloud computing",count:220},
+    {keyword:"robotics",count:190},
+    {keyword:"optimization",count:180},
+    {keyword:"prediction",count:170},
+    {keyword:"computer science",count:160},
+    {keyword:"image processing",count:150},
+    {keyword:"algorithm",count:145},
+    {keyword:"transformer",count:130},
+    {keyword:"large language models",count:120}
 
-    {
-        keyword:"machine learning",
-        count:970
-    },
+];
 
-    {
-        keyword:"deep learning",
-        count:760
-    },
 
-    {
-        keyword:"computer vision",
-        count:520
-    },
+const TOP_AUTHORS = [
 
-    {
-        keyword:"neural networks",
-        count:460
-    },
+    {author:"Zhang, Y.",count:82},
+    {author:"Wang, J.",count:79},
+    {author:"Li, X.",count:75},
+    {author:"Liu, Y.",count:71},
+    {author:"Chen, H.",count:67},
+    {author:"Wang, Y.",count:64},
+    {author:"Zhang, L.",count:61},
+    {author:"Li, J.",count:58},
+    {author:"Chen, X.",count:55},
+    {author:"Liu, J.",count:52}
 
-    {
-        keyword:"feature extraction",
-        count:390
-    },
+];
 
-    {
-        keyword:"classification",
-        count:350
-    },
 
-    {
-        keyword:"internet of things",
-        count:310
-    },
+const YEARS = [
 
-    {
-        keyword:"natural language processing",
-        count:285
-    },
-
-    {
-        keyword:"big data",
-        count:260
-    },
-
-    {
-        keyword:"data mining",
-        count:240
-    },
-
-    {
-        keyword:"cloud computing",
-        count:220
-    },
-
-    {
-        keyword:"robotics",
-        count:190
-    },
-
-    {
-        keyword:"optimization",
-        count:180
-    },
-
-    {
-        keyword:"prediction",
-        count:170
-    },
-
-    {
-        keyword:"computer science",
-        count:160
-    },
-
-    {
-        keyword:"image processing",
-        count:150
-    },
-
-    {
-        keyword:"algorithm",
-        count:145
-    },
-
-    {
-        keyword:"transformer",
-        count:130
-    },
-
-    {
-        keyword:"large language models",
-        count:120
-    }
+    {year:2010,count:65},
+    {year:2011,count:82},
+    {year:2012,count:105},
+    {year:2013,count:128},
+    {year:2014,count:155},
+    {year:2015,count:185},
+    {year:2016,count:230},
+    {year:2017,count:285},
+    {year:2018,count:350},
+    {year:2019,count:430},
+    {year:2020,count:510},
+    {year:2021,count:620},
+    {year:2022,count:760},
+    {year:2023,count:910},
+    {year:2024,count:1020},
+    {year:2025,count:870}
 
 ];
 
 
 /* =========================================================
-   TOP AUTHORS
+   RESEARCH AREAS
 ========================================================= */
-
-const TOP_AUTHORS = [
-
-    {
-        author:"Zhang, Y.",
-        count:86
-    },
-
-    {
-        author:"Wang, Y.",
-        count:82
-    },
-
-    {
-        author:"Li, Y.",
-        count:76
-    },
-
-    {
-        author:"Chen, Y.",
-        count:71
-    },
-
-    {
-        author:"Wang, J.",
-        count:68
-    },
-
-    {
-        author:"Zhang, J.",
-        count:64
-    },
-
-    {
-        author:"Liu, Y.",
-        count:61
-    },
-
-    {
-        author:"Li, J.",
-        count:58
-    },
-
-    {
-        author:"Chen, J.",
-        count:55
-    },
-
-    {
-        author:"Liu, J.",
-        count:52
-    }
-
-];
-
-
-/*
-    Research Areas
-*/
 
 const RESEARCH_AREAS = [
 
     {
         subject:"Computer Science",
-        count:2400
+        count:2400,
+        icon:"💻",
+        color:"#a9d58f",
+        light:"#e8f7df"
     },
 
     {
         subject:"Engineering",
-        count:1050
+        count:1050,
+        icon:"⚙️",
+        color:"#9fc1df",
+        light:"#e3f0fb"
     },
 
     {
         subject:"Mathematics",
-        count:620
+        count:620,
+        icon:"📐",
+        color:"#e7c76e",
+        light:"#fff4d5"
     },
 
     {
         subject:"Decision Sciences",
-        count:430
+        count:430,
+        icon:"🧠",
+        color:"#dfa0a0",
+        light:"#fde5e5"
     },
 
     {
         subject:"Physics",
-        count:300
+        count:300,
+        icon:"⚛️",
+        color:"#bea4dc",
+        light:"#eee5fa"
     },
 
     {
         subject:"Materials Science",
-        count:250
+        count:250,
+        icon:"🧪",
+        color:"#dda9c1",
+        light:"#f8e2ee"
     },
 
     {
         subject:"Medicine",
-        count:210
+        count:210,
+        icon:"🩺",
+        color:"#91c8b5",
+        light:"#def3ec"
     },
 
     {
         subject:"Business",
-        count:180
+        count:180,
+        icon:"💼",
+        color:"#d9b383",
+        light:"#f9e9d8"
     },
 
     {
         subject:"Social Sciences",
-        count:150
+        count:150,
+        icon:"👥",
+        color:"#aab8cd",
+        light:"#e8edf5"
     },
 
     {
         subject:"Others",
-        count:113
+        count:113,
+        icon:"🌱",
+        color:"#9dc49a",
+        light:"#e3f1df"
     }
 
 ];
@@ -2868,9 +3869,7 @@ function baseLayout(){
 (function(){
 
     const data =
-        [...TOP_KEYWORDS]
-        .reverse();
-
+        [...TOP_KEYWORDS].reverse();
 
     Plotly.newPlot(
 
@@ -2931,9 +3930,7 @@ function baseLayout(){
 
             xaxis:{
                 title:"Articles",
-
-                gridcolor:
-                    "#f3e7ed"
+                gridcolor:"#f3e7ed"
             },
 
             yaxis:{
@@ -2947,11 +3944,8 @@ function baseLayout(){
         },
 
         {
-
             responsive:true,
-
             displaylogo:false
-
         }
 
     );
@@ -2966,9 +3960,7 @@ function baseLayout(){
 (function(){
 
     const data =
-        [...TOP_AUTHORS]
-        .reverse();
-
+        [...TOP_AUTHORS].reverse();
 
     Plotly.newPlot(
 
@@ -2990,15 +3982,24 @@ function baseLayout(){
                     x=>x.count
                 ),
 
+            text:
+                data.map(
+                    x=>x.count
+                ),
+
+            textposition:"outside",
+
+            cliponaxis:false,
+
             marker:{
 
                 color:
                     data.map(
                         (x,i)=>
                             `hsl(
-                                ${100+i*4},
-                                35%,
-                                ${70-i*1.2}%
+                                ${125+i*2},
+                                ${42+i*1.5}%,
+                                ${62+i*2}%
                             )`
                     ),
 
@@ -3008,15 +4009,6 @@ function baseLayout(){
                 }
 
             },
-
-            text:
-                data.map(
-                    x=>x.count
-                ),
-
-            textposition:"outside",
-
-            cliponaxis:false,
 
             hovertemplate:
                 "<b>%{y}</b><br>"+
@@ -3030,29 +4022,22 @@ function baseLayout(){
             ...baseLayout(),
 
             margin:{
-                l:110,
-                r:55,
+                l:90,
+                r:50,
                 t:20,
                 b:50
             },
 
             xaxis:{
-
                 title:"Publications",
-
-                gridcolor:
-                    "#edf2eb",
-
+                gridcolor:"#e5eee2",
                 zeroline:false
-
             },
 
             yaxis:{
-
                 tickfont:{
-                    size:11
+                    size:10
                 }
-
             },
 
             showlegend:false
@@ -3060,11 +4045,8 @@ function baseLayout(){
         },
 
         {
-
             responsive:true,
-
             displaylogo:false
-
         }
 
     );
@@ -3073,61 +4055,58 @@ function baseLayout(){
 
 
 /* =========================================================
-   RESEARCH AREAS
+   PUBLICATIONS BY YEAR
 ========================================================= */
 
 (function(){
 
     Plotly.newPlot(
 
-        "subjects",
+        "years",
 
         [{
 
-            type:"pie",
+            type:"scatter",
 
-            labels:
-                RESEARCH_AREAS.map(
-                    x=>x.subject
+            mode:
+                "lines+markers",
+
+            x:
+                YEARS.map(
+                    x=>x.year
                 ),
 
-            values:
-                RESEARCH_AREAS.map(
+            y:
+                YEARS.map(
                     x=>x.count
                 ),
 
-            hole:.52,
+            line:{
 
-            textinfo:"percent",
+                width:3,
 
-            marker:{
+                color:"#719873",
 
-                line:{
-                    color:"#fff",
-                    width:2
-                },
-
-                colors:[
-
-                    "#82a982",
-                    "#9db9d6",
-                    "#e6bd65",
-                    "#d99b9b",
-                    "#a9c79f",
-                    "#bba5d8",
-                    "#e3a9c5",
-                    "#8fc4b0",
-                    "#c9b38c",
-                    "#9aa9b9"
-
-                ]
+                shape:"spline"
 
             },
 
+            marker:{
+
+                size:7,
+
+                color:"#719873"
+
+            },
+
+            fill:"tozeroy",
+
+            fillcolor:
+                "rgba(113,152,115,.15)",
+
             hovertemplate:
-                "<b>%{label}</b><br>"+
-                "Articles: %{value}<br>"+
-                "%{percent}"+
+                "Year: %{x}<br>"+
+                "Articles: %{y}"+
                 "<extra></extra>"
 
         }],
@@ -3136,23 +4115,319 @@ function baseLayout(){
 
             ...baseLayout(),
 
-            margin:{
-                l:20,
-                r:20,
-                t:20,
-                b:20
+            xaxis:{
+                title:"Year",
+                dtick:1,
+                gridcolor:"#edf2eb"
+            },
+
+            yaxis:{
+                title:"Articles",
+                gridcolor:"#edf2eb"
             }
 
         },
 
         {
-
             responsive:true,
-
             displaylogo:false
-
         }
 
+    );
+
+})();
+
+
+/* =========================================================
+   RESEARCH AREAS — SIMPLE LIST
+========================================================= */
+
+(function(){
+
+    const list =
+        document.getElementById(
+            "researchList"
+        );
+
+    const detail =
+        document.getElementById(
+            "researchDetail"
+        );
+
+    const detailIcon =
+        document.getElementById(
+            "researchDetailIcon"
+        );
+
+    const detailTitle =
+        document.getElementById(
+            "researchDetailTitle"
+        );
+
+    const detailCount =
+        document.getElementById(
+            "researchDetailCount"
+        );
+
+    const detailPercent =
+        document.getElementById(
+            "researchDetailPercent"
+        );
+
+
+    /*
+       เรียงจากมาก → น้อย
+    */
+
+    const areas =
+        [...RESEARCH_AREAS].sort(
+            (a,b)=>
+                b.count-a.count
+        );
+
+
+    /*
+       จำนวนบทความรวมของทุก Research Area
+    */
+
+    const total =
+        areas.reduce(
+            (sum,item)=>
+                sum+item.count,
+            0
+        );
+
+
+    /*
+       ค่าสูงสุด
+       ใช้คำนวณความยาว bar
+    */
+
+    const max =
+        Math.max(
+            ...areas.map(
+                item=>item.count
+            )
+        );
+
+
+    areas.forEach(
+        (item,index)=>{
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+            row.className =
+                "research-row";
+
+
+            /*
+               เปอร์เซ็นต์
+            */
+
+            const percent =
+                (
+                    item.count /
+                    total *
+                    100
+                ).toFixed(1);
+
+
+            /*
+               ความยาว bar
+               ใช้ sqrt เพื่อไม่ให้
+               Computer Science ยาวเกินไป
+            */
+
+            const barWidth =
+                Math.sqrt(
+                    item.count/max
+                )*100;
+
+
+            row.style.setProperty(
+                "--bar-width",
+                barWidth+"%"
+            );
+
+            row.style.setProperty(
+                "--research-color",
+                item.color
+            );
+
+            row.style.setProperty(
+                "--research-light",
+                item.light
+            );
+
+
+            row.innerHTML = `
+
+                <div class="research-rank">
+                    ${index+1}
+                </div>
+
+                <div
+                    class="research-row-icon"
+                    title="${item.subject}"
+                >
+                    ${item.icon}
+                </div>
+
+                <div class="research-row-name">
+                    ${item.subject}
+                </div>
+
+                <div class="research-bar-area">
+
+                    <div class="research-bar-bg">
+
+                        <div
+                            class="research-bar">
+                        </div>
+
+                    </div>
+
+                    <div class="research-percent">
+                        ${percent}%
+                    </div>
+
+                </div>
+
+                <div class="research-row-count">
+
+                    <strong>
+                        ${item.count.toLocaleString()}
+                    </strong>
+
+                    <br>
+
+                    articles
+
+                </div>
+
+            `;
+
+
+            /*
+               CLICK
+            */
+
+            row.addEventListener(
+                "click",
+                function(event){
+
+                    event.stopPropagation();
+
+
+                    /*
+                       เอา selected
+                       ออกจาก row อื่น
+                    */
+
+                    list
+                        .querySelectorAll(
+                            ".research-row"
+                        )
+                        .forEach(
+                            other=>{
+
+                                other.classList.remove(
+                                    "selected"
+                                );
+
+                            }
+                        );
+
+
+                    /*
+                       เลือก row นี้
+                    */
+
+                    row.classList.add(
+                        "selected"
+                    );
+
+
+                    /*
+                       แสดงรายละเอียด
+                    */
+
+                    detailIcon.textContent =
+                        item.icon;
+
+                    detailTitle.textContent =
+                        item.subject;
+
+                    detailCount.textContent =
+                        item.count.toLocaleString()+
+                        " Articles";
+
+                    detailPercent.textContent =
+                        percent+
+                        "% of all research-area articles";
+
+
+                    detail.classList.add(
+                        "show"
+                    );
+
+                }
+            );
+
+
+            list.appendChild(
+                row
+            );
+
+        }
+    );
+
+
+    /*
+       คลิกพื้นที่ว่าง
+       → ปิด selection
+    */
+
+    document
+        .getElementById("subjects")
+        .addEventListener(
+            "click",
+            function(){
+
+                list
+                    .querySelectorAll(
+                        ".research-row"
+                    )
+                    .forEach(
+                        row =>
+                            row.classList.remove(
+                                "selected"
+                            )
+                    );
+
+                detail.classList.remove(
+                    "show"
+                );
+
+            }
+        );
+
+
+    /*
+       ไม่ให้คลิก detail
+       แล้วปิดตัวเอง
+    */
+
+    detail.addEventListener(
+        "click",
+        function(event){
+
+            event.stopPropagation();
+
+        }
     );
 
 })();
@@ -3178,113 +4453,91 @@ function baseLayout(){
     const flowers = [
 
         {
-            keyword:
-                "Deep Learning",
-
+            keyword:"Deep Learning",
             count:760,
-
             x:13,
-            y:39
+            y:39,
+            icon:"🌸"
         },
 
         {
-            keyword:
-                "Machine Learning",
-
+            keyword:"Machine Learning",
             count:970,
-
             x:25,
-            y:30
+            y:30,
+            icon:"🌷"
         },
 
         {
-            keyword:
-                "Neural Networks",
-
+            keyword:"Neural Networks",
             count:460,
-
             x:34,
-            y:43
+            y:43,
+            icon:"🌼"
         },
 
         {
-            keyword:
-                "Classification",
-
+            keyword:"Classification",
             count:350,
-
             x:21,
-            y:56
+            y:56,
+            icon:"🌺"
         },
 
         {
-            keyword:
-                "Computer Vision",
-
+            keyword:"Computer Vision",
             count:520,
-
             x:65,
-            y:31
+            y:31,
+            icon:"🌻"
         },
 
         {
-            keyword:
-                "Image Processing",
-
+            keyword:"Image Processing",
             count:150,
-
             x:83,
-            y:35
+            y:35,
+            icon:"🪻"
         },
 
         {
-            keyword:
-                "Natural Language Processing",
-
+            keyword:"Natural Language Processing",
             count:285,
-
             x:67,
-            y:56
+            y:56,
+            icon:"🪷"
         },
 
         {
-            keyword:
-                "Large Language Models",
-
+            keyword:"Large Language Models",
             count:120,
-
             x:83,
-            y:56
+            y:56,
+            icon:"🏵️"
         },
 
         {
-            keyword:
-                "Big Data",
-
+            keyword:"Big Data",
             count:260,
-
             x:36,
-            y:79
+            y:79,
+            icon:"🌹"
         },
 
         {
-            keyword:
-                "Data Mining",
-
+            keyword:"Data Mining",
             count:240,
-
             x:49,
-            y:86
+            y:86,
+            icon:"💮"
         },
 
         {
-            keyword:
-                "Cloud Computing",
-
+            keyword:"Cloud Computing",
             count:220,
-
             x:63,
-            y:79
+            y:79,
+            icon:"🌾"
         }
 
     ];
@@ -3292,8 +4545,7 @@ function baseLayout(){
 
     const center = {
 
-        keyword:
-            "Artificial Intelligence",
+        keyword:"Artificial Intelligence",
 
         x:50,
         y:48
@@ -3304,29 +4556,19 @@ function baseLayout(){
     const connections = [
 
         ["Artificial Intelligence","Machine Learning",3],
-
         ["Artificial Intelligence","Deep Learning",3],
-
         ["Artificial Intelligence","Neural Networks",2],
-
         ["Artificial Intelligence","Classification",2],
-
         ["Artificial Intelligence","Computer Vision",2],
-
         ["Artificial Intelligence","Natural Language Processing",2],
-
         ["Artificial Intelligence","Big Data",2],
 
         ["Machine Learning","Deep Learning",3],
-
         ["Machine Learning","Neural Networks",2],
-
         ["Machine Learning","Classification",2],
 
         ["Deep Learning","Neural Networks",3],
-
         ["Deep Learning","Computer Vision",2],
-
         ["Deep Learning","Natural Language Processing",2],
 
         ["Computer Vision","Image Processing",3],
@@ -3334,9 +4576,7 @@ function baseLayout(){
         ["Natural Language Processing","Large Language Models",3],
 
         ["Big Data","Data Mining",3],
-
         ["Big Data","Cloud Computing",2],
-
         ["Data Mining","Cloud Computing",2]
 
     ];
@@ -3381,17 +4621,6 @@ function baseLayout(){
                 ratio*38;
 
 
-            const icons = [
-
-                "🌸",
-                "🌼",
-                "🌷",
-                "🌺",
-                "🌻"
-
-            ];
-
-
             const icon =
                 document.createElement(
                     "div"
@@ -3404,12 +4633,7 @@ function baseLayout(){
                 size+"px";
 
             icon.textContent =
-                icons[
-                    Math.floor(
-                        Math.random() *
-                        icons.length
-                    )
-                ];
+                item.icon;
 
 
             const name =
@@ -3436,9 +4660,17 @@ function baseLayout(){
                 item.count.toLocaleString();
 
 
-            flower.appendChild(icon);
-            flower.appendChild(name);
-            flower.appendChild(count);
+            flower.appendChild(
+                icon
+            );
+
+            flower.appendChild(
+                name
+            );
+
+            flower.appendChild(
+                count
+            );
 
 
             flower.title =
@@ -3447,9 +4679,68 @@ function baseLayout(){
                 item.count;
 
 
+            flower.addEventListener(
+                "click",
+                function(event){
+
+                    event.stopPropagation();
+
+
+                    field
+                        .querySelectorAll(
+                            ".co-flower"
+                        )
+                        .forEach(
+                            other=>{
+
+                                other.classList.remove(
+                                    "selected"
+                                );
+
+                            }
+                        );
+
+
+                    flower.classList.remove(
+                        "selected"
+                    );
+
+                    void flower.offsetWidth;
+
+
+                    flower.classList.add(
+                        "selected"
+                    );
+
+                }
+            );
+
+
             field.appendChild(
                 flower
             );
+
+        }
+    );
+
+
+    field.addEventListener(
+        "click",
+        function(){
+
+            field
+                .querySelectorAll(
+                    ".co-flower"
+                )
+                .forEach(
+                    flower=>{
+
+                        flower.classList.remove(
+                            "selected"
+                        );
+
+                    }
+                );
 
         }
     );
@@ -3480,10 +4771,8 @@ function baseLayout(){
         const rect =
             field.getBoundingClientRect();
 
-
         const width =
             rect.width;
-
 
         const height =
             rect.height;
@@ -3493,7 +4782,6 @@ function baseLayout(){
             "viewBox",
             `0 0 ${width} ${height}`
         );
-
 
         svg.innerHTML="";
 
@@ -3510,6 +4798,7 @@ function baseLayout(){
                     getFlower(
                         connection[1]
                     );
+
 
                 if(
                     !from ||
@@ -3530,18 +4819,15 @@ function baseLayout(){
                     100 *
                     width;
 
-
                 const y1 =
                     from.y /
                     100 *
                     height;
 
-
                 const x2 =
                     to.x /
                     100 *
                     width;
-
 
                 const y2 =
                     to.y /
@@ -3552,14 +4838,12 @@ function baseLayout(){
                 const midX =
                     (x1+x2)/2;
 
-
                 const midY =
                     (y1+y2)/2;
 
 
                 const dx =
                     x2-x1;
-
 
                 const dy =
                     y2-y1;
@@ -3582,7 +4866,6 @@ function baseLayout(){
                 let controlX =
                     midX;
 
-
                 let controlY =
                     midY;
 
@@ -3595,7 +4878,6 @@ function baseLayout(){
                         midX -
                         dy/distance*
                         curve;
-
 
                     controlY =
                         midY +
@@ -3699,58 +4981,109 @@ function baseLayout(){
 
         {
             group:"ai",
-
             points:[
-
                 [15,38],
                 [29,35],
                 [42,39],
                 [22,53],
                 [36,55]
-
             ]
         },
 
         {
             group:"vision",
-
             points:[
-
                 [61,36],
                 [75,35],
                 [69,52],
                 [83,51],
                 [80,64]
-
             ]
         },
 
         {
             group:"data",
-
             points:[
-
                 [19,78],
                 [32,82],
                 [43,75],
                 [29,69]
-
             ]
         },
 
         {
             group:"tech",
-
             points:[
-
                 [61,78],
                 [73,81],
                 [84,76]
-
             ]
         }
 
     ];
+
+
+    const featureFlowers =
+        field.querySelectorAll(
+            ".feature-flower"
+        );
+
+
+    featureFlowers.forEach(
+        flower=>{
+
+            flower.addEventListener(
+                "click",
+                function(event){
+
+                    event.stopPropagation();
+
+
+                    featureFlowers.forEach(
+                        other=>{
+
+                            other.classList.remove(
+                                "selected"
+                            );
+
+                        }
+                    );
+
+
+                    flower.classList.remove(
+                        "selected"
+                    );
+
+                    void flower.offsetWidth;
+
+
+                    flower.classList.add(
+                        "selected"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    field.addEventListener(
+        "click",
+        function(){
+
+            featureFlowers.forEach(
+                flower=>{
+
+                    flower.classList.remove(
+                        "selected"
+                    );
+
+                }
+            );
+
+        }
+    );
 
 
     function draw(){
@@ -3758,10 +5091,8 @@ function baseLayout(){
         const rect =
             field.getBoundingClientRect();
 
-
         const width =
             rect.width;
-
 
         const height =
             rect.height;
@@ -3771,7 +5102,6 @@ function baseLayout(){
             "viewBox",
             `0 0 ${width} ${height}`
         );
-
 
         svg.innerHTML="";
 
@@ -3807,18 +5137,15 @@ function baseLayout(){
                         a[0]/100*width
                     );
 
-
                     line.setAttribute(
                         "y1",
                         a[1]/100*height
                     );
 
-
                     line.setAttribute(
                         "x2",
                         b[0]/100*width
                     );
-
 
                     line.setAttribute(
                         "y2",
