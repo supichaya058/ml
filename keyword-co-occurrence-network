@@ -1,0 +1,232 @@
+# ============================================================
+# TEXT FEATURE VECTOR SPACE
+# SPECTER2 Embedding → PCA → Interactive HTML
+# ============================================================
+
+import pandas as pd
+import plotly.express as px
+from google.colab import files
+
+# ============================================================
+# 1. UPLOAD FILE
+# ============================================================
+
+print("📂 กรุณาเลือกไฟล์ที่มี PC1 และ PC2")
+uploaded = files.upload()
+
+filename = list(uploaded.keys())[0]
+
+df = pd.read_csv(filename)
+
+print("\n======================================")
+print("โหลดข้อมูลสำเร็จ")
+print("======================================")
+print("ไฟล์:", filename)
+print("จำนวนข้อมูล:", len(df))
+print("Columns:")
+print(df.columns.tolist())
+
+
+# ============================================================
+# 2. ตรวจสอบ Column
+# ============================================================
+
+required_columns = [
+    "PC1",
+    "PC2",
+    "Subject",
+    "Title"
+]
+
+missing_columns = [
+    col
+    for col in required_columns
+    if col not in df.columns
+]
+
+if len(missing_columns) > 0:
+
+    print("\n❌ ไม่พบ Column:")
+    print(missing_columns)
+
+    print("\nColumn ที่มีอยู่:")
+    print(df.columns.tolist())
+
+    raise ValueError(
+        "ไฟล์นี้ยังไม่มี Column ที่จำเป็นสำหรับ Visualization"
+    )
+
+
+# ============================================================
+# 3. Text Feature Vector Space
+# ============================================================
+
+fig = px.scatter(
+
+    df,
+
+    x="PC1",
+
+    y="PC2",
+
+    color="Subject",
+
+    hover_data=[
+        "Title"
+    ],
+
+    title=(
+        "<b>Text Feature Vector Space</b>"
+        "<br>"
+        "<span style='font-size:13px'>"
+        "SPECTER2 Text Embedding Visualized using PCA"
+        "</span>"
+    ),
+
+    labels={
+
+        "PC1":
+            "Principal Component 1",
+
+        "PC2":
+            "Principal Component 2",
+
+        "Subject":
+            "Subject"
+
+    }
+
+)
+
+
+# ============================================================
+# 4. จุดบนกราฟ
+# ============================================================
+
+fig.update_traces(
+
+    marker=dict(
+
+        size=7,
+
+        opacity=0.75,
+
+        line=dict(
+            width=0.5
+        )
+
+    )
+
+)
+
+
+# ============================================================
+# 5. Layout
+# ============================================================
+
+fig.update_layout(
+
+    template="plotly_white",
+
+    height=800,
+
+    title=dict(
+
+        x=0.5,
+
+        xanchor="center"
+
+    ),
+
+    # ------------------------------------------
+    # Legend ด้านล่าง
+    # ------------------------------------------
+
+    legend=dict(
+
+        title="Subject",
+
+        orientation="h",
+
+        yanchor="top",
+
+        y=-0.15,
+
+        xanchor="center",
+
+        x=0.5
+
+    ),
+
+    margin=dict(
+
+        l=70,
+
+        r=70,
+
+        t=100,
+
+        b=170
+
+    ),
+
+    xaxis=dict(
+
+        showgrid=True,
+
+        zeroline=True
+
+    ),
+
+    yaxis=dict(
+
+        showgrid=True,
+
+        zeroline=True
+
+    )
+
+)
+
+
+# ============================================================
+# 6. แสดงกราฟใน Colab
+# ============================================================
+
+fig.show()
+
+
+# ============================================================
+# 7. บันทึกเป็น HTML
+# ============================================================
+
+output_file = (
+    "05_text_feature_vector_space.html"
+)
+
+fig.write_html(
+
+    output_file,
+
+    include_plotlyjs=True
+
+)
+
+
+print("\n======================================")
+print("🎉 สร้าง Visualization สำเร็จ")
+print("======================================")
+
+print(
+    "📁",
+    output_file
+)
+
+
+# ============================================================
+# 8. ดาวน์โหลด HTML
+# ============================================================
+
+files.download(
+    output_file
+)
