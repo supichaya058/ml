@@ -33,7 +33,6 @@ body{
         sans-serif;
 
     background:#f5f8f2;
-
     color:#405442;
 }
 
@@ -45,7 +44,6 @@ body{
 .header{
 
     position:relative;
-
     overflow:hidden;
 
     padding:35px 30px;
@@ -71,18 +69,15 @@ body{
             #e5f1dc
         );
 
-    border-bottom:
-        1px solid #d7e4d2;
+    border-bottom:1px solid #d7e4d2;
 }
 
 .header-inner{
 
     max-width:1450px;
-
     margin:auto;
 
     position:relative;
-
     z-index:5;
 }
 
@@ -193,68 +188,6 @@ body{
 
 
 /* =========================================================
-   RESEARCH OVERVIEW
-========================================================= */
-
-.overview{
-
-    margin-bottom:20px;
-
-    padding:20px 24px;
-
-    background:white;
-
-    border:
-        1px solid #dce7d7;
-
-    border-radius:20px;
-
-    box-shadow:
-        0 5px 18px
-        rgba(65,90,65,.07);
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-.overview::after{
-
-    content:"🌱";
-
-    position:absolute;
-
-    right:22px;
-
-    bottom:-8px;
-
-    font-size:70px;
-
-    opacity:.10;
-}
-
-.overview-title{
-
-    font-size:20px;
-
-    font-weight:800;
-
-    color:#426a48;
-}
-
-.overview-text{
-
-    margin-top:7px;
-
-    color:#7d897e;
-
-    font-size:13px;
-
-    line-height:1.7;
-}
-
-
-/* =========================================================
    KPI
 ========================================================= */
 
@@ -278,8 +211,7 @@ body{
 
     background:white;
 
-    border:
-        1px solid #dce7d7;
+    border:1px solid #dce7d7;
 
     border-radius:20px;
 
@@ -362,8 +294,7 @@ body{
 
     background:white;
 
-    border:
-        1px solid #dce7d7;
+    border:1px solid #dce7d7;
 
     border-radius:20px;
 
@@ -378,8 +309,7 @@ body{
 
     padding:18px 20px;
 
-    border-bottom:
-        1px solid #e8eee5;
+    border-bottom:1px solid #e8eee5;
 }
 
 .card-title{
@@ -403,7 +333,6 @@ body{
     position:absolute;
 
     right:18px;
-
     top:12px;
 
     font-size:27px;
@@ -416,8 +345,69 @@ body{
 
 
 /* =========================================================
+   EMPTY DATA
+========================================================= */
+
+.empty-data{
+
+    height:500px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    padding:30px;
+
+    color:#8a968b;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(223,241,216,.45),
+            transparent 45%
+        ),
+
+        #fbfdf9;
+}
+
+.empty-data-inner{
+
+    max-width:420px;
+}
+
+.empty-icon{
+
+    font-size:50px;
+
+    margin-bottom:12px;
+}
+
+.empty-title{
+
+    color:#5b6c5d;
+
+    font-size:16px;
+
+    font-weight:800;
+
+    margin-bottom:7px;
+}
+
+.empty-text{
+
+    font-size:12px;
+
+    line-height:1.8;
+}
+
+
+/* =========================================================
    FEATURE VECTOR GARDEN
-   ไม่ใช่ Network
+   ไม่มี NETWORK
 ========================================================= */
 
 .feature-field{
@@ -463,7 +453,7 @@ body{
 
 
 /* =========================================================
-   SOFT GROUP BACKGROUNDS
+   SOFT GROUP BACKGROUND
 ========================================================= */
 
 .feature-group{
@@ -490,8 +480,7 @@ body{
         radial-gradient(
             ellipse,
             rgba(255,190,215,.20),
-            rgba(255,190,215,.06)
-            48%,
+            rgba(255,190,215,.06) 48%,
             transparent 72%
         );
 }
@@ -509,8 +498,7 @@ body{
         radial-gradient(
             ellipse,
             rgba(180,210,250,.20),
-            rgba(180,210,250,.06)
-            48%,
+            rgba(180,210,250,.06) 48%,
             transparent 72%
         );
 }
@@ -528,8 +516,7 @@ body{
         radial-gradient(
             ellipse,
             rgba(247,211,143,.20),
-            rgba(247,211,143,.06)
-            48%,
+            rgba(247,211,143,.06) 48%,
             transparent 72%
         );
 }
@@ -547,8 +534,7 @@ body{
         radial-gradient(
             ellipse,
             rgba(190,225,182,.22),
-            rgba(190,225,182,.06)
-            48%,
+            rgba(190,225,182,.06) 48%,
             transparent 72%
         );
 }
@@ -710,7 +696,7 @@ body{
 
 
 /* =========================================================
-   CENTRAL FLOWER
+   CENTER FLOWER
 ========================================================= */
 
 .feature-center{
@@ -797,7 +783,8 @@ body{
     border-radius:20px;
 
     border:
-        1px solid #dce7d7;
+        1px solid
+        #dce7d7;
 
     font-size:12px;
 
@@ -820,9 +807,7 @@ body{
     pointer-events:none;
 
     animation:
-        fly 5s
-        ease-in-out
-        infinite;
+        fly 5s ease-in-out infinite;
 }
 
 .b1{
@@ -895,7 +880,8 @@ body{
         rgba(255,255,255,.85);
 
     border:
-        1px solid #dbe6d7;
+        1px solid
+        #dbe6d7;
 
     box-shadow:
         0 4px 12px
@@ -910,7 +896,7 @@ body{
 
 
 /* =========================================================
-   CO-OCCURRENCE GARDEN
+   KEYWORD CO-OCCURRENCE GARDEN
    NETWORK ONLY
 ========================================================= */
 
@@ -926,7 +912,25 @@ body{
 
         radial-gradient(
             circle at 50% 50%,
-            rgba(255,255,255,.95),
+            rgba(255,255,255,.97),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 20% 40%,
+            rgba(255,193,216,.12),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 80% 40%,
+            rgba(190,214,252,.12),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 50% 85%,
+            rgba(249,218,158,.12),
             transparent 30%
         ),
 
@@ -939,7 +943,8 @@ body{
 
 
 /* =========================================================
-   CO COMMUNITY
+   COMMUNITY SOFT BACKGROUND
+   ไม่มีเส้นประ
 ========================================================= */
 
 .co-community{
@@ -952,57 +957,120 @@ body{
         translate(-50%,-50%);
 
     border-radius:50%;
+
+    pointer-events:none;
 }
 
 .co-community.ai{
 
-    width:330px;
-    height:290px;
+    width:350px;
+    height:300px;
 
     left:25%;
-    top:45%;
+    top:43%;
 
     background:
 
         radial-gradient(
             circle,
-            rgba(255,193,216,.18),
-            transparent 70%
+            rgba(255,193,216,.20),
+            rgba(255,193,216,.06) 50%,
+            transparent 72%
         );
 }
 
 .co-community.vision{
 
-    width:330px;
-    height:290px;
+    width:350px;
+    height:300px;
 
-    right:10%;
-    top:44%;
+    left:75%;
+    top:43%;
 
     background:
 
         radial-gradient(
             circle,
-            rgba(190,214,252,.18),
-            transparent 70%
+            rgba(190,214,252,.20),
+            rgba(190,214,252,.06) 50%,
+            transparent 72%
         );
 }
 
 .co-community.data{
 
-    width:310px;
+    width:380px;
     height:240px;
 
-    left:49%;
-    bottom:1%;
+    left:50%;
+    top:82%;
 
     background:
 
         radial-gradient(
             circle,
-            rgba(249,218,158,.18),
-            transparent 70%
+            rgba(249,218,158,.20),
+            rgba(249,218,158,.06) 50%,
+            transparent 72%
         );
+}
+
+
+/* =========================================================
+   GROUP TITLES
+========================================================= */
+
+.co-group-title{
+
+    position:absolute;
+
+    z-index:15;
+
+    padding:7px 14px;
+
+    border-radius:20px;
+
+    background:
+        rgba(255,255,255,.88);
+
+    border:
+        1px solid
+        #dce6d8;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    box-shadow:
+        0 3px 10px
+        rgba(70,90,70,.05);
+}
+
+.co-group-title.ai{
+
+    left:10%;
+    top:10%;
+
+    color:#c9577d;
+}
+
+.co-group-title.vision{
+
+    right:10%;
+    top:10%;
+
+    color:#527bb5;
+}
+
+.co-group-title.data{
+
+    left:50%;
+    bottom:5%;
+
+    transform:
+        translateX(-50%);
+
+    color:#b07820;
 }
 
 
@@ -1028,7 +1096,8 @@ body{
     cursor:pointer;
 
     transition:
-        transform .25s ease;
+        transform .25s ease,
+        filter .25s ease;
 }
 
 .co-flower:hover{
@@ -1036,6 +1105,12 @@ body{
     transform:
         translate(-50%,-50%)
         scale(1.16);
+
+    filter:
+        drop-shadow(
+            0 8px 12px
+            rgba(70,90,70,.22)
+        );
 
     z-index:30;
 }
@@ -1060,19 +1135,26 @@ body{
     border-radius:14px;
 
     background:
-        rgba(255,255,255,.84);
+        rgba(255,255,255,.90);
 
     border:
-        1px solid #dce6d8;
+        1px solid
+        #dce6d8;
 
     font-size:9px;
 
     color:#536053;
+
+    white-space:nowrap;
+
+    box-shadow:
+        0 2px 7px
+        rgba(60,80,60,.05);
 }
 
 
 /* =========================================================
-   CO SVG
+   CO NETWORK SVG
 ========================================================= */
 
 .co-svg{
@@ -1095,23 +1177,35 @@ body{
 
     stroke:#8ba382;
 
-    stroke-width:1.7;
+    stroke-width:1.8;
 
-    stroke-opacity:.35;
+    stroke-opacity:.30;
 
     stroke-linecap:round;
+
+    transition:
+        stroke-opacity .2s ease;
 }
 
 .co-line.strong{
 
-    stroke-width:2.5;
+    stroke-width:3.5;
 
-    stroke-opacity:.5;
+    stroke-opacity:.55;
+}
+
+.co-line.community{
+
+    stroke:#9aae99;
+
+    stroke-width:2;
+
+    stroke-opacity:.18;
 }
 
 
 /* =========================================================
-   CO CENTER
+   CENTER
 ========================================================= */
 
 .co-center{
@@ -1135,15 +1229,55 @@ body{
 
 .co-center .icon{
 
-    font-size:75px;
+    width:105px;
+    height:105px;
 
-    line-height:1;
+    display:flex;
 
-    filter:
-        drop-shadow(
-            0 7px 8px
-            rgba(60,80,60,.15)
-        );
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+            circle,
+            #fff8c9 0 17%,
+            transparent 18%
+        ),
+
+        radial-gradient(
+            circle at 35% 35%,
+            #ffb5d0 0 23%,
+            transparent 24%
+        ),
+
+        radial-gradient(
+            circle at 65% 35%,
+            #ffb5d0 0 23%,
+            transparent 24%
+        ),
+
+        radial-gradient(
+            circle at 35% 65%,
+            #ffb5d0 0 23%,
+            transparent 24%
+        ),
+
+        radial-gradient(
+            circle at 65% 65%,
+            #ffb5d0 0 23%,
+            transparent 24%
+        ),
+
+        #fff;
+
+    font-size:42px;
+
+    box-shadow:
+        0 10px 28px
+        rgba(90,110,80,.15);
 }
 
 .co-center .name{
@@ -1155,14 +1289,57 @@ body{
     border-radius:20px;
 
     background:
-        rgba(255,255,255,.9);
+        rgba(255,255,255,.93);
 
     border:
-        1px solid #dce7d7;
+        1px solid
+        #dce7d7;
 
     font-size:11px;
 
     font-weight:800;
+
+    color:#536354;
+
+    box-shadow:
+        0 3px 10px
+        rgba(70,90,70,.06);
+}
+
+
+/* =========================================================
+   CO LEGEND
+========================================================= */
+
+.co-legend{
+
+    position:absolute;
+
+    left:18px;
+    bottom:18px;
+
+    z-index:30;
+
+    padding:11px 14px;
+
+    border-radius:17px;
+
+    background:
+        rgba(255,255,255,.88);
+
+    border:
+        1px solid
+        #dbe6d7;
+
+    box-shadow:
+        0 4px 12px
+        rgba(70,90,70,.08);
+
+    font-size:10px;
+
+    line-height:1.8;
+
+    color:#627163;
 }
 
 
@@ -1177,7 +1354,8 @@ body{
     background:#f8fbf5;
 
     border-top:
-        1px solid #e5ede1;
+        1px solid
+        #e5ede1;
 
     color:#617061;
 
@@ -1224,7 +1402,13 @@ footer{
 
         height:850px;
     }
+
+    .co-field{
+
+        height:780px;
+    }
 }
+
 
 @media(max-width:650px){
 
@@ -1241,6 +1425,11 @@ footer{
     .feature-field{
 
         height:1000px;
+    }
+
+    .co-field{
+
+        height:950px;
     }
 
     .feature-group.ai{
@@ -1282,6 +1471,23 @@ footer{
 
         top:34%;
     }
+
+    .co-community.ai{
+
+        left:25%;
+        top:35%;
+    }
+
+    .co-community.vision{
+
+        left:75%;
+        top:35%;
+    }
+
+    .co-community.data{
+
+        top:75%;
+    }
 }
 
 </style>
@@ -1321,7 +1527,8 @@ footer{
         </h1>
 
         <div class="subtitle">
-            Scopus Research Visualization · Research Keywords Growing Together
+            Research Keywords Growing Together
+            · Scopus Research Visualization
         </div>
 
     </div>
@@ -1337,33 +1544,7 @@ footer{
      RESEARCH OVERVIEW
 ========================================================= -->
 
-<section class="overview">
-
-    <div class="overview-title">
-        🌱 Research Overview
-    </div>
-
-    <div class="overview-text">
-
-        This dashboard visualizes AI-related research
-        from Scopus publications.
-        The visualization highlights keyword frequency,
-        publication trends, research authors,
-        research areas, feature relationships,
-        and keyword co-occurrence.
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     KPI
-========================================================= -->
-
 <section class="kpis">
-
 
     <div class="kpi">
 
@@ -1419,7 +1600,7 @@ footer{
     <div class="kpi">
 
         <div class="kpi-label">
-            🌿 RESEARCH AREAS
+            🏷️ RESEARCH AREAS
         </div>
 
         <div class="kpi-value">
@@ -1427,11 +1608,10 @@ footer{
         </div>
 
         <div class="kpi-small">
-            Research subject groups
+            Research subject areas
         </div>
 
     </div>
-
 
 </section>
 
@@ -1446,7 +1626,6 @@ footer{
 
 <!-- =========================================================
      TOP KEYWORDS
-     BAR CHART ONLY
 ========================================================= -->
 
 <div class="card">
@@ -1520,7 +1699,7 @@ footer{
         </div>
 
         <div class="card-sub">
-            Authors with the highest number of publications
+            Researchers with the highest number of publications
         </div>
 
         <div class="card-flower">
@@ -1529,9 +1708,34 @@ footer{
 
     </div>
 
-    <div
-        id="authors"
-        class="plot">
+    <div id="authors">
+
+        <div class="empty-data">
+
+            <div class="empty-data-inner">
+
+                <div class="empty-icon">
+                    🌱
+                </div>
+
+                <div class="empty-title">
+                    Top Authors
+                </div>
+
+                <div class="empty-text">
+                    Author information is not included
+                    in the current HTML data.
+                    <br><br>
+                    This section is intentionally left
+                    without sample author names.
+                    <br>
+                    Real Scopus author data can be inserted here.
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
 </div>
@@ -1561,7 +1765,7 @@ footer{
     </div>
 
     <div
-        id="areas"
+        id="subjects"
         class="plot">
     </div>
 
@@ -1586,7 +1790,7 @@ footer{
         </div>
 
         <div class="card-flower">
-            🦋
+            🌸
         </div>
 
     </div>
@@ -1607,7 +1811,6 @@ footer{
         <div class="feature-group data"></div>
 
         <div class="feature-group tech"></div>
-
 
 
         <!-- BUTTERFLIES -->
@@ -1633,7 +1836,6 @@ footer{
         </div>
 
 
-
         <!-- GROUP TITLES -->
 
         <div class="group-title ai">
@@ -1653,7 +1855,6 @@ footer{
         </div>
 
 
-
         <!-- CENTER -->
 
         <div class="feature-center">
@@ -1667,7 +1868,6 @@ footer{
             </div>
 
         </div>
-
 
 
         <!-- AI -->
@@ -1787,7 +1987,6 @@ footer{
         </div>
 
 
-
         <!-- VISION -->
 
         <div
@@ -1905,7 +2104,6 @@ footer{
         </div>
 
 
-
         <!-- DATA -->
 
         <div
@@ -2000,7 +2198,6 @@ footer{
         </div>
 
 
-
         <!-- EMERGING TECHNOLOGY -->
 
         <div
@@ -2072,7 +2269,6 @@ footer{
         </div>
 
 
-
         <!-- LEGEND -->
 
         <div class="feature-legend">
@@ -2090,7 +2286,6 @@ footer{
             🦋 = Decoration
 
         </div>
-
 
     </div>
 
@@ -2143,7 +2338,7 @@ footer{
 
 <!-- =========================================================
      KEYWORD CO-OCCURRENCE GARDEN
-     NETWORK ONLY
+     THIS IS THE ONLY NETWORK
 ========================================================= -->
 
 <div class="card full">
@@ -2155,7 +2350,7 @@ footer{
         </div>
 
         <div class="card-sub">
-            Related keywords bloom together in research communities
+            Related keywords bloom together · Lines represent co-occurrence relationships
         </div>
 
         <div class="card-flower">
@@ -2169,6 +2364,41 @@ footer{
         class="co-field"
         id="coField"
     >
+
+
+        <!-- SOFT COMMUNITIES -->
+
+        <div class="co-community ai"></div>
+
+        <div class="co-community vision"></div>
+
+        <div class="co-community data"></div>
+
+
+        <!-- GROUP TITLES -->
+
+        <div class="co-group-title ai">
+            🌸 AI & Machine Learning
+        </div>
+
+        <div class="co-group-title vision">
+            🌼 Vision & Language
+        </div>
+
+        <div class="co-group-title data">
+            🌻 Data & Computing
+        </div>
+
+
+        <!-- NETWORK -->
+
+        <svg
+            id="coSvg"
+            class="co-svg">
+        </svg>
+
+
+        <!-- BUTTERFLIES -->
 
         <div class="butterfly b1">
             🦋
@@ -2187,18 +2417,7 @@ footer{
         </div>
 
 
-        <div class="co-community ai"></div>
-
-        <div class="co-community vision"></div>
-
-        <div class="co-community data"></div>
-
-
-        <svg
-            id="coSvg"
-            class="co-svg">
-        </svg>
-
+        <!-- CENTER -->
 
         <div class="co-center">
 
@@ -2439,25 +2658,49 @@ footer{
         </div>
 
 
+        <!-- LEGEND -->
+
+        <div class="co-legend">
+
+            🌺 = Main research theme<br>
+
+            🌸 = Related keyword<br>
+
+            🌿 = Co-occurrence relationship<br>
+
+            📏 Stronger line = stronger relationship<br>
+
+            🦋 = Decoration
+
+        </div>
+
     </div>
 
 
     <div class="insight">
 
-        <b>🌺 How to read this garden</b><br>
+        <b>🌺 How to read the Co-occurrence Garden</b><br>
 
         🌸
-        Flowers close together indicate related research keywords.
+        Flowers represent research keywords.
 
         <br>
 
         🌿
-        Lines represent keyword co-occurrence relationships.
+        Lines connect keywords that frequently
+        appear together in research.
 
         <br>
 
         🌺
-        The central flower represents the main research theme.
+        The central flower represents
+        the main research theme.
+
+        <br>
+
+        📏
+        Thicker lines represent stronger
+        keyword relationships.
 
         <br>
 
@@ -2492,9 +2735,9 @@ footer{
 ========================================================= */
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    TOP KEYWORDS
---------------------------------------------------------- */
+========================================================= */
 
 const TOP_KEYWORDS = [
 
@@ -2601,9 +2844,9 @@ const TOP_KEYWORDS = [
 ];
 
 
-/* ---------------------------------------------------------
-   YEARS
---------------------------------------------------------- */
+/* =========================================================
+   PUBLICATION YEARS
+========================================================= */
 
 const YEARS = [
 
@@ -2627,119 +2870,59 @@ const YEARS = [
 ];
 
 
-/* ---------------------------------------------------------
-   TOP AUTHORS
-   เปลี่ยนข้อมูลชุดนี้เป็น Author จาก Scopus จริง
---------------------------------------------------------- */
-
-const TOP_AUTHORS = [
-
-    {
-        author:"Author 1",
-        count:145
-    },
-
-    {
-        author:"Author 2",
-        count:132
-    },
-
-    {
-        author:"Author 3",
-        count:118
-    },
-
-    {
-        author:"Author 4",
-        count:105
-    },
-
-    {
-        author:"Author 5",
-        count:97
-    },
-
-    {
-        author:"Author 6",
-        count:91
-    },
-
-    {
-        author:"Author 7",
-        count:84
-    },
-
-    {
-        author:"Author 8",
-        count:79
-    },
-
-    {
-        author:"Author 9",
-        count:73
-    },
-
-    {
-        author:"Author 10",
-        count:68
-    }
-
-];
-
-
-/* ---------------------------------------------------------
+/* =========================================================
    RESEARCH AREAS
---------------------------------------------------------- */
+========================================================= */
 
-const RESEARCH_AREAS = [
+const SUBJECTS = [
 
     {
-        area:"Computer Science",
+        subject:"Computer Science",
         count:2400
     },
 
     {
-        area:"Engineering",
+        subject:"Engineering",
         count:1050
     },
 
     {
-        area:"Mathematics",
+        subject:"Mathematics",
         count:620
     },
 
     {
-        area:"Decision Sciences",
+        subject:"Decision Sciences",
         count:430
     },
 
     {
-        area:"Physics",
+        subject:"Physics",
         count:300
     },
 
     {
-        area:"Materials Science",
+        subject:"Materials Science",
         count:250
     },
 
     {
-        area:"Medicine",
+        subject:"Medicine",
         count:210
     },
 
     {
-        area:"Business",
+        subject:"Business",
         count:180
     },
 
     {
-        area:"Social Sciences",
+        subject:"Social Sciences",
         count:150
     },
 
     {
-        area:"Others",
+        subject:"Others",
         count:113
     }
 
@@ -2747,7 +2930,7 @@ const RESEARCH_AREAS = [
 
 
 /* =========================================================
-   BASE LAYOUT
+   BASE PLOT LAYOUT
 ========================================================= */
 
 function baseLayout(){
@@ -2780,7 +2963,7 @@ function baseLayout(){
 
 
 /* =========================================================
-   🌼 TOP KEYWORDS
+   TOP KEYWORDS
    BAR CHART ONLY
 ========================================================= */
 
@@ -2813,7 +2996,15 @@ function baseLayout(){
 
             marker:{
 
-                color:"#e9a8bd",
+                color:
+                    data.map(
+                        (x,i)=>
+                            `hsl(
+                                ${330+i*2},
+                                65%,
+                                ${78-i*1.3}%
+                            )`
+                    ),
 
                 line:{
 
@@ -2839,11 +3030,8 @@ function baseLayout(){
             margin:{
 
                 l:170,
-
                 r:30,
-
                 t:20,
-
                 b:50
             },
 
@@ -2872,6 +3060,7 @@ function baseLayout(){
             responsive:true,
 
             displaylogo:false
+
         }
 
     );
@@ -2880,7 +3069,7 @@ function baseLayout(){
 
 
 /* =========================================================
-   📈 PUBLICATIONS BY YEAR
+   PUBLICATIONS BY YEAR
 ========================================================= */
 
 (function(){
@@ -2964,6 +3153,7 @@ function baseLayout(){
             responsive:true,
 
             displaylogo:false
+
         }
 
     );
@@ -2972,125 +3162,26 @@ function baseLayout(){
 
 
 /* =========================================================
-   🌷 TOP AUTHORS
-========================================================= */
-
-(function(){
-
-    const data =
-        [...TOP_AUTHORS]
-        .reverse();
-
-
-    Plotly.newPlot(
-
-        "authors",
-
-        [{
-
-            type:"bar",
-
-            orientation:"h",
-
-            y:
-                data.map(
-                    x=>x.author
-                ),
-
-            x:
-                data.map(
-                    x=>x.count
-                ),
-
-            marker:{
-
-                color:"#9db9d6",
-
-                line:{
-
-                    color:"#ffffff",
-
-                    width:1
-                }
-
-            },
-
-            hovertemplate:
-
-                "<b>%{y}</b><br>"+
-                "Publications: %{x}"+
-                "<extra></extra>"
-
-        }],
-
-        {
-
-            ...baseLayout(),
-
-            margin:{
-
-                l:120,
-
-                r:30,
-
-                t:20,
-
-                b:50
-            },
-
-            xaxis:{
-
-                title:"Publications",
-
-                gridcolor:
-                    "#e9eef5"
-            },
-
-            yaxis:{
-
-                tickfont:{
-
-                    size:10
-                }
-            },
-
-            showlegend:false
-
-        },
-
-        {
-
-            responsive:true,
-
-            displaylogo:false
-        }
-
-    );
-
-})();
-
-
-/* =========================================================
-   🌿 RESEARCH AREAS
+   RESEARCH AREAS
 ========================================================= */
 
 (function(){
 
     Plotly.newPlot(
 
-        "areas",
+        "subjects",
 
         [{
 
             type:"pie",
 
             labels:
-                RESEARCH_AREAS.map(
-                    x=>x.area
+                SUBJECTS.map(
+                    x=>x.subject
                 ),
 
             values:
-                RESEARCH_AREAS.map(
+                SUBJECTS.map(
                     x=>x.count
                 ),
 
@@ -3102,7 +3193,7 @@ function baseLayout(){
 
                 line:{
 
-                    color:"#ffffff",
+                    color:"#fff",
 
                     width:2
                 },
@@ -3140,11 +3231,8 @@ function baseLayout(){
             margin:{
 
                 l:20,
-
                 r:20,
-
                 t:20,
-
                 b:20
             }
 
@@ -3155,6 +3243,7 @@ function baseLayout(){
             responsive:true,
 
             displaylogo:false
+
         }
 
     );
@@ -3163,269 +3252,8 @@ function baseLayout(){
 
 
 /* =========================================================
-   🌸 FEATURE VECTOR GARDEN
-   ไม่มี Network
-========================================================= */
-
-(function(){
-
-    const field =
-        document.getElementById(
-            "featureField"
-        );
-
-    const flowers = [
-
-        {
-            keyword:"Machine Learning",
-            count:970,
-            x:15,
-            y:38,
-            flower:"🌸"
-        },
-
-        {
-            keyword:"Artificial Intelligence",
-            count:1260,
-            x:29,
-            y:35,
-            flower:"🌹"
-        },
-
-        {
-            keyword:"Deep Learning",
-            count:760,
-            x:42,
-            y:39,
-            flower:"🌷"
-        },
-
-        {
-            keyword:"Neural Networks",
-            count:460,
-            x:22,
-            y:53,
-            flower:"🌼"
-        },
-
-        {
-            keyword:"Classification",
-            count:350,
-            x:36,
-            y:55,
-            flower:"🌺"
-        },
-
-        {
-            keyword:"Computer Vision",
-            count:520,
-            x:61,
-            y:36,
-            flower:"🌼"
-        },
-
-        {
-            keyword:"Image Processing",
-            count:150,
-            x:75,
-            y:35,
-            flower:"🌷"
-        },
-
-        {
-            keyword:"Natural Language Processing",
-            count:285,
-            x:69,
-            y:52,
-            flower:"🌸"
-        },
-
-        {
-            keyword:"Large Language Models",
-            count:120,
-            x:83,
-            y:51,
-            flower:"🌺"
-        },
-
-        {
-            keyword:"Transformer",
-            count:130,
-            x:80,
-            y:64,
-            flower:"🪻"
-        },
-
-        {
-            keyword:"Big Data",
-            count:260,
-            x:19,
-            y:78,
-            flower:"🌻"
-        },
-
-        {
-            keyword:"Data Mining",
-            count:240,
-            x:32,
-            y:82,
-            flower:"🌼"
-        },
-
-        {
-            keyword:"Cloud Computing",
-            count:220,
-            x:43,
-            y:75,
-            flower:"🌷"
-        },
-
-        {
-            keyword:"Algorithm",
-            count:145,
-            x:29,
-            y:69,
-            flower:"🌸"
-        },
-
-        {
-            keyword:"Internet of Things",
-            count:310,
-            x:61,
-            y:78,
-            flower:"🌷"
-        },
-
-        {
-            keyword:"Robotics",
-            count:190,
-            x:73,
-            y:81,
-            flower:"🌻"
-        },
-
-        {
-            keyword:"Optimization",
-            count:180,
-            x:84,
-            y:76,
-            flower:"🌺"
-        }
-
-    ];
-
-
-    const maxCount =
-        Math.max(
-            ...flowers.map(
-                f=>f.count
-            )
-        );
-
-
-    flowers.forEach(
-        item=>{
-
-            const flower =
-                document.createElement(
-                    "div"
-                );
-
-            flower.className =
-                "feature-flower";
-
-
-            flower.style.left =
-                item.x+"%";
-
-
-            flower.style.top =
-                item.y+"%";
-
-
-            const ratio =
-                Math.sqrt(
-                    item.count /
-                    maxCount
-                );
-
-
-            const size =
-                28 +
-                ratio*42;
-
-
-            const icon =
-                document.createElement(
-                    "div"
-                );
-
-            icon.className =
-                "emoji";
-
-            icon.style.fontSize =
-                size+"px";
-
-            icon.textContent =
-                item.flower;
-
-
-            const label =
-                document.createElement(
-                    "div"
-                );
-
-            label.className =
-                "label";
-
-            label.textContent =
-                item.keyword;
-
-
-            const count =
-                document.createElement(
-                    "div"
-                );
-
-            count.className =
-                "count";
-
-            count.textContent =
-                item.count.toLocaleString();
-
-
-            flower.appendChild(
-                icon
-            );
-
-            flower.appendChild(
-                label
-            );
-
-            flower.appendChild(
-                count
-            );
-
-
-            flower.title =
-                item.keyword+
-                "\nFrequency: "+
-                item.count;
-
-
-            field.appendChild(
-                flower
-            );
-
-        }
-    );
-
-})();
-
-
-/* =========================================================
-   🌺 KEYWORD CO-OCCURRENCE GARDEN
-   NETWORK ONLY
+   KEYWORD CO-OCCURRENCE NETWORK
+   ONLY NETWORK IN THIS DASHBOARD
 ========================================================= */
 
 (function(){
@@ -3441,15 +3269,163 @@ function baseLayout(){
         );
 
 
-    const flowers =
-        [
-            ...field.querySelectorAll(
-                ".co-flower"
-            )
-        ];
+    const flowers = [
+
+        {
+            keyword:"Deep Learning",
+            x:13,
+            y:39
+        },
+
+        {
+            keyword:"Machine Learning",
+            x:25,
+            y:30
+        },
+
+        {
+            keyword:"Neural Networks",
+            x:34,
+            y:43
+        },
+
+        {
+            keyword:"Classification",
+            x:21,
+            y:56
+        },
+
+        {
+            keyword:"Computer Vision",
+            x:65,
+            y:31
+        },
+
+        {
+            keyword:"Image Processing",
+            x:83,
+            y:35
+        },
+
+        {
+            keyword:"NLP",
+            x:67,
+            y:56
+        },
+
+        {
+            keyword:"Large Language Models",
+            x:83,
+            y:56
+        },
+
+        {
+            keyword:"Big Data",
+            x:36,
+            y:79
+        },
+
+        {
+            keyword:"Data Mining",
+            x:49,
+            y:86
+        },
+
+        {
+            keyword:"Cloud Computing",
+            x:63,
+            y:79
+        }
+
+    ];
 
 
-    function draw(){
+    /* =====================================================
+       CO-OCCURRENCE STRENGTH
+    ===================================================== */
+
+    const pairs = [
+
+        {
+            a:"Deep Learning",
+            b:"Machine Learning",
+            strength:3
+        },
+
+        {
+            a:"Deep Learning",
+            b:"Neural Networks",
+            strength:3
+        },
+
+        {
+            a:"Machine Learning",
+            b:"Neural Networks",
+            strength:2
+        },
+
+        {
+            a:"Machine Learning",
+            b:"Classification",
+            strength:2
+        },
+
+        {
+            a:"Deep Learning",
+            b:"Computer Vision",
+            strength:3
+        },
+
+        {
+            a:"Computer Vision",
+            b:"Image Processing",
+            strength:3
+        },
+
+        {
+            a:"Computer Vision",
+            b:"NLP",
+            strength:1
+        },
+
+        {
+            a:"NLP",
+            b:"Large Language Models",
+            strength:3
+        },
+
+        {
+            a:"Big Data",
+            b:"Data Mining",
+            strength:3
+        },
+
+        {
+            a:"Data Mining",
+            b:"Cloud Computing",
+            strength:2
+        },
+
+        {
+            a:"Big Data",
+            b:"Cloud Computing",
+            strength:2
+        },
+
+        {
+            a:"Machine Learning",
+            b:"Big Data",
+            strength:2
+        }
+
+    ];
+
+
+    /* =====================================================
+       DRAW NETWORK
+    ===================================================== */
+
+    function drawNetwork(){
 
         const rect =
             field.getBoundingClientRect();
@@ -3472,168 +3448,114 @@ function baseLayout(){
         svg.innerHTML="";
 
 
-        const centerX =
-            width*.5;
+        function getKeyword(
+            name
+        ){
 
+            return flowers.find(
+                item =>
+                    item.keyword ===
+                    name
+            );
 
-        const centerY =
-            height*.48;
-
-
-        /* ---------------------------------------------
-           CENTER CONNECTIONS
-        --------------------------------------------- */
-
-        flowers.forEach(
-            (flower,index)=>{
-
-                const x =
-                    parseFloat(
-                        flower.dataset.x
-                    ) /
-                    100 *
-                    width;
-
-
-                const y =
-                    parseFloat(
-                        flower.dataset.y
-                    ) /
-                    100 *
-                    height;
-
-
-                const curveX =
-                    (x+centerX)/2+
-                    (index%2===0
-                        ? -25
-                        : 25);
-
-
-                const curveY =
-                    (y+centerY)/2+
-                    (index%2===0
-                        ? 25
-                        : -25);
-
-
-                const path =
-                    document.createElementNS(
-                        "http://www.w3.org/2000/svg",
-                        "path"
-                    );
-
-
-                path.setAttribute(
-
-                    "d",
-
-                    `
-                    M ${x} ${y}
-                    Q ${curveX} ${curveY}
-                      ${centerX} ${centerY}
-                    `
-                );
-
-
-                path.setAttribute(
-
-                    "class",
-
-                    index%3===0
-                        ? "co-line strong"
-                        : "co-line"
-                );
-
-
-                svg.appendChild(
-                    path
-                );
-
-            }
-        );
-
-
-        /* ---------------------------------------------
-           KEYWORD PAIRS
-        --------------------------------------------- */
-
-        const pairs = [
-
-            [0,1],
-            [1,2],
-            [0,3],
-
-            [4,5],
-            [4,6],
-            [5,7],
-
-            [8,9],
-            [9,10],
-            [8,10]
-
-        ];
+        }
 
 
         pairs.forEach(
             pair=>{
 
-                const a =
-                    flowers[
-                        pair[0]
-                    ];
+                const from =
+                    getKeyword(
+                        pair.a
+                    );
+
+                const to =
+                    getKeyword(
+                        pair.b
+                    );
 
 
-                const b =
-                    flowers[
-                        pair[1]
-                    ];
-
-
-                if(!a || !b){
+                if(
+                    !from ||
+                    !to
+                ){
 
                     return;
                 }
 
 
                 const x1 =
-                    parseFloat(
-                        a.dataset.x
-                    ) /
+                    from.x /
                     100 *
                     width;
 
 
                 const y1 =
-                    parseFloat(
-                        a.dataset.y
-                    ) /
+                    from.y /
                     100 *
                     height;
 
 
                 const x2 =
-                    parseFloat(
-                        b.dataset.x
-                    ) /
+                    to.x /
                     100 *
                     width;
 
 
                 const y2 =
-                    parseFloat(
-                        b.dataset.y
-                    ) /
+                    to.y /
                     100 *
                     height;
 
 
-                const curveX =
+                const midX =
                     (x1+x2)/2;
 
 
-                const curveY =
-                    (y1+y2)/2-25;
+                const midY =
+                    (y1+y2)/2;
+
+
+                const dx =
+                    x2-x1;
+
+
+                const dy =
+                    y2-y1;
+
+
+                const distance =
+                    Math.sqrt(
+                        dx*dx+
+                        dy*dy
+                    );
+
+
+                const curve =
+                    Math.min(
+                        65,
+                        distance*.24
+                    );
+
+
+                const direction =
+                    pair.strength === 3
+                        ? -1
+                        : 1;
+
+
+                const controlX =
+                    midX -
+                    dy/distance*
+                    curve*
+                    direction;
+
+
+                const controlY =
+                    midY +
+                    dx/distance*
+                    curve*
+                    direction;
 
 
                 const path =
@@ -3649,15 +3571,21 @@ function baseLayout(){
 
                     `
                     M ${x1} ${y1}
-                    Q ${curveX} ${curveY}
+                    Q ${controlX} ${controlY}
                       ${x2} ${y2}
                     `
                 );
 
 
                 path.setAttribute(
+
                     "class",
-                    "co-line"
+
+                    pair.strength >= 3
+                        ?
+                        "co-line strong"
+                        :
+                        "co-line"
                 );
 
 
@@ -3668,24 +3596,149 @@ function baseLayout(){
             }
         );
 
+
+        /* =================================================
+           CONNECT MAIN THEME TO IMPORTANT KEYWORDS
+        ================================================= */
+
+        const centerX =
+            width*.50;
+
+
+        const centerY =
+            height*.48;
+
+
+        const centerConnections = [
+
+            "Deep Learning",
+
+            "Machine Learning",
+
+            "Computer Vision",
+
+            "NLP",
+
+            "Big Data"
+
+        ];
+
+
+        centerConnections.forEach(
+            (name,index)=>{
+
+                const item =
+                    getKeyword(name);
+
+
+                if(!item){
+                    return;
+                }
+
+
+                const x =
+                    item.x /
+                    100 *
+                    width;
+
+
+                const y =
+                    item.y /
+                    100 *
+                    height;
+
+
+                const midX =
+                    (x+centerX)/2;
+
+
+                const midY =
+                    (y+centerY)/2;
+
+
+                const dx =
+                    centerX-x;
+
+
+                const dy =
+                    centerY-y;
+
+
+                const distance =
+                    Math.sqrt(
+                        dx*dx+
+                        dy*dy
+                    );
+
+
+                const curve =
+                    35;
+
+
+                const controlX =
+                    midX -
+                    dy/distance*
+                    curve*
+                    (index%2===0 ? 1 : -1);
+
+
+                const controlY =
+                    midY +
+                    dx/distance*
+                    curve*
+                    (index%2===0 ? 1 : -1);
+
+
+                const path =
+                    document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "path"
+                    );
+
+
+                path.setAttribute(
+
+                    "d",
+
+                    `
+                    M ${x} ${y}
+                    Q ${controlX} ${controlY}
+                      ${centerX} ${centerY}
+                    `
+                );
+
+
+                path.setAttribute(
+                    "class",
+                    "co-line community"
+                );
+
+
+                svg.insertBefore(
+                    path,
+                    svg.firstChild
+                );
+
+            }
+        );
+
     }
 
 
     setTimeout(
-        draw,
+        drawNetwork,
         200
     );
 
 
     window.addEventListener(
         "resize",
-        draw
+        drawNetwork
     );
 
 })();
 
 </script>
-
 
 </body>
 
