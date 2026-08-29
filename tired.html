@@ -2083,34 +2083,138 @@ footer{
 </div>
 
 
-<!-- =========================================================
-     PUBLICATIONS BY YEAR
-========================================================= -->
 
-<div class="card">
+/* =========================================================
+   PUBLICATIONS BY YEAR
+   ใช้ข้อมูลจากไฟล์เดิม
+   โครงกราฟแบบ Lines + Markers
+========================================================= */
 
-    <div class="card-head">
+const YEARS = [
+    { year: 2021, count: /* ข้อมูลจากไฟล์ */ },
+    { year: 2022, count: /* ข้อมูลจากไฟล์ */ },
+    { year: 2023, count: /* ข้อมูลจากไฟล์ */ },
+    { year: 2024, count: /* ข้อมูลจากไฟล์ */ },
+    { year: 2025, count: /* ข้อมูลจากไฟล์ */ },
+    { year: 2026, count: /* ข้อมูลจากไฟล์ */ }
+];
 
-        <div class="card-title">
-            📈 Publications by Year
-        </div>
 
-        <div class="card-sub">
-            Research publication trend
-        </div>
+Plotly.newPlot(
 
-        <div class="card-flower">
-            🌼
-        </div>
+    "years",
 
-    </div>
+    [{
+        type: "scatter",
 
-    <div
-        id="years"
-        class="plot">
-    </div>
+        mode: "lines+markers",
 
-</div>
+        x: YEARS.map(
+            item => item.year
+        ),
+
+        y: YEARS.map(
+            item => item.count
+        ),
+
+        line: {
+            width: 3,
+            color: "#719873",
+            shape: "spline"
+        },
+
+        marker: {
+            size: 8,
+            color: "#719873",
+
+            line: {
+                color: "#ffffff",
+                width: 2
+            }
+        },
+
+        fill: "tozeroy",
+
+        fillcolor:
+            "rgba(113,152,115,.15)",
+
+        hovertemplate:
+            "<b>%{x}</b><br>" +
+            "Publications: %{y:,}" +
+            "<extra></extra>"
+    }],
+
+    {
+
+        ...baseLayout(),
+
+        xaxis: {
+
+            title: "Year",
+
+            tickmode: "array",
+
+            tickvals: [
+                2021,
+                2022,
+                2023,
+                2024,
+                2025,
+                2026
+            ],
+
+            ticktext: [
+                "2021",
+                "2022",
+                "2023",
+                "2024",
+                "2025",
+                "2026"
+            ],
+
+            range: [
+                2020.5,
+                2026.5
+            ],
+
+            dtick: 1,
+
+            gridcolor: "#edf2eb",
+
+            zeroline: false
+        },
+
+        yaxis: {
+
+            title: "Publications",
+
+            gridcolor: "#edf2eb",
+
+            zeroline: false,
+
+            rangemode: "tozero"
+        },
+
+        margin: {
+            l: 60,
+            r: 30,
+            t: 25,
+            b: 55
+        },
+
+        hovermode: "x unified",
+
+        showlegend: false
+    },
+
+    {
+        responsive: true,
+        displaylogo: false
+    }
+
+);
+
+
 
 
 <!-- =========================================================
