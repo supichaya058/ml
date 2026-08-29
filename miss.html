@@ -1,15 +1,13 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>AI Research Flower Field</title>
 
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 
 <style>
 
@@ -35,12 +33,17 @@ body{
     background:
         linear-gradient(
             180deg,
-            #f5fff5 0%,
-            #eefbea 45%,
-            #f8fff4 100%
+            #f7fff9 0%,
+            #eefaf1 45%,
+            #f9fff8 100%
         );
 
-    color:#28452d;
+    color:#24432d;
+}
+
+.container{
+    width:min(1500px,94%);
+    margin:auto;
 }
 
 
@@ -48,57 +51,56 @@ body{
    HEADER
 ========================================================= */
 
-.header{
+.hero{
     position:relative;
     overflow:hidden;
 
-    margin:22px;
-    padding:45px 30px;
+    margin:24px auto;
+
+    padding:48px 30px;
 
     border-radius:30px;
 
     background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.96),
-            rgba(236,251,232,.94)
-        );
+        radial-gradient(circle at 15% 30%,rgba(255,255,255,.9),transparent 25%),
+        radial-gradient(circle at 85% 20%,rgba(255,239,177,.5),transparent 25%),
+        linear-gradient(135deg,#dff7e5,#fff8d9);
 
-    border:1px solid rgba(100,150,90,.18);
+    border:1px solid rgba(91,143,102,.18);
 
     box-shadow:
-        0 12px 40px rgba(70,120,60,.12);
-
-    text-align:center;
+        0 15px 45px rgba(62,105,72,.12);
 }
 
 .header-inner{
     position:relative;
-    z-index:5;
+    z-index:3;
+
+    text-align:center;
 }
 
-.header h1{
+.header-inner h1{
     margin:0;
 
     font-size:
-        clamp(30px,4vw,54px);
+        clamp(30px,4vw,56px);
 
     letter-spacing:2px;
 
-    color:#285b32;
+    color:#2d6538;
 
     text-shadow:
-        0 3px 8px rgba(60,110,60,.12);
+        0 2px 0 white;
 }
 
 .subtitle{
     margin-top:12px;
 
-    font-size:15px;
+    font-size:16px;
 
-    color:#6c896d;
+    color:#62816a;
 
-    line-height:1.8;
+    letter-spacing:.4px;
 }
 
 .header-butterfly,
@@ -107,92 +109,49 @@ body{
 
     z-index:2;
 
-    pointer-events:none;
+    user-select:none;
 
-    opacity:.85;
+    animation:
+        float 5s ease-in-out infinite;
 }
 
 .header-butterfly{
-    font-size:30px;
+    font-size:38px;
 }
 
 .header-butterfly.one{
     left:8%;
-    top:24%;
-    animation:float1 5s ease-in-out infinite;
+    top:18%;
 }
 
 .header-butterfly.two{
     right:10%;
-    bottom:22%;
-    animation:float2 6s ease-in-out infinite;
+    bottom:18%;
+    animation-delay:1.5s;
 }
 
 .header-flower{
-    font-size:42px;
+    font-size:50px;
 }
 
 .header-flower.one{
-    left:16%;
-    bottom:12%;
-    transform:rotate(-10deg);
+    left:3%;
+    bottom:5%;
 }
 
 .header-flower.two{
-    right:17%;
-    top:12%;
-    transform:rotate(12deg);
+    right:4%;
+    top:8%;
 }
 
+@keyframes float{
+    0%,100%{
+        transform:translateY(0) rotate(-4deg);
+    }
 
-/* =========================================================
-   CSV INPUT
-========================================================= */
-
-.data-control{
-    margin:0 22px 20px;
-
-    padding:18px 22px;
-
-    border-radius:20px;
-
-    background:rgba(255,255,255,.88);
-
-    border:1px solid rgba(90,140,80,.15);
-
-    box-shadow:
-        0 8px 25px rgba(70,120,60,.08);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:15px;
-    flex-wrap:wrap;
-}
-
-.data-control label{
-    font-weight:700;
-    color:#39633f;
-}
-
-#csvFile{
-    padding:10px;
-
-    border-radius:10px;
-
-    border:1px solid #c9ddc7;
-
-    background:#fbfffa;
-}
-
-.data-status{
-    width:100%;
-
-    text-align:center;
-
-    font-size:13px;
-
-    color:#718871;
+    50%{
+        transform:translateY(-13px) rotate(5deg);
+    }
 }
 
 
@@ -208,25 +167,26 @@ body{
 
     gap:18px;
 
-    margin:0 22px 24px;
+    margin:20px 0 25px;
 }
 
 .kpi{
     position:relative;
 
-    padding:25px 22px;
+    overflow:hidden;
 
-    border-radius:24px;
+    padding:25px;
 
-    background:
-        rgba(255,255,255,.92);
+    min-height:145px;
 
-    border:1px solid rgba(90,140,80,.15);
+    border-radius:22px;
+
+    background:rgba(255,255,255,.82);
+
+    border:1px solid rgba(78,130,87,.16);
 
     box-shadow:
-        0 8px 28px rgba(70,120,60,.08);
-
-    overflow:hidden;
+        0 10px 28px rgba(60,100,67,.09);
 }
 
 .kpi::after{
@@ -234,45 +194,45 @@ body{
 
     position:absolute;
 
-    right:15px;
-    bottom:7px;
+    right:16px;
+    bottom:-8px;
 
-    font-size:32px;
+    font-size:42px;
 
-    opacity:.18;
+    opacity:.22;
 }
 
 .kpi-label{
-    font-size:12px;
+    font-size:13px;
 
-    font-weight:800;
+    font-weight:700;
 
     letter-spacing:1px;
 
-    color:#6d896e;
+    color:#729078;
 }
 
 .kpi-value{
-    margin-top:8px;
+    margin-top:7px;
 
     font-size:34px;
 
     font-weight:800;
 
-    color:#2c6337;
+    color:#2f693b;
 }
 
 .kpi-small{
-    margin-top:3px;
+    margin-top:4px;
 
-    font-size:12px;
+    font-size:13px;
 
-    color:#8ba18b;
+    color:#829985;
 }
 
 
 /* =========================================================
-   GRID
+   CARDS
 ========================================================= */
 
 .dashboard-grid{
@@ -282,118 +242,98 @@ body{
         repeat(2,minmax(0,1fr));
 
     gap:22px;
-
-    margin:0 22px 24px;
 }
-
-
-/* =========================================================
-   CARD
-========================================================= */
 
 .card{
     position:relative;
 
+    overflow:hidden;
+
     min-width:0;
 
-    padding:22px;
-
-    border-radius:28px;
+    border-radius:26px;
 
     background:
-        rgba(255,255,255,.94);
+        rgba(255,255,255,.88);
 
-    border:1px solid rgba(90,140,80,.14);
+    border:
+        1px solid rgba(70,120,79,.16);
 
     box-shadow:
-        0 10px 35px rgba(70,120,60,.09);
-
-    overflow:hidden;
+        0 12px 34px rgba(63,100,70,.09);
 }
 
 .card.full{
-    grid-column:1 / -1;
+    grid-column:1/-1;
 }
 
 .card-head{
     position:relative;
 
-    min-height:68px;
-
-    padding-right:55px;
+    padding:25px 27px 10px;
 }
 
 .card-title{
-    font-size:20px;
+    font-size:21px;
 
     font-weight:800;
 
-    color:#315f38;
+    color:#2e6338;
 }
 
 .card-sub{
     margin-top:5px;
 
-    font-size:12px;
+    font-size:13px;
 
-    color:#8a9d8b;
+    color:#819686;
 }
 
 .card-flower{
     position:absolute;
 
-    right:5px;
-    top:-7px;
+    right:24px;
+    top:18px;
 
-    font-size:40px;
+    font-size:36px;
 
-    transform:rotate(7deg);
-
-    opacity:.9;
+    opacity:.85;
 }
 
 .plot{
-    width:100%;
-    height:410px;
+    height:430px;
+
+    padding:5px 15px 18px;
 }
 
 
 /* =========================================================
-   RESEARCH FIELD
+   RESEARCH AREAS
 ========================================================= */
 
 .research-field{
     position:relative;
 
-    min-height:570px;
+    min-height:520px;
 
-    overflow:hidden;
-
-    border-radius:24px;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(222,246,218,.65),
-            rgba(250,255,248,.7)
-        );
+    padding:10px 20px 30px;
 }
 
 #researchPie{
     width:100%;
-    height:500px;
+    height:440px;
 }
 
 .research-center-label{
     position:absolute;
 
-    z-index:10;
+    z-index:5;
 
     left:50%;
-    top:48%;
+    top:50%;
 
     transform:
-        translate(-50%,-50%);
+        translate(-50%,-52%);
 
     text-align:center;
 
@@ -401,49 +341,38 @@ body{
 }
 
 .research-center-flower{
-    font-size:32px;
+    font-size:34px;
 }
 
 .research-center-number{
-    font-size:34px;
+    margin-top:-3px;
+
+    font-size:38px;
 
     font-weight:800;
 
-    color:#35653b;
+    color:#356d3f;
 }
 
 .research-center-text{
     font-size:12px;
 
-    color:#789078;
+    color:#829884;
 }
 
-.research-legend{
-    position:absolute;
-
-    left:20px;
-    bottom:20px;
+.research-legend,
+.research-hint{
+    text-align:center;
 
     font-size:12px;
 
-    line-height:1.8;
+    color:#78907c;
 
-    color:#718871;
+    line-height:1.8;
 }
 
 .research-hint{
-    position:absolute;
-
-    right:20px;
-    bottom:20px;
-
-    font-size:12px;
-
-    line-height:1.8;
-
-    text-align:right;
-
-    color:#718871;
+    margin-top:5px;
 }
 
 
@@ -454,18 +383,22 @@ body{
 .co-field{
     position:relative;
 
-    height:650px;
+    height:700px;
+
+    margin:5px 20px 25px;
 
     overflow:hidden;
 
-    border-radius:24px;
+    border-radius:25px;
 
     background:
         radial-gradient(
             circle at 50% 50%,
-            rgba(222,247,217,.7),
-            rgba(248,255,246,.9)
+            rgba(255,255,255,.95),
+            rgba(232,248,233,.55)
         );
+
+    border:1px solid rgba(70,130,78,.12);
 }
 
 .co-svg{
@@ -476,7 +409,7 @@ body{
     width:100%;
     height:100%;
 
-    z-index:3;
+    z-index:2;
 }
 
 .co-community{
@@ -486,73 +419,58 @@ body{
 
     filter:blur(2px);
 
-    opacity:.28;
+    opacity:.20;
 
-    z-index:1;
+    z-index:0;
 }
 
 .co-community.ai{
-    width:340px;
-    height:250px;
+    width:430px;
+    height:350px;
 
-    left:8%;
-    top:15%;
+    left:5%;
+    top:20%;
 
-    background:
-        radial-gradient(
-            circle,
-            #dcefdc,
-            transparent 70%
-        );
+    background:#ffc7dc;
 }
 
 .co-community.vision{
-    width:340px;
-    height:250px;
+    width:420px;
+    height:330px;
 
-    right:8%;
-    top:14%;
+    right:5%;
+    top:17%;
 
-    background:
-        radial-gradient(
-            circle,
-            #fff0c8,
-            transparent 70%
-        );
+    background:#fff0a7;
 }
 
 .co-community.data{
-    width:380px;
-    height:250px;
+    width:440px;
+    height:300px;
 
-    left:31%;
-    bottom:4%;
+    left:30%;
+    bottom:-70px;
 
-    background:
-        radial-gradient(
-            circle,
-            #fff0ad,
-            transparent 70%
-        );
+    background:#ffd39d;
 }
 
 .co-group-title{
     position:absolute;
 
-    z-index:8;
+    z-index:5;
 
-    font-size:14px;
-
-    font-weight:800;
-
-    padding:7px 12px;
+    padding:7px 13px;
 
     border-radius:20px;
 
-    background:rgba(255,255,255,.82);
+    background:rgba(255,255,255,.75);
+
+    font-size:13px;
+
+    font-weight:700;
 
     box-shadow:
-        0 5px 15px rgba(50,90,50,.08);
+        0 4px 14px rgba(50,90,55,.08);
 }
 
 .co-group-title.ai{
@@ -566,143 +484,187 @@ body{
 }
 
 .co-group-title.data{
-    left:42%;
-    bottom:6%;
+    left:43%;
+    bottom:5%;
+}
+
+.co-node{
+    position:absolute;
+
+    transform:translate(-50%,-50%);
+
+    z-index:4;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:
+        transform .2s ease;
+}
+
+.co-node:hover{
+    transform:
+        translate(-50%,-50%)
+        scale(1.12);
+}
+
+.co-node .flower{
+    line-height:1;
+}
+
+.co-node .label{
+    margin-top:4px;
+
+    padding:3px 7px;
+
+    border-radius:8px;
+
+    background:rgba(255,255,255,.85);
+
+    font-size:11px;
+
+    white-space:nowrap;
+
+    box-shadow:
+        0 3px 8px rgba(40,80,45,.08);
+}
+
+.co-node .count{
+    margin-top:2px;
+
+    font-size:10px;
+
+    color:#79907e;
 }
 
 .co-center{
     position:absolute;
 
-    z-index:10;
-
     left:50%;
-    top:50%;
+    top:48%;
 
     transform:
         translate(-50%,-50%);
 
-    text-align:center;
+    z-index:6;
 
-    pointer-events:none;
-}
+    width:145px;
+    height:145px;
 
-.co-center .icon{
-    width:90px;
-    height:90px;
+    display:flex;
 
-    margin:auto;
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
 
     border-radius:50%;
 
     background:
         radial-gradient(
             circle,
-            #ffe5a4 0 18%,
-            #fff2bd 19% 30%,
-            #f8d77b 31% 48%,
-            #fff 49% 53%,
-            #f3e3ad 54% 70%,
-            transparent 71%
+            #fff 45%,
+            #effbed 100%
         );
 
+    border:4px solid rgba(111,170,116,.28);
+
     box-shadow:
-        0 0 35px rgba(220,170,60,.28);
+        0 8px 30px rgba(70,110,75,.16);
+
+    text-align:center;
+}
+
+.co-center .icon{
+    font-size:42px;
 }
 
 .co-center .name{
-    margin-top:10px;
+    max-width:120px;
 
-    font-weight:800;
+    font-size:12px;
 
-    color:#456448;
+    font-weight:700;
+
+    color:#4c704f;
 }
 
 .butterfly{
     position:absolute;
 
-    z-index:12;
+    z-index:8;
 
-    font-size:25px;
-
-    pointer-events:none;
+    font-size:30px;
 
     animation:
-        butterflyFloat 5s ease-in-out infinite;
+        float 4s ease-in-out infinite;
 }
 
 .co-field .b1{
-    left:10%;
-    bottom:16%;
+    left:18%;
+    top:20%;
 }
 
 .co-field .b2{
-    right:13%;
-    top:25%;
+    right:20%;
+    top:27%;
 
     animation-delay:1s;
 }
 
 .co-field .b3{
     left:25%;
-    top:20%;
+    bottom:20%;
 
     animation-delay:2s;
 }
 
 .co-field .b4{
-    right:28%;
+    right:14%;
     bottom:18%;
 
-    animation-delay:3s;
+    animation-delay:.5s;
 }
-
-
-/* =========================================================
-   INSIGHT
-========================================================= */
 
 .insight{
-    margin-top:18px;
+    margin:0 25px 25px;
 
-    padding:20px 22px;
+    padding:18px 22px;
 
-    border-radius:20px;
+    border-radius:17px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #f4fbef,
-            #fbfff9
-        );
+    background:#f3fbf4;
 
-    border-left:5px solid #b6d99e;
+    color:#66806b;
 
-    color:#657965;
+    line-height:1.9;
 
     font-size:13px;
-
-    line-height:2;
 }
 
 
 /* =========================================================
-   FEATURE GARDEN
+   FEATURE VECTOR
 ========================================================= */
 
 .feature-field{
     position:relative;
 
-    height:720px;
+    height:760px;
+
+    margin:5px 20px 25px;
 
     overflow:hidden;
 
-    border-radius:24px;
+    border-radius:25px;
 
     background:
         radial-gradient(
-            circle at 50% 45%,
-            rgba(231,248,225,.75),
-            rgba(249,255,247,.95)
+            circle at center,
+            rgba(255,255,255,.96),
+            rgba(236,250,237,.7)
         );
 }
 
@@ -711,88 +673,49 @@ body{
 
     border-radius:50%;
 
-    opacity:.22;
+    filter:blur(3px);
 
-    filter:blur(1px);
+    opacity:.18;
 }
 
 .feature-group.ai{
-    width:42%;
-    height:36%;
+    width:480px;
+    height:390px;
 
-    left:5%;
-    top:13%;
+    left:3%;
+    top:15%;
 
-    background:#d9efd6;
+    background:#f6a8c8;
 }
 
 .feature-group.vision{
-    width:42%;
-    height:36%;
+    width:440px;
+    height:370px;
 
-    right:5%;
-    top:13%;
+    right:2%;
+    top:12%;
 
-    background:#fff0c4;
+    background:#ffe381;
 }
 
 .feature-group.data{
-    width:42%;
-    height:34%;
+    width:420px;
+    height:300px;
 
-    left:5%;
-    bottom:7%;
+    left:7%;
+    bottom:-40px;
 
-    background:#ffe7a7;
+    background:#ffca86;
 }
 
 .feature-group.tech{
-    width:42%;
-    height:34%;
+    width:430px;
+    height:300px;
 
-    right:5%;
-    bottom:7%;
+    right:4%;
+    bottom:-30px;
 
-    background:#eadcf5;
-}
-
-.group-title{
-    position:absolute;
-
-    z-index:10;
-
-    padding:7px 12px;
-
-    border-radius:20px;
-
-    background:rgba(255,255,255,.84);
-
-    box-shadow:
-        0 4px 12px rgba(50,90,50,.08);
-
-    font-size:13px;
-
-    font-weight:800;
-}
-
-.group-title.ai{
-    left:7%;
-    top:8%;
-}
-
-.group-title.vision{
-    right:7%;
-    top:8%;
-}
-
-.group-title.data{
-    left:7%;
-    bottom:5%;
-}
-
-.group-title.tech{
-    right:7%;
-    bottom:5%;
+    background:#d7b4ed;
 }
 
 .feature-svg{
@@ -803,15 +726,50 @@ body{
     width:100%;
     height:100%;
 
-    z-index:3;
+    z-index:1;
+}
 
-    pointer-events:none;
+.group-title{
+    position:absolute;
+
+    z-index:5;
+
+    padding:8px 13px;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.82);
+
+    font-size:13px;
+
+    font-weight:700;
+
+    box-shadow:
+        0 4px 12px rgba(50,90,55,.08);
+}
+
+.group-title.ai{
+    left:6%;
+    top:7%;
+}
+
+.group-title.vision{
+    right:6%;
+    top:7%;
+}
+
+.group-title.data{
+    left:7%;
+    bottom:7%;
+}
+
+.group-title.tech{
+    right:6%;
+    bottom:7%;
 }
 
 .feature-center{
     position:absolute;
-
-    z-index:12;
 
     left:50%;
     top:47%;
@@ -819,29 +777,51 @@ body{
     transform:
         translate(-50%,-50%);
 
-    text-align:center;
+    z-index:6;
 
-    pointer-events:none;
+    width:155px;
+    height:155px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+        radial-gradient(
+            circle,
+            #fff 45%,
+            #eef9ef
+        );
+
+    border:
+        4px solid rgba(108,164,114,.28);
+
+    box-shadow:
+        0 8px 30px rgba(60,100,67,.16);
 }
 
 .feature-center .flower{
-    font-size:70px;
+    font-size:48px;
 }
 
 .feature-center .title{
-    margin-top:-5px;
-
-    font-size:18px;
+    font-size:13px;
 
     font-weight:800;
 
-    color:#476848;
+    color:#527458;
 }
 
 .feature-flower{
     position:absolute;
 
-    z-index:15;
+    z-index:5;
 
     transform:
         translate(-50%,-50%);
@@ -857,30 +837,35 @@ body{
 .feature-flower:hover{
     transform:
         translate(-50%,-50%)
-        scale(1.12);
+        scale(1.13);
+
+    z-index:10;
 }
 
 .feature-flower .emoji{
-    line-height:1;
+    line-height:.9;
+
+    filter:
+        drop-shadow(
+            0 5px 5px
+            rgba(80,110,80,.15)
+        );
 }
 
 .feature-flower .label{
-    margin-top:4px;
+    margin-top:5px;
 
-    max-width:150px;
+    padding:3px 6px;
+
+    border-radius:7px;
+
+    background:rgba(255,255,255,.87);
 
     font-size:11px;
 
-    font-weight:700;
+    font-weight:600;
 
-    color:#4b634d;
-
-    background:
-        rgba(255,255,255,.82);
-
-    border-radius:10px;
-
-    padding:3px 6px;
+    white-space:nowrap;
 }
 
 .feature-flower .count{
@@ -888,34 +873,28 @@ body{
 
     font-size:10px;
 
-    color:#819281;
+    color:#79907e;
 }
 
 .feature-legend{
     position:absolute;
 
-    z-index:20;
+    right:18px;
+    top:18px;
 
-    left:50%;
-    bottom:10px;
+    z-index:10;
 
-    transform:
-        translateX(-50%);
+    padding:12px 15px;
 
-    padding:8px 14px;
+    border-radius:13px;
 
-    border-radius:14px;
-
-    background:
-        rgba(255,255,255,.9);
+    background:rgba(255,255,255,.85);
 
     font-size:11px;
 
-    color:#718171;
+    line-height:1.8;
 
-    text-align:center;
-
-    line-height:1.7;
+    color:#708574;
 }
 
 
@@ -924,60 +903,13 @@ body{
 ========================================================= */
 
 .footer{
-    margin:10px 22px 30px;
+    margin:28px 0;
 
     text-align:center;
 
-    font-size:13px;
+    font-size:12px;
 
-    color:#789078;
-}
-
-
-/* =========================================================
-   ANIMATION
-========================================================= */
-
-@keyframes float1{
-    0%,100%{
-        transform:
-            translate(0,0)
-            rotate(-5deg);
-    }
-
-    50%{
-        transform:
-            translate(20px,-15px)
-            rotate(8deg);
-    }
-}
-
-@keyframes float2{
-    0%,100%{
-        transform:
-            translate(0,0)
-            rotate(4deg);
-    }
-
-    50%{
-        transform:
-            translate(-18px,12px)
-            rotate(-7deg);
-    }
-}
-
-@keyframes butterflyFloat{
-    0%,100%{
-        transform:
-            translate(0,0)
-            rotate(-5deg);
-    }
-
-    50%{
-        transform:
-            translate(12px,-15px)
-            rotate(8deg);
-    }
+    color:#819583;
 }
 
 
@@ -985,7 +917,7 @@ body{
    RESPONSIVE
 ========================================================= */
 
-@media(max-width:900px){
+@media(max-width:1000px){
 
     .kpi-grid{
         grid-template-columns:
@@ -1002,64 +934,60 @@ body{
 
 }
 
-@media(max-width:600px){
-
-    .header{
-        margin:10px;
-        padding:35px 18px;
-    }
+@media(max-width:650px){
 
     .kpi-grid{
         grid-template-columns:1fr;
-
-        margin:
-            0 10px 18px;
     }
 
-    .dashboard-grid{
-        margin:
-            0 10px 18px;
-    }
-
-    .card{
-        padding:16px;
+    .hero{
+        padding:35px 18px;
     }
 
     .plot{
-        height:360px;
+        height:390px;
     }
 
     .research-field{
-        min-height:500px;
+        min-height:470px;
     }
 
     #researchPie{
-        height:440px;
+        height:390px;
     }
 
     .co-field{
-        height:560px;
+        height:620px;
     }
 
     .feature-field{
         height:850px;
+
+        overflow-x:hidden;
     }
 
+    .feature-legend{
+        left:15px;
+        right:auto;
+        top:auto;
+        bottom:15px;
+    }
 }
 
 </style>
-
 </head>
 
 
 <body>
 
+<div class="container">
 
-<!-- =========================================================
+
+<!-- ======================================================
      HEADER
-========================================================= -->
+====================================================== -->
 
-<header class="header">
+<header class="hero">
 
     <div class="header-butterfly one">
         🦋
@@ -1080,12 +1008,12 @@ body{
     <div class="header-inner">
 
         <h1>
-            🌱🌼 AI RESEARCH FLOWER FIELD
+            🌱🌸 AI RESEARCH VISUALIZATION
         </h1>
 
         <div class="subtitle">
             Research Keywords Growing Together
-            · Scopus Research Visualization
+            · Scopus Dataset
             · 🦋🌼
         </div>
 
@@ -1094,37 +1022,11 @@ body{
 </header>
 
 
-<!-- =========================================================
-     CSV CONTROL
-========================================================= -->
-
-<div class="data-control">
-
-    <label for="csvFile">
-        🌱 Select Scopus CSV
-    </label>
-
-    <input
-        type="file"
-        id="csvFile"
-        accept=".csv"
-    >
-
-    <div
-        class="data-status"
-        id="dataStatus"
-    >
-        Please select your Scopus CSV to grow the garden.
-    </div>
-
-</div>
-
-
-<!-- =========================================================
+<!-- ======================================================
      KPI
-========================================================= -->
+====================================================== -->
 
-<div class="kpi-grid">
+<section class="kpi-grid">
 
     <div class="kpi">
 
@@ -1134,8 +1036,7 @@ body{
 
         <div
             class="kpi-value"
-            id="kpiArticles"
-        >
+            id="articleCount">
             —
         </div>
 
@@ -1154,8 +1055,7 @@ body{
 
         <div
             class="kpi-value"
-            id="kpiKeywords"
-        >
+            id="keywordCount">
             —
         </div>
 
@@ -1174,8 +1074,7 @@ body{
 
         <div
             class="kpi-value"
-            id="kpiYears"
-        >
+            id="yearRange">
             —
         </div>
 
@@ -1194,8 +1093,7 @@ body{
 
         <div
             class="kpi-value"
-            id="kpiAreas"
-        >
+            id="areaCount">
             —
         </div>
 
@@ -1205,14 +1103,19 @@ body{
 
     </div>
 
-</div>
+</section>
 
 
-<!-- =========================================================
+<!-- ======================================================
+     DASHBOARD
+====================================================== -->
+
+<section class="dashboard-grid">
+
+
+<!-- ======================================================
      TOP KEYWORDS
-========================================================= -->
-
-<div class="dashboard-grid">
+====================================================== -->
 
 <div class="card">
 
@@ -1240,9 +1143,9 @@ body{
 </div>
 
 
-<!-- =========================================================
+<!-- ======================================================
      TOP AUTHORS
-========================================================= -->
+====================================================== -->
 
 <div class="card">
 
@@ -1270,9 +1173,9 @@ body{
 </div>
 
 
-<!-- =========================================================
+<!-- ======================================================
      PUBLICATIONS BY YEAR
-========================================================= -->
+====================================================== -->
 
 <div class="card full">
 
@@ -1300,9 +1203,9 @@ body{
 </div>
 
 
-<!-- =========================================================
+<!-- ======================================================
      RESEARCH AREAS
-========================================================= -->
+====================================================== -->
 
 <div class="card full">
 
@@ -1336,8 +1239,7 @@ body{
 
             <div
                 class="research-center-number"
-                id="researchCenterNumber"
-            >
+                id="centerAreaCount">
                 —
             </div>
 
@@ -1364,7 +1266,7 @@ body{
 
             🖱️ Hover = details<br>
 
-            👆 Click = explore section
+            👆 Click = separate section
 
         </div>
 
@@ -1373,9 +1275,9 @@ body{
 </div>
 
 
-<!-- =========================================================
-     CO-OCCURRENCE GARDEN
-========================================================= -->
+<!-- ======================================================
+     KEYWORD CO-OCCURRENCE
+====================================================== -->
 
 <div class="card full">
 
@@ -1386,8 +1288,7 @@ body{
         </div>
 
         <div class="card-sub">
-            Related keywords bloom together · Lines represent
-            co-occurrence relationships
+            Related keywords bloom together · Lines represent co-occurrence relationships
         </div>
 
         <div class="card-flower">
@@ -1403,9 +1304,7 @@ body{
     >
 
         <div class="co-community ai"></div>
-
         <div class="co-community vision"></div>
-
         <div class="co-community data"></div>
 
 
@@ -1447,7 +1346,9 @@ body{
 
         <div class="co-center">
 
-            <div class="icon"></div>
+            <div class="icon">
+                🌺
+            </div>
 
             <div class="name">
                 Artificial Intelligence
@@ -1462,32 +1363,37 @@ body{
 
         <b>🌺 How to read this garden</b><br>
 
-        🌸 Flowers represent research keywords.
+        🌸
+        Flowers represent research keywords.
 
         <br>
 
-        🌿 Lines represent keyword co-occurrence relationships.
+        🌿
+        Lines represent keyword co-occurrence relationships.
 
         <br>
 
-        🌺 The central flower represents the main research theme.
+        🌺
+        The central flower represents the main research theme.
 
         <br>
 
-        📏 Larger flowers represent keywords with higher frequency.
+        📏
+        Larger flowers represent keywords with higher frequency.
 
         <br>
 
-        🦋 Butterflies are decorative only.
+        🦋
+        Butterflies are decorative only.
 
     </div>
 
 </div>
 
 
-<!-- =========================================================
+<!-- ======================================================
      FEATURE VECTOR GARDEN
-========================================================= -->
+====================================================== -->
 
 <div class="card full">
 
@@ -1514,11 +1420,8 @@ body{
     >
 
         <div class="feature-group ai"></div>
-
         <div class="feature-group vision"></div>
-
         <div class="feature-group data"></div>
-
         <div class="feature-group tech"></div>
 
 
@@ -1584,41 +1487,72 @@ body{
 
         <div class="feature-legend">
 
-            🌸 AI & Machine Learning ·
-            🌼 Vision & Language ·
-            🌻 Data & Computing ·
-            🌷 Emerging Technology
-            <br>
-            📏 Flower size = Keyword frequency ·
-            🌿 Lines = Keyword relationship ·
-            🦋 Decoration
+            🌸 = AI & Machine Learning<br>
+            🌼 = Vision & Language<br>
+            🌻 = Data & Computing<br>
+            🌷 = Emerging Technology<br>
+            📏 Flower size = Keyword frequency<br>
+            🌿 Lines = Keyword relationship<br>
+            🦋 = Decoration
 
         </div>
 
     </div>
 
 
-    <div
-        class="insight"
-        id="researchGroupsInsight"
-    >
+    <div class="insight">
 
         <b>🌱 Research Groups</b><br>
 
-        Research groups will be generated from the keywords in your dataset.
+        🌸
+        <b>AI & Machine Learning</b>
+        —
+        Artificial Intelligence,
+        Machine Learning,
+        Deep Learning,
+        Neural Networks,
+        Classification
+
+        <br>
+
+        🌼
+        <b>Vision & Language</b>
+        —
+        Computer Vision,
+        Image Processing,
+        NLP,
+        Large Language Models,
+        Transformer
+
+        <br>
+
+        🌻
+        <b>Data & Computing</b>
+        —
+        Big Data,
+        Data Mining,
+        Cloud Computing,
+        Algorithm
+
+        <br>
+
+        🌷
+        <b>Emerging Technology</b>
+        —
+        IoT,
+        Robotics,
+        Optimization
 
     </div>
 
 </div>
 
-</div>
+</section>
 
 
 <div class="footer">
-
-    🌱🌸 AI Research Visualization
-    · Scopus Dataset
-    · 🦋🌼
+    🌱 AI Research Visualization · Scopus Dataset · Generated from CSV
+</div>
 
 </div>
 
@@ -1626,273 +1560,542 @@ body{
 <script>
 
 /* =========================================================
-   CSV PARSER
+   CONFIGURATION
 ========================================================= */
 
-function parseCSV(text){
+const CSV_FILE = "data.csv";
 
-    const rows = [];
+const TOP_KEYWORDS = 15;
+const TOP_AUTHORS = 12;
+const TOP_FEATURES = 20;
 
-    let row = [];
-    let cell = "";
-    let quoted = false;
 
-    for(let i=0;i<text.length;i++){
+/* =========================================================
+   CSV HELPERS
+========================================================= */
 
-        const char = text[i];
-        const next = text[i+1];
+function normalizeHeader(text){
 
-        if(char === '"' && next === '"' && quoted){
-
-            cell += '"';
-            i++;
-            continue;
-        }
-
-        if(char === '"'){
-
-            quoted = !quoted;
-            continue;
-        }
-
-        if(char === "," && !quoted){
-
-            row.push(cell);
-            cell = "";
-            continue;
-        }
-
-        if(
-            (char === "\n" || char === "\r") &&
-            !quoted
-        ){
-
-            if(char === "\r" && next === "\n"){
-                i++;
-            }
-
-            row.push(cell);
-
-            if(row.some(v => v.trim() !== "")){
-                rows.push(row);
-            }
-
-            row = [];
-            cell = "";
-
-            continue;
-        }
-
-        cell += char;
-    }
-
-    if(cell !== "" || row.length){
-
-        row.push(cell);
-
-        if(row.some(v => v.trim() !== "")){
-            rows.push(row);
-        }
-    }
-
-    if(!rows.length){
-        return [];
-    }
-
-    const headers = rows[0].map(h =>
-        h.trim().replace(/^\uFEFF/,"")
-    );
-
-    return rows.slice(1).map(values => {
-
-        const obj = {};
-
-        headers.forEach((header,index)=>{
-            obj[header] =
-                (values[index] || "").trim();
-        });
-
-        return obj;
-
-    });
+    return String(text || "")
+        .trim()
+        .toLowerCase()
+        .replace(/[\s_\-]+/g," ");
 
 }
 
 
-/* =========================================================
-   COLUMN FINDER
-========================================================= */
+function findColumn(columns, candidates){
 
-function findColumn(rows,names){
+    const normalized =
+        columns.map(c => ({
+            original:c,
+            normalized:normalizeHeader(c)
+        }));
 
-    if(!rows.length) return null;
+    for(const candidate of candidates){
 
-    const columns =
-        Object.keys(rows[0]);
-
-    for(const wanted of names){
+        const target =
+            normalizeHeader(candidate);
 
         const exact =
-            columns.find(c =>
-                c.trim().toLowerCase() ===
-                wanted.toLowerCase()
+            normalized.find(
+                x => x.normalized === target
             );
 
-        if(exact) return exact;
+        if(exact)
+            return exact.original;
+
     }
 
-    for(const wanted of names){
+    for(const candidate of candidates){
+
+        const target =
+            normalizeHeader(candidate);
 
         const partial =
-            columns.find(c =>
-                c.toLowerCase().includes(
-                    wanted.toLowerCase()
-                )
+            normalized.find(
+                x =>
+                    x.normalized.includes(target) ||
+                    target.includes(x.normalized)
             );
 
-        if(partial) return partial;
+        if(partial)
+            return partial.original;
+
     }
 
     return null;
 }
 
 
-/* =========================================================
-   VALUE CLEANER
-========================================================= */
-
-function cleanValue(value){
+function cleanText(value){
 
     return String(value || "")
-        .replace(/^\s*[\[\(]/,"")
-        .replace(/[\]\)]\s*$/,"")
+        .replace(/\u00a0/g," ")
         .trim();
+
 }
 
-
-/* =========================================================
-   SPLIT KEYWORDS
-========================================================= */
 
 function splitKeywords(value){
 
-    if(!value) return [];
+    if(!value)
+        return [];
 
-    return value
-        .split(/;|\||\n/)
-        .map(v => cleanValue(v))
+    return String(value)
+        .split(/[;,|]+/)
+        .map(x => x.trim())
         .filter(Boolean);
+
 }
 
-
-/* =========================================================
-   SPLIT AUTHORS
-========================================================= */
 
 function splitAuthors(value){
 
-    if(!value) return [];
+    if(!value)
+        return [];
 
-    return value
-        .split(/;|\||\n/)
-        .map(v => cleanValue(v))
+    return String(value)
+        .split(/[;,|]+/)
+        .map(x => x.trim())
         .filter(Boolean);
+
 }
 
 
 /* =========================================================
-   YEAR NORMALIZER
+   LOAD CSV
 ========================================================= */
 
-function getYear(value){
+async function loadCSV(){
 
-    const match =
-        String(value || "").match(/\b(19|20)\d{2}\b/);
+    const response =
+        await fetch(CSV_FILE);
 
-    return match
-        ? Number(match[0])
-        : null;
-}
+    if(!response.ok){
 
+        throw new Error(
+            "ไม่พบไฟล์ " + CSV_FILE
+        );
 
-/* =========================================================
-   COUNTER
-========================================================= */
+    }
 
-function countValues(rows,column,splitter){
+    const text =
+        await response.text();
 
-    const map = new Map();
+    return new Promise(
+        (resolve,reject)=>{
 
-    rows.forEach(row => {
-
-        const value =
-            row[column];
-
-        splitter(value).forEach(item => {
-
-            const key =
-                item.trim();
-
-            if(!key) return;
-
-            map.set(
-                key,
-                (map.get(key) || 0) + 1
+            d3.csvParse(
+                text,
+                rows => resolve(rows)
             );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+async function init(){
+
+    try{
+
+        const rows =
+            await loadCSV();
+
+        if(!rows.length)
+            throw new Error("CSV ไม่มีข้อมูล");
+
+
+        const columns =
+            Object.keys(rows[0]);
+
+
+        /* -----------------------------------------------
+           FIND COLUMNS
+        ------------------------------------------------ */
+
+        const yearColumn =
+            findColumn(
+                columns,
+                [
+                    "Year",
+                    "Publication Year",
+                    "Published Year",
+                    "PY",
+                    "ปี"
+                ]
+            );
+
+
+        const keywordColumn =
+            findColumn(
+                columns,
+                [
+                    "Author Keywords",
+                    "Author Keyword",
+                    "Keywords",
+                    "Keyword",
+                    "DE"
+                ]
+            );
+
+
+        const authorColumn =
+            findColumn(
+                columns,
+                [
+                    "Authors",
+                    "Author",
+                    "Authors"
+                ]
+            );
+
+
+        const subjectColumn =
+            findColumn(
+                columns,
+                [
+                    "Subject",
+                    "Subjects",
+                    "Research Areas",
+                    "Research Area"
+                ]
+            );
+
+
+        console.log("Columns:",columns);
+
+        console.log({
+            yearColumn,
+            keywordColumn,
+            authorColumn,
+            subjectColumn
+        });
+
+
+        /* -----------------------------------------------
+           ARTICLES
+        ------------------------------------------------ */
+
+        document
+            .getElementById("articleCount")
+            .textContent =
+                rows.length.toLocaleString();
+
+
+        /* -----------------------------------------------
+           KEYWORDS
+        ------------------------------------------------ */
+
+        const keywordFreq =
+            new Map();
+
+        const keywordRows =
+            [];
+
+        rows.forEach(row=>{
+
+            const keywords =
+                splitKeywords(
+                    keywordColumn
+                        ? row[keywordColumn]
+                        : ""
+                );
+
+            keywords.forEach(keyword=>{
+
+                const key =
+                    keyword.toLowerCase();
+
+                if(!keywordFreq.has(key)){
+
+                    keywordFreq.set(
+                        key,
+                        {
+                            label:keyword,
+                            count:0
+                        }
+                    );
+
+                }
+
+                keywordFreq
+                    .get(key)
+                    .count++;
+
+                keywordRows.push({
+                    row,
+                    keyword:key
+                });
+
+            });
 
         });
 
-    });
 
-    return [...map.entries()]
-        .sort((a,b)=>b[1]-a[1]);
+        document
+            .getElementById("keywordCount")
+            .textContent =
+                keywordFreq.size.toLocaleString();
+
+
+        /* -----------------------------------------------
+           YEAR
+        ------------------------------------------------ */
+
+        const yearFreq =
+            new Map();
+
+        rows.forEach(row=>{
+
+            if(!yearColumn)
+                return;
+
+            const year =
+                parseInt(
+                    String(row[yearColumn])
+                        .match(/\d{4}/)?.[0]
+                );
+
+            if(
+                Number.isFinite(year) &&
+                year >= 1900 &&
+                year <= 2100
+            ){
+
+                yearFreq.set(
+                    year,
+                    (yearFreq.get(year)||0)+1
+                );
+
+            }
+
+        });
+
+
+        const years =
+            [...yearFreq.keys()]
+                .sort((a,b)=>a-b);
+
+
+        if(years.length){
+
+            document
+                .getElementById("yearRange")
+                .textContent =
+                    `${years[0]}–${years[years.length-1]}`;
+
+        }
+
+
+        /* -----------------------------------------------
+           AUTHORS
+        ------------------------------------------------ */
+
+        const authorFreq =
+            new Map();
+
+
+        rows.forEach(row=>{
+
+            const authors =
+                splitAuthors(
+                    authorColumn
+                        ? row[authorColumn]
+                        : ""
+                );
+
+            authors.forEach(author=>{
+
+                const key =
+                    author.toLowerCase();
+
+                if(!authorFreq.has(key)){
+
+                    authorFreq.set(
+                        key,
+                        {
+                            label:author,
+                            count:0
+                        }
+                    );
+
+                }
+
+                authorFreq
+                    .get(key)
+                    .count++;
+
+            });
+
+        });
+
+
+        /* -----------------------------------------------
+           SUBJECTS
+        ------------------------------------------------ */
+
+        const subjectFreq =
+            new Map();
+
+
+        rows.forEach(row=>{
+
+            const subjects =
+                splitKeywords(
+                    subjectColumn
+                        ? row[subjectColumn]
+                        : ""
+                );
+
+            subjects.forEach(subject=>{
+
+                const key =
+                    subject.toLowerCase();
+
+                if(!subjectFreq.has(key)){
+
+                    subjectFreq.set(
+                        key,
+                        {
+                            label:subject,
+                            count:0
+                        }
+                    );
+
+                }
+
+                subjectFreq
+                    .get(key)
+                    .count++;
+
+            });
+
+        });
+
+
+        const subjects =
+            [...subjectFreq.values()]
+                .sort(
+                    (a,b)=>b.count-a.count
+                );
+
+
+        document
+            .getElementById("areaCount")
+            .textContent =
+                subjects.length.toLocaleString();
+
+
+        document
+            .getElementById("centerAreaCount")
+            .textContent =
+                subjects.length;
+
+
+        /* -----------------------------------------------
+           DRAW
+        ------------------------------------------------ */
+
+        drawKeywords(
+            [...keywordFreq.values()]
+                .sort(
+                    (a,b)=>b.count-a.count
+                )
+                .slice(0,TOP_KEYWORDS)
+        );
+
+
+        drawAuthors(
+            [...authorFreq.values()]
+                .sort(
+                    (a,b)=>b.count-a.count
+                )
+                .slice(0,TOP_AUTHORS)
+        );
+
+
+        drawYears(
+            years,
+            yearFreq
+        );
+
+
+        drawSubjects(
+            subjects
+        );
+
+
+        drawFeatureGarden(
+            [...keywordFreq.values()]
+                .sort(
+                    (a,b)=>b.count-a.count
+                )
+                .slice(0,TOP_FEATURES)
+        );
+
+
+        drawCoOccurrence(
+            rows,
+            keywordColumn,
+            keywordFreq
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        document.body.insertAdjacentHTML(
+            "beforeend",
+
+            `
+            <div style="
+                position:fixed;
+                left:20px;
+                right:20px;
+                bottom:20px;
+                z-index:9999;
+                padding:18px;
+                border-radius:15px;
+                background:#fff0f0;
+                border:1px solid #e6aaaa;
+                color:#8b3a3a;
+                box-shadow:0 10px 30px rgba(0,0,0,.12);
+            ">
+                ⚠️ ไม่สามารถโหลด CSV ได้:
+                ${error.message}
+                <br>
+                ตรวจสอบว่าไฟล์
+                <b>data.csv</b>
+                อยู่โฟลเดอร์เดียวกับ HTML
+            </div>
+            `
+        );
+
+    }
+
 }
-
-
-/* =========================================================
-   NUMBER FORMAT
-========================================================= */
-
-function fmt(number){
-
-    return Number(number || 0)
-        .toLocaleString("en-US");
-}
-
-
-/* =========================================================
-   PLOTLY COMMON
-========================================================= */
-
-const plotFont = {
-    family:"Segoe UI, Arial, sans-serif",
-    color:"#506b52"
-};
-
-const plotConfig = {
-    responsive:true,
-    displayModeBar:false
-};
 
 
 /* =========================================================
    TOP KEYWORDS
 ========================================================= */
 
-function drawKeywords(rows,column){
-
-    const data =
-        countValues(
-            rows,
-            column,
-            splitKeywords
-        ).slice(0,15);
+function drawKeywords(data){
 
     const labels =
-        data.map(d=>d[0]).reverse();
+        data.map(x=>x.label).reverse();
 
     const values =
-        data.map(d=>d[1]).reverse();
+        data.map(x=>x.count).reverse();
+
 
     Plotly.newPlot(
         "keywords",
@@ -1904,42 +2107,34 @@ function drawKeywords(rows,column){
             x:values,
             y:labels,
 
-            text:values.map(fmt),
+            text:values.map(
+                x=>x.toLocaleString()
+            ),
 
             textposition:"outside",
 
             hovertemplate:
-                "<b>%{y}</b><br>" +
-                "Frequency: %{x:,}" +
-                "<extra></extra>"
-        }],
-        {
-            margin:{
-                l:170,
-                r:45,
-                t:15,
-                b:45
-            },
+                "<b>%{y}</b><br>"+
+                "Frequency: %{x:,}"+
+                "<extra></extra>",
 
-            paper_bgcolor:"rgba(0,0,0,0)",
-
-            plot_bgcolor:"rgba(0,0,0,0)",
-
-            font:plotFont,
-
-            xaxis:{
-                title:"Frequency",
-
-                gridcolor:
-                    "rgba(100,140,100,.12)"
-            },
-
-            yaxis:{
-                automargin:true
+            marker:{
+                line:{
+                    width:1
+                }
             }
-        },
-        plotConfig
+        }],
+
+        plotLayout(
+            "Top Author Keywords"
+        ),
+
+        {
+            responsive:true,
+            displayModeBar:false
+        }
     );
+
 }
 
 
@@ -1947,20 +2142,14 @@ function drawKeywords(rows,column){
    TOP AUTHORS
 ========================================================= */
 
-function drawAuthors(rows,column){
-
-    const data =
-        countValues(
-            rows,
-            column,
-            splitAuthors
-        ).slice(0,15);
+function drawAuthors(data){
 
     const labels =
-        data.map(d=>d[0]).reverse();
+        data.map(x=>x.label).reverse();
 
     const values =
-        data.map(d=>d[1]).reverse();
+        data.map(x=>x.count).reverse();
+
 
     Plotly.newPlot(
         "authors",
@@ -1972,42 +2161,28 @@ function drawAuthors(rows,column){
             x:values,
             y:labels,
 
-            text:values.map(fmt),
+            text:values.map(
+                x=>x.toLocaleString()
+            ),
 
             textposition:"outside",
 
             hovertemplate:
-                "<b>%{y}</b><br>" +
-                "Documents: %{x:,}" +
+                "<b>%{y}</b><br>"+
+                "Publications: %{x:,}"+
                 "<extra></extra>"
         }],
+
+        plotLayout(
+            "Top Authors"
+        ),
+
         {
-            margin:{
-                l:190,
-                r:45,
-                t:15,
-                b:45
-            },
-
-            paper_bgcolor:"rgba(0,0,0,0)",
-
-            plot_bgcolor:"rgba(0,0,0,0)",
-
-            font:plotFont,
-
-            xaxis:{
-                title:"Articles",
-
-                gridcolor:
-                    "rgba(100,140,100,.12)"
-            },
-
-            yaxis:{
-                automargin:true
-            }
-        },
-        plotConfig
+            responsive:true,
+            displayModeBar:false
+        }
     );
+
 }
 
 
@@ -2015,105 +2190,156 @@ function drawAuthors(rows,column){
    PUBLICATIONS BY YEAR
 ========================================================= */
 
-function drawYears(rows,column){
-
-    const yearMap = new Map();
-
-    rows.forEach(row => {
-
-        const year =
-            getYear(row[column]);
-
-        if(year === null) return;
-
-        yearMap.set(
-            year,
-            (yearMap.get(year) || 0) + 1
-        );
-
-    });
-
-    const years =
-        [...yearMap.keys()]
-        .sort((a,b)=>a-b);
+function drawYears(years,yearFreq){
 
     const values =
-        years.map(y=>yearMap.get(y));
+        years.map(
+            y => yearFreq.get(y)
+        );
+
+
+    /*
+        Main line
+    */
+
+    const lineTrace = {
+
+        x:years,
+
+        y:values,
+
+        type:"scatter",
+
+        mode:"lines+markers",
+
+        line:{
+            shape:"spline",
+            width:4
+        },
+
+        marker:{
+            size:10
+        },
+
+        fill:"tozeroy",
+
+        fillcolor:
+            "rgba(117,181,119,.13)",
+
+        hovertemplate:
+            "<b>%{x}</b><br>"+
+            "Publications: %{y:,}"+
+            "<extra></extra>"
+
+    };
+
+
+    /*
+        Flower markers
+    */
+
+    const flowerTrace = {
+
+        x:years,
+
+        y:values,
+
+        type:"scatter",
+
+        mode:"text",
+
+        text:
+            years.map(
+                (year,i)=>{
+
+                    if(i === values.length-1)
+                        return "🌼";
+
+                    return "🌸";
+
+                }
+            ),
+
+        textfont:{
+            size:years.map(
+                (year,i)=>{
+
+                    const max =
+                        Math.max(...values);
+
+                    return (
+                        18 +
+                        (values[i]/max)*20
+                    );
+
+                }
+            )
+        },
+
+        hovertemplate:
+            "<b>%{x}</b><br>"+
+            "Publications: %{y:,}"+
+            "<extra></extra>"
+
+    };
+
 
     Plotly.newPlot(
         "years",
-        [{
+        [
+            lineTrace,
+            flowerTrace
+        ],
 
-            type:"scatter",
-
-            mode:"lines+markers",
-
-            x:years,
-
-            y:values,
-
-            text:values.map(fmt),
-
-            customdata:values,
-
-            line:{
-                width:4,
-                shape:"spline"
-            },
-
-            marker:{
-                size:9
-            },
-
-            fill:"tozeroy",
-
-            hovertemplate:
-                "<b>%{x}</b><br>" +
-                "Publications: %{y:,}" +
-                "<extra></extra>"
-
-        }],
         {
 
             margin:{
                 l:65,
                 r:30,
-                t:20,
+                t:25,
                 b:55
             },
 
-            paper_bgcolor:"rgba(0,0,0,0)",
+            paper_bgcolor:
+                "rgba(0,0,0,0)",
 
-            plot_bgcolor:"rgba(0,0,0,0)",
-
-            font:plotFont,
+            plot_bgcolor:
+                "rgba(0,0,0,0)",
 
             xaxis:{
-
                 title:"Publication Year",
 
-                dtick:1,
+                dtick:
+                    years.length > 12
+                        ? 1
+                        : undefined,
 
                 gridcolor:
-                    "rgba(100,140,100,.10)"
-
+                    "rgba(100,140,105,.10)"
             },
 
             yaxis:{
-
                 title:"Number of Publications",
 
                 rangemode:"tozero",
 
                 gridcolor:
-                    "rgba(100,140,100,.10)"
+                    "rgba(100,140,105,.10)"
+            },
 
+            showlegend:false,
+
+            hoverlabel:{
+                bgcolor:"#ffffff"
             }
-
         },
 
-        plotConfig
+        {
+            responsive:true,
+            displayModeBar:false
+        }
     );
+
 }
 
 
@@ -2121,76 +2347,62 @@ function drawYears(rows,column){
    RESEARCH AREAS
 ========================================================= */
 
-function drawResearchAreas(rows,column){
+function drawSubjects(subjects){
 
-    const data =
-        countValues(
-            rows,
-            column,
-            value => {
+    if(!subjects.length){
 
-                if(!value) return [];
-
-                return [
-                    cleanValue(value)
-                ];
-
+        Plotly.newPlot(
+            "researchPie",
+            [],
+            plotLayout("No Subject data"),
+            {
+                responsive:true,
+                displayModeBar:false
             }
         );
 
-    const top =
-        data.slice(0,10);
+        return;
+    }
 
-    const labels =
-        top.map(d=>d[0]);
-
-    const values =
-        top.map(d=>d[1]);
-
-    document
-        .getElementById(
-            "researchCenterNumber"
-        )
-        .textContent =
-        labels.length;
 
     Plotly.newPlot(
         "researchPie",
-        [{
 
+        [{
             type:"pie",
 
-            labels:labels,
+            labels:
+                subjects.map(
+                    x=>x.label
+                ),
 
-            values:values,
+            values:
+                subjects.map(
+                    x=>x.count
+                ),
 
-            hole:.58,
-
-            sort:false,
+            hole:.62,
 
             textinfo:"percent",
 
             hovertemplate:
-                "<b>%{label}</b><br>" +
-                "Articles: %{value:,}<br>" +
-                "Share: %{percent}" +
+                "<b>%{label}</b><br>"+
+                "Articles: %{value:,}<br>"+
+                "Share: %{percent}"+
                 "<extra></extra>",
 
-            marker:{
-                line:{
-                    color:"#ffffff",
-                    width:3
-                }
-            }
+            sort:false,
 
+            direction:"clockwise"
         }],
+
         {
 
             margin:{
-                l:15,
-                r:15,
-                t:10,
-                b:10
+                l:20,
+                r:20,
+                t:15,
+                b:15
             },
 
             paper_bgcolor:
@@ -2207,84 +2419,16 @@ function drawResearchAreas(rows,column){
                 x:.5,
                 xanchor:"center",
 
-                y:-.02,
-
-                font:{
-                    size:11
-                }
-            },
-
-            font:plotFont
-
+                y:-.03
+            }
         },
 
-        plotConfig
+        {
+            responsive:true,
+            displayModeBar:false
+        }
     );
-}
 
-
-/* =========================================================
-   KEYWORD GROUPING
-========================================================= */
-
-function classifyKeyword(keyword){
-
-    const k =
-        keyword.toLowerCase();
-
-    if(
-        /artificial intelligence|machine learning|deep learning|neural|classification|reinforcement|supervised|unsupervised|generative ai|llm|large language|transformer|natural language processing|nlp/.test(k)
-    ){
-        return "ai";
-    }
-
-    if(
-        /computer vision|image|visual|speech|language|text|semantic|sentiment|object detection|face|video/.test(k)
-    ){
-        return "vision";
-    }
-
-    if(
-        /big data|data mining|data science|cloud|algorithm|database|analytics|data analysis|distributed|computing/.test(k)
-    ){
-        return "data";
-    }
-
-    return "tech";
-}
-
-
-/* =========================================================
-   FLOWER STYLE
-========================================================= */
-
-function flowerForGroup(group){
-
-    if(group === "ai"){
-        return {
-            emoji:"🌸",
-            color:"#d9efd6"
-        };
-    }
-
-    if(group === "vision"){
-        return {
-            emoji:"🌼",
-            color:"#fff0b9"
-        };
-    }
-
-    if(group === "data"){
-        return {
-            emoji:"🌻",
-            color:"#ffe7a1"
-        };
-    }
-
-    return {
-        emoji:"🌷",
-        color:"#eadcf5"
-    };
 }
 
 
@@ -2292,163 +2436,197 @@ function flowerForGroup(group){
    FEATURE VECTOR GARDEN
 ========================================================= */
 
-function drawFeatureGarden(rows,column){
+function classifyKeyword(keyword){
 
-    const keywordData =
-        countValues(
-            rows,
-            column,
-            splitKeywords
-        ).slice(0,20);
+    const k =
+        keyword.toLowerCase();
+
+
+    if(
+        /artificial intelligence|machine learning|deep learning|neural|classification|reinforcement|generative ai|llm|large language/.test(k)
+    )
+        return "ai";
+
+
+    if(
+        /computer vision|image|vision|natural language|nlp|language|transformer|speech|text/.test(k)
+    )
+        return "vision";
+
+
+    if(
+        /big data|data mining|data analysis|cloud|algorithm|database|computing|analytics/.test(k)
+    )
+        return "data";
+
+
+    return "tech";
+
+}
+
+
+function drawFeatureGarden(data){
 
     const container =
         document.getElementById(
             "featureFlowers"
         );
 
+
     container.innerHTML = "";
 
-    if(!keywordData.length){
-        return;
-    }
 
     const groups = {
-        ai:[],
-        vision:[],
-        data:[],
-        tech:[]
+
+        ai:{
+            emoji:"🌸",
+            items:[]
+        },
+
+        vision:{
+            emoji:"🌼",
+            items:[]
+        },
+
+        data:{
+            emoji:"🌻",
+            items:[]
+        },
+
+        tech:{
+            emoji:"🌷",
+            items:[]
+        }
+
     };
 
-    keywordData.forEach(item => {
+
+    data.forEach(item=>{
 
         const group =
-            classifyKeyword(item[0]);
+            classifyKeyword(
+                item.label
+            );
 
-        groups[group].push(item);
+        groups[group]
+            .items
+            .push(item);
 
     });
 
 
-    const positions = {
+    const positions = [
 
-        ai:[
-            [14,32],
-            [27,27],
-            [41,34],
-            [22,48],
-            [36,50]
-        ],
+        [15,38],
+        [27,34],
+        [40,39],
+        [20,53],
+        [35,54],
 
-        vision:[
-            [60,30],
-            [74,27],
-            [68,45],
-            [82,43],
-            [78,57]
-        ],
+        [61,35],
+        [75,34],
+        [68,50],
+        [83,49],
+        [78,62],
 
-        data:[
-            [16,70],
-            [29,75],
-            [42,68],
-            [27,61],
-            [42,79]
-        ],
+        [18,76],
+        [31,81],
+        [43,75],
+        [28,68],
 
-        tech:[
-            [59,70],
-            [72,75],
-            [84,68],
-            [66,60],
-            [82,80]
-        ]
+        [61,77],
+        [73,80],
+        [84,75],
+        [52,24],
+        [51,72],
+        [90,58]
 
-    };
+    ];
 
 
-    Object.entries(groups).forEach(
-        ([group,items]) => {
+    data.forEach((item,index)=>{
 
-            items
-                .slice(0,5)
-                .forEach(
-                    (item,index) => {
+        const group =
+            classifyKeyword(
+                item.label
+            );
 
-                        const pos =
-                            positions[group][index];
 
-                        if(!pos) return;
+        const p =
+            positions[index] ||
+            [
+                10 +
+                Math.random()*80,
 
-                        const [x,y] = pos;
+                25 +
+                Math.random()*60
+            ];
 
-                        const flower =
-                            flowerForGroup(group);
 
-                        const max =
-                            keywordData[0][1];
+        const minSize = 28;
+        const maxSize = 66;
 
-                        const size =
-                            27 +
-                            (
-                                item[1] / max
-                            ) * 38;
+        const maxCount =
+            data[0]?.count || 1;
 
-                        const div =
-                            document.createElement(
-                                "div"
-                            );
+        const size =
+            minSize +
+            (
+                item.count /
+                maxCount
+            ) *
+            (
+                maxSize-minSize
+            );
 
-                        div.className =
-                            "feature-flower";
 
-                        div.style.left =
-                            x + "%";
+        const div =
+            document.createElement("div");
 
-                        div.style.top =
-                            y + "%";
+        div.className =
+            "feature-flower";
 
-                        div.dataset.keyword =
-                            item[0];
 
-                        div.dataset.count =
-                            item[1];
+        div.style.left =
+            p[0]+"%";
 
-                        div.innerHTML = `
+        div.style.top =
+            p[1]+"%";
 
-                            <div
-                                class="emoji"
-                                style="
-                                    font-size:${size}px
-                                "
-                            >
-                                ${flower.emoji}
-                            </div>
 
-                            <div class="label">
-                                ${escapeHTML(item[0])}
-                            </div>
+        div.innerHTML = `
 
-                            <div class="count">
-                                ${fmt(item[1])}
-                            </div>
+            <div
+                class="emoji"
+                style="font-size:${size}px"
+            >
+                ${groups[group].emoji}
+            </div>
 
-                        `;
+            <div class="label">
+                ${escapeHTML(item.label)}
+            </div>
 
-                        div.title =
-                            `${item[0]} · ${fmt(item[1])}`;
+            <div class="count">
+                ${item.count.toLocaleString()}
+            </div>
 
-                        container.appendChild(div);
+        `;
 
-                    }
-                );
 
-        }
+        div.title =
+            `${item.label}: ${item.count.toLocaleString()}`;
+
+
+        container.appendChild(div);
+
+    });
+
+
+    drawFeatureLines(
+        data,
+        positions
     );
-
-
-    drawFeatureLines();
-
-    updateResearchGroupsInsight(groups);
 
 }
 
@@ -2457,170 +2635,523 @@ function drawFeatureGarden(rows,column){
    FEATURE LINES
 ========================================================= */
 
-function drawFeatureLines(){
+function drawFeatureLines(
+    data,
+    positions
+){
 
     const svg =
         document.getElementById(
             "featureSvg"
         );
 
+
     svg.innerHTML = "";
 
-    const flowers =
-        [
-            ...document.querySelectorAll(
-                "#featureFlowers .feature-flower"
-            )
-        ];
 
-    if(flowers.length < 2){
-        return;
-    }
-
-    const rect =
-        document
-            .getElementById(
-                "featureField"
-            )
-            .getBoundingClientRect();
-
-    flowers.forEach((flower,index)=>{
-
-        if(index >= flowers.length - 1){
-            return;
-        }
-
-        const next =
-            flowers[index+1];
-
-        const r1 =
-            flower.getBoundingClientRect();
-
-        const r2 =
-            next.getBoundingClientRect();
-
-        const x1 =
-            r1.left -
-            rect.left +
-            r1.width/2;
-
-        const y1 =
-            r1.top -
-            rect.top +
-            r1.height/2;
-
-        const x2 =
-            r2.left -
-            rect.left +
-            r2.width/2;
-
-        const y2 =
-            r2.top -
-            rect.top +
-            r2.height/2;
-
-        const line =
-            document.createElementNS(
-                "http://www.w3.org/2000/svg",
-                "line"
-            );
-
-        line.setAttribute(
-            "x1",
-            x1
+    const field =
+        document.getElementById(
+            "featureField"
         );
 
-        line.setAttribute(
-            "y1",
-            y1
-        );
 
-        line.setAttribute(
-            "x2",
-            x2
-        );
+    const width =
+        field.clientWidth;
 
-        line.setAttribute(
-            "y2",
-            y2
-        );
-
-        line.setAttribute(
-            "stroke",
-            "#b8cfb3"
-        );
-
-        line.setAttribute(
-            "stroke-width",
-            "1.5"
-        );
-
-        line.setAttribute(
-            "stroke-opacity",
-            ".55"
-        );
-
-        svg.appendChild(line);
-
-    });
-
-}
+    const height =
+        field.clientHeight;
 
 
-/* =========================================================
-   RESEARCH GROUP TEXT
-========================================================= */
+    const center = {
 
-function updateResearchGroupsInsight(groups){
-
-    const names = {
-
-        ai:"🌸 <b>AI & Machine Learning</b>",
-
-        vision:"🌼 <b>Vision & Language</b>",
-
-        data:"🌻 <b>Data & Computing</b>",
-
-        tech:"🌷 <b>Emerging Technology</b>"
+        x:width*.5,
+        y:height*.47
 
     };
 
-    const parts = [];
 
-    Object.entries(groups).forEach(
-        ([group,items]) => {
+    data.forEach(
+        (item,index)=>{
 
-            if(!items.length) return;
+            if(index>=positions.length)
+                return;
 
-            const keywords =
-                items
-                    .slice(0,8)
-                    .map(x =>
-                        escapeHTML(x[0])
+
+            const x =
+                width *
+                positions[index][0] /
+                100;
+
+            const y =
+                height *
+                positions[index][1] /
+                100;
+
+
+            const distance =
+                Math.sqrt(
+                    Math.pow(x-center.x,2)+
+                    Math.pow(y-center.y,2)
+                );
+
+
+            if(distance < 330){
+
+                const line =
+                    document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "line"
+                    );
+
+                line.setAttribute(
+                    "x1",
+                    center.x
+                );
+
+                line.setAttribute(
+                    "y1",
+                    center.y
+                );
+
+                line.setAttribute(
+                    "x2",
+                    x
+                );
+
+                line.setAttribute(
+                    "y2",
+                    y
+                );
+
+                line.setAttribute(
+                    "stroke",
+                    "#8bb98e"
+                );
+
+                line.setAttribute(
+                    "stroke-opacity",
+                    ".28"
+                );
+
+                line.setAttribute(
+                    "stroke-width",
+                    Math.max(
+                        1,
+                        Math.min(
+                            4,
+                            item.count /
+                            Math.max(...data.map(d=>d.count))
+                            * 4
+                        )
                     )
-                    .join(", ");
+                );
 
-            parts.push(
-                `${names[group]} — ${keywords}`
-            );
+
+                svg.appendChild(line);
+
+            }
 
         }
     );
 
-    document
-        .getElementById(
-            "researchGroupsInsight"
-        )
-        .innerHTML =
+}
 
-        `<b>🌱 Research Groups</b><br>` +
-        parts.join("<br>");
+
+/* =========================================================
+   KEYWORD CO-OCCURRENCE
+========================================================= */
+
+function drawCoOccurrence(
+    rows,
+    keywordColumn,
+    keywordFreq
+){
+
+    const field =
+        document.getElementById(
+            "coField"
+        );
+
+    const svg =
+        document.getElementById(
+            "coSvg"
+        );
+
+
+    svg.innerHTML = "";
+
+
+    const topKeywords =
+        [...keywordFreq.values()]
+            .sort(
+                (a,b)=>b.count-a.count
+            )
+            .slice(0,15);
+
+
+    const keys =
+        new Set(
+            topKeywords.map(
+                x=>x.label.toLowerCase()
+            )
+        );
+
+
+    const co =
+        new Map();
+
+
+    rows.forEach(row=>{
+
+        const words =
+            splitKeywords(
+                keywordColumn
+                    ? row[keywordColumn]
+                    : ""
+            )
+            .map(
+                x=>x.toLowerCase()
+            )
+            .filter(
+                x=>keys.has(x)
+            );
+
+
+        const unique =
+            [...new Set(words)];
+
+
+        for(
+            let i=0;
+            i<unique.length;
+            i++
+        ){
+
+            for(
+                let j=i+1;
+                j<unique.length;
+                j++
+            ){
+
+                const pair =
+                    [
+                        unique[i],
+                        unique[j]
+                    ].sort().join("|||");
+
+
+                co.set(
+                    pair,
+                    (co.get(pair)||0)+1
+                );
+
+            }
+
+        }
+
+    });
+
+
+    const strongest =
+        [...co.entries()]
+            .sort(
+                (a,b)=>b[1]-a[1]
+            )
+            .slice(0,30);
+
+
+    const width =
+        field.clientWidth;
+
+    const height =
+        field.clientHeight;
+
+
+    const center = {
+
+        x:width*.5,
+        y:height*.48
+
+    };
+
+
+    const nodePositions = {};
+
+
+    topKeywords.forEach(
+        (item,index)=>{
+
+            const angle =
+                (
+                    index /
+                    topKeywords.length
+                ) *
+                Math.PI*2;
+
+            const radius =
+                index % 2 === 0
+                    ? Math.min(width,height)*.30
+                    : Math.min(width,height)*.40;
+
+
+            nodePositions[
+                item.label.toLowerCase()
+            ] = {
+
+                x:
+                    center.x +
+                    Math.cos(angle) *
+                    radius,
+
+                y:
+                    center.y +
+                    Math.sin(angle) *
+                    radius*.68
+
+            };
+
+        }
+    );
+
+
+    /*
+       SVG lines
+    */
+
+    strongest.forEach(
+        ([pair,count])=>{
+
+            const [
+                a,
+                b
+            ] =
+                pair.split("|||");
+
+
+            const p1 =
+                nodePositions[a];
+
+            const p2 =
+                nodePositions[b];
+
+
+            if(!p1 || !p2)
+                return;
+
+
+            const line =
+                document.createElementNS(
+                    "http://www.w3.org/2000/svg",
+                    "line"
+                );
+
+
+            line.setAttribute(
+                "x1",
+                p1.x
+            );
+
+            line.setAttribute(
+                "y1",
+                p1.y
+            );
+
+            line.setAttribute(
+                "x2",
+                p2.x
+            );
+
+            line.setAttribute(
+                "y2",
+                p2.y
+            );
+
+            line.setAttribute(
+                "stroke",
+                "#79a77d"
+            );
+
+            line.setAttribute(
+                "stroke-opacity",
+                ".22"
+            );
+
+            line.setAttribute(
+                "stroke-width",
+                Math.min(
+                    6,
+                    1 + count/5
+                )
+            );
+
+
+            svg.appendChild(line);
+
+        }
+    );
+
+
+    /*
+       Nodes
+    */
+
+    topKeywords.forEach(
+        item=>{
+
+            const p =
+                nodePositions[
+                    item.label.toLowerCase()
+                ];
+
+
+            if(!p)
+                return;
+
+
+            const node =
+                document.createElement("div");
+
+            node.className =
+                "co-node";
+
+
+            node.style.left =
+                p.x+"px";
+
+            node.style.top =
+                p.y+"px";
+
+
+            const size =
+                28 +
+                Math.min(
+                    32,
+                    item.count /
+                    Math.max(
+                        ...topKeywords.map(
+                            x=>x.count
+                        )
+                    ) *
+                    32
+                );
+
+
+            const emoji =
+                indexEmoji(
+                    item.label
+                );
+
+
+            node.innerHTML = `
+
+                <div
+                    class="flower"
+                    style="font-size:${size}px"
+                >
+                    ${emoji}
+                </div>
+
+                <div class="label">
+                    ${escapeHTML(item.label)}
+                </div>
+
+                <div class="count">
+                    ${item.count.toLocaleString()}
+                </div>
+
+            `;
+
+
+            field.appendChild(node);
+
+        }
+    );
 
 }
 
 
 /* =========================================================
-   HTML ESCAPE
+   EMOJI
+========================================================= */
+
+function indexEmoji(keyword){
+
+    const group =
+        classifyKeyword(
+            keyword
+        );
+
+    if(group==="ai")
+        return "🌸";
+
+    if(group==="vision")
+        return "🌼";
+
+    if(group==="data")
+        return "🌻";
+
+    return "🌷";
+
+}
+
+
+/* =========================================================
+   PLOTLY LAYOUT
+========================================================= */
+
+function plotLayout(title){
+
+    return {
+
+        margin:{
+            l:40,
+            r:55,
+            t:15,
+            b:40
+        },
+
+        paper_bgcolor:
+            "rgba(0,0,0,0)",
+
+        plot_bgcolor:
+            "rgba(0,0,0,0)",
+
+        font:{
+            family:
+                "Segoe UI, Arial, sans-serif",
+
+            color:"#55715a"
+        },
+
+        xaxis:{
+            gridcolor:
+                "rgba(100,140,105,.10)",
+
+            zeroline:false
+        },
+
+        yaxis:{
+            gridcolor:
+                "rgba(100,140,105,.10)",
+
+            zeroline:false,
+
+            automargin:true
+        },
+
+        title:{
+            text:"",
+            font:{
+                size:1
+            }
+        }
+    };
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
 ========================================================= */
 
 function escapeHTML(value){
@@ -2636,654 +3167,36 @@ function escapeHTML(value){
 
 
 /* =========================================================
-   CO-OCCURRENCE
-========================================================= */
-
-function drawCoOccurrence(rows,column){
-
-    const keywordCounts =
-        new Map();
-
-    const pairCounts =
-        new Map();
-
-    rows.forEach(row => {
-
-        const keywords =
-            [
-                ...new Set(
-                    splitKeywords(
-                        row[column]
-                    )
-                    .map(k=>k.toLowerCase())
-                )
-            ];
-
-        keywords.forEach(k=>{
-
-            keywordCounts.set(
-                k,
-                (keywordCounts.get(k)||0)+1
-            );
-
-        });
-
-        for(let i=0;i<keywords.length;i++){
-
-            for(
-                let j=i+1;
-                j<keywords.length;
-                j++
-            ){
-
-                const a =
-                    keywords[i];
-
-                const b =
-                    keywords[j];
-
-                const key =
-                    a < b
-                    ? `${a}|||${b}`
-                    : `${b}|||${a}`;
-
-                pairCounts.set(
-                    key,
-                    (pairCounts.get(key)||0)+1
-                );
-
-            }
-
-        }
-
-    });
-
-
-    const topKeywords =
-        [...keywordCounts.entries()]
-            .sort((a,b)=>b[1]-a[1])
-            .slice(0,18);
-
-
-    if(!topKeywords.length){
-        return;
-    }
-
-
-    const selected =
-        new Set(
-            topKeywords.map(x=>x[0])
-        );
-
-
-    const pairs =
-        [...pairCounts.entries()]
-            .filter(([key])=>{
-
-                const [a,b] =
-                    key.split("|||");
-
-                return (
-                    selected.has(a) &&
-                    selected.has(b)
-                );
-
-            })
-            .sort((a,b)=>b[1]-a[1])
-            .slice(0,35);
-
-
-    const field =
-        document.getElementById(
-            "coField"
-        );
-
-    const svg =
-        document.getElementById(
-            "coSvg"
-        );
-
-    svg.innerHTML = "";
-
-
-    const width =
-        field.clientWidth;
-
-    const height =
-        field.clientHeight;
-
-
-    const nodes =
-        topKeywords.map(
-            ([keyword,count],index)=>{
-
-                const angle =
-                    (index /
-                    topKeywords.length) *
-                    Math.PI * 2;
-
-                const radius =
-                    Math.min(width,height) *
-                    .30;
-
-                return {
-
-                    keyword,
-
-                    count,
-
-                    x:
-                        width/2 +
-                        Math.cos(angle) *
-                        radius,
-
-                    y:
-                        height/2 +
-                        Math.sin(angle) *
-                        radius
-
-                };
-
-            }
-        );
-
-
-    const nodeMap =
-        new Map(
-            nodes.map(n=>[
-                n.keyword,
-                n
-            ])
-        );
-
-
-    pairs.forEach(([key,count])=>{
-
-        const [a,b] =
-            key.split("|||");
-
-        const n1 =
-            nodeMap.get(a);
-
-        const n2 =
-            nodeMap.get(b);
-
-        if(!n1 || !n2) return;
-
-        const line =
-            document.createElementNS(
-                "http://www.w3.org/2000/svg",
-                "line"
-            );
-
-        line.setAttribute(
-            "x1",
-            n1.x
-        );
-
-        line.setAttribute(
-            "y1",
-            n1.y
-        );
-
-        line.setAttribute(
-            "x2",
-            n2.x
-        );
-
-        line.setAttribute(
-            "y2",
-            n2.y
-        );
-
-        line.setAttribute(
-            "stroke",
-            "#b7ceb2"
-        );
-
-        line.setAttribute(
-            "stroke-width",
-            Math.min(
-                6,
-                1 + count/3
-            )
-        );
-
-        line.setAttribute(
-            "stroke-opacity",
-            ".55"
-        );
-
-        svg.appendChild(line);
-
-    });
-
-
-    nodes.forEach(node=>{
-
-        const group =
-            classifyKeyword(
-                node.keyword
-            );
-
-        const flower =
-            flowerForGroup(group);
-
-        const size =
-            25 +
-            (
-                node.count /
-                topKeywords[0][1]
-            ) * 40;
-
-
-        const wrapper =
-            document.createElement(
-                "div"
-            );
-
-        wrapper.style.position =
-            "absolute";
-
-        wrapper.style.left =
-            node.x + "px";
-
-        wrapper.style.top =
-            node.y + "px";
-
-        wrapper.style.transform =
-            "translate(-50%,-50%)";
-
-        wrapper.style.zIndex =
-            "20";
-
-        wrapper.style.textAlign =
-            "center";
-
-        wrapper.style.cursor =
-            "pointer";
-
-
-        wrapper.innerHTML = `
-
-            <div
-                style="
-                    font-size:${size}px;
-                    line-height:1;
-                "
-            >
-                ${flower.emoji}
-            </div>
-
-            <div
-                style="
-                    margin-top:3px;
-                    padding:3px 7px;
-                    border-radius:9px;
-                    background:rgba(255,255,255,.84);
-                    font-size:10px;
-                    font-weight:700;
-                    color:#4c644e;
-                    white-space:nowrap;
-                "
-            >
-                ${escapeHTML(node.keyword)}
-            </div>
-
-            <div
-                style="
-                    font-size:9px;
-                    color:#819181;
-                "
-            >
-                ${fmt(node.count)}
-            </div>
-
-        `;
-
-        wrapper.title =
-            `${node.keyword}: ${fmt(node.count)}`;
-
-        field.appendChild(wrapper);
-
-    });
-
-}
-
-
-/* =========================================================
-   MAIN DATA LOADER
-========================================================= */
-
-function processCSV(rows){
-
-    if(!rows.length){
-        return;
-    }
-
-
-    const articleColumn =
-        findColumn(
-            rows,
-            [
-                "Article",
-                "Title",
-                "Document Title",
-                "Document Type"
-            ]
-        );
-
-
-    const keywordColumn =
-        findColumn(
-            rows,
-            [
-                "Author Keywords",
-                "Authors Keywords",
-                "Author keyword",
-                "Keywords"
-            ]
-        );
-
-
-    const authorColumn =
-        findColumn(
-            rows,
-            [
-                "Authors",
-                "Author"
-            ]
-        );
-
-
-    const yearColumn =
-        findColumn(
-            rows,
-            [
-                "Year",
-                "Publication Year",
-                "Cover Date",
-                "Date"
-            ]
-        );
-
-
-    const subjectColumn =
-        findColumn(
-            rows,
-            [
-                "Subject",
-                "Subjects",
-                "Research Area",
-                "Research Areas"
-            ]
-        );
-
-
-    if(!keywordColumn){
-
-        document.getElementById(
-            "dataStatus"
-        ).textContent =
-            "⚠️ Cannot find 'Author Keywords' column.";
-
-        return;
-    }
-
-
-    if(!authorColumn){
-
-        document.getElementById(
-            "dataStatus"
-        ).textContent =
-            "⚠️ Cannot find 'Authors' column.";
-
-        return;
-    }
-
-
-    if(!yearColumn){
-
-        document.getElementById(
-            "dataStatus"
-        ).textContent =
-            "⚠️ Cannot find 'Year' column.";
-
-        return;
-    }
-
-
-    if(!subjectColumn){
-
-        document.getElementById(
-            "dataStatus"
-        ).textContent =
-            "⚠️ Cannot find 'Subject' column.";
-
-        return;
-    }
-
-
-    /* =====================================================
-       ARTICLES
-    ===================================================== */
-
-    document.getElementById(
-        "kpiArticles"
-    ).textContent =
-        fmt(rows.length);
-
-
-    /* =====================================================
-       UNIQUE KEYWORDS
-    ===================================================== */
-
-    const uniqueKeywords =
-        new Set();
-
-    rows.forEach(row=>{
-
-        splitKeywords(
-            row[keywordColumn]
-        ).forEach(k=>{
-
-            uniqueKeywords.add(
-                k.toLowerCase()
-            );
-
-        });
-
-    });
-
-
-    document.getElementById(
-        "kpiKeywords"
-    ).textContent =
-        fmt(uniqueKeywords.size);
-
-
-    /* =====================================================
-       YEAR RANGE
-    ===================================================== */
-
-    const years =
-        rows
-            .map(row =>
-                getYear(
-                    row[yearColumn]
-                )
-            )
-            .filter(Boolean)
-            .sort((a,b)=>a-b);
-
-
-    if(years.length){
-
-        document.getElementById(
-            "kpiYears"
-        ).textContent =
-            `${years[0]}–${years[years.length-1]}`;
-
-    }
-
-
-    /* =====================================================
-       RESEARCH AREAS
-    ===================================================== */
-
-    const subjects =
-        new Set();
-
-    rows.forEach(row=>{
-
-        const subject =
-            cleanValue(
-                row[subjectColumn]
-            );
-
-        if(subject){
-            subjects.add(subject);
-        }
-
-    });
-
-
-    document.getElementById(
-        "kpiAreas"
-    ).textContent =
-        fmt(subjects.size);
-
-
-    /* =====================================================
-       STATUS
-    ===================================================== */
-
-    document.getElementById(
-        "dataStatus"
-    ).textContent =
-
-        `🌱 Loaded ${fmt(rows.length)} records · ` +
-        `${fmt(uniqueKeywords.size)} unique author keywords · ` +
-        `${years.length ? years[0] : "?"}–${years.length ? years[years.length-1] : "?"}`;
-
-
-    /* =====================================================
-       DRAW ALL
-    ===================================================== */
-
-    drawKeywords(
-        rows,
-        keywordColumn
-    );
-
-    drawAuthors(
-        rows,
-        authorColumn
-    );
-
-    drawYears(
-        rows,
-        yearColumn
-    );
-
-    drawResearchAreas(
-        rows,
-        subjectColumn
-    );
-
-    drawFeatureGarden(
-        rows,
-        keywordColumn
-    );
-
-    drawCoOccurrence(
-        rows,
-        keywordColumn
-    );
-
-}
-
-
-/* =========================================================
-   FILE INPUT
-========================================================= */
-
-document
-    .getElementById("csvFile")
-    .addEventListener(
-        "change",
-        event => {
-
-            const file =
-                event.target.files[0];
-
-            if(!file){
-                return;
-            }
-
-
-            const reader =
-                new FileReader();
-
-
-            reader.onload =
-                function(e){
-
-                    try{
-
-                        const rows =
-                            parseCSV(
-                                e.target.result
-                            );
-
-                        processCSV(rows);
-
-                    }
-                    catch(error){
-
-                        console.error(error);
-
-                        document.getElementById(
-                            "dataStatus"
-                        ).textContent =
-                            "⚠️ Error reading CSV: " +
-                            error.message;
-
-                    }
-
-                };
-
-
-            reader.readAsText(
-                file,
-                "UTF-8"
-            );
-
-        }
-    );
-
-
-/* =========================================================
-   RESPONSIVE REDRAW
+   RESIZE
 ========================================================= */
 
 window.addEventListener(
     "resize",
     ()=>{
+        Plotly.Plots.resize(
+            document.getElementById("keywords")
+        );
 
-        const field =
-            document.getElementById(
-                "featureField"
-            );
+        Plotly.Plots.resize(
+            document.getElementById("authors")
+        );
 
-        if(field){
+        Plotly.Plots.resize(
+            document.getElementById("years")
+        );
 
-            drawFeatureLines();
-
-        }
-
+        Plotly.Plots.resize(
+            document.getElementById("researchPie")
+        );
     }
 );
+
+
+/* =========================================================
+   START
+========================================================= */
+
+init();
 
 </script>
 
