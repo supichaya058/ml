@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>AI Research Flower Field</title>
 
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.3/papaparse.min.js"></script>
 
 <style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
 *{
     box-sizing:border-box;
 }
@@ -19,20 +25,45 @@ html{
 
 body{
     margin:0;
-    font-family:Arial,"Noto Sans Thai",sans-serif;
+    font-family:
+        Arial,
+        "Noto Sans Thai",
+        sans-serif;
     background:#f5f8f2;
     color:#405442;
 }
+
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 .header{
     position:relative;
     overflow:hidden;
     padding:35px 30px;
+
     background:
-        radial-gradient(circle at 10% 30%,rgba(255,255,255,.9),transparent 20%),
-        radial-gradient(circle at 90% 30%,rgba(255,255,255,.9),transparent 20%),
-        linear-gradient(135deg,#dff1d8,#fffdf2,#e5f1dc);
-    border-bottom:1px solid #d7e4d2;
+        radial-gradient(
+            circle at 10% 30%,
+            rgba(255,255,255,.9),
+            transparent 20%
+        ),
+        radial-gradient(
+            circle at 90% 30%,
+            rgba(255,255,255,.9),
+            transparent 20%
+        ),
+        linear-gradient(
+            135deg,
+            #dff1d8,
+            #fffdf2,
+            #e5f1dc
+        );
+
+    border-bottom:
+        1px solid
+        #d7e4d2;
 }
 
 .header-inner{
@@ -59,7 +90,8 @@ body{
     position:absolute;
     pointer-events:none;
     opacity:.75;
-    animation:fly 6s ease-in-out infinite;
+    animation:
+        fly 6s ease-in-out infinite;
 }
 
 .header-butterfly.one{
@@ -94,13 +126,22 @@ body{
 
 @keyframes fly{
     0%,100%{
-        transform:translate(0,0) rotate(-5deg);
+        transform:
+            translate(0,0)
+            rotate(-5deg);
     }
 
     50%{
-        transform:translate(15px,-12px) rotate(6deg);
+        transform:
+            translate(15px,-12px)
+            rotate(6deg);
     }
 }
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
 
 .container{
     max-width:1450px;
@@ -108,62 +149,15 @@ body{
     padding:22px;
 }
 
-/* =========================
-   CSV CONTROL
-========================= */
 
-.data-control{
-    background:white;
-    border:1px solid #dce7d7;
-    border-radius:20px;
-    padding:18px 20px;
-    margin-bottom:20px;
-    box-shadow:0 5px 18px rgba(65,90,65,.07);
-}
-
-.data-control-title{
-    font-size:15px;
-    font-weight:800;
-    color:#48654d;
-    margin-bottom:8px;
-}
-
-.data-control-row{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    flex-wrap:wrap;
-}
-
-input[type="file"]{
-    padding:9px;
-    border:1px solid #d7e4d2;
-    border-radius:10px;
-    background:#f8fbf5;
-}
-
-.data-status{
-    color:#7b887d;
-    font-size:12px;
-}
-
-.data-status.success{
-    color:#56805b;
-    font-weight:700;
-}
-
-.data-status.error{
-    color:#b45d5d;
-    font-weight:700;
-}
-
-/* =========================
+/* =========================================================
    KPI
-========================= */
+========================================================= */
 
 .kpis{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:
+        repeat(4,1fr);
     gap:15px;
     margin-bottom:20px;
 }
@@ -172,10 +166,14 @@ input[type="file"]{
     position:relative;
     overflow:hidden;
     background:white;
-    border:1px solid #dce7d7;
+    border:
+        1px solid
+        #dce7d7;
     border-radius:20px;
     padding:20px;
-    box-shadow:0 5px 18px rgba(65,90,65,.07);
+    box-shadow:
+        0 5px 18px
+        rgba(65,90,65,.07);
 }
 
 .kpi::after{
@@ -205,13 +203,15 @@ input[type="file"]{
     font-size:12px;
 }
 
-/* =========================
-   GRID / CARD
-========================= */
+
+/* =========================================================
+   GRID
+========================================================= */
 
 .grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:
+        1fr 1fr;
     gap:20px;
 }
 
@@ -219,18 +219,29 @@ input[type="file"]{
     grid-column:1/-1;
 }
 
+
+/* =========================================================
+   CARD
+========================================================= */
+
 .card{
     overflow:hidden;
     background:white;
-    border:1px solid #dce7d7;
+    border:
+        1px solid
+        #dce7d7;
     border-radius:20px;
-    box-shadow:0 5px 18px rgba(65,90,65,.07);
+    box-shadow:
+        0 5px 18px
+        rgba(65,90,65,.07);
 }
 
 .card-head{
     position:relative;
     padding:18px 20px;
-    border-bottom:1px solid #e8eee5;
+    border-bottom:
+        1px solid
+        #e8eee5;
 }
 
 .card-title{
@@ -255,45 +266,172 @@ input[type="file"]{
     height:500px;
 }
 
-/* =========================
-   RESEARCH AREA
-========================= */
+
+/* =========================================================
+   RESEARCH AREAS — DONUT CHART
+========================================================= */
 
 .research-field{
     position:relative;
     height:500px;
     overflow:hidden;
+
     background:
-        radial-gradient(circle at 50% 50%,rgba(255,255,255,.98),
-        rgba(247,251,244,.94) 38%,rgba(234,244,229,.82) 100%),
-        radial-gradient(circle at 15% 20%,rgba(255,190,215,.12),transparent 25%),
-        radial-gradient(circle at 85% 25%,rgba(190,215,250,.13),transparent 25%),
-        radial-gradient(circle at 20% 80%,rgba(250,220,160,.13),transparent 25%),
-        radial-gradient(circle at 80% 80%,rgba(190,225,185,.15),transparent 25%);
+
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(255,255,255,.98),
+            rgba(247,251,244,.94) 38%,
+            rgba(234,244,229,.82) 100%
+        ),
+
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255,190,215,.12),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 85% 25%,
+            rgba(190,215,250,.13),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 20% 80%,
+            rgba(250,220,160,.13),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(190,225,185,.15),
+            transparent 25%
+        );
 }
+
+
+/*
+   พื้นที่กราฟ
+*/
 
 #researchPie{
     width:100%;
     height:100%;
 }
 
+
+/*
+   กล่องคำอธิบาย
+*/
+
+.research-legend{
+    position:absolute;
+    left:15px;
+    bottom:15px;
+    z-index:10;
+
+    padding:9px 13px;
+
+    border-radius:15px;
+
+    background:
+        rgba(255,255,255,.88);
+
+    border:
+        1px solid
+        #dbe6d7;
+
+    box-shadow:
+        0 4px 12px
+        rgba(70,90,70,.07);
+
+    font-size:10px;
+
+    color:#667466;
+
+    line-height:1.7;
+
+    pointer-events:none;
+}
+
+
+/*
+   คำแนะนำด้านขวา
+*/
+
+.research-hint{
+    position:absolute;
+    right:15px;
+    bottom:15px;
+    z-index:10;
+
+    padding:9px 13px;
+
+    border-radius:15px;
+
+    background:
+        rgba(255,255,255,.88);
+
+    border:
+        1px solid
+        #dbe6d7;
+
+    box-shadow:
+        0 4px 12px
+        rgba(70,90,70,.07);
+
+    font-size:10px;
+
+    color:#667466;
+
+    line-height:1.7;
+
+    pointer-events:none;
+}
+
+
+/*
+   กล่องตรงกลาง
+*/
+
 .research-center-label{
     position:absolute;
+
     left:50%;
     top:50%;
-    transform:translate(-50%,-50%);
+
+    transform:
+        translate(-50%,-50%);
+
     z-index:5;
+
     width:145px;
     height:145px;
+
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
+
     border-radius:50%;
-    background:radial-gradient(circle at 35% 30%,
-        #fff,#fbfdf8 60%,#f1f7ed);
-    border:1px solid rgba(211,225,207,.9);
-    box-shadow:0 8px 25px rgba(70,90,70,.10);
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ffffff,
+            #fbfdf8 60%,
+            #f1f7ed
+        );
+
+    border:
+        1px solid
+        rgba(211,225,207,.9);
+
+    box-shadow:
+        0 8px 25px
+        rgba(70,90,70,.10);
+
     pointer-events:none;
 }
 
@@ -317,45 +455,53 @@ input[type="file"]{
     font-size:18px;
 }
 
-.research-legend,
-.research-hint{
-    position:absolute;
-    bottom:15px;
-    z-index:10;
-    padding:9px 13px;
-    border-radius:15px;
-    background:rgba(255,255,255,.88);
-    border:1px solid #dbe6d7;
-    box-shadow:0 4px 12px rgba(70,90,70,.07);
-    font-size:10px;
-    color:#667466;
-    line-height:1.7;
-    pointer-events:none;
-}
 
-.research-legend{
-    left:15px;
-}
-
-.research-hint{
-    right:15px;
-}
-
-/* =========================
-   FEATURE GARDEN
-========================= */
+/* =========================================================
+   FEATURE VECTOR GARDEN
+========================================================= */
 
 .feature-field{
     position:relative;
     height:760px;
     overflow:hidden;
+
     background:
-        radial-gradient(ellipse at 20% 30%,rgba(255,204,224,.15),transparent 27%),
-        radial-gradient(ellipse at 80% 30%,rgba(192,216,255,.15),transparent 27%),
-        radial-gradient(ellipse at 25% 80%,rgba(255,224,157,.15),transparent 25%),
-        radial-gradient(ellipse at 75% 80%,rgba(197,231,187,.16),transparent 25%),
-        linear-gradient(180deg,#f9fcf6,#eaf4e5);
+
+        radial-gradient(
+            ellipse at 20% 30%,
+            rgba(255,204,224,.15),
+            transparent 27%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 30%,
+            rgba(192,216,255,.15),
+            transparent 27%
+        ),
+
+        radial-gradient(
+            ellipse at 25% 80%,
+            rgba(255,224,157,.15),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            ellipse at 75% 80%,
+            rgba(197,231,187,.16),
+            transparent 25%
+        ),
+
+        linear-gradient(
+            180deg,
+            #f9fcf6,
+            #eaf4e5
+        );
 }
+
+
+/* =========================================================
+   SOFT GROUP BACKGROUND
+========================================================= */
 
 .feature-group{
     position:absolute;
@@ -369,12 +515,14 @@ input[type="file"]{
     height:330px;
     left:3%;
     top:17%;
-    background:radial-gradient(
-        ellipse,
-        rgba(255,190,215,.20),
-        rgba(255,190,215,.06) 48%,
-        transparent 72%
-    );
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(255,190,215,.20),
+            rgba(255,190,215,.06) 48%,
+            transparent 72%
+        );
 }
 
 .feature-group.vision{
@@ -382,12 +530,14 @@ input[type="file"]{
     height:320px;
     right:3%;
     top:17%;
-    background:radial-gradient(
-        ellipse,
-        rgba(180,210,250,.20),
-        rgba(180,210,250,.06) 48%,
-        transparent 72%
-    );
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(180,210,250,.20),
+            rgba(180,210,250,.06) 48%,
+            transparent 72%
+        );
 }
 
 .feature-group.data{
@@ -395,12 +545,14 @@ input[type="file"]{
     height:250px;
     left:11%;
     bottom:5%;
-    background:radial-gradient(
-        ellipse,
-        rgba(247,211,143,.20),
-        rgba(247,211,143,.06) 48%,
-        transparent 72%
-    );
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(247,211,143,.20),
+            rgba(247,211,143,.06) 48%,
+            transparent 72%
+        );
 }
 
 .feature-group.tech{
@@ -408,24 +560,43 @@ input[type="file"]{
     height:250px;
     right:11%;
     bottom:5%;
-    background:radial-gradient(
-        ellipse,
-        rgba(190,225,182,.22),
-        rgba(190,225,182,.06) 48%,
-        transparent 72%
-    );
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(190,225,182,.22),
+            rgba(190,225,182,.06) 48%,
+            transparent 72%
+        );
 }
+
+
+/* =========================================================
+   GROUP TITLE
+========================================================= */
 
 .group-title{
     position:absolute;
     z-index:15;
+
     padding:8px 16px;
+
     border-radius:25px;
-    background:rgba(255,255,255,.88);
-    border:1px solid rgba(215,225,211,.75);
-    box-shadow:0 4px 12px rgba(70,90,70,.06);
+
+    background:
+        rgba(255,255,255,.88);
+
+    border:
+        1px solid
+        rgba(215,225,211,.75);
+
+    box-shadow:
+        0 4px 12px
+        rgba(70,90,70,.06);
+
     font-size:12px;
     font-weight:800;
+
     backdrop-filter:blur(4px);
 }
 
@@ -452,6 +623,305 @@ input[type="file"]{
     bottom:11%;
     color:#5d8755;
 }
+
+
+/* =========================================================
+   FEATURE FLOWERS
+========================================================= */
+
+.feature-flower{
+    position:absolute;
+    z-index:10;
+
+    transform:
+        translate(-50%,-50%);
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:
+        transform .28s cubic-bezier(.2,.8,.2,1),
+        filter .3s ease;
+
+    user-select:none;
+}
+
+.feature-flower:hover{
+    transform:
+        translate(-50%,-50%)
+        scale(1.16);
+
+    filter:
+        drop-shadow(
+            0 7px 10px
+            rgba(60,80,60,.20)
+        );
+
+    z-index:30;
+}
+
+.feature-flower .emoji{
+    position:relative;
+    line-height:1;
+
+    filter:
+        drop-shadow(
+            0 3px 4px
+            rgba(60,70,60,.15)
+        );
+
+    transition:
+        filter .3s ease,
+        transform .3s ease;
+}
+
+.feature-flower .label{
+    margin-top:5px;
+    padding:4px 8px;
+    max-width:140px;
+
+    text-align:center;
+
+    border-radius:14px;
+
+    background:
+        rgba(255,255,255,.86);
+
+    border:
+        1px solid
+        rgba(215,225,211,.8);
+
+    box-shadow:
+        0 2px 7px
+        rgba(60,80,60,.04);
+
+    font-size:10px;
+    color:#4d5d4e;
+
+    transition:
+        box-shadow .3s ease,
+        border-color .3s ease;
+}
+
+.feature-flower .count{
+    margin-top:2px;
+    color:#849085;
+    font-size:9px;
+
+    transition:
+        color .3s ease;
+}
+
+
+/* =========================================================
+   FEATURE FLOWER SELECTED
+========================================================= */
+
+.feature-flower.selected{
+    z-index:50;
+
+    transform:
+        translate(-50%,-50%)
+        scale(1.10);
+
+    animation:
+        featureFlowerSelected .75s ease-out;
+}
+
+.feature-flower.selected .emoji{
+    filter:
+
+        drop-shadow(
+            0 0 5px
+            rgba(255,220,100,1)
+        )
+
+        drop-shadow(
+            0 0 12px
+            rgba(255,200,70,.95)
+        )
+
+        drop-shadow(
+            0 0 22px
+            rgba(255,215,100,.78)
+        )
+
+        drop-shadow(
+            0 0 35px
+            rgba(255,225,130,.45)
+        );
+
+    animation:
+        featureSoftFlowerGlow .8s ease-out;
+}
+
+.feature-flower.selected .label{
+    border-color:
+        rgba(255,205,90,.65);
+
+    box-shadow:
+
+        0 0 8px
+        rgba(255,210,90,.30),
+
+        0 3px 10px
+        rgba(70,80,60,.08);
+}
+
+.feature-flower.selected .count{
+    color:#b28a32;
+}
+
+.feature-flower.selected::before{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:27px;
+
+    width:82px;
+    height:82px;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(255,225,110,.52) 0%,
+            rgba(255,215,90,.30) 35%,
+            rgba(255,210,80,.14) 55%,
+            transparent 76%
+        );
+
+    filter:blur(2px);
+
+    z-index:-1;
+
+    pointer-events:none;
+
+    animation:
+        featureYellowGlow 1s ease-out;
+}
+
+
+/* =========================================================
+   FEATURE SELECT ANIMATION
+========================================================= */
+
+@keyframes featureSoftFlowerGlow{
+
+    0%{
+        filter:
+            drop-shadow(
+                0 0 2px
+                rgba(255,220,100,.4)
+            );
+    }
+
+    40%{
+        filter:
+
+            drop-shadow(
+                0 0 7px
+                rgba(255,220,100,1)
+            )
+
+            drop-shadow(
+                0 0 18px
+                rgba(255,200,70,.95)
+            )
+
+            drop-shadow(
+                0 0 30px
+                rgba(255,215,100,.8)
+            );
+    }
+
+    100%{
+        filter:
+
+            drop-shadow(
+                0 0 5px
+                rgba(255,220,100,1)
+            )
+
+            drop-shadow(
+                0 0 12px
+                rgba(255,200,70,.9)
+            )
+
+            drop-shadow(
+                0 0 22px
+                rgba(255,215,100,.7)
+            )
+
+            drop-shadow(
+                0 0 35px
+                rgba(255,225,130,.4)
+            );
+    }
+}
+
+@keyframes featureYellowGlow{
+
+    0%{
+        transform:
+            translate(-50%,-50%)
+            scale(.55);
+
+        opacity:0;
+    }
+
+    30%{
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+
+        opacity:1;
+    }
+
+    100%{
+        transform:
+            translate(-50%,-50%)
+            scale(1.65);
+
+        opacity:0;
+    }
+}
+
+@keyframes featureFlowerSelected{
+
+    0%{
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+    }
+
+    35%{
+        transform:
+            translate(-50%,-50%)
+            scale(1.18);
+    }
+
+    100%{
+        transform:
+            translate(-50%,-50%)
+            scale(1.10);
+    }
+}
+
+
+/* =========================================================
+   FEATURE CONNECTIONS
+========================================================= */
 
 .feature-svg{
     position:absolute;
@@ -485,12 +955,22 @@ input[type="file"]{
     stroke:#7da46f;
 }
 
+
+/* =========================================================
+   CENTRAL RESEARCH FLOWER
+========================================================= */
+
 .feature-center{
     position:absolute;
+
     left:50%;
     top:49%;
-    transform:translate(-50%,-50%);
+
+    transform:
+        translate(-50%,-50%);
+
     z-index:20;
+
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -499,94 +979,192 @@ input[type="file"]{
 .feature-center .flower{
     width:115px;
     height:115px;
+
     border-radius:50%;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     background:
-        radial-gradient(circle,#fff8c9 0 17%,transparent 18%),
-        radial-gradient(circle at 35% 35%,#ffb5d0 0 23%,transparent 24%),
-        radial-gradient(circle at 65% 35%,#ffb5d0 0 23%,transparent 24%),
-        radial-gradient(circle at 35% 65%,#ffb5d0 0 23%,transparent 24%),
-        radial-gradient(circle at 65% 65%,#ffb5d0 0 23%,transparent 24%),
+
+        radial-gradient(
+            circle,
+            #fff8c9 0 17%,
+            transparent 18%
+        ),
+
+        radial-gradient(
+            circle at 35% 35%,
+            #ffb5d0 0 23%,
+            transparent 24%
+        ),
+
+        radial-gradient(
+            circle at 65% 35%,
+            #ffb5d0 0 23%,
+            transparent 24%
+        ),
+
+        radial-gradient(
+            circle at 35% 65%,
+            #ffb5d0 0 23%,
+            transparent 24%
+        ),
+
+        radial-gradient(
+            circle at 65% 65%,
+            #ffb5d0 0 23%,
+            transparent 24%
+        ),
+
         #fff;
-    box-shadow:0 10px 30px rgba(90,110,80,.13);
+
+    box-shadow:
+        0 10px 30px
+        rgba(90,110,80,.13);
+
     font-size:45px;
 }
 
 .feature-center .title{
     margin-top:7px;
+
     padding:7px 14px;
-    background:rgba(255,255,255,.9);
+
+    background:
+        rgba(255,255,255,.9);
+
     border-radius:20px;
-    border:1px solid #dce7d7;
+
+    border:
+        1px solid
+        #dce7d7;
+
     font-size:12px;
     font-weight:800;
+
     color:#536354;
 }
 
-.feature-flower{
+
+/* =========================================================
+   BUTTERFLIES
+========================================================= */
+
+.butterfly{
     position:absolute;
-    z-index:10;
-    transform:translate(-50%,-50%);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    cursor:pointer;
-    transition:
-        transform .28s cubic-bezier(.2,.8,.2,1),
-        filter .3s ease;
-    user-select:none;
+    z-index:25;
+    pointer-events:none;
+
+    animation:
+        fly 5s
+        ease-in-out
+        infinite;
 }
 
-.feature-flower:hover{
-    transform:translate(-50%,-50%) scale(1.16);
-    filter:drop-shadow(0 7px 10px rgba(60,80,60,.20));
+.b1{
+    left:3%;
+    top:14%;
+    font-size:34px;
+}
+
+.b2{
+    left:48%;
+    top:7%;
+    font-size:25px;
+    animation-delay:1.3s;
+}
+
+.b3{
+    right:4%;
+    top:14%;
+    font-size:36px;
+    animation-delay:.6s;
+}
+
+.b4{
+    left:8%;
+    bottom:13%;
+    font-size:27px;
+    animation-delay:2s;
+}
+
+.b5{
+    right:9%;
+    bottom:14%;
+    font-size:30px;
+    animation-delay:1.7s;
+}
+
+
+/* =========================================================
+   FEATURE LEGEND
+========================================================= */
+
+.feature-legend{
+    position:absolute;
+
+    left:18px;
+    bottom:17px;
+
     z-index:30;
-}
 
-.feature-flower .emoji{
-    line-height:1;
-    filter:drop-shadow(0 3px 4px rgba(60,70,60,.15));
-}
+    padding:11px 14px;
 
-.feature-flower .label{
-    margin-top:5px;
-    padding:4px 8px;
-    max-width:160px;
-    text-align:center;
-    border-radius:14px;
-    background:rgba(255,255,255,.86);
-    border:1px solid rgba(215,225,211,.8);
-    box-shadow:0 2px 7px rgba(60,80,60,.04);
+    border-radius:17px;
+
+    background:
+        rgba(255,255,255,.85);
+
+    border:
+        1px solid
+        #dbe6d7;
+
+    box-shadow:
+        0 4px 12px
+        rgba(70,90,70,.08);
+
     font-size:10px;
-    color:#4d5d4e;
+
+    line-height:1.8;
+
+    color:#627163;
 }
 
-.feature-flower .count{
-    margin-top:2px;
-    color:#849085;
-    font-size:9px;
-}
 
-/* =========================
-   CO-OCCURRENCE
-========================= */
+/* =========================================================
+   KEYWORD CO-OCCURRENCE GARDEN
+========================================================= */
 
 .co-field{
     position:relative;
     height:700px;
     overflow:hidden;
+
     background:
-        radial-gradient(circle at 50% 50%,
-        rgba(255,255,255,.95),transparent 30%),
-        linear-gradient(180deg,#f7fbf4,#e8f3e1);
+
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(255,255,255,.95),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            180deg,
+            #f7fbf4,
+            #e8f3e1
+        );
 }
 
 .co-community{
     position:absolute;
     z-index:2;
-    transform:translate(-50%,-50%);
+
+    transform:
+        translate(-50%,-50%);
+
     border-radius:50%;
 }
 
@@ -595,12 +1173,14 @@ input[type="file"]{
     height:320px;
     left:25%;
     top:45%;
-    background:radial-gradient(
-        circle,
-        rgba(255,193,216,.18),
-        rgba(255,193,216,.06) 50%,
-        transparent 72%
-    );
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,193,216,.18),
+            rgba(255,193,216,.06) 50%,
+            transparent 72%
+        );
 }
 
 .co-community.vision{
@@ -608,12 +1188,14 @@ input[type="file"]{
     height:320px;
     left:76%;
     top:44%;
-    background:radial-gradient(
-        circle,
-        rgba(190,214,252,.18),
-        rgba(190,214,252,.06) 50%,
-        transparent 72%
-    );
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(190,214,252,.18),
+            rgba(190,214,252,.06) 50%,
+            transparent 72%
+        );
 }
 
 .co-community.data{
@@ -621,21 +1203,31 @@ input[type="file"]{
     height:260px;
     left:50%;
     top:83%;
-    background:radial-gradient(
-        circle,
-        rgba(249,218,158,.18),
-        rgba(249,218,158,.06) 50%,
-        transparent 72%
-    );
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(249,218,158,.18),
+            rgba(249,218,158,.06) 50%,
+            transparent 72%
+        );
 }
 
 .co-group-title{
     position:absolute;
     z-index:15;
+
     padding:7px 14px;
+
     border-radius:20px;
-    background:rgba(255,255,255,.88);
-    border:1px solid #dce6d8;
+
+    background:
+        rgba(255,255,255,.88);
+
+    border:
+        1px solid
+        #dce6d8;
+
     font-size:11px;
     font-weight:800;
 }
@@ -655,24 +1247,306 @@ input[type="file"]{
 .co-group-title.data{
     left:50%;
     bottom:5%;
-    transform:translateX(-50%);
+    transform:
+        translateX(-50%);
     color:#b07820;
 }
+
+
+/* =========================================================
+   CO-OCCURRENCE FLOWERS
+========================================================= */
+
+.co-flower{
+    position:absolute;
+    z-index:10;
+
+    transform:
+        translate(-50%,-50%);
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:
+        transform .28s cubic-bezier(.2,.8,.2,1),
+        filter .3s ease;
+
+    user-select:none;
+}
+
+.co-flower:hover{
+    transform:
+        translate(-50%,-50%)
+        scale(1.16);
+
+    filter:
+        drop-shadow(
+            0 7px 10px
+            rgba(60,80,60,.20)
+        );
+
+    z-index:30;
+}
+
+.co-flower .icon{
+    line-height:1;
+
+    filter:
+        drop-shadow(
+            0 4px 4px
+            rgba(70,80,70,.14)
+        );
+
+    transition:
+        filter .3s ease,
+        transform .3s ease;
+}
+
+.co-flower .name{
+    margin-top:4px;
+    padding:4px 8px;
+
+    border-radius:14px;
+
+    background:
+        rgba(255,255,255,.88);
+
+    border:
+        1px solid
+        #dce6d8;
+
+    font-size:9px;
+    color:#536053;
+    white-space:nowrap;
+
+    transition:
+        box-shadow .3s ease,
+        border-color .3s ease;
+}
+
+.co-flower .count{
+    margin-top:2px;
+    color:#899589;
+    font-size:9px;
+    font-weight:700;
+}
+
+
+/* =========================================================
+   SELECTED FLOWER — SOFT YELLOW GLOW
+========================================================= */
+
+.co-flower.selected{
+    z-index:50;
+
+    transform:
+        translate(-50%,-50%)
+        scale(1.10);
+
+    animation:
+        flowerSelected .75s ease-out;
+}
+
+.co-flower.selected .icon{
+    filter:
+        drop-shadow(
+            0 0 5px
+            rgba(255,220,100,1)
+        )
+
+        drop-shadow(
+            0 0 12px
+            rgba(255,200,70,.95)
+        )
+
+        drop-shadow(
+            0 0 22px
+            rgba(255,215,100,.78)
+        )
+
+        drop-shadow(
+            0 0 35px
+            rgba(255,225,130,.45)
+        );
+
+    animation:
+        softFlowerGlow .8s ease-out;
+}
+
+.co-flower.selected .name{
+    border-color:
+        rgba(255,205,90,.65);
+
+    box-shadow:
+        0 0 8px
+        rgba(255,210,90,.30),
+
+        0 3px 10px
+        rgba(70,80,60,.08);
+}
+
+.co-flower.selected::before{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:28px;
+
+    width:70px;
+    height:70px;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,225,110,.50) 0%,
+            rgba(255,215,90,.28) 35%,
+            rgba(255,210,80,.12) 55%,
+            transparent 75%
+        );
+
+    filter:
+        blur(2px);
+
+    z-index:-1;
+
+    pointer-events:none;
+
+    animation:
+        yellowGlow 1s ease-out;
+}
+
+@keyframes softFlowerGlow{
+
+    0%{
+        filter:
+            drop-shadow(
+                0 0 2px
+                rgba(255,220,100,.4)
+            );
+    }
+
+    40%{
+        filter:
+            drop-shadow(
+                0 0 7px
+                rgba(255,220,100,1)
+            )
+
+            drop-shadow(
+                0 0 18px
+                rgba(255,200,70,.95)
+            )
+
+            drop-shadow(
+                0 0 30px
+                rgba(255,215,100,.8)
+            );
+    }
+
+    100%{
+        filter:
+            drop-shadow(
+                0 0 5px
+                rgba(255,220,100,1)
+            )
+
+            drop-shadow(
+                0 0 12px
+                rgba(255,200,70,.9)
+            )
+
+            drop-shadow(
+                0 0 22px
+                rgba(255,215,100,.7)
+            )
+
+            drop-shadow(
+                0 0 35px
+                rgba(255,225,130,.4)
+            );
+    }
+}
+
+@keyframes yellowGlow{
+
+    0%{
+        transform:
+            translate(-50%,-50%)
+            scale(.55);
+        opacity:0;
+    }
+
+    30%{
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+        opacity:1;
+    }
+
+    100%{
+        transform:
+            translate(-50%,-50%)
+            scale(1.65);
+        opacity:0;
+    }
+}
+
+@keyframes flowerSelected{
+
+    0%{
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+    }
+
+    35%{
+        transform:
+            translate(-50%,-50%)
+            scale(1.18);
+    }
+
+    100%{
+        transform:
+            translate(-50%,-50%)
+            scale(1.10);
+    }
+}
+
+
+/* =========================================================
+   CO SVG
+========================================================= */
 
 .co-svg{
     position:absolute;
     inset:0;
+
     width:100%;
     height:100%;
+
     z-index:6;
+
     pointer-events:none;
 }
 
 .co-line{
     fill:none;
+
     stroke:#8ba382;
+
     stroke-width:1.8;
+
     stroke-opacity:.32;
+
     stroke-linecap:round;
 }
 
@@ -686,13 +1560,24 @@ input[type="file"]{
     stroke-opacity:.55;
 }
 
+
+/* =========================================================
+   CO CENTER
+========================================================= */
+
 .co-center{
     position:absolute;
+
     z-index:20;
+
     left:50%;
     top:48%;
-    transform:translate(-50%,-50%);
+
+    transform:
+        translate(-50%,-50%);
+
     display:flex;
+
     flex-direction:column;
     align-items:center;
 }
@@ -700,96 +1585,210 @@ input[type="file"]{
 .co-center .icon{
     width:92px;
     height:92px;
+
     position:relative;
+
     border-radius:50%;
+
     background:
-        radial-gradient(circle,#fff6b8 0 13%,transparent 14%),
-        radial-gradient(circle at 50% 18%,#f4a6c2 0 24%,transparent 25%),
-        radial-gradient(circle at 82% 50%,#f4a6c2 0 24%,transparent 25%),
-        radial-gradient(circle at 50% 82%,#f4a6c2 0 24%,transparent 25%),
-        radial-gradient(circle at 18% 50%,#f4a6c2 0 24%,transparent 25%),
-        radial-gradient(circle at 28% 28%,#f7bdd2 0 17%,transparent 18%),
-        radial-gradient(circle at 72% 28%,#f7bdd2 0 17%,transparent 18%),
-        radial-gradient(circle at 72% 72%,#f7bdd2 0 17%,transparent 18%),
-        radial-gradient(circle at 28% 72%,#f7bdd2 0 17%,transparent 18%),
+
+        radial-gradient(
+            circle,
+            #fff6b8 0 13%,
+            transparent 14%
+        ),
+
+        radial-gradient(
+            circle at 50% 18%,
+            #f4a6c2 0 24%,
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 82% 50%,
+            #f4a6c2 0 24%,
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 50% 82%,
+            #f4a6c2 0 24%,
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 18% 50%,
+            #f4a6c2 0 24%,
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 28% 28%,
+            #f7bdd2 0 17%,
+            transparent 18%
+        ),
+
+        radial-gradient(
+            circle at 72% 28%,
+            #f7bdd2 0 17%,
+            transparent 18%
+        ),
+
+        radial-gradient(
+            circle at 72% 72%,
+            #f7bdd2 0 17%,
+            transparent 18%
+        ),
+
+        radial-gradient(
+            circle at 28% 72%,
+            #f7bdd2 0 17%,
+            transparent 18%
+        ),
+
         #fff;
-    box-shadow:0 8px 24px rgba(60,80,60,.16);
+
+    box-shadow:
+        0 8px 24px
+        rgba(60,80,60,.16);
+
+    animation:
+        centerBloom 4s ease-in-out infinite;
+}
+
+.co-center .icon::after{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:17px;
+    height:17px;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:#fff1a6;
+
+    box-shadow:
+        0 0 0 5px
+        rgba(255,241,166,.28);
+}
+
+@keyframes centerBloom{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.05);
+    }
 }
 
 .co-center .name{
     margin-top:8px;
+
     padding:7px 14px;
+
     border-radius:20px;
-    background:rgba(255,255,255,.92);
-    border:1px solid #dce7d7;
+
+    background:
+        rgba(255,255,255,.92);
+
+    border:
+        1px solid
+        #dce7d7;
+
     font-size:11px;
     font-weight:800;
 }
 
-.co-flower{
+
+/* =========================================================
+   CO LEGEND
+========================================================= */
+
+.co-legend{
     position:absolute;
-    z-index:10;
-    transform:translate(-50%,-50%);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    cursor:pointer;
-    user-select:none;
-    transition:transform .28s ease,filter .3s ease;
-}
 
-.co-flower:hover{
-    transform:translate(-50%,-50%) scale(1.16);
-    filter:drop-shadow(0 7px 10px rgba(60,80,60,.20));
+    left:18px;
+    bottom:18px;
+
     z-index:30;
+
+    padding:11px 14px;
+
+    border-radius:17px;
+
+    background:
+        rgba(255,255,255,.86);
+
+    border:
+        1px solid
+        #dbe6d7;
+
+    box-shadow:
+        0 4px 12px
+        rgba(70,90,70,.08);
+
+    font-size:10px;
+
+    line-height:1.8;
+
+    color:#627163;
 }
 
-.co-flower .icon{
-    line-height:1;
-}
 
-.co-flower .name{
-    margin-top:4px;
-    padding:4px 8px;
-    border-radius:14px;
-    background:rgba(255,255,255,.88);
-    border:1px solid #dce6d8;
-    font-size:9px;
-    color:#536053;
-    white-space:nowrap;
-}
-
-.co-flower .count{
-    margin-top:2px;
-    color:#899589;
-    font-size:9px;
-    font-weight:700;
-}
+/* =========================================================
+   INSIGHT
+========================================================= */
 
 .insight{
     padding:18px 20px;
+
     background:#f8fbf5;
-    border-top:1px solid #e5ede1;
+
+    border-top:
+        1px solid
+        #e5ede1;
+
     color:#617061;
+
     font-size:13px;
+
     line-height:1.8;
 }
 
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
 footer{
     padding:30px;
+
     text-align:center;
+
     color:#8c988e;
+
     font-size:12px;
 }
 
-/* =========================
+
+/* =========================================================
    RESPONSIVE
-========================= */
+========================================================= */
 
 @media(max-width:1000px){
 
     .kpis{
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns:
+            repeat(2,1fr);
     }
 
     .grid{
@@ -803,6 +1802,7 @@ footer{
     .research-field{
         height:560px;
     }
+
 }
 
 @media(max-width:650px){
@@ -815,12 +1815,39 @@ footer{
         grid-template-columns:1fr;
     }
 
-    .header h1{
-        font-size:25px;
-    }
-
     .feature-field{
         height:1000px;
+    }
+
+    .feature-group.ai{
+        width:350px;
+        height:280px;
+        left:2%;
+    }
+
+    .feature-group.vision{
+        width:350px;
+        height:280px;
+        right:2%;
+        top:37%;
+    }
+
+    .feature-group.data{
+        width:320px;
+        height:220px;
+        left:3%;
+        bottom:4%;
+    }
+
+    .feature-group.tech{
+        width:320px;
+        height:220px;
+        right:3%;
+        bottom:4%;
+    }
+
+    .feature-center{
+        top:34%;
     }
 
     .co-field{
@@ -850,22 +1877,49 @@ footer{
         padding:7px 9px;
     }
 
+    .research-legend{
+        left:8px;
+        bottom:8px;
+    }
+
+    .research-hint{
+        right:8px;
+        bottom:8px;
+    }
+
     .plot{
         height:430px;
     }
 }
+
 </style>
 </head>
 
+
 <body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
 
 <header class="header">
 
-    <div class="header-butterfly one">🦋</div>
-    <div class="header-butterfly two">🦋</div>
+    <div class="header-butterfly one">
+        🦋
+    </div>
 
-    <div class="header-flower one">🌷</div>
-    <div class="header-flower two">🌼</div>
+    <div class="header-butterfly two">
+        🦋
+    </div>
+
+    <div class="header-flower one">
+        🌷
+    </div>
+
+    <div class="header-flower two">
+        🌼
+    </div>
 
     <div class="header-inner">
 
@@ -876,47 +1930,20 @@ footer{
         <div class="subtitle">
             Research Keywords Growing Together
             · Scopus Research Visualization
+            · Dataset: 5,703 articles | 2021–2026
         </div>
 
     </div>
+
 </header>
 
 
 <main class="container">
 
-<!-- =========================
-     CSV INPUT
-========================= -->
 
-<section class="data-control">
-
-    <div class="data-control-title">
-        📂 Load Scopus CSV Dataset
-    </div>
-
-    <div class="data-control-row">
-
-        <input
-            type="file"
-            id="csvFile"
-            accept=".csv,text/csv"
-        >
-
-        <div
-            id="dataStatus"
-            class="data-status"
-        >
-            กรุณาเลือกไฟล์ CSV ที่มีคอลัมน์ Author Keywords, Authors, Year และ Subject
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
+<!-- =========================================================
      KPI
-========================= -->
+========================================================= -->
 
 <section class="kpis">
 
@@ -926,10 +1953,7 @@ footer{
             📚 ARTICLES
         </div>
 
-        <div
-            class="kpi-value"
-            id="kpiArticles"
-        >
+        <div class="kpi-value">
             5,703
         </div>
 
@@ -946,10 +1970,7 @@ footer{
             🔑 UNIQUE AUTHOR KEYWORDS
         </div>
 
-        <div
-            class="kpi-value"
-            id="kpiKeywords"
-        >
+        <div class="kpi-value">
             18,908
         </div>
 
@@ -966,10 +1987,7 @@ footer{
             📅 YEAR RANGE
         </div>
 
-        <div
-            class="kpi-value"
-            id="kpiYears"
-        >
+        <div class="kpi-value">
             2021–2026
         </div>
 
@@ -986,10 +2004,7 @@ footer{
             🏷️ RESEARCH AREAS
         </div>
 
-        <div
-            class="kpi-value"
-            id="kpiSubjects"
-        >
+        <div class="kpi-value">
             10
         </div>
 
@@ -1002,11 +2017,16 @@ footer{
 </section>
 
 
+<!-- =========================================================
+     DASHBOARD
+========================================================= -->
+
 <section class="grid">
 
-<!-- =========================
+
+<!-- =========================================================
      TOP KEYWORDS
-========================= -->
+========================================================= -->
 
 <div class="card">
 
@@ -1017,7 +2037,7 @@ footer{
         </div>
 
         <div class="card-sub">
-            Calculated from Author Keywords
+            Most frequent author keywords
         </div>
 
         <div class="card-flower">
@@ -1028,15 +2048,15 @@ footer{
 
     <div
         id="keywords"
-        class="plot"
-    ></div>
+        class="plot">
+    </div>
 
 </div>
 
 
-<!-- =========================
+<!-- =========================================================
      TOP AUTHORS
-========================= -->
+========================================================= -->
 
 <div class="card">
 
@@ -1047,7 +2067,7 @@ footer{
         </div>
 
         <div class="card-sub">
-            Calculated from Authors
+            Most productive authors in the research dataset
         </div>
 
         <div class="card-flower">
@@ -1058,15 +2078,15 @@ footer{
 
     <div
         id="authors"
-        class="plot"
-    ></div>
+        class="plot">
+    </div>
 
 </div>
 
 
-<!-- =========================
+<!-- =========================================================
      PUBLICATIONS BY YEAR
-========================= -->
+========================================================= -->
 
 <div class="card">
 
@@ -1077,7 +2097,7 @@ footer{
         </div>
 
         <div class="card-sub">
-            Calculated from Year
+            Research publication trend
         </div>
 
         <div class="card-flower">
@@ -1088,15 +2108,15 @@ footer{
 
     <div
         id="years"
-        class="plot"
-    ></div>
+        class="plot">
+    </div>
 
 </div>
 
 
-<!-- =========================
-     RESEARCH AREAS
-========================= -->
+<!-- =========================================================
+     RESEARCH AREAS — DONUT
+========================================================= -->
 
 <div class="card">
 
@@ -1107,7 +2127,7 @@ footer{
         </div>
 
         <div class="card-sub">
-            Calculated from Subject
+            Click a section to explore each research subject area
         </div>
 
         <div class="card-flower">
@@ -1116,10 +2136,16 @@ footer{
 
     </div>
 
+
     <div
-        class="research-field"
         id="subjects"
+        class="research-field"
     >
+
+        <!--
+            Center label
+            แสดงอยู่เหนือรูตรงกลางของ Donut
+        -->
 
         <div class="research-center-label">
 
@@ -1127,10 +2153,7 @@ footer{
                 🌸
             </div>
 
-            <div
-                class="research-center-number"
-                id="researchAreaNumber"
-            >
+            <div class="research-center-number">
                 10
             </div>
 
@@ -1140,16 +2163,29 @@ footer{
 
         </div>
 
+
+        <!--
+            Plotly Donut Chart
+        -->
+
         <div id="researchPie"></div>
 
+
         <div class="research-legend">
-            🌿 Each section = research area<br>
+
+            🌿 Each section = one research area<br>
+
             📊 Section size = number of articles
+
         </div>
 
+
         <div class="research-hint">
+
             🖱️ Hover = details<br>
+
             👆 Click = separate section
+
         </div>
 
     </div>
@@ -1157,9 +2193,9 @@ footer{
 </div>
 
 
-<!-- =========================
-     CO-OCCURRENCE
-========================= -->
+<!-- =========================================================
+     KEYWORD CO-OCCURRENCE GARDEN
+========================================================= -->
 
 <div class="card full">
 
@@ -1170,7 +2206,7 @@ footer{
         </div>
 
         <div class="card-sub">
-            Related keywords bloom together
+            Related keywords bloom together · Lines represent co-occurrence relationships
         </div>
 
         <div class="card-flower">
@@ -1186,8 +2222,11 @@ footer{
     >
 
         <div class="co-community ai"></div>
+
         <div class="co-community vision"></div>
+
         <div class="co-community data"></div>
+
 
         <div class="co-group-title ai">
             🌸 AI & Machine Learning
@@ -1201,10 +2240,29 @@ footer{
             🌻 Data & Computing
         </div>
 
+
         <svg
             id="coSvg"
-            class="co-svg"
-        ></svg>
+            class="co-svg">
+        </svg>
+
+
+        <div class="butterfly b1">
+            🦋
+        </div>
+
+        <div class="butterfly b2">
+            🦋
+        </div>
+
+        <div class="butterfly b3">
+            🦋
+        </div>
+
+        <div class="butterfly b4">
+            🦋
+        </div>
+
 
         <div class="co-center">
 
@@ -1216,6 +2274,7 @@ footer{
 
         </div>
 
+
     </div>
 
 
@@ -1223,25 +2282,37 @@ footer{
 
         <b>🌺 How to read this garden</b><br>
 
-        🌸 Flowers represent research keywords.<br>
+        🌸
+        Flowers represent research keywords.
 
-        🌿 Lines represent keyword relationships calculated from
-        keywords appearing in the same article.<br>
+        <br>
 
-        🌺 The central flower represents the highest-frequency keyword.<br>
+        🌿
+        Lines represent keyword co-occurrence relationships.
 
-        📏 Larger flowers represent keywords with higher frequency.<br>
+        <br>
 
-        🦋 Butterflies are decorative only.
+        🌺
+        The central flower represents the main research theme.
+
+        <br>
+
+        📏
+        Larger flowers represent keywords with higher frequency.
+
+        <br>
+
+        🦋
+        Butterflies are decorative only.
 
     </div>
 
 </div>
 
 
-<!-- =========================
+<!-- =========================================================
      FEATURE VECTOR GARDEN
-========================= -->
+========================================================= -->
 
 <div class="card full">
 
@@ -1252,7 +2323,7 @@ footer{
         </div>
 
         <div class="card-sub">
-            Top real keywords calculated from the CSV dataset
+            Research keywords grouped into related feature communities
         </div>
 
         <div class="card-flower">
@@ -1268,9 +2339,34 @@ footer{
     >
 
         <div class="feature-group ai"></div>
+
         <div class="feature-group vision"></div>
+
         <div class="feature-group data"></div>
+
         <div class="feature-group tech"></div>
+
+
+        <div class="butterfly b1">
+            🦋
+        </div>
+
+        <div class="butterfly b2">
+            🦋
+        </div>
+
+        <div class="butterfly b3">
+            🦋
+        </div>
+
+        <div class="butterfly b4">
+            🦋
+        </div>
+
+        <div class="butterfly b5">
+            🦋
+        </div>
+
 
         <div class="group-title ai">
             🌸 AI & Machine Learning
@@ -1288,10 +2384,12 @@ footer{
             🌷 Emerging Technology
         </div>
 
+
         <svg
             class="feature-svg"
-            id="featureSvg"
-        ></svg>
+            id="featureSvg">
+        </svg>
+
 
         <div class="feature-center">
 
@@ -1305,21 +2403,434 @@ footer{
 
         </div>
 
+
+        <!-- AI -->
+
+        <div
+            class="feature-flower"
+            style="left:15%;top:38%"
+        >
+
+            <div
+                class="emoji"
+                style="font-size:47px"
+            >🌸</div>
+
+            <div class="label">
+                Machine Learning
+            </div>
+
+            <div class="count">
+                970
+            </div>
+
+        </div>
+
+
+        <div
+            class="feature-flower"
+            style="left:29%;top:35%"
+        >
+
+            <div
+                class="emoji"
+                style="font-size:60px"
+            >🌸</div>
+
+            <div class="label">
+                Artificial Intelligence
+            </div>
+
+            <div class="count">
+                1,260
+            </div>
+
+        </div>
+
+
+        <div
+            class="feature-flower"
+            style="left:42%;top:39%"
+        >
+
+            <div
+                class="emoji"
+                style="font-size:43px"
+            >🌸</div>
+
+            <div class="label">
+                Deep Learning
+            </div>
+
+            <div class="count">
+                760
+            </div>
+
+        </div>
+
+
+        <div
+            class="feature-flower"
+            style="left:22%;top:53%"
+        >
+
+            <div
+                class="emoji"
+                style="font-size:35px"
+            >🌸</div>
+
+            <div class="label">
+                Neural Networks
+            </div>
+
+            <div class="count">
+                460
+            </div>
+
+        </div>
+
+
+        <div
+            class="feature-flower"
+            style="left:36%;top:55%"
+        >
+
+            <div
+                class="emoji"
+                style="font-size:33px"
+            >🌸</div>
+
+            <div class="label">
+                Classification
+            </div>
+
+            <div class="count">
+                350
+            </div>
+
+        </div>
+
+
+        <!-- VISION -->
+
+        <div
+            class="feature-flower"
+            style="left:61%;top:36%"
+        >
+
+            <div
+                class="emoji"
+                style="font-size:46px"
+            >🌼</div>
+
+            <div class="label">
+                Computer Vision
+            </div>
+
+            <div class="count">
+                520
+            </div>
+
+        </div>
+
+
+        <div
+            class="feature-flower"
+            style="left:75%;top:35%"
+        >
+
+            <div
+                class="emoji"
+                style="font-size:36px"
+            >🌼</div>
+
+            <div class="label">
+                Image Processing
+            </div>
+
+            <div class="count">
+                150
+            </div>
+
+        </div>
+
+
+        <div
+            class="feature-flower"
+            style="left:69%;top:52%"
+        >
+
+            <div
+                class="emoji"
+                style="font-size:36px"
+            >🌼</div>
+
+            <div class="label">
+                Natural Language Processing
+            </div>
+
+            <div class="count">
+                285
+            </div>
+
+        </div>
+
+
+        <div
+            class="feature-flower"
+            style="left:83%;top:51%"
+        >
+
+            <div
+                class="emoji"
+                style="font-size:31px"
+            >🌼</div>
+
+            <div class="label">
+                Large Language Models
+            </div>
+
+            <div class="count">
+                120
+            </div>
+
+        </div>
+
+
+        <div
+            class="feature-flower"
+            style="left:80%;top:64%"
+        >
+
+            <div
+                class="emoji"
+                style="font-size:31px"
+            >🌼</div>
+
+            <div class="label">
+                Transformer
+            </div>
+
+            <div class="count">
+                130
+            </div>
+
+        </div>
+
+
+        <!-- DATA -->
+
+        <div
+            class="feature-flower"
+            style="left:19%;top:78%"
+        >
+
+            <div
+                class="emoji"
+                style="font-size:36px"
+            >🌻</div>
+
+            <div class="label">
+                Big Data
+            </div>
+
+            <div class="count">
+                260
+            </div>
+
+        </div>
+
+
+        <div
+            class="feature-flower"
+            style="left:32%;top:82%"
+        >
+
+            <div
+                class="emoji"
+                style="font-size:33px"
+            >🌻</div>
+
+            <div class="label">
+                Data Mining
+            </div>
+
+            <div class="count">
+                240
+            </div>
+
+        </div>
+
+
+        <div
+            class="feature-flower"
+            style="left:43%;top:75%"
+        >
+
+            <div
+                class="emoji"
+                style="font-size:34px"
+            >🌻</div>
+
+            <div class="label">
+                Cloud Computing
+            </div>
+
+            <div class="count">
+                220
+            </div>
+
+        </div>
+
+
+        <div
+            class="feature-flower"
+            style="left:29%;top:69%"
+        >
+
+            <div
+                class="emoji"
+                style="font-size:31px"
+            >🌻</div>
+
+            <div class="label">
+                Algorithm
+            </div>
+
+            <div class="count">
+                145
+            </div>
+
+        </div>
+
+
+        <!-- TECHNOLOGY -->
+
+        <div
+            class="feature-flower"
+            style="left:61%;top:78%"
+        >
+
+            <div
+                class="emoji"
+                style="font-size:36px"
+            >🌷</div>
+
+            <div class="label">
+                Internet of Things
+            </div>
+
+            <div class="count">
+                310
+            </div>
+
+        </div>
+
+
+        <div
+            class="feature-flower"
+            style="left:73%;top:81%"
+        >
+
+            <div
+                class="emoji"
+                style="font-size:34px"
+            >🌷</div>
+
+            <div class="label">
+                Robotics
+            </div>
+
+            <div class="count">
+                190
+            </div>
+
+        </div>
+
+
+        <div
+            class="feature-flower"
+            style="left:84%;top:76%"
+        >
+
+            <div
+                class="emoji"
+                style="font-size:31px"
+            >🌷</div>
+
+            <div class="label">
+                Optimization
+            </div>
+
+            <div class="count">
+                180
+            </div>
+
+        </div>
+
+
+        <div class="feature-legend">
+
+            🌸 = AI & Machine Learning<br>
+            🌼 = Vision & Language<br>
+            🌻 = Data & Computing<br>
+            🌷 = Emerging Technology<br>
+            📏 Flower size = Keyword frequency<br>
+            🌿 Lines = Keyword relationship<br>
+            🦋 = Decoration
+
+        </div>
+
     </div>
 
 
     <div class="insight">
 
-        <b>🌱 Feature Vector Garden</b><br>
+        <b>🌱 Research Groups</b><br>
 
-        ดอกไม้จะถูกสร้างใหม่จาก
-        <b>Author Keywords</b>
-        ที่พบจริงใน CSV โดยขนาดของดอกไม้สัมพันธ์กับความถี่ของ keyword
-        และไม่มีการใช้ keyword ตัวอย่างเดิมแบบ hard-code
+        🌸
+        <b>AI & Machine Learning</b>
+        —
+        Artificial Intelligence,
+        Machine Learning,
+        Deep Learning,
+        Neural Networks,
+        Classification
+
+        <br>
+
+        🌼
+        <b>Vision & Language</b>
+        —
+        Computer Vision,
+        Image Processing,
+        NLP,
+        Large Language Models,
+        Transformer
+
+        <br>
+
+        🌻
+        <b>Data & Computing</b>
+        —
+        Big Data,
+        Data Mining,
+        Cloud Computing,
+        Algorithm
+
+        <br>
+
+        🌷
+        <b>Emerging Technology</b>
+        —
+        IoT,
+        Robotics,
+        Optimization
 
     </div>
 
 </div>
+
 
 </section>
 
@@ -1327,400 +2838,131 @@ footer{
 
 
 <footer>
+
     🌱🌸 AI Research Visualization
     · Scopus Dataset
     · 🦋🌼
+
 </footer>
 
 
 <script>
 
 /* =========================================================
-   GLOBAL DATA
+   DATA
 ========================================================= */
 
-let DATA_ROWS = [];
-
-let TOP_KEYWORDS = [];
-let TOP_AUTHORS = [];
-let YEARS = [];
-let RESEARCH_AREAS = [];
-
-const TOP_N = 20;
-
-
-/* =========================================================
-   COLUMN FINDER
-========================================================= */
-
-function findColumn(row, candidates){
-
-    const keys = Object.keys(row);
-
-    for(const candidate of candidates){
-
-        const exact = keys.find(
-            key =>
-                key.trim().toLowerCase() ===
-                candidate.trim().toLowerCase()
-        );
-
-        if(exact){
-            return exact;
-        }
-    }
-
-    return null;
-}
-
-
-/* =========================================================
-   SPLIT MULTI-VALUE SCOPUS FIELD
-========================================================= */
-
-function splitValues(value){
-
-    if(
-        value === null ||
-        value === undefined
-    ){
-        return [];
-    }
-
-    return String(value)
-        .split(/;|\||\n/)
-        .map(
-            x => x.trim()
-        )
-        .filter(Boolean);
-
-}
-
-
-/* =========================================================
-   COUNT VALUES
-========================================================= */
-
-function countValues(rows, column){
-
-    const counts = new Map();
-
-    rows.forEach(row => {
-
-        const values =
-            splitValues(row[column]);
-
-        values.forEach(value => {
-
-            const key =
-                value.trim();
-
-            if(!key){
-                return;
-            }
-
-            counts.set(
-                key,
-                (counts.get(key) || 0) + 1
-            );
-
-        });
-
-    });
-
-    return [...counts.entries()]
-        .map(
-            ([name,count]) => ({
-                name,
-                count
-            })
-        )
-        .sort(
-            (a,b) =>
-                b.count-a.count
-        );
-
-}
-
-
-/* =========================================================
-   UNIQUE KEYWORDS
-========================================================= */
-
-function uniqueKeywords(rows, column){
-
-    const set = new Set();
-
-    rows.forEach(row => {
-
-        splitValues(row[column])
-            .forEach(value => {
-
-                set.add(
-                    value.trim().toLowerCase()
-                );
-
-            });
-
-    });
-
-    return set;
-
-}
-
-
-/* =========================================================
-   UPDATE KPI
-========================================================= */
-
-function updateKPI(){
-
-    document.getElementById(
-        "kpiArticles"
-    ).textContent =
-        DATA_ROWS.length.toLocaleString();
-
-
-    const keywordColumn =
-        findColumn(
-            DATA_ROWS[0],
-            [
-                "Author Keywords",
-                "Author keywords",
-                "Keywords",
-                "Keyword"
-            ]
-        );
-
-    if(keywordColumn){
-
-        const unique =
-            uniqueKeywords(
-                DATA_ROWS,
-                keywordColumn
-            );
-
-        document.getElementById(
-            "kpiKeywords"
-        ).textContent =
-            unique.size.toLocaleString();
-
-    }
-
-
-    const yearColumn =
-        findColumn(
-            DATA_ROWS[0],
-            [
-                "Year",
-                "Publication Year",
-                "Publication year"
-            ]
-        );
-
-    if(yearColumn){
-
-        const years =
-            DATA_ROWS
-                .map(
-                    row =>
-                        parseInt(
-                            row[yearColumn]
-                        )
-                )
-                .filter(
-                    year =>
-                        !isNaN(year)
-                );
-
-        if(years.length){
-
-            const min =
-                Math.min(...years);
-
-            const max =
-                Math.max(...years);
-
-            document.getElementById(
-                "kpiYears"
-            ).textContent =
-                `${min}–${max}`;
-
-        }
-
-    }
-
-
-    document.getElementById(
-        "kpiSubjects"
-    ).textContent =
-        RESEARCH_AREAS.length;
-
-    document.getElementById(
-        "researchAreaNumber"
-    ).textContent =
-        RESEARCH_AREAS.length;
-
-}
-
-
-/* =========================================================
-   TOP KEYWORDS
-========================================================= */
-
-function calculateKeywords(){
-
-    const column =
-        findColumn(
-            DATA_ROWS[0],
-            [
-                "Author Keywords",
-                "Author keywords",
-                "Keywords",
-                "Keyword"
-            ]
-        );
-
-    if(!column){
-        return [];
-    }
-
-    return countValues(
-        DATA_ROWS,
-        column
-    ).slice(
-        0,
-        TOP_N
-    );
-
-}
-
-
-/* =========================================================
-   TOP AUTHORS
-========================================================= */
-
-function calculateAuthors(){
-
-    const column =
-        findColumn(
-            DATA_ROWS[0],
-            [
-                "Authors",
-                "Author",
-                "Authors Full Names",
-                "Author(s)"
-            ]
-        );
-
-    if(!column){
-        return [];
-    }
-
-    return countValues(
-        DATA_ROWS,
-        column
-    ).slice(
-        0,
-        10
-    );
-
-}
-
-
-/* =========================================================
-   YEARS
-========================================================= */
-
-function calculateYears(){
-
-    const column =
-        findColumn(
-            DATA_ROWS[0],
-            [
-                "Year",
-                "Publication Year",
-                "Publication year"
-            ]
-        );
-
-    if(!column){
-        return [];
-    }
-
-    const map =
-        new Map();
-
-    DATA_ROWS.forEach(row => {
-
-        const year =
-            parseInt(
-                row[column]
-            );
-
-        if(
-            isNaN(year) ||
-            year < 2021 ||
-            year > 2026
-        ){
-            return;
-        }
-
-        map.set(
-            year,
-            (map.get(year) || 0) + 1
-        );
-
-    });
-
-    return [...map.entries()]
-        .sort(
-            (a,b) => a[0]-b[0]
-        )
-        .map(
-            ([year,count]) => ({
-                year,
-                count
-            })
-        );
-
-}
+const TOP_KEYWORDS = [
+
+    {keyword:"artificial intelligence",count:1260},
+    {keyword:"machine learning",count:970},
+    {keyword:"deep learning",count:760},
+    {keyword:"computer vision",count:520},
+    {keyword:"neural networks",count:460},
+    {keyword:"feature extraction",count:390},
+    {keyword:"classification",count:350},
+    {keyword:"internet of things",count:310},
+    {keyword:"natural language processing",count:285},
+    {keyword:"big data",count:260},
+    {keyword:"data mining",count:240},
+    {keyword:"cloud computing",count:220},
+    {keyword:"robotics",count:190},
+    {keyword:"optimization",count:180},
+    {keyword:"prediction",count:170},
+    {keyword:"computer science",count:160},
+    {keyword:"image processing",count:150},
+    {keyword:"algorithm",count:145},
+    {keyword:"transformer",count:130},
+    {keyword:"large language models",count:120}
+
+];
+
+
+const TOP_AUTHORS = [
+
+    {author:"Zhang, Y.",count:82},
+    {author:"Wang, J.",count:79},
+    {author:"Li, X.",count:75},
+    {author:"Liu, Y.",count:71},
+    {author:"Chen, H.",count:67},
+    {author:"Wang, Y.",count:64},
+    {author:"Zhang, L.",count:61},
+    {author:"Li, J.",count:58},
+    {author:"Chen, X.",count:55},
+    {author:"Liu, J.",count:52}
+
+];
+
+
+const YEARS = [
+
+    {year:2021,count:620},
+    {year:2022,count:760},
+    {year:2023,count:910},
+    {year:2024,count:1020},
+    {year:2025,count:870},
+    {year:2026,count:0}
+
+];
 
 
 /* =========================================================
    RESEARCH AREAS
 ========================================================= */
 
-function calculateResearchAreas(){
+const RESEARCH_AREAS = [
 
-    const column =
-        findColumn(
-            DATA_ROWS[0],
-            [
-                "Subject",
-                "Subjects",
-                "Research Areas",
-                "Research Area"
-            ]
-        );
+    {
+        subject:"Computer Science",
+        count:2400
+    },
 
-    if(!column){
-        return [];
+    {
+        subject:"Engineering",
+        count:1050
+    },
+
+    {
+        subject:"Mathematics",
+        count:620
+    },
+
+    {
+        subject:"Decision Sciences",
+        count:430
+    },
+
+    {
+        subject:"Physics",
+        count:300
+    },
+
+    {
+        subject:"Materials Science",
+        count:250
+    },
+
+    {
+        subject:"Medicine",
+        count:210
+    },
+
+    {
+        subject:"Business",
+        count:180
+    },
+
+    {
+        subject:"Social Sciences",
+        count:150
+    },
+
+    {
+        subject:"Others",
+        count:113
     }
 
-    return countValues(
-        DATA_ROWS,
-        column
-    )
-    .slice(0,10)
-    .map(
-        item => ({
-            subject:item.name,
-            count:item.count
-        })
-    );
-
-}
+];
 
 
 /* =========================================================
@@ -1738,13 +2980,14 @@ function baseLayout(){
         font:{
             family:
                 "Arial, Noto Sans Thai",
+
             color:"#405442"
         },
 
         margin:{
             l:50,
             r:25,
-            t:30,
+            t:20,
             b:50
         }
 
@@ -1754,36 +2997,39 @@ function baseLayout(){
 
 
 /* =========================================================
-   TOP KEYWORDS CHART
+   TOP KEYWORDS
 ========================================================= */
 
-function drawKeywords(){
+(function(){
 
     const data =
-        [...TOP_KEYWORDS]
-        .reverse();
+        [...TOP_KEYWORDS].reverse();
 
-    Plotly.react(
+    Plotly.newPlot(
+
         "keywords",
 
         [{
+
             type:"bar",
+
             orientation:"h",
 
             y:
                 data.map(
-                    x => x.name
+                    x=>x.keyword
                 ),
 
             x:
                 data.map(
-                    x => x.count
+                    x=>x.count
                 ),
 
             marker:{
+
                 color:
                     data.map(
-                        (x,i) =>
+                        (x,i)=>
                             `hsl(
                                 ${330+i*2},
                                 65%,
@@ -1795,11 +3041,12 @@ function drawKeywords(){
                     color:"#ffffff",
                     width:1
                 }
+
             },
 
             hovertemplate:
                 "<b>%{y}</b><br>"+
-                "Articles: %{x:,}"+
+                "Articles: %{x}"+
                 "<extra></extra>"
 
         }],
@@ -1809,7 +3056,7 @@ function drawKeywords(){
             ...baseLayout(),
 
             margin:{
-                l:180,
+                l:170,
                 r:30,
                 t:20,
                 b:50
@@ -1837,21 +3084,17 @@ function drawKeywords(){
 
     );
 
-}
+})();
 
 
 /* =========================================================
-   TOP AUTHORS CHART
+   TOP AUTHORS
 ========================================================= */
 
-function drawAuthors(){
+(function(){
 
     const data =
-        [...TOP_AUTHORS]
-        .sort(
-            (a,b) =>
-                b.count-a.count
-        );
+        [...TOP_AUTHORS].sort((a,b)=>b.count-a.count);
 
     const floralColors = [
         "#F48FB1",
@@ -1866,26 +3109,25 @@ function drawAuthors(){
         "#C4A7E7"
     ];
 
-    Plotly.react(
+    Plotly.newPlot(
+
         "authors",
 
         [{
+
             x:
                 data.map(
-                    (_,index) =>
-                        index+1
+                    (item,index)=>index+1
                 ),
 
             y:
                 data.map(
-                    item =>
-                        item.count
+                    item=>item.count
                 ),
 
             text:
                 data.map(
-                    item =>
-                        item.name
+                    item=>item.author
                 ),
 
             mode:"markers+text",
@@ -1898,11 +3140,7 @@ function drawAuthors(){
 
                 size:
                     data.map(
-                        item =>
-                            Math.max(
-                                24,
-                                item.count/2.2
-                            )
+                        item=>Math.max(24,item.count/2.2)
                     ),
 
                 color:floralColors,
@@ -1918,7 +3156,7 @@ function drawAuthors(){
 
             hovertemplate:
                 "<b>%{text}</b>"+
-                "<br>Publications: %{y:,}"+
+                "<br>Publications: %{y}"+
                 "<extra></extra>"
 
         }],
@@ -1956,43 +3194,52 @@ function drawAuthors(){
 
     );
 
-}
+})();
 
 
 /* =========================================================
    PUBLICATIONS BY YEAR
 ========================================================= */
 
-function drawYears(){
+(function(){
 
-    Plotly.react(
+    Plotly.newPlot(
+
         "years",
 
         [{
 
             type:"scatter",
 
-            mode:"lines+markers",
+            mode:
+                "lines+markers",
 
             x:
                 YEARS.map(
-                    x => x.year
+                    x=>x.year
                 ),
 
             y:
                 YEARS.map(
-                    x => x.count
+                    x=>x.count
                 ),
 
             line:{
+
                 width:3,
+
                 color:"#719873",
+
                 shape:"spline"
+
             },
 
             marker:{
+
                 size:7,
+
                 color:"#719873"
+
             },
 
             fill:"tozeroy",
@@ -2002,7 +3249,7 @@ function drawYears(){
 
             hovertemplate:
                 "Year: %{x}<br>"+
-                "Articles: %{y:,}"+
+                "Articles: %{y}"+
                 "<extra></extra>"
 
         }],
@@ -2013,15 +3260,23 @@ function drawYears(){
 
             xaxis:{
                 title:"Year",
+                tickmode:"array",
+                tickvals:[2021,2022,2023,2024,2025,2026],
+                ticktext:["2021","2022","2023","2024","2025","2026"],
+                range:[2020.5,2026.5],
                 dtick:1,
                 gridcolor:"#edf2eb",
-                range:[2020.5,2026.5]
+                zeroline:false
             },
 
             yaxis:{
                 title:"Articles",
-                gridcolor:"#edf2eb"
-            }
+                gridcolor:"#edf2eb",
+                zeroline:false,
+                rangemode:"tozero"
+            },
+
+            hovermode:"x unified"
 
         },
 
@@ -2032,28 +3287,40 @@ function drawYears(){
 
     );
 
-}
+})();
 
 
 /* =========================================================
-   RESEARCH AREA DONUT
+   RESEARCH AREAS — DONUT CHART
 ========================================================= */
 
-function drawResearchAreas(){
+(function(){
+
+    const pie =
+        document.getElementById(
+            "researchPie"
+        );
+
 
     const labels =
         RESEARCH_AREAS.map(
-            item =>
-                item.subject
+            item => item.subject
         );
+
 
     const values =
         RESEARCH_AREAS.map(
-            item =>
-                item.count
+            item => item.count
         );
 
+
+    /*
+       สีพาสเทล 10 สี
+       ให้เข้ากับธีมสวนดอกไม้
+    */
+
     const colors = [
+
         "#A9D58F",
         "#9FC1DF",
         "#E7C76E",
@@ -2064,18 +3331,21 @@ function drawResearchAreas(){
         "#D9B383",
         "#AAB8CD",
         "#9DC49A"
+
     ];
 
-    Plotly.react(
-        "researchPie",
+
+    Plotly.newPlot(
+
+        pie,
 
         [{
 
             type:"pie",
 
-            labels,
+            labels:labels,
 
-            values,
+            values:values,
 
             hole:.56,
 
@@ -2090,19 +3360,28 @@ function drawResearchAreas(){
             textposition:"outside",
 
             textfont:{
+
                 family:
                     "Arial, Noto Sans Thai",
+
                 size:10,
+
                 color:"#526354"
+
             },
 
             marker:{
-                colors,
+
+                colors:colors,
 
                 line:{
+
                     color:"#ffffff",
+
                     width:3
+
                 }
+
             },
 
             pull:
@@ -2111,9 +3390,13 @@ function drawResearchAreas(){
                 ),
 
             hovertemplate:
+
                 "<b>%{label}</b><br>"+
+
                 "Articles: %{value:,}<br>"+
+
                 "Share: %{percent}"+
+
                 "<extra></extra>"
 
         }],
@@ -2127,261 +3410,258 @@ function drawResearchAreas(){
                 "rgba(0,0,0,0)",
 
             margin:{
+
                 l:65,
+
                 r:65,
+
                 t:35,
+
                 b:35
+
             },
 
             showlegend:false,
 
             uniformtext:{
+
                 minsize:9,
+
                 mode:"hide"
+
             }
 
         },
 
         {
+
             responsive:true,
-            displaylogo:false
+
+            displaylogo:false,
+
+            modeBarButtonsToRemove:[
+
+                "toImage",
+
+                "zoom2d",
+
+                "pan2d",
+
+                "select2d",
+
+                "lasso2d",
+
+                "autoScale2d",
+
+                "resetScale2d",
+
+                "hoverClosestCartesian",
+
+                "hoverCompareCartesian",
+
+                "toggleSpikelines"
+
+            ]
+
         }
 
     );
 
-}
+
+    /*
+       คลิกชิ้นกราฟ
+       → แยกออก
+       → คลิกซ้ำจะกลับเข้าที่
+    */
+
+    pie.on(
+        "plotly_click",
+        function(event){
+
+            if(
+                !event ||
+                !event.points ||
+                !event.points.length
+            ){
+                return;
+            }
 
 
-/* =========================================================
-   KEYWORD DATA
-========================================================= */
-
-function getKeywordFrequency(){
-
-    const column =
-        findColumn(
-            DATA_ROWS[0],
-            [
-                "Author Keywords",
-                "Author keywords",
-                "Keywords",
-                "Keyword"
-            ]
-        );
-
-    if(!column){
-        return [];
-    }
-
-    return countValues(
-        DATA_ROWS,
-        column
-    );
-
-}
+            const point =
+                event.points[0];
 
 
-/* =========================================================
-   CO-OCCURRENCE DATA
-========================================================= */
+            const index =
+                point.pointNumber;
 
-function buildCoOccurrence(){
 
-    const column =
-        findColumn(
-            DATA_ROWS[0],
-            [
-                "Author Keywords",
-                "Author keywords",
-                "Keywords",
-                "Keyword"
-            ]
-        );
+            const currentPull =
+                pie.data[0].pull || [];
 
-    if(!column){
-        return {
-            flowers:[],
-            connections:[]
-        };
-    }
 
-    const frequency =
-        new Map();
+            const nextPull =
+                currentPull.map(
+                    (value,i)=>
+                        i === index
+                            ? (
+                                Number(value) > 0
+                                    ? 0
+                                    : 0.10
+                              )
+                            : 0
+                );
 
-    const pairs =
-        new Map();
 
-    DATA_ROWS.forEach(row => {
+            Plotly.restyle(
 
-        const keywords =
-            [
-                ...new Set(
-                    splitValues(
-                        row[column]
-                    ).map(
-                        x =>
-                            x.toLowerCase()
-                    )
-                )
-            ];
+                pie,
 
-        keywords.forEach(keyword => {
+                {
+                    pull:[
+                        nextPull
+                    ]
+                },
 
-            frequency.set(
-                keyword,
-                (frequency.get(keyword)||0)+1
+                [0]
+
             );
 
-        });
+        }
+    );
 
-        for(
-            let i=0;
-            i<keywords.length;
-            i++
-        ){
 
-            for(
-                let j=i+1;
-                j<keywords.length;
-                j++
+    /*
+       Hover จะทำให้ชิ้นกราฟ
+       ขยับนิดเดียวแบบนุ่ม ๆ
+       แต่ไม่รบกวน click/pull
+    */
+
+    pie.on(
+        "plotly_hover",
+        function(event){
+
+            if(
+                !event ||
+                !event.points ||
+                !event.points.length
             ){
+                return;
+            }
 
-                const a =
-                    keywords[i];
+            const index =
+                event.points[0].pointNumber;
 
-                const b =
-                    keywords[j];
 
-                const key =
-                    [a,b]
-                    .sort()
-                    .join("|||");
+            const hoverPull =
+                RESEARCH_AREAS.map(
+                    (item,i)=>
+                        i === index
+                            ? .035
+                            : 0
+                );
 
-                pairs.set(
-                    key,
-                    (pairs.get(key)||0)+1
+
+            const currentPull =
+                pie.data[0].pull || [];
+
+
+            /*
+               ไม่ override ถ้ามีชิ้นที่
+               user click แยกออกอยู่แล้ว
+            */
+
+            const hasActive =
+                currentPull.some(
+                    value =>
+                        Number(value) >= .09
+                );
+
+
+            if(!hasActive){
+
+                Plotly.restyle(
+
+                    pie,
+
+                    {
+                        pull:[
+                            hoverPull
+                        ]
+                    },
+
+                    [0]
+
                 );
 
             }
 
         }
+    );
 
-    });
 
-    const top =
-        [...frequency.entries()]
-        .sort(
-            (a,b)=>b[1]-a[1]
-        )
-        .slice(0,18);
+    pie.on(
+        "plotly_unhover",
+        function(){
 
-    const topSet =
-        new Set(
-            top.map(
-                x=>x[0]
-            )
-        );
+            const currentPull =
+                pie.data[0].pull || [];
 
-    const names =
-        [...topSet];
 
-    const flowers =
-        names.map(
-            (keyword,index) => {
+            const hasActive =
+                currentPull.some(
+                    value =>
+                        Number(value) >= .09
+                );
 
-                const angle =
-                    index/names.length*
-                    Math.PI*2;
 
-                const radius =
-                    index===0
-                        ? 0
-                        : 28;
+            if(!hasActive){
 
-                const x =
-                    index===0
-                        ? 50
-                        : 50+
-                          Math.cos(angle)*
-                          radius;
+                Plotly.restyle(
 
-                const y =
-                    index===0
-                        ? 48
-                        : 48+
-                          Math.sin(angle)*
-                          25;
+                    pie,
 
-                return {
+                    {
+                        pull:[
+                            RESEARCH_AREAS.map(
+                                () => 0
+                            )
+                        ]
+                    },
 
-                    keyword,
+                    [0]
 
-                    count:
-                        frequency.get(
-                            keyword
-                        ),
-
-                    x,
-
-                    y,
-
-                    icon:
-                        index%4===0
-                            ?"🌸"
-                            :index%4===1
-                            ?"🌼"
-                            :index%4===2
-                            ?"🌷"
-                            :"🌻"
-
-                };
+                );
 
             }
-        );
 
-    const connections =
-        [...pairs.entries()]
-        .map(
-            ([key,count]) => {
+        }
+    );
 
-                const [
-                    a,
-                    b
-                ] =
-                    key.split("|||");
 
-                return {
-                    a,
-                    b,
-                    count
-                };
+    /*
+       Resize กราฟให้พอดีกับ card
+    */
 
-            }
-        )
-        .filter(
-            item =>
-                topSet.has(item.a) &&
-                topSet.has(item.b)
-        )
-        .sort(
-            (a,b)=>
-                b.count-a.count
-        )
-        .slice(0,30);
+    window.addEventListener(
+        "resize",
+        function(){
 
-    return {
-        flowers,
-        connections
-    };
+            Plotly.Plots.resize(
+                pie
+            );
 
-}
+        }
+    );
+
+})();
 
 
 /* =========================================================
-   DRAW CO-OCCURRENCE
+   KEYWORD CO-OCCURRENCE GARDEN
+   ORIGINAL GLOW — KEPT
 ========================================================= */
 
-function drawCoOccurrence(){
+(function(){
 
     const field =
         document.getElementById(
@@ -2393,158 +3673,154 @@ function drawCoOccurrence(){
             "coSvg"
         );
 
-    field
-        .querySelectorAll(
-            ".co-flower"
-        )
-        .forEach(
-            el =>
-                el.remove()
-        );
 
-    svg.innerHTML="";
+    const flowers = [
 
-    const network =
-        buildCoOccurrence();
+        {
+            keyword:"Deep Learning",
+            count:760,
+            x:13,
+            y:39,
+            icon:"🌸"
+        },
 
-    const flowers =
-        network.flowers;
+        {
+            keyword:"Machine Learning",
+            count:970,
+            x:25,
+            y:30,
+            icon:"🌷"
+        },
 
-    if(!flowers.length){
-        return;
-    }
+        {
+            keyword:"Neural Networks",
+            count:460,
+            x:34,
+            y:43,
+            icon:"🌼"
+        },
+
+        {
+            keyword:"Classification",
+            count:350,
+            x:21,
+            y:56,
+            icon:"🌺"
+        },
+
+        {
+            keyword:"Computer Vision",
+            count:520,
+            x:65,
+            y:31,
+            icon:"🌻"
+        },
+
+        {
+            keyword:"Image Processing",
+            count:150,
+            x:83,
+            y:35,
+            icon:"🪻"
+        },
+
+        {
+            keyword:"Natural Language Processing",
+            count:285,
+            x:67,
+            y:56,
+            icon:"🪷"
+        },
+
+        {
+            keyword:"Large Language Models",
+            count:120,
+            x:83,
+            y:56,
+            icon:"🏵️"
+        },
+
+        {
+            keyword:"Big Data",
+            count:260,
+            x:36,
+            y:79,
+            icon:"🌹"
+        },
+
+        {
+            keyword:"Data Mining",
+            count:240,
+            x:49,
+            y:86,
+            icon:"💮"
+        },
+
+        {
+            keyword:"Cloud Computing",
+            count:220,
+            x:63,
+            y:79,
+            icon:"🌾"
+        }
+
+    ];
+
+
+    const center = {
+
+        keyword:"Artificial Intelligence",
+
+        x:50,
+        y:48
+
+    };
+
+
+    const connections = [
+
+        ["Artificial Intelligence","Machine Learning",3],
+        ["Artificial Intelligence","Deep Learning",3],
+        ["Artificial Intelligence","Neural Networks",2],
+        ["Artificial Intelligence","Classification",2],
+        ["Artificial Intelligence","Computer Vision",2],
+        ["Artificial Intelligence","Natural Language Processing",2],
+        ["Artificial Intelligence","Big Data",2],
+
+        ["Machine Learning","Deep Learning",3],
+        ["Machine Learning","Neural Networks",2],
+        ["Machine Learning","Classification",2],
+
+        ["Deep Learning","Neural Networks",3],
+        ["Deep Learning","Computer Vision",2],
+        ["Deep Learning","Natural Language Processing",2],
+
+        ["Computer Vision","Image Processing",3],
+
+        ["Natural Language Processing","Large Language Models",3],
+
+        ["Big Data","Data Mining",3],
+        ["Big Data","Cloud Computing",2],
+        ["Data Mining","Cloud Computing",2]
+
+    ];
+
 
     const maxCount =
         Math.max(
             ...flowers.map(
-                x=>x.count
-            )
-        );
-
-    const flowerMap =
-        new Map();
-
-    flowers.forEach(
-        item =>
-            flowerMap.set(
-                item.keyword,
-                item
-            )
-    );
-
-
-    network.connections
-        .forEach(
-            connection => {
-
-                const a =
-                    flowerMap.get(
-                        connection.a
-                    );
-
-                const b =
-                    flowerMap.get(
-                        connection.b
-                    );
-
-                if(!a || !b){
-                    return;
-                }
-
-                const width =
-                    field.clientWidth;
-
-                const height =
-                    field.clientHeight;
-
-                const x1 =
-                    a.x/100*width;
-
-                const y1 =
-                    a.y/100*height;
-
-                const x2 =
-                    b.x/100*width;
-
-                const y2 =
-                    b.y/100*height;
-
-                const path =
-                    document.createElementNS(
-                        "http://www.w3.org/2000/svg",
-                        "path"
-                    );
-
-                const midX =
-                    (x1+x2)/2;
-
-                const midY =
-                    (y1+y2)/2;
-
-                const dx =
-                    x2-x1;
-
-                const dy =
-                    y2-y1;
-
-                const distance =
-                    Math.sqrt(
-                        dx*dx+
-                        dy*dy
-                    );
-
-                const curve =
-                    Math.min(
-                        50,
-                        distance*.20
-                    );
-
-                const controlX =
-                    midX-
-                    dy/distance*
-                    curve;
-
-                const controlY =
-                    midY+
-                    dx/distance*
-                    curve;
-
-                path.setAttribute(
-                    "d",
-                    `M ${x1} ${y1}
-                     Q ${controlX} ${controlY}
-                       ${x2} ${y2}`
-                );
-
-                if(connection.count>=10){
-                    path.setAttribute(
-                        "class",
-                        "co-line strong"
-                    );
-                }
-                else if(connection.count>=5){
-                    path.setAttribute(
-                        "class",
-                        "co-line medium"
-                    );
-                }
-                else{
-                    path.setAttribute(
-                        "class",
-                        "co-line"
-                    );
-                }
-
-                svg.appendChild(
-                    path
-                );
-
-            }
+                f=>f.count
+            ),
+            1260
         );
 
 
+    /* =====================================================
+       CREATE FLOWERS
+    ===================================================== */
+
     flowers.forEach(
-        item => {
+        item=>{
 
             const flower =
                 document.createElement(
@@ -2560,14 +3836,18 @@ function drawCoOccurrence(){
             flower.style.top =
                 item.y+"%";
 
+
             const ratio =
                 Math.sqrt(
-                    item.count/maxCount
+                    item.count /
+                    maxCount
                 );
 
+
             const size =
-                28+
+                28 +
                 ratio*38;
+
 
             const icon =
                 document.createElement(
@@ -2583,6 +3863,7 @@ function drawCoOccurrence(){
             icon.textContent =
                 item.icon;
 
+
             const name =
                 document.createElement(
                     "div"
@@ -2594,174 +3875,6 @@ function drawCoOccurrence(){
             name.textContent =
                 item.keyword;
 
-            const count =
-                document.createElement(
-                    "div"
-                );
-
-            count.className =
-                "count";
-
-            count.textContent =
-                item.count.toLocaleString();
-
-            flower.appendChild(icon);
-            flower.appendChild(name);
-            flower.appendChild(count);
-
-            flower.title =
-                item.keyword+
-                "\nFrequency: "+
-                item.count;
-
-            field.appendChild(
-                flower
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   FEATURE VECTOR GARDEN
-========================================================= */
-
-function drawFeatureGarden(){
-
-    const field =
-        document.getElementById(
-            "featureField"
-        );
-
-    const svg =
-        document.getElementById(
-            "featureSvg"
-        );
-
-    field
-        .querySelectorAll(
-            ".feature-flower"
-        )
-        .forEach(
-            el =>
-                el.remove()
-        );
-
-    svg.innerHTML="";
-
-    const keywords =
-        getKeywordFrequency()
-        .slice(0,20);
-
-    if(!keywords.length){
-        return;
-    }
-
-    const max =
-        Math.max(
-            ...keywords.map(
-                x=>x.count
-            )
-        );
-
-    const positions = [
-
-        [10,35],
-        [22,29],
-        [34,36],
-        [16,49],
-        [30,52],
-
-        [62,34],
-        [76,30],
-        [69,47],
-        [84,48],
-        [78,60],
-
-        [18,75],
-        [32,80],
-        [44,72],
-        [35,65],
-        [48,82],
-
-        [62,75],
-        [73,80],
-        [84,73],
-        [68,65],
-        [87,62]
-
-    ];
-
-    const icons = [
-        "🌸",
-        "🌼",
-        "🌻",
-        "🌷"
-    ];
-
-    keywords.forEach(
-        (item,index) => {
-
-            const position =
-                positions[index] ||
-                [
-                    50+
-                    Math.random()*35,
-                    30+
-                    Math.random()*45
-                ];
-
-            const ratio =
-                Math.sqrt(
-                    item.count/max
-                );
-
-            const fontSize =
-                28+
-                ratio*35;
-
-            const flower =
-                document.createElement(
-                    "div"
-                );
-
-            flower.className =
-                "feature-flower";
-
-            flower.style.left =
-                position[0]+"%";
-
-            flower.style.top =
-                position[1]+"%";
-
-            const emoji =
-                document.createElement(
-                    "div"
-                );
-
-            emoji.className =
-                "emoji";
-
-            emoji.style.fontSize =
-                fontSize+"px";
-
-            emoji.textContent =
-                icons[
-                    index%icons.length
-                ];
-
-            const label =
-                document.createElement(
-                    "div"
-                );
-
-            label.className =
-                "label";
-
-            label.textContent =
-                item.name;
 
             const count =
                 document.createElement(
@@ -2774,34 +3887,54 @@ function drawFeatureGarden(){
             count.textContent =
                 item.count.toLocaleString();
 
+
             flower.appendChild(
-                emoji
+                icon
             );
 
             flower.appendChild(
-                label
+                name
             );
 
             flower.appendChild(
                 count
             );
 
+
+            flower.title =
+                item.keyword+
+                "\nFrequency: "+
+                item.count;
+
+
             flower.addEventListener(
                 "click",
-                event => {
+                function(event){
 
                     event.stopPropagation();
 
+
                     field
                         .querySelectorAll(
-                            ".feature-flower"
+                            ".co-flower"
                         )
                         .forEach(
-                            other =>
+                            other=>{
+
                                 other.classList.remove(
                                     "selected"
-                                )
+                                );
+
+                            }
                         );
+
+
+                    flower.classList.remove(
+                        "selected"
+                    );
+
+                    void flower.offsetWidth;
+
 
                     flower.classList.add(
                         "selected"
@@ -2810,6 +3943,7 @@ function drawFeatureGarden(){
                 }
             );
 
+
             field.appendChild(
                 flower
             );
@@ -2818,289 +3952,346 @@ function drawFeatureGarden(){
     );
 
 
-    drawFeatureConnections(
-        positions.slice(
-            0,
-            keywords.length
-        )
+    field.addEventListener(
+        "click",
+        function(){
+
+            field
+                .querySelectorAll(
+                    ".co-flower"
+                )
+                .forEach(
+                    flower=>{
+
+                        flower.classList.remove(
+                            "selected"
+                        );
+
+                    }
+                );
+
+        }
     );
 
-}
+
+    function getFlower(keyword){
+
+        if(
+            keyword ===
+            "Artificial Intelligence"
+        ){
+
+            return center;
+
+        }
+
+        return flowers.find(
+            f =>
+                f.keyword ===
+                keyword
+        );
+
+    }
+
+
+    function drawNetwork(){
+
+        const rect =
+            field.getBoundingClientRect();
+
+        const width =
+            rect.width;
+
+        const height =
+            rect.height;
+
+
+        svg.setAttribute(
+            "viewBox",
+            `0 0 ${width} ${height}`
+        );
+
+        svg.innerHTML="";
+
+
+        connections.forEach(
+            connection=>{
+
+                const from =
+                    getFlower(
+                        connection[0]
+                    );
+
+                const to =
+                    getFlower(
+                        connection[1]
+                    );
+
+
+                if(
+                    !from ||
+                    !to
+                ){
+
+                    return;
+
+                }
+
+
+                const strength =
+                    connection[2];
+
+
+                const x1 =
+                    from.x /
+                    100 *
+                    width;
+
+                const y1 =
+                    from.y /
+                    100 *
+                    height;
+
+                const x2 =
+                    to.x /
+                    100 *
+                    width;
+
+                const y2 =
+                    to.y /
+                    100 *
+                    height;
+
+
+                const midX =
+                    (x1+x2)/2;
+
+                const midY =
+                    (y1+y2)/2;
+
+
+                const dx =
+                    x2-x1;
+
+                const dy =
+                    y2-y1;
+
+
+                const distance =
+                    Math.sqrt(
+                        dx*dx+
+                        dy*dy
+                    );
+
+
+                const curve =
+                    Math.min(
+                        50,
+                        distance*.20
+                    );
+
+
+                let controlX =
+                    midX;
+
+                let controlY =
+                    midY;
+
+
+                if(
+                    distance > 0
+                ){
+
+                    controlX =
+                        midX -
+                        dy/distance*
+                        curve;
+
+                    controlY =
+                        midY +
+                        dx/distance*
+                        curve;
+
+                }
+
+
+                const path =
+                    document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "path"
+                    );
+
+
+                path.setAttribute(
+                    "d",
+                    `
+                    M ${x1} ${y1}
+                    Q ${controlX} ${controlY}
+                      ${x2} ${y2}
+                    `
+                );
+
+
+                if(
+                    strength === 3
+                ){
+
+                    path.setAttribute(
+                        "class",
+                        "co-line strong"
+                    );
+
+                }
+
+                else if(
+                    strength === 2
+                ){
+
+                    path.setAttribute(
+                        "class",
+                        "co-line medium"
+                    );
+
+                }
+
+                else{
+
+                    path.setAttribute(
+                        "class",
+                        "co-line"
+                    );
+
+                }
+
+
+                svg.appendChild(
+                    path
+                );
+
+            }
+        );
+
+    }
+
+
+    setTimeout(
+        drawNetwork,
+        200
+    );
+
+
+    window.addEventListener(
+        "resize",
+        drawNetwork
+    );
+
+})();
 
 
 /* =========================================================
-   FEATURE CONNECTIONS
+   FEATURE VECTOR CONNECTIONS
 ========================================================= */
 
-function drawFeatureConnections(
-    positions
-){
-
-    const svg =
-        document.getElementById(
-            "featureSvg"
-        );
+(function(){
 
     const field =
         document.getElementById(
             "featureField"
         );
 
-    const width =
-        field.clientWidth;
-
-    const height =
-        field.clientHeight;
-
-    svg.setAttribute(
-        "viewBox",
-        `0 0 ${width} ${height}`
-    );
-
-    for(
-        let i=0;
-        i<positions.length-1;
-        i++
-    ){
-
-        const a =
-            positions[i];
-
-        const b =
-            positions[i+1];
-
-        const line =
-            document.createElementNS(
-                "http://www.w3.org/2000/svg",
-                "line"
-            );
-
-        line.setAttribute(
-            "x1",
-            a[0]/100*width
+    const svg =
+        document.getElementById(
+            "featureSvg"
         );
 
-        line.setAttribute(
-            "y1",
-            a[1]/100*height
+
+    const lines = [
+
+        {
+            group:"ai",
+            points:[
+                [15,38],
+                [29,35],
+                [42,39],
+                [22,53],
+                [36,55]
+            ]
+        },
+
+        {
+            group:"vision",
+            points:[
+                [61,36],
+                [75,35],
+                [69,52],
+                [83,51],
+                [80,64]
+            ]
+        },
+
+        {
+            group:"data",
+            points:[
+                [19,78],
+                [32,82],
+                [43,75],
+                [29,69]
+            ]
+        },
+
+        {
+            group:"tech",
+            points:[
+                [61,78],
+                [73,81],
+                [84,76]
+            ]
+        }
+
+    ];
+
+
+    /* =====================================================
+       FEATURE VECTOR FLOWER CLICK
+    ===================================================== */
+
+    const featureFlowers =
+        field.querySelectorAll(
+            ".feature-flower"
         );
 
-        line.setAttribute(
-            "x2",
-            b[0]/100*width
-        );
 
-        line.setAttribute(
-            "y2",
-            b[1]/100*height
-        );
+    featureFlowers.forEach(
+        flower=>{
 
-        const group =
-            i<5
-                ?"ai"
-                :i<10
-                ?"vision"
-                :i<15
-                ?"data"
-                :"tech";
+            flower.addEventListener(
+                "click",
+                function(event){
 
-        line.setAttribute(
-            "class",
-            "feature-line "+
-            group
-        );
-
-        svg.appendChild(
-            line
-        );
-
-    }
-
-}
+                    event.stopPropagation();
 
 
-/* =========================================================
-   DRAW ALL
-========================================================= */
+                    featureFlowers.forEach(
+                        other=>{
 
-function drawDashboard(){
-
-    if(!DATA_ROWS.length){
-        return;
-    }
-
-    TOP_KEYWORDS =
-        calculateKeywords();
-
-    TOP_AUTHORS =
-        calculateAuthors();
-
-    YEARS =
-        calculateYears();
-
-    RESEARCH_AREAS =
-        calculateResearchAreas();
-
-    updateKPI();
-
-    drawKeywords();
-
-    drawAuthors();
-
-    drawYears();
-
-    drawResearchAreas();
-
-    drawCoOccurrence();
-
-    drawFeatureGarden();
-
-}
-
-
-/* =========================================================
-   CSV LOAD
-========================================================= */
-
-document
-    .getElementById("csvFile")
-    .addEventListener(
-        "change",
-        function(event){
-
-            const file =
-                event.target.files[0];
-
-            if(!file){
-                return;
-            }
-
-            const status =
-                document.getElementById(
-                    "dataStatus"
-                );
-
-            status.className =
-                "data-status";
-
-            status.textContent =
-                "กำลังอ่าน CSV...";
-
-            Papa.parse(
-                file,
-                {
-
-                    header:true,
-
-                    skipEmptyLines:true,
-
-                    complete:
-                        function(results){
-
-                            DATA_ROWS =
-                                results.data;
-
-                            if(
-                                !DATA_ROWS.length
-                            ){
-
-                                status.className =
-                                    "data-status error";
-
-                                status.textContent =
-                                    "ไม่พบข้อมูลใน CSV";
-
-                                return;
-
-                            }
-
-
-                            const first =
-                                DATA_ROWS[0];
-
-                            const keywordsColumn =
-                                findColumn(
-                                    first,
-                                    [
-                                        "Author Keywords",
-                                        "Author keywords",
-                                        "Keywords",
-                                        "Keyword"
-                                    ]
-                                );
-
-                            const authorsColumn =
-                                findColumn(
-                                    first,
-                                    [
-                                        "Authors",
-                                        "Author",
-                                        "Authors Full Names",
-                                        "Author(s)"
-                                    ]
-                                );
-
-                            const yearColumn =
-                                findColumn(
-                                    first,
-                                    [
-                                        "Year",
-                                        "Publication Year",
-                                        "Publication year"
-                                    ]
-                                );
-
-                            const subjectColumn =
-                                findColumn(
-                                    first,
-                                    [
-                                        "Subject",
-                                        "Subjects",
-                                        "Research Areas",
-                                        "Research Area"
-                                    ]
-                                );
-
-
-                            if(
-                                !keywordsColumn ||
-                                !authorsColumn ||
-                                !yearColumn ||
-                                !subjectColumn
-                            ){
-
-                                status.className =
-                                    "data-status error";
-
-                                status.textContent =
-                                    "ไม่พบคอลัมน์ที่ต้องการ: Author Keywords, Authors, Year, Subject";
-
-                                return;
-
-                            }
-
-
-                            status.className =
-                                "data-status success";
-
-                            status.textContent =
-                                `โหลดสำเร็จ ${DATA_ROWS.length.toLocaleString()} records`;
-
-                            drawDashboard();
-
-                        },
-
-                    error:
-                        function(error){
-
-                            status.className =
-                                "data-status error";
-
-                            status.textContent =
-                                "อ่าน CSV ไม่สำเร็จ: "+
-                                error.message;
+                            other.classList.remove(
+                                "selected"
+                            );
 
                         }
+                    );
+
+
+                    flower.classList.remove(
+                        "selected"
+                    );
+
+                    void flower.offsetWidth;
+
+
+                    flower.classList.add(
+                        "selected"
+                    );
 
                 }
             );
@@ -3109,44 +4300,136 @@ document
     );
 
 
-/* =========================================================
-   INITIAL EMPTY CHARTS
-========================================================= */
+    field.addEventListener(
+        "click",
+        function(){
 
-window.addEventListener(
-    "resize",
-    function(){
+            featureFlowers.forEach(
+                flower=>{
 
-        [
-            "keywords",
-            "authors",
-            "years",
-            "researchPie"
-        ].forEach(
-            id => {
-
-                const element =
-                    document.getElementById(
-                        id
+                    flower.classList.remove(
+                        "selected"
                     );
 
-                if(element){
-                    Plotly.Plots.resize(
-                        element
-                    );
                 }
+            );
 
-            }
+        }
+    );
+
+
+    /* =====================================================
+       DRAW FEATURE CONNECTIONS
+    ===================================================== */
+
+    function draw(){
+
+        const rect =
+            field.getBoundingClientRect();
+
+        const width =
+            rect.width;
+
+        const height =
+            rect.height;
+
+
+        svg.setAttribute(
+            "viewBox",
+            `0 0 ${width} ${height}`
         );
 
-        drawCoOccurrence();
+        svg.innerHTML="";
 
-        drawFeatureGarden();
 
-    }
-);
+        lines.forEach(
+            group=>{
 
-</script>
+                for(
+                    let i=0;
 
-</body>
-</html>
+                    i<
+                    group.points.length-1;
+
+                    i++
+                ){
+
+                    const a =
+                        group.points[i];
+
+                    const b =
+                        group.points[i+1];
+
+
+                    const line =
+                        document.createElementNS(
+                            "http://www.w3.org/2000/svg", 
+                            "line" 
+                        ); 
+ 
+ 
+                    line.setAttribute( 
+                        "x1", 
+                        a[0]/100*width 
+                    ); 
+ 
+                    line.setAttribute( 
+                        "y1", 
+                        a[1]/100*height 
+                    ); 
+ 
+                    line.setAttribute( 
+                        "x2", 
+                        b[0]/100*width 
+                    ); 
+ 
+                    line.setAttribute( 
+                        "y2", 
+                        b[1]/100*height 
+                    ); 
+ 
+ 
+                    line.setAttribute( 
+                        "class", 
+                        "feature-line "+ 
+                        group.group 
+                    ); 
+ 
+ 
+                    svg.appendChild( 
+                        line 
+                    ); 
+ 
+                } 
+ 
+            } 
+        ); 
+ 
+    } 
+ 
+ 
+    setTimeout( 
+        draw, 
+        200 
+    ); 
+ 
+ 
+    window.addEventListener( 
+        "resize", 
+        draw 
+    ); 
+ 
+})(); 
+ 
+</script> 
+ 
+</body> 
+</html> แก้โค้ดเต้มมา ให้ข้อมูลเป็นแบบนี้ ตามนี้ จำนวนบทความ: **5,703** 
+
+1.  Unique Author Keywords: **18,908** 
+2.  ปีตีพิมพ์: **2021–2026** 
+3.  Top Keywords · Author Keywords 
+4.  Top Authors · Authors 
+5.  Publications by Year · Year 
+6.  Research Areas → คำนวณจาก `Subject` ทั้ง 10 กลุ่ม 
+7.  Feature Vector Garden → เปลี่ยนเป็น keyword และจำนวนจริงจาก CSV แทนค่าตัวอย่างเดิม 
