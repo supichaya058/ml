@@ -1,14 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>AI Research Flower Field</title>
-
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Scopus Data Analysis</title>
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
-
 <style>
 
 /* =========================================================
@@ -319,78 +316,6 @@ body{
     width:100%;
     height:100%;
 }
-
-
-/*
-   กล่องคำอธิบาย
-*/
-
-.research-legend{
-    position:absolute;
-    left:15px;
-    bottom:15px;
-    z-index:10;
-
-    padding:9px 13px;
-
-    border-radius:15px;
-
-    background:
-        rgba(255,255,255,.88);
-
-    border:
-        1px solid
-        #dbe6d7;
-
-    box-shadow:
-        0 4px 12px
-        rgba(70,90,70,.07);
-
-    font-size:10px;
-
-    color:#667466;
-
-    line-height:1.7;
-
-    pointer-events:none;
-}
-
-
-/*
-   คำแนะนำด้านขวา
-*/
-
-.research-hint{
-    position:absolute;
-    right:15px;
-    bottom:15px;
-    z-index:10;
-
-    padding:9px 13px;
-
-    border-radius:15px;
-
-    background:
-        rgba(255,255,255,.88);
-
-    border:
-        1px solid
-        #dbe6d7;
-
-    box-shadow:
-        0 4px 12px
-        rgba(70,90,70,.07);
-
-    font-size:10px;
-
-    color:#667466;
-
-    line-height:1.7;
-
-    pointer-events:none;
-}
-
-
 /*
    กล่องตรงกลาง
 */
@@ -1097,43 +1022,6 @@ body{
     font-size:30px;
     animation-delay:1.7s;
 }
-
-
-/* =========================================================
-   FEATURE LEGEND
-========================================================= */
-
-.feature-legend{
-    position:absolute;
-
-    left:18px;
-    bottom:17px;
-
-    z-index:30;
-
-    padding:11px 14px;
-
-    border-radius:17px;
-
-    background:
-        rgba(255,255,255,.85);
-
-    border:
-        1px solid
-        #dbe6d7;
-
-    box-shadow:
-        0 4px 12px
-        rgba(70,90,70,.08);
-
-    font-size:10px;
-
-    line-height:1.8;
-
-    color:#627163;
-}
-
-
 /* =========================================================
    KEYWORD CO-OCCURRENCE GARDEN
 ========================================================= */
@@ -1871,1098 +1759,437 @@ footer{
         font-size:9px;
     }
 
-    .research-legend,
-    .research-hint{
-        font-size:9px;
-        padding:7px 9px;
-    }
-
-    .research-legend{
-        left:8px;
-        bottom:8px;
-    }
-
-    .research-hint{
-        right:8px;
-        bottom:8px;
-    }
-
     .plot{
         height:430px;
     }
 }
 
+
+/* =========================================================
+   EXPLANATION BOXES
+========================================================= */
+.explanation{
+    margin-top:14px;
+    padding:14px 16px;
+    border-radius:14px;
+    background:linear-gradient(135deg,#fbfdf9,#fffafc);
+    border:1px solid #e1e9dc;
+    color:#5b695d;
+    font-size:12px;
+    line-height:1.75;
+}
+.explanation strong{
+    color:#405442;
+}
+.explanation-title{
+    font-weight:800;
+    margin-bottom:4px;
+    color:#38543d;
+}
+.explanation ul{
+    margin:6px 0 0 18px;
+    padding:0;
+}
+.explanation li{
+    margin:2px 0;
+}
 </style>
 </head>
-
-
 <body>
-
-
 <!-- =========================================================
      HEADER
 ========================================================= -->
-
 <header class="header">
-
-    <div class="header-butterfly one">
+<div class="header-butterfly one">
         🦋
     </div>
-
-    <div class="header-butterfly two">
+<div class="header-butterfly two">
         🦋
     </div>
-
-    <div class="header-flower one">
+<div class="header-flower one">
         🌷
     </div>
-
-    <div class="header-flower two">
+<div class="header-flower two">
         🌼
     </div>
-
-    <div class="header-inner">
-
-        <h1>
-            🌱🌼 AI RESEARCH FLOWER FIELD
+<div class="header-inner">
+<h1>
+            🌱🌼 Scopus Data Analysis
         </h1>
-
-        <div class="subtitle">
-            Research Keywords Growing Together
-            · Scopus Research Visualization
-            · Dataset: 5,703 articles | 2021–2026
-        </div>
-
-    </div>
-
+<div class="subtitle">
+</div>
+</div>
 </header>
-
-
 <main class="container">
-
-
 <!-- =========================================================
      KPI
 ========================================================= -->
-
 <section class="kpis">
-
-    <div class="kpi">
-
-        <div class="kpi-label">
+<div class="kpi">
+<div class="kpi-label">
             📚 ARTICLES
         </div>
-
-        <div class="kpi-value">
+<div class="kpi-value">
             5,703
         </div>
-
-        <div class="kpi-small">
+<div class="kpi-small">
             Records in dataset
         </div>
-
-    </div>
-
-
-    <div class="kpi">
-
-        <div class="kpi-label">
+</div>
+<div class="kpi">
+<div class="kpi-label">
             🔑 UNIQUE AUTHOR KEYWORDS
         </div>
-
-        <div class="kpi-value">
+<div class="kpi-value">
             18,908
         </div>
-
-        <div class="kpi-small">
+<div class="kpi-small">
             Author Keywords
         </div>
-
-    </div>
-
-
-    <div class="kpi">
-
-        <div class="kpi-label">
+</div>
+<div class="kpi">
+<div class="kpi-label">
             📅 YEAR RANGE
         </div>
-
-        <div class="kpi-value">
+<div class="kpi-value">
             2021–2026
         </div>
-
-        <div class="kpi-small">
+<div class="kpi-small">
             Publication years
         </div>
-
-    </div>
-
-
-    <div class="kpi">
-
-        <div class="kpi-label">
+</div>
+<div class="kpi">
+<div class="kpi-label">
             🏷️ RESEARCH AREAS
         </div>
-
-        <div class="kpi-value">
+<div class="kpi-value">
             10
         </div>
-
-        <div class="kpi-small">
+<div class="kpi-small">
             Research subject groups
         </div>
-
-    </div>
-
+</div>
 </section>
-
-
 <!-- =========================================================
      DASHBOARD
 ========================================================= -->
-
 <section class="grid">
-
-
 <!-- =========================================================
      TOP KEYWORDS
 ========================================================= -->
-
 <div class="card">
-
-    <div class="card-head">
-
-        <div class="card-title">
+<div class="card-head">
+<div class="card-title">
             🌼 Top Keywords
         </div>
-
-        <div class="card-sub">
+<div class="card-sub">
             Most frequent author keywords
         </div>
-
-        <div class="card-flower">
+<div class="card-flower">
             🌷
         </div>
-
-    </div>
-
-    <div
-        id="keywords"
-        class="plot">
-    </div>
-
 </div>
-
-
+<div class="plot" id="keywords">
+</div>
+<div class="explanation"><div class="explanation-title">💡 คำอธิบายโดยละเอียด</div><p>กราฟนี้แสดงคำสำคัญจากช่อง Author Keywords ที่พบในบทความมากที่สุดของชุดข้อมูล CSV โดยเรียงตามจำนวนครั้งที่คำสำคัญปรากฏในบทความ ยิ่งแท่งยาว แสดงว่าคำนั้นปรากฏในบทความจำนวนมากกว่า จึงช่วยบอกได้ว่า “หัวข้อหรือแนวคิดใดถูกกล่าวถึงบ่อย” ในชุดข้อมูลนี้</p><p>วิธีอ่านกราฟ: แกนด้านซ้ายคือชื่อคำสำคัญ ส่วนแกนด้านล่างคือจำนวนบทความที่พบคำสำคัญนั้น ตัวเลขไม่ได้หมายถึงจำนวนคำที่ถูกพิมพ์ซ้ำภายในบทความ แต่หมายถึงจำนวนบทความที่มีคำสำคัญนั้นอยู่ใน Author Keywords ดังนั้นกราฟนี้เหมาะสำหรับใช้ค้นหา research themes ที่เด่นที่สุด และใช้เปรียบเทียบความสนใจของหัวข้อแต่ละเรื่อง</p><p>ตัวอย่างจากข้อมูลจริง: “Deep learning” พบ 299 บทความ, “Artificial intelligence” พบ 274 บทความ และ “machine learning” พบ 214 บทความ จึงเป็นกลุ่มคำสำคัญที่มีความโดดเด่นในชุดข้อมูลนี้</p><p>ข้อควรระวัง: ความถี่สูงไม่ได้แปลว่างานวิจัยมีคุณภาพสูงกว่า หรือมี citation สูงกว่า เป็นเพียงตัวชี้วัดว่าคำสำคัญนั้นปรากฏในบทความจำนวนมากกว่า</p></div>
+</div>
 <!-- =========================================================
      TOP AUTHORS
 ========================================================= -->
-
 <div class="card">
-
-    <div class="card-head">
-
-        <div class="card-title">
+<div class="card-head">
+<div class="card-title">
             🌷 Top Authors
         </div>
-
-        <div class="card-sub">
+<div class="card-sub">
             Most productive authors in the research dataset
         </div>
-
-        <div class="card-flower">
+<div class="card-flower">
             🌷
         </div>
-
-    </div>
-
-    <div
-        id="authors"
-        class="plot">
-    </div>
-
 </div>
-
-
+<div class="plot" id="authors">
+</div>
+<div class="explanation"><div class="explanation-title">💡 คำอธิบายโดยละเอียด</div><p>กราฟนี้แสดงผู้เขียนที่ปรากฏในชุดข้อมูลมากที่สุด โดยนับจากรายชื่อ Authors ในข้อมูล CSV และใช้เพื่อดูว่าใครมีผลงานปรากฏในชุดข้อมูลจำนวนมาก</p><p>วิธีอ่านกราฟ: แกนแนวนอนแสดงลำดับของผู้เขียน ส่วนแกนแนวตั้งแสดงจำนวนบทความ ยิ่งแท่งสูง หมายถึงผู้เขียนคนนั้นมีบทความอยู่ในชุดข้อมูลมากกว่า ผู้ใช้สามารถใช้กราฟนี้เพื่อดูภาพรวมของ authorship concentration และค้นหาผู้เขียนที่มีผลงานปรากฏบ่อย</p><p>ตัวอย่างจากข้อมูลจริง: Zhang, Y. มี 142 บทความ, Wang, Y. มี 131 บทความ และ Li, X. มี 118 บทความ ซึ่งเป็นกลุ่มผู้เขียนที่มีจำนวนบทความสูงในชุดข้อมูลนี้</p><p>ข้อควรระวัง: จำนวนบทความไม่ใช่การจัดอันดับคุณภาพงานวิจัย และไม่ได้บอกจำนวน citation, h-index หรือ contribution ของผู้เขียนแต่ละคน นอกจากนี้ชื่อผู้เขียนที่สะกดต่างกันอาจถูกนับเป็นคนละชื่อหากข้อมูลต้นฉบับไม่ได้ทำ author disambiguation</p></div>
+</div>
 <!-- =========================================================
      PUBLICATIONS BY YEAR
 ========================================================= -->
-
 <div class="card">
-
-    <div class="card-head">
-
-        <div class="card-title">
+<div class="card-head">
+<div class="card-title">
             📈 Publications by Year
         </div>
-
-        <div class="card-sub">
+<div class="card-sub">
             Research publication trend
         </div>
-
-        <div class="card-flower">
+<div class="card-flower">
             🌼
         </div>
-
-    </div>
-
-    <div
-        id="years"
-        class="plot">
-    </div>
-
 </div>
-
-
+<div class="plot" id="years">
+</div>
+<div class="explanation"><div class="explanation-title">💡 คำอธิบายโดยละเอียด</div><p>กราฟนี้แสดงจำนวนบทความที่เผยแพร่ในแต่ละปีตามข้อมูล CSV ใช้สำหรับดูแนวโน้มของปริมาณงานวิจัยในช่วงเวลาที่ชุดข้อมูลครอบคลุม</p><p>วิธีอ่านกราฟ: แกนแนวนอนคือปีเผยแพร่ และแกนแนวตั้งคือจำนวนบทความ จุดหรือแท่งที่สูงขึ้นหมายถึงปีนั้นมีบทความอยู่ในชุดข้อมูลมากขึ้น การเปรียบเทียบแต่ละปีช่วยให้เห็นช่วงที่ publication activity เพิ่มขึ้น ลดลง หรือมีการเปลี่ยนแปลง</p><p>กราฟนี้สามารถใช้ประกอบการตอบคำถาม เช่น “ช่วงใดมีงานวิจัยมากที่สุด?”, “แนวโน้มการตีพิมพ์เพิ่มขึ้นหรือไม่?” และ “หัวข้อวิจัยมีการเติบโตในช่วงเวลาใด?”</p><p>ข้อควรระวัง: จำนวนบทความในแต่ละปีขึ้นอยู่กับช่วงเวลาและขอบเขตของ CSV ที่นำมาวิเคราะห์ หากปีล่าสุดยังเก็บข้อมูลไม่ครบทั้งปี จำนวนบทความของปีนั้นอาจต่ำกว่าปีก่อนและไม่ควรตีความว่าเป็นการลดลงของความสนใจโดยทันที</p></div>
+</div>
 <!-- =========================================================
      RESEARCH AREAS — DONUT
 ========================================================= -->
-
 <div class="card">
-
-    <div class="card-head">
-
-        <div class="card-title">
+<div class="card-head">
+<div class="card-title">
             🌿 Research Areas
         </div>
-
-        <div class="card-sub">
-            Click a section to explore each research subject area
-        </div>
-
-        <div class="card-flower">
+<div class="card-flower">
             🌻
         </div>
-
-    </div>
-
-
-    <div
-        id="subjects"
-        class="research-field"
-    >
-
-        <!--
+</div>
+<div class="research-field" id="subjects">
+<!--
             Center label
             แสดงอยู่เหนือรูตรงกลางของ Donut
         -->
-
-        <div class="research-center-label">
-
-            <div class="research-center-flower">
+<div class="research-center-label">
+<div class="research-center-flower">
                 🌸
             </div>
-
-            <div class="research-center-number">
+<div class="research-center-number">
                 10
             </div>
-
-            <div class="research-center-text">
+<div class="research-center-text">
                 Research Areas
             </div>
-
-        </div>
-
-
-        <!--
+</div>
+<!--
             Plotly Donut Chart
         -->
-
-        <div id="researchPie"></div>
-
-
-        <div class="research-legend">
-
-            🌿 Each section = one research area<br>
-
-            📊 Section size = number of articles
-
-        </div>
-
-
-        <div class="research-hint">
-
-            🖱️ Hover = details<br>
-
-            👆 Click = separate section
-
-        </div>
-
-    </div>
-
+<div id="researchPie"></div>
+<div class="explanation"><div class="explanation-title">💡 คำอธิบายโดยละเอียด</div><p>กราฟนี้แสดงการกระจายของบทความตาม Research Area จำนวน 10 กลุ่มที่มาจากข้อมูล CSV แต่ละส่วนของวงแหวนแทนหนึ่งสาขา และขนาดของส่วนนั้นสัมพันธ์กับจำนวนบทความในสาขา</p><p>วิธีอ่านกราฟ: ส่วนที่มีขนาดใหญ่หมายถึง Research Area นั้นมีบทความมากกว่า ส่วนที่มีขนาดเล็กหมายถึงมีบทความน้อยกว่า จำนวนตรงกลางแสดงจำนวน Research Areas ที่นำมาวิเคราะห์</p><p>จากข้อมูลจริง กลุ่มที่มีจำนวนบทความสูง ได้แก่ Applications 600 บทความ, Computational Theory and Mathematics 597 บทความ, Hardware 596 บทความ และ Computer Graphics and Computer-Aided Design 595 บทความ ข้อมูลเหล่านี้ช่วยให้เห็นว่า research activity ของชุดข้อมูลกระจายอยู่ในสาขาใดมากที่สุด</p><p>กราฟนี้เหมาะสำหรับใช้ดู research landscape ในระดับสาขา และใช้เปรียบเทียบสัดส่วนของแต่ละ area อย่างรวดเร็ว อย่างไรก็ตาม Research Area เป็นการจัดหมวดหมู่ของข้อมูล จึงไม่ควรตีความว่าแต่ละบทความเกี่ยวข้องกับสาขาเดียวในเชิงเนื้อหาโดยสมบูรณ์ หากต้นฉบับอนุญาตให้บทความหนึ่งอยู่ได้หลายหมวดหมู่</p></div>
 </div>
-
-
+</div>
 <!-- =========================================================
      KEYWORD CO-OCCURRENCE GARDEN
 ========================================================= -->
-
 <div class="card full">
-
-    <div class="card-head">
-
-        <div class="card-title">
+<div class="card-head">
+<div class="card-title">
             🌺 Keyword Co-occurrence Garden
         </div>
-
-        <div class="card-sub">
+<div class="card-sub">
             Related keywords bloom together · Lines represent co-occurrence relationships
         </div>
-
-        <div class="card-flower">
+<div class="card-flower">
             🦋
         </div>
-
-    </div>
-
-
-    <div
-        class="co-field"
-        id="coField"
-    >
-
-        <div class="co-community ai"></div>
-
-        <div class="co-community vision"></div>
-
-        <div class="co-community data"></div>
-
-
-        <div class="co-group-title ai">
-            🌸 AI & Machine Learning
+</div>
+<div class="co-field" id="coField">
+<div class="co-community ai"></div>
+<div class="co-community vision"></div>
+<div class="co-community data"></div>
+<div class="co-group-title ai">
+            🌸 AI &amp; Machine Learning
         </div>
-
-        <div class="co-group-title vision">
-            🌼 Vision & Language
+<div class="co-group-title vision">
+            🌼 Vision &amp; Language
         </div>
-
-        <div class="co-group-title data">
-            🌻 Data & Computing
+<div class="co-group-title data">
+            🌻 Data &amp; Computing
         </div>
-
-
-        <svg
-            id="coSvg"
-            class="co-svg">
-        </svg>
-
-
-        <div class="butterfly b1">
+<svg class="co-svg" id="coSvg">
+</svg>
+<div class="butterfly b1">
             🦋
         </div>
-
-        <div class="butterfly b2">
+<div class="butterfly b2">
             🦋
         </div>
-
-        <div class="butterfly b3">
+<div class="butterfly b3">
             🦋
         </div>
-
-        <div class="butterfly b4">
+<div class="butterfly b4">
             🦋
         </div>
-
-
-        <div class="co-center">
-
-            <div class="icon"></div>
-
-            <div class="name">
+<div class="co-center">
+<div class="icon"></div>
+<div class="name">
                 Artificial Intelligence
             </div>
-
-        </div>
-
-
-    </div>
-
-
-    <div class="insight">
-
-        <b>🌺 How to read this garden</b><br>
-
-        🌸
-        Flowers represent research keywords.
-
-        <br>
-
-        🌿
-        Lines represent keyword co-occurrence relationships.
-
-        <br>
-
-        🌺
-        The central flower represents the main research theme.
-
-        <br>
-
-        📏
-        Larger flowers represent keywords with higher frequency.
-
-        <br>
-
-        🦋
-        Butterflies are decorative only.
-
-    </div>
-
 </div>
-
-
+</div>
+<div class="explanation"><div class="explanation-title">💡 คำอธิบายโดยละเอียด</div><p>ส่วนนี้แสดงความสัมพันธ์ระหว่างคำสำคัญที่ปรากฏร่วมกันในบทความเดียวกัน หรือ keyword co-occurrence ดอกไม้แต่ละดอกแทน keyword และตัวเลขใต้ชื่อคือจำนวนบทความที่พบ keyword นั้น</p><p>วิธีอ่าน: ดอกไม้ที่มีขนาดใหญ่หมายถึง keyword มีความถี่สูงกว่า ส่วนเส้นที่เชื่อมดอกไม้สองดอกหมายถึงคำสำคัญทั้งสองมีแนวโน้มปรากฏร่วมกันในบทความเดียวกัน ความสัมพันธ์ที่เส้นเด่นกว่าหมายถึงมีการปรากฏร่วมกันมากกว่าในโครงสร้างที่คำนวณจากข้อมูล</p><p>ตัวอย่างเช่น Artificial Intelligence เชื่อมกับ Machine Learning, Deep Learning, Neural Networks, Classification, Computer Vision, Natural Language Processing และ Big Data ซึ่งช่วยให้มองเห็นว่าแนวคิดเหล่านี้มีความเกี่ยวข้องกันภายใน research landscape</p><p>ประโยชน์ของกราฟนี้คือช่วยเปลี่ยนรายการ keyword ธรรมดาให้เป็น “เครือข่ายหัวข้อ” ทำให้เห็นทั้ง keyword ที่สำคัญและความสัมพันธ์ระหว่างหัวข้อพร้อมกัน สามารถใช้ค้นหา keyword ที่ทำหน้าที่เป็นศูนย์กลางหรือสะพานเชื่อมระหว่างกลุ่มหัวข้อได้</p><p>ข้อควรระวัง: เส้นเชื่อมแสดงความสัมพันธ์จากการปรากฏร่วมกัน ไม่ได้หมายความว่าคำหนึ่งเป็นสาเหตุของอีกคำหนึ่ง และไม่ควรตีความเป็น causal relationship</p></div>
+</div>
 <!-- =========================================================
      FEATURE VECTOR GARDEN
 ========================================================= -->
-
 <div class="card full">
-
-    <div class="card-head">
-
-        <div class="card-title">
+<div class="card-head">
+<div class="card-title">
             🌸 Feature Vector Garden
         </div>
-
-        <div class="card-sub">
+<div class="card-sub">
             Research keywords grouped into related feature communities
         </div>
-
-        <div class="card-flower">
+<div class="card-flower">
             🦋
         </div>
-
-    </div>
-
-
-    <div
-        class="feature-field"
-        id="featureField"
-    >
-
-        <div class="feature-group ai"></div>
-
-        <div class="feature-group vision"></div>
-
-        <div class="feature-group data"></div>
-
-        <div class="feature-group tech"></div>
-
-
-        <div class="butterfly b1">
+</div>
+<div class="feature-field" id="featureField">
+<div class="feature-group ai"></div>
+<div class="feature-group vision"></div>
+<div class="feature-group data"></div>
+<div class="feature-group tech"></div>
+<div class="butterfly b1">
             🦋
         </div>
-
-        <div class="butterfly b2">
+<div class="butterfly b2">
             🦋
         </div>
-
-        <div class="butterfly b3">
+<div class="butterfly b3">
             🦋
         </div>
-
-        <div class="butterfly b4">
+<div class="butterfly b4">
             🦋
         </div>
-
-        <div class="butterfly b5">
+<div class="butterfly b5">
             🦋
         </div>
-
-
-        <div class="group-title ai">
-            🌸 AI & Machine Learning
+<div class="group-title ai">
+            🌸 AI &amp; Machine Learning
         </div>
-
-        <div class="group-title vision">
-            🌼 Vision & Language
+<div class="group-title vision">
+            🌼 Vision &amp; Language
         </div>
-
-        <div class="group-title data">
-            🌻 Data & Computing
+<div class="group-title data">
+            🌻 Data &amp; Computing
         </div>
-
-        <div class="group-title tech">
+<div class="group-title tech">
             🌷 Emerging Technology
         </div>
-
-
-        <svg
-            class="feature-svg"
-            id="featureSvg">
-        </svg>
-
-
-        <div class="feature-center">
-
-            <div class="flower">
+<svg class="feature-svg" id="featureSvg">
+</svg>
+<div class="feature-center">
+<div class="flower">
                 🌺
             </div>
-
-            <div class="title">
-                AI Research
+<div class="title">
+                Scopus Data Analysis
             </div>
-
-        </div>
-
-
-        <!-- AI -->
-
-        <div
-            class="feature-flower"
-            style="left:15%;top:38%"
-        >
-
-            <div
-                class="emoji"
-                style="font-size:47px"
-            >🌸</div>
-
-            <div class="label">
-                Machine Learning
-            </div>
-
-            <div class="count">
-                970
-            </div>
-
-        </div>
-
-
-        <div
-            class="feature-flower"
-            style="left:29%;top:35%"
-        >
-
-            <div
-                class="emoji"
-                style="font-size:60px"
-            >🌸</div>
-
-            <div class="label">
-                Artificial Intelligence
-            </div>
-
-            <div class="count">
-                1,260
-            </div>
-
-        </div>
-
-
-        <div
-            class="feature-flower"
-            style="left:42%;top:39%"
-        >
-
-            <div
-                class="emoji"
-                style="font-size:43px"
-            >🌸</div>
-
-            <div class="label">
-                Deep Learning
-            </div>
-
-            <div class="count">
-                760
-            </div>
-
-        </div>
-
-
-        <div
-            class="feature-flower"
-            style="left:22%;top:53%"
-        >
-
-            <div
-                class="emoji"
-                style="font-size:35px"
-            >🌸</div>
-
-            <div class="label">
-                Neural Networks
-            </div>
-
-            <div class="count">
-                460
-            </div>
-
-        </div>
-
-
-        <div
-            class="feature-flower"
-            style="left:36%;top:55%"
-        >
-
-            <div
-                class="emoji"
-                style="font-size:33px"
-            >🌸</div>
-
-            <div class="label">
-                Classification
-            </div>
-
-            <div class="count">
-                350
-            </div>
-
-        </div>
-
-
-        <!-- VISION -->
-
-        <div
-            class="feature-flower"
-            style="left:61%;top:36%"
-        >
-
-            <div
-                class="emoji"
-                style="font-size:46px"
-            >🌼</div>
-
-            <div class="label">
-                Computer Vision
-            </div>
-
-            <div class="count">
-                520
-            </div>
-
-        </div>
-
-
-        <div
-            class="feature-flower"
-            style="left:75%;top:35%"
-        >
-
-            <div
-                class="emoji"
-                style="font-size:36px"
-            >🌼</div>
-
-            <div class="label">
-                Image Processing
-            </div>
-
-            <div class="count">
-                150
-            </div>
-
-        </div>
-
-
-        <div
-            class="feature-flower"
-            style="left:69%;top:52%"
-        >
-
-            <div
-                class="emoji"
-                style="font-size:36px"
-            >🌼</div>
-
-            <div class="label">
-                Natural Language Processing
-            </div>
-
-            <div class="count">
-                285
-            </div>
-
-        </div>
-
-
-        <div
-            class="feature-flower"
-            style="left:83%;top:51%"
-        >
-
-            <div
-                class="emoji"
-                style="font-size:31px"
-            >🌼</div>
-
-            <div class="label">
-                Large Language Models
-            </div>
-
-            <div class="count">
-                120
-            </div>
-
-        </div>
-
-
-        <div
-            class="feature-flower"
-            style="left:80%;top:64%"
-        >
-
-            <div
-                class="emoji"
-                style="font-size:31px"
-            >🌼</div>
-
-            <div class="label">
-                Transformer
-            </div>
-
-            <div class="count">
-                130
-            </div>
-
-        </div>
-
-
-        <!-- DATA -->
-
-        <div
-            class="feature-flower"
-            style="left:19%;top:78%"
-        >
-
-            <div
-                class="emoji"
-                style="font-size:36px"
-            >🌻</div>
-
-            <div class="label">
-                Big Data
-            </div>
-
-            <div class="count">
-                260
-            </div>
-
-        </div>
-
-
-        <div
-            class="feature-flower"
-            style="left:32%;top:82%"
-        >
-
-            <div
-                class="emoji"
-                style="font-size:33px"
-            >🌻</div>
-
-            <div class="label">
-                Data Mining
-            </div>
-
-            <div class="count">
-                240
-            </div>
-
-        </div>
-
-
-        <div
-            class="feature-flower"
-            style="left:43%;top:75%"
-        >
-
-            <div
-                class="emoji"
-                style="font-size:34px"
-            >🌻</div>
-
-            <div class="label">
-                Cloud Computing
-            </div>
-
-            <div class="count">
-                220
-            </div>
-
-        </div>
-
-
-        <div
-            class="feature-flower"
-            style="left:29%;top:69%"
-        >
-
-            <div
-                class="emoji"
-                style="font-size:31px"
-            >🌻</div>
-
-            <div class="label">
-                Algorithm
-            </div>
-
-            <div class="count">
-                145
-            </div>
-
-        </div>
-
-
-        <!-- TECHNOLOGY -->
-
-        <div
-            class="feature-flower"
-            style="left:61%;top:78%"
-        >
-
-            <div
-                class="emoji"
-                style="font-size:36px"
-            >🌷</div>
-
-            <div class="label">
-                Internet of Things
-            </div>
-
-            <div class="count">
-                310
-            </div>
-
-        </div>
-
-
-        <div
-            class="feature-flower"
-            style="left:73%;top:81%"
-        >
-
-            <div
-                class="emoji"
-                style="font-size:34px"
-            >🌷</div>
-
-            <div class="label">
-                Robotics
-            </div>
-
-            <div class="count">
-                190
-            </div>
-
-        </div>
-
-
-        <div
-            class="feature-flower"
-            style="left:84%;top:76%"
-        >
-
-            <div
-                class="emoji"
-                style="font-size:31px"
-            >🌷</div>
-
-            <div class="label">
-                Optimization
-            </div>
-
-            <div class="count">
-                180
-            </div>
-
-        </div>
-
-
-        <div class="feature-legend">
-
-            🌸 = AI & Machine Learning<br>
-            🌼 = Vision & Language<br>
-            🌻 = Data & Computing<br>
-            🌷 = Emerging Technology<br>
-            📏 Flower size = Keyword frequency<br>
-            🌿 Lines = Keyword relationship<br>
-            🦋 = Decoration
-
-        </div>
-
-    </div>
-
-
-    <div class="insight">
-
-        <b>🌱 Research Groups</b><br>
-
-        🌸
-        <b>AI & Machine Learning</b>
-        —
-        Artificial Intelligence,
-        Machine Learning,
-        Deep Learning,
-        Neural Networks,
-        Classification
-
-        <br>
-
-        🌼
-        <b>Vision & Language</b>
-        —
-        Computer Vision,
-        Image Processing,
-        NLP,
-        Large Language Models,
-        Transformer
-
-        <br>
-
-        🌻
-        <b>Data & Computing</b>
-        —
-        Big Data,
-        Data Mining,
-        Cloud Computing,
-        Algorithm
-
-        <br>
-
-        🌷
-        <b>Emerging Technology</b>
-        —
-        IoT,
-        Robotics,
-        Optimization
-
-    </div>
-
 </div>
-
-
+<!-- FEATURE FLOWERS: top 17 Author Keywords from CSV -->
+<div class="feature-flower" style="left:15%;top:38%">
+<div class="emoji" style="font-size:36px">🌸</div>
+<div class="label">Deep learning</div>
+<div class="count">299</div>
+</div>
+<div class="feature-flower" style="left:29%;top:35%">
+<div class="emoji" style="font-size:36px">🌸</div>
+<div class="label">Artificial intelligence</div>
+<div class="count">274</div>
+</div>
+<div class="feature-flower" style="left:42%;top:39%">
+<div class="emoji" style="font-size:36px">🌸</div>
+<div class="label">machine learning</div>
+<div class="count">214</div>
+</div>
+<div class="feature-flower" style="left:22%;top:53%">
+<div class="emoji" style="font-size:36px">🌸</div>
+<div class="label">large language models</div>
+<div class="count">71</div>
+</div>
+<div class="feature-flower" style="left:36%;top:55%">
+<div class="emoji" style="font-size:36px">🌸</div>
+<div class="label">Federated learning</div>
+<div class="count">63</div>
+</div>
+<div class="feature-flower" style="left:61%;top:36%">
+<div class="emoji" style="font-size:36px">🌼</div>
+<div class="label">Computer vision</div>
+<div class="count">61</div>
+</div>
+<div class="feature-flower" style="left:75%;top:35%">
+<div class="emoji" style="font-size:36px">🌼</div>
+<div class="label">Generative AI</div>
+<div class="count">61</div>
+</div>
+<div class="feature-flower" style="left:69%;top:52%">
+<div class="emoji" style="font-size:36px">🌼</div>
+<div class="label">FPGA</div>
+<div class="count">56</div>
+</div>
+<div class="feature-flower" style="left:83%;top:51%">
+<div class="emoji" style="font-size:36px">🌼</div>
+<div class="label">Virtual Reality</div>
+<div class="count">55</div>
+</div>
+<div class="feature-flower" style="left:80%;top:64%">
+<div class="emoji" style="font-size:36px">🌼</div>
+<div class="label">edge computing</div>
+<div class="count">49</div>
+</div>
+<div class="feature-flower" style="left:19%;top:78%">
+<div class="emoji" style="font-size:36px">🌻</div>
+<div class="label">Transformer</div>
+<div class="count">48</div>
+</div>
+<div class="feature-flower" style="left:32%;top:82%">
+<div class="emoji" style="font-size:36px">🌻</div>
+<div class="label">reinforcement learning</div>
+<div class="count">43</div>
+</div>
+<div class="feature-flower" style="left:43%;top:75%">
+<div class="emoji" style="font-size:36px">🌻</div>
+<div class="label">attention mechanism</div>
+<div class="count">43</div>
+</div>
+<div class="feature-flower" style="left:29%;top:69%">
+<div class="emoji" style="font-size:36px">🌻</div>
+<div class="label">large language model</div>
+<div class="count">42</div>
+</div>
+<div class="feature-flower" style="left:61%;top:78%">
+<div class="emoji" style="font-size:36px">🌷</div>
+<div class="label">Computer-aided design</div>
+<div class="count">39</div>
+</div>
+<div class="feature-flower" style="left:73%;top:81%">
+<div class="emoji" style="font-size:36px">🌷</div>
+<div class="label">Human-Computer Interaction</div>
+<div class="count">39</div>
+</div>
+<div class="feature-flower" style="left:84%;top:76%">
+<div class="emoji" style="font-size:36px">🌷</div>
+<div class="label">Natural language processing</div>
+<div class="count">38</div>
+</div>
+</div>
+<div class="explanation"><div class="explanation-title">💡 คำอธิบายโดยละเอียด</div><p>ส่วนนี้ใช้แสดงภาพรวมของ feature/keyword ที่ถูกจัดกลุ่มเป็น research communities เพื่อช่วยให้เห็นโครงสร้างของหัวข้อวิจัยในรูปแบบเชิงภาพ ดอกไม้แต่ละดอกแทน keyword และตัวเลขด้านล่างคือความถี่ของ keyword จากข้อมูลจริง</p><p>วิธีอ่าน: ขนาดของดอกไม้สัมพันธ์กับจำนวนบทความที่พบ keyword นั้น ดอกไม้ขนาดใหญ่จึงเป็น keyword ที่พบมากกว่า ส่วนสีหรือกลุ่มของดอกไม้ใช้แยก community ที่เกี่ยวข้องกัน เช่น AI &amp; Machine Learning, Vision &amp; Language, Data &amp; Computing และ Emerging Technology</p><p>ตำแหน่งของดอกไม้ช่วยให้มองเห็นการจัดกลุ่มเชิงภาพ ไม่ควรอ่านพิกัดเป็นค่าทางสถิติแบบแกน X/Y โดยตรง จุดประสงค์หลักคือช่วยให้เห็นว่า keyword ใดอยู่ใกล้กับกลุ่มแนวคิดใด และช่วยสังเกตกลุ่มหัวข้อที่เด่นหรือมีความหนาแน่น</p><p>จากข้อมูลจริง keyword ที่มีความถี่สูงในส่วนนี้ เช่น Deep learning 299, Artificial intelligence 274 และ machine learning 214 ขณะที่ keyword อื่น ๆ เช่น Large Language Models 71, Federated Learning 63 และ Computer Vision 61 แสดงหัวข้อที่มีความถี่รองลงมา</p><p>ส่วนนี้เหมาะสำหรับ exploratory analysis หรือการสำรวจเบื้องต้น เพื่อสร้างภาพรวมของ research themes ก่อนนำข้อมูลไปวิเคราะห์ต่อด้วย feature engineering, embedding, clustering หรือ machine learning</p><p>ข้อควรระวัง: visualization นี้ช่วยในการสำรวจและตีความภาพรวม ไม่ควรใช้ตำแหน่งของดอกไม้เพียงอย่างเดียวเพื่อสรุปว่าคำสองคำมี semantic similarity สูงหรือต่ำ เว้นแต่มีการคำนวณระยะห่างจาก embedding หรือวิธีทางสถิติรองรับโดยตรง</p></div>
+</div>
 </section>
-
 </main>
-
-
 <footer>
 
-    🌱🌸 AI Research Visualization
+    🌱🌸 Scopus Data Analysis
     · Scopus Dataset
     · 🦋🌼
 
 </footer>
-
-
 <script>
 
 /* =========================================================
-   DATA
+   DATA — calculated from dataset_clean_final(1).csv
+   Author Keywords are normalized case-insensitively.
 ========================================================= */
 
-const TOP_KEYWORDS = [
+const TOP_KEYWORDS = [{"keyword":"Deep learning","count":299},{"keyword":"Artificial intelligence","count":274},{"keyword":"machine learning","count":214},{"keyword":"large language models","count":71},{"keyword":"Federated learning","count":63},{"keyword":"Computer vision","count":61},{"keyword":"Generative AI","count":61},{"keyword":"FPGA","count":56},{"keyword":"Virtual Reality","count":55},{"keyword":"edge computing","count":49},{"keyword":"Transformer","count":48},{"keyword":"reinforcement learning","count":43},{"keyword":"attention mechanism","count":43},{"keyword":"large language model","count":42},{"keyword":"Computer-aided design","count":39},{"keyword":"Human-Computer Interaction","count":39},{"keyword":"Natural language processing","count":38},{"keyword":"Convolutional neural network","count":38},{"keyword":"Quantum computing","count":38},{"keyword":"neural networks","count":37}];
 
-    {keyword:"artificial intelligence",count:1260},
-    {keyword:"machine learning",count:970},
-    {keyword:"deep learning",count:760},
-    {keyword:"computer vision",count:520},
-    {keyword:"neural networks",count:460},
-    {keyword:"feature extraction",count:390},
-    {keyword:"classification",count:350},
-    {keyword:"internet of things",count:310},
-    {keyword:"natural language processing",count:285},
-    {keyword:"big data",count:260},
-    {keyword:"data mining",count:240},
-    {keyword:"cloud computing",count:220},
-    {keyword:"robotics",count:190},
-    {keyword:"optimization",count:180},
-    {keyword:"prediction",count:170},
-    {keyword:"computer science",count:160},
-    {keyword:"image processing",count:150},
-    {keyword:"algorithm",count:145},
-    {keyword:"transformer",count:130},
-    {keyword:"large language models",count:120}
+const TOP_AUTHORS = [{"author":"Zhang Y.","count":142},{"author":"Wang Y.","count":131},{"author":"Liu Y.","count":111},{"author":"Li Y.","count":108},{"author":"Li J.","count":96},{"author":"Wang Z.","count":92},{"author":"Zhang X.","count":82},{"author":"Wang X.","count":80},{"author":"Zhang J.","count":72},{"author":"Li X.","count":72}];
 
-];
-
-
-const TOP_AUTHORS = [
-
-    {author:"Zhang, Y.",count:82},
-    {author:"Wang, J.",count:79},
-    {author:"Li, X.",count:75},
-    {author:"Liu, Y.",count:71},
-    {author:"Chen, H.",count:67},
-    {author:"Wang, Y.",count:64},
-    {author:"Zhang, L.",count:61},
-    {author:"Li, J.",count:58},
-    {author:"Chen, X.",count:55},
-    {author:"Liu, J.",count:52}
-
-];
-
-
-const YEARS = [
-
-    {year:2021,count:620},
-    {year:2022,count:760},
-    {year:2023,count:910},
-    {year:2024,count:1020},
-    {year:2025,count:870},
-    {year:2026,count:0}
-
-];
-
+const YEARS = [{"year":2021,"count":13},{"year":2022,"count":88},{"year":2023,"count":90},{"year":2024,"count":184},{"year":2025,"count":5212},{"year":2026,"count":116}];
 
 /* =========================================================
-   RESEARCH AREAS
+   RESEARCH AREAS — calculated from Subject
 ========================================================= */
 
-const RESEARCH_AREAS = [
-
-    {
-        subject:"Computer Science",
-        count:2400
-    },
-
-    {
-        subject:"Engineering",
-        count:1050
-    },
-
-    {
-        subject:"Mathematics",
-        count:620
-    },
-
-    {
-        subject:"Decision Sciences",
-        count:430
-    },
-
-    {
-        subject:"Physics",
-        count:300
-    },
-
-    {
-        subject:"Materials Science",
-        count:250
-    },
-
-    {
-        subject:"Medicine",
-        count:210
-    },
-
-    {
-        subject:"Business",
-        count:180
-    },
-
-    {
-        subject:"Social Sciences",
-        count:150
-    },
-
-    {
-        subject:"Others",
-        count:113
-    }
-
-];
+const RESEARCH_AREAS = [{"subject":"Applications","count":600},{"subject":"Computational Theory and Mathematics","count":597},{"subject":"Hardware","count":596},{"subject":"Computer Graphics and Computer-Aided Design","count":595},{"subject":"Artificial Intelligence1","count":591},{"subject":"Networks","count":550},{"subject":"Software","count":545},{"subject":"Human","count":544},{"subject":"Information Systems","count":543},{"subject":"Signal","count":542}];
 
 
 /* =========================================================
@@ -3260,14 +2487,23 @@ function baseLayout(){
 
             xaxis:{
                 title:"Year",
+                tickmode:"array",
+                tickvals:[2021,2022,2023,2024,2025,2026],
+                ticktext:["2021","2022","2023","2024","2025","2026"],
+                range:[2020.5,2026.5],
                 dtick:1,
-                gridcolor:"#edf2eb"
+                gridcolor:"#edf2eb",
+                zeroline:false
             },
 
             yaxis:{
                 title:"Articles",
-                gridcolor:"#edf2eb"
-            }
+                gridcolor:"#edf2eb",
+                zeroline:false,
+                rangemode:"tozero"
+            },
+
+            hovermode:"x unified"
 
         },
 
@@ -3665,135 +2901,36 @@ function baseLayout(){
         );
 
 
-    const flowers = [
-
-        {
-            keyword:"Deep Learning",
-            count:760,
-            x:13,
-            y:39,
-            icon:"🌸"
-        },
-
-        {
-            keyword:"Machine Learning",
-            count:970,
-            x:25,
-            y:30,
-            icon:"🌷"
-        },
-
-        {
-            keyword:"Neural Networks",
-            count:460,
-            x:34,
-            y:43,
-            icon:"🌼"
-        },
-
-        {
-            keyword:"Classification",
-            count:350,
-            x:21,
-            y:56,
-            icon:"🌺"
-        },
-
-        {
-            keyword:"Computer Vision",
-            count:520,
-            x:65,
-            y:31,
-            icon:"🌻"
-        },
-
-        {
-            keyword:"Image Processing",
-            count:150,
-            x:83,
-            y:35,
-            icon:"🪻"
-        },
-
-        {
-            keyword:"Natural Language Processing",
-            count:285,
-            x:67,
-            y:56,
-            icon:"🪷"
-        },
-
-        {
-            keyword:"Large Language Models",
-            count:120,
-            x:83,
-            y:56,
-            icon:"🏵️"
-        },
-
-        {
-            keyword:"Big Data",
-            count:260,
-            x:36,
-            y:79,
-            icon:"🌹"
-        },
-
-        {
-            keyword:"Data Mining",
-            count:240,
-            x:49,
-            y:86,
-            icon:"💮"
-        },
-
-        {
-            keyword:"Cloud Computing",
-            count:220,
-            x:63,
-            y:79,
-            icon:"🌾"
-        }
-
-    ];
-
+    const flowers = [{"keyword":"Deep learning","count":299,"x":13,"y":39,"icon":"🌸"},{"keyword":"machine learning","count":214,"x":25,"y":30,"icon":"🌷"},{"keyword":"large language models","count":71,"x":34,"y":43,"icon":"🌼"},{"keyword":"Federated learning","count":63,"x":21,"y":56,"icon":"🌺"},{"keyword":"Computer vision","count":61,"x":65,"y":31,"icon":"🌻"},{"keyword":"Generative AI","count":61,"x":83,"y":35,"icon":"🪻"},{"keyword":"FPGA","count":56,"x":67,"y":56,"icon":"🪷"},{"keyword":"Virtual Reality","count":55,"x":83,"y":56,"icon":"🏵️"},{"keyword":"edge computing","count":49,"x":36,"y":79,"icon":"🌹"},{"keyword":"Transformer","count":48,"x":49,"y":86,"icon":"💮"},{"keyword":"reinforcement learning","count":43,"x":63,"y":79,"icon":"🌾"}];
 
     const center = {
-
         keyword:"Artificial Intelligence",
-
         x:50,
         y:48
-
     };
 
 
     const connections = [
-
-        ["Artificial Intelligence","Machine Learning",3],
-        ["Artificial Intelligence","Deep Learning",3],
-        ["Artificial Intelligence","Neural Networks",2],
-        ["Artificial Intelligence","Classification",2],
-        ["Artificial Intelligence","Computer Vision",2],
-        ["Artificial Intelligence","Natural Language Processing",2],
-        ["Artificial Intelligence","Big Data",2],
-
-        ["Machine Learning","Deep Learning",3],
-        ["Machine Learning","Neural Networks",2],
-        ["Machine Learning","Classification",2],
-
-        ["Deep Learning","Neural Networks",3],
-        ["Deep Learning","Computer Vision",2],
-        ["Deep Learning","Natural Language Processing",2],
-
-        ["Computer Vision","Image Processing",3],
-
-        ["Natural Language Processing","Large Language Models",3],
-
-        ["Big Data","Data Mining",3],
-        ["Big Data","Cloud Computing",2],
-        ["Data Mining","Cloud Computing",2]
-
+        ["Artificial Intelligence","machine learning",3],
+        ["Artificial Intelligence","Deep learning",3],
+        ["Deep learning","machine learning",3],
+        ["Computer vision","Deep learning",3],
+        ["Deep learning","Transformer",3],
+        ["edge computing","Federated learning",3],
+        ["Artificial Intelligence","Computer vision",2],
+        ["Artificial Intelligence","Generative AI",2],
+        ["Artificial Intelligence","large language models",2],
+        ["Artificial Intelligence","Transformer",2],
+        ["Computer vision","machine learning",2],
+        ["Artificial Intelligence","Federated learning",2],
+        ["Artificial Intelligence","Virtual Reality",2],
+        ["Artificial Intelligence","reinforcement learning",2],
+        ["Deep learning","edge computing",2],
+        ["Deep learning","reinforcement learning",1],
+        ["FPGA","machine learning",1],
+        ["Deep learning","Generative AI",1],
+        ["Generative AI","large language models",1],
+        ["Federated learning","machine learning",1]
     ];
 
 
@@ -3802,7 +2939,7 @@ function baseLayout(){
             ...flowers.map(
                 f=>f.count
             ),
-            1260
+            274
         );
 
 
@@ -4412,15 +3549,6 @@ function baseLayout(){
  
 })(); 
  
-</script> 
- 
-</body> 
-</html> แก้โค้ดเต้มมา ให้ข้อมูลเป็นแบบนี้ ตามนี้ จำนวนบทความ: **5,703** 
-
-1.  Unique Author Keywords: **18,908** 
-2.  ปีตีพิมพ์: **2021–2026** 
-3.  Top Keywords · Author Keywords 
-4.  Top Authors · Authors 
-5.  Publications by Year · Year 
-6.  Research Areas → คำนวณจาก `Subject` ทั้ง 10 กลุ่ม 
-7.  Feature Vector Garden → เปลี่ยนเป็น keyword และจำนวนจริงจาก CSV แทนค่าตัวอย่างเดิม 
+</script>
+</body>
+</html>
