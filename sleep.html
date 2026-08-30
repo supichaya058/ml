@@ -1,15 +1,21 @@
-```html
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AI Research Flower Field — Scopus Final Dataset 2021–2026</title>
+<title>AI Research Flower Field — Scopus 2021–2026</title>
 
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 
 <style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
 *{
     box-sizing:border-box;
 }
@@ -32,7 +38,7 @@ body{
 .header{
     position:relative;
     overflow:hidden;
-    padding:38px 30px;
+    padding:35px 30px;
     background:
         radial-gradient(circle at 10% 30%,rgba(255,255,255,.9),transparent 20%),
         radial-gradient(circle at 90% 30%,rgba(255,255,255,.9),transparent 20%),
@@ -101,13 +107,14 @@ body{
     0%,100%{
         transform:translate(0,0) rotate(-5deg);
     }
+
     50%{
         transform:translate(15px,-12px) rotate(6deg);
     }
 }
 
 /* =========================================================
-   CONTAINER / CARDS
+   CONTAINER / KPI
 ========================================================= */
 
 .container{
@@ -160,6 +167,10 @@ body{
     font-size:12px;
 }
 
+/* =========================================================
+   GRID / CARD
+========================================================= */
+
 .grid{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -207,34 +218,41 @@ body{
 }
 
 /* =========================================================
-   EXPLANATION
-========================================================= */
-
-.explanation{
-    padding:15px 20px 18px;
-    background:#f8fbf5;
-    border-top:1px solid #e5ede1;
-    color:#617061;
-    font-size:12px;
-    line-height:1.75;
-}
-
-.explanation b{
-    color:#526754;
-}
-
-/* =========================================================
    RESEARCH AREAS
 ========================================================= */
 
 .research-field{
     position:relative;
-    height:560px;
+    height:500px;
     overflow:hidden;
+
     background:
-        radial-gradient(circle at 50% 50%,rgba(255,255,255,.98),
-        rgba(247,251,244,.94) 38%,
-        rgba(234,244,229,.82) 100%);
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(255,255,255,.98),
+            rgba(247,251,244,.94) 38%,
+            rgba(234,244,229,.82) 100%
+        ),
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255,190,215,.12),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 85% 25%,
+            rgba(190,215,250,.13),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 20% 80%,
+            rgba(250,220,160,.13),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(190,225,185,.15),
+            transparent 25%
+        );
 }
 
 #researchPie{
@@ -248,17 +266,30 @@ body{
     top:50%;
     transform:translate(-50%,-50%);
     z-index:5;
+
     width:145px;
     height:145px;
+
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
+
     border-radius:50%;
+
     background:
-        radial-gradient(circle at 35% 30%,#fff,#fbfdf8 60%,#f1f7ed);
+        radial-gradient(
+            circle at 35% 30%,
+            #fff,
+            #fbfdf8 60%,
+            #f1f7ed
+        );
+
     border:1px solid rgba(211,225,207,.9);
-    box-shadow:0 8px 25px rgba(70,90,70,.10);
+
+    box-shadow:
+        0 8px 25px rgba(70,90,70,.10);
+
     pointer-events:none;
 }
 
@@ -283,224 +314,6 @@ body{
 }
 
 /* =========================================================
-   CO-OCCURRENCE
-========================================================= */
-
-.co-field{
-    position:relative;
-    height:700px;
-    overflow:hidden;
-    background:
-        radial-gradient(circle at 50% 50%,rgba(255,255,255,.95),transparent 30%),
-        linear-gradient(180deg,#f7fbf4,#e8f3e1);
-}
-
-.co-community{
-    position:absolute;
-    z-index:2;
-    transform:translate(-50%,-50%);
-    border-radius:50%;
-}
-
-.co-community.ai{
-    width:390px;
-    height:320px;
-    left:25%;
-    top:45%;
-    background:radial-gradient(circle,
-        rgba(255,193,216,.18),
-        rgba(255,193,216,.06) 50%,
-        transparent 72%);
-}
-
-.co-community.vision{
-    width:390px;
-    height:320px;
-    left:76%;
-    top:44%;
-    background:radial-gradient(circle,
-        rgba(190,214,252,.18),
-        rgba(190,214,252,.06) 50%,
-        transparent 72%);
-}
-
-.co-community.data{
-    width:360px;
-    height:260px;
-    left:50%;
-    top:83%;
-    background:radial-gradient(circle,
-        rgba(249,218,158,.18),
-        rgba(249,218,158,.06) 50%,
-        transparent 72%);
-}
-
-.co-group-title{
-    position:absolute;
-    z-index:15;
-    padding:7px 14px;
-    border-radius:20px;
-    background:rgba(255,255,255,.88);
-    border:1px solid #dce6d8;
-    font-size:11px;
-    font-weight:800;
-}
-
-.co-group-title.ai{
-    left:10%;
-    top:11%;
-    color:#c9577d;
-}
-
-.co-group-title.vision{
-    right:10%;
-    top:11%;
-    color:#527bb5;
-}
-
-.co-group-title.data{
-    left:50%;
-    bottom:5%;
-    transform:translateX(-50%);
-    color:#b07820;
-}
-
-.co-flower{
-    position:absolute;
-    z-index:10;
-    transform:translate(-50%,-50%);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    cursor:pointer;
-    transition:
-        transform .28s cubic-bezier(.2,.8,.2,1),
-        filter .3s ease;
-    user-select:none;
-}
-
-.co-flower:hover{
-    transform:translate(-50%,-50%) scale(1.16);
-    filter:drop-shadow(0 7px 10px rgba(60,80,60,.20));
-    z-index:30;
-}
-
-.co-flower .icon{
-    line-height:1;
-    filter:drop-shadow(0 4px 4px rgba(70,80,70,.14));
-}
-
-.co-flower .name{
-    margin-top:4px;
-    padding:4px 8px;
-    border-radius:14px;
-    background:rgba(255,255,255,.88);
-    border:1px solid #dce6d8;
-    font-size:9px;
-    color:#536053;
-    white-space:nowrap;
-}
-
-.co-flower .count{
-    margin-top:2px;
-    color:#899589;
-    font-size:9px;
-    font-weight:700;
-}
-
-.co-flower.selected{
-    z-index:50;
-    transform:translate(-50%,-50%) scale(1.10);
-}
-
-.co-flower.selected .icon{
-    filter:
-        drop-shadow(0 0 5px rgba(255,220,100,1))
-        drop-shadow(0 0 12px rgba(255,200,70,.95))
-        drop-shadow(0 0 22px rgba(255,215,100,.78));
-}
-
-.co-svg{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    z-index:6;
-    pointer-events:none;
-}
-
-.co-line{
-    fill:none;
-    stroke:#8ba382;
-    stroke-width:1.8;
-    stroke-opacity:.32;
-    stroke-linecap:round;
-}
-
-.co-line.medium{
-    stroke-width:2.5;
-    stroke-opacity:.43;
-}
-
-.co-line.strong{
-    stroke-width:3.5;
-    stroke-opacity:.55;
-}
-
-.co-center{
-    position:absolute;
-    z-index:20;
-    left:50%;
-    top:48%;
-    transform:translate(-50%,-50%);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-}
-
-.co-center .icon{
-    width:92px;
-    height:92px;
-    position:relative;
-    border-radius:50%;
-    background:
-        radial-gradient(circle,#fff6b8 0 13%,transparent 14%),
-        radial-gradient(circle at 50% 18%,#f4a6c2 0 24%,transparent 25%),
-        radial-gradient(circle at 82% 50%,#f4a6c2 0 24%,transparent 25%),
-        radial-gradient(circle at 50% 82%,#f4a6c2 0 24%,transparent 25%),
-        radial-gradient(circle at 18% 50%,#f4a6c2 0 24%,transparent 25%),
-        radial-gradient(circle at 28% 28%,#f7bdd2 0 17%,transparent 18%),
-        radial-gradient(circle at 72% 28%,#f7bdd2 0 17%,transparent 18%),
-        radial-gradient(circle at 72% 72%,#f7bdd2 0 17%,transparent 18%),
-        radial-gradient(circle at 28% 72%,#f7bdd2 0 17%,transparent 18%),
-        #fff;
-    box-shadow:0 8px 24px rgba(60,80,60,.16);
-}
-
-.co-center .icon:after{
-    content:"";
-    position:absolute;
-    left:50%;
-    top:50%;
-    width:17px;
-    height:17px;
-    transform:translate(-50%,-50%);
-    border-radius:50%;
-    background:#fff1a6;
-    box-shadow:0 0 0 5px rgba(255,241,166,.28);
-}
-
-.co-center .name{
-    margin-top:8px;
-    padding:7px 14px;
-    border-radius:20px;
-    background:rgba(255,255,255,.92);
-    border:1px solid #dce7d7;
-    font-size:11px;
-    font-weight:800;
-}
-
-/* =========================================================
    FEATURE VECTOR GARDEN
 ========================================================= */
 
@@ -508,12 +321,33 @@ body{
     position:relative;
     height:760px;
     overflow:hidden;
+
     background:
-        radial-gradient(ellipse at 20% 30%,rgba(255,204,224,.15),transparent 27%),
-        radial-gradient(ellipse at 80% 30%,rgba(192,216,255,.15),transparent 27%),
-        radial-gradient(ellipse at 25% 80%,rgba(255,224,157,.15),transparent 25%),
-        radial-gradient(ellipse at 75% 80%,rgba(197,231,187,.16),transparent 25%),
-        linear-gradient(180deg,#f9fcf6,#eaf4e5);
+        radial-gradient(
+            ellipse at 20% 30%,
+            rgba(255,204,224,.15),
+            transparent 27%
+        ),
+        radial-gradient(
+            ellipse at 80% 30%,
+            rgba(192,216,255,.15),
+            transparent 27%
+        ),
+        radial-gradient(
+            ellipse at 25% 80%,
+            rgba(255,224,157,.15),
+            transparent 25%
+        ),
+        radial-gradient(
+            ellipse at 75% 80%,
+            rgba(197,231,187,.16),
+            transparent 25%
+        ),
+        linear-gradient(
+            180deg,
+            #f9fcf6,
+            #eaf4e5
+        );
 }
 
 .feature-group{
@@ -528,10 +362,13 @@ body{
     height:330px;
     left:3%;
     top:17%;
-    background:radial-gradient(ellipse,
-        rgba(255,190,215,.20),
-        rgba(255,190,215,.06) 48%,
-        transparent 72%);
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(255,190,215,.20),
+            rgba(255,190,215,.06) 48%,
+            transparent 72%
+        );
 }
 
 .feature-group.vision{
@@ -539,10 +376,13 @@ body{
     height:320px;
     right:3%;
     top:17%;
-    background:radial-gradient(ellipse,
-        rgba(180,210,250,.20),
-        rgba(180,210,250,.06) 48%,
-        transparent 72%);
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(180,210,250,.20),
+            rgba(180,210,250,.06) 48%,
+            transparent 72%
+        );
 }
 
 .feature-group.data{
@@ -550,10 +390,13 @@ body{
     height:250px;
     left:11%;
     bottom:5%;
-    background:radial-gradient(ellipse,
-        rgba(247,211,143,.20),
-        rgba(247,211,143,.06) 48%,
-        transparent 72%);
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(247,211,143,.20),
+            rgba(247,211,143,.06) 48%,
+            transparent 72%
+        );
 }
 
 .feature-group.tech{
@@ -561,22 +404,33 @@ body{
     height:250px;
     right:11%;
     bottom:5%;
-    background:radial-gradient(ellipse,
-        rgba(190,225,182,.22),
-        rgba(190,225,182,.06) 48%,
-        transparent 72%);
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(190,225,182,.22),
+            rgba(190,225,182,.06) 48%,
+            transparent 72%
+        );
 }
 
 .group-title{
     position:absolute;
     z-index:15;
+
     padding:8px 16px;
+
     border-radius:25px;
+
     background:rgba(255,255,255,.88);
+
     border:1px solid rgba(215,225,211,.75);
-    box-shadow:0 4px 12px rgba(70,90,70,.06);
+
+    box-shadow:
+        0 4px 12px rgba(70,90,70,.06);
+
     font-size:12px;
     font-weight:800;
+
     backdrop-filter:blur(4px);
 }
 
@@ -607,38 +461,66 @@ body{
 .feature-flower{
     position:absolute;
     z-index:10;
+
     transform:translate(-50%,-50%);
+
     display:flex;
     flex-direction:column;
     align-items:center;
+
     cursor:pointer;
+
     transition:
         transform .28s cubic-bezier(.2,.8,.2,1),
         filter .3s ease;
+
     user-select:none;
 }
 
 .feature-flower:hover{
     transform:translate(-50%,-50%) scale(1.16);
-    filter:drop-shadow(0 7px 10px rgba(60,80,60,.20));
+
+    filter:
+        drop-shadow(
+            0 7px 10px rgba(60,80,60,.20)
+        );
+
     z-index:30;
 }
 
 .feature-flower .emoji{
     position:relative;
+
     line-height:1;
-    filter:drop-shadow(0 3px 4px rgba(60,70,60,.15));
+
+    filter:
+        drop-shadow(
+            0 3px 4px rgba(60,70,60,.15)
+        );
+
+    transition:
+        filter .3s ease,
+        transform .3s ease;
 }
 
 .feature-flower .label{
     margin-top:5px;
+
     padding:4px 8px;
+
     max-width:145px;
+
     text-align:center;
+
     border-radius:14px;
+
     background:rgba(255,255,255,.86);
+
     border:1px solid rgba(215,225,211,.8);
-    box-shadow:0 2px 7px rgba(60,80,60,.04);
+
+    box-shadow:
+        0 2px 7px rgba(60,80,60,.04);
+
     font-size:10px;
     color:#4d5d4e;
 }
@@ -649,31 +531,198 @@ body{
     font-size:9px;
 }
 
+/* =========================================================
+   FEATURE SELECTED
+========================================================= */
+
 .feature-flower.selected{
     z-index:50;
-    transform:translate(-50%,-50%) scale(1.10);
+
+    transform:
+        translate(-50%,-50%)
+        scale(1.10);
+
+    animation:
+        featureFlowerSelected .75s ease-out;
 }
 
 .feature-flower.selected .emoji{
     filter:
-        drop-shadow(0 0 5px rgba(255,220,100,1))
-        drop-shadow(0 0 12px rgba(255,200,70,.95))
-        drop-shadow(0 0 22px rgba(255,215,100,.78));
+        drop-shadow(
+            0 0 5px rgba(255,220,100,1)
+        )
+        drop-shadow(
+            0 0 12px rgba(255,200,70,.95)
+        )
+        drop-shadow(
+            0 0 22px rgba(255,215,100,.78)
+        )
+        drop-shadow(
+            0 0 35px rgba(255,225,130,.45)
+        );
+
+    animation:
+        featureSoftFlowerGlow .8s ease-out;
 }
+
+.feature-flower.selected .label{
+    border-color:
+        rgba(255,205,90,.65);
+
+    box-shadow:
+        0 0 8px rgba(255,210,90,.30),
+        0 3px 10px rgba(70,80,60,.08);
+}
+
+.feature-flower.selected .count{
+    color:#b28a32;
+}
+
+.feature-flower.selected:before{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:27px;
+
+    width:82px;
+    height:82px;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,225,110,.52) 0%,
+            rgba(255,215,90,.30) 35%,
+            rgba(255,210,80,.14) 55%,
+            transparent 76%
+        );
+
+    filter:blur(2px);
+
+    z-index:-1;
+
+    pointer-events:none;
+
+    animation:
+        featureYellowGlow 1s ease-out;
+}
+
+@keyframes featureSoftFlowerGlow{
+
+    0%{
+        filter:
+            drop-shadow(
+                0 0 2px rgba(255,220,100,.4)
+            );
+    }
+
+    40%{
+        filter:
+            drop-shadow(
+                0 0 7px rgba(255,220,100,1)
+            )
+            drop-shadow(
+                0 0 18px rgba(255,200,70,.95)
+            )
+            drop-shadow(
+                0 0 30px rgba(255,215,100,.8)
+            );
+    }
+
+    100%{
+        filter:
+            drop-shadow(
+                0 0 5px rgba(255,220,100,1)
+            )
+            drop-shadow(
+                0 0 12px rgba(255,200,70,.9)
+            )
+            drop-shadow(
+                0 0 22px rgba(255,215,100,.7)
+            )
+            drop-shadow(
+                0 0 35px rgba(255,225,130,.4)
+            );
+    }
+}
+
+@keyframes featureYellowGlow{
+
+    0%{
+        transform:
+            translate(-50%,-50%)
+            scale(.55);
+
+        opacity:0;
+    }
+
+    30%{
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+
+        opacity:1;
+    }
+
+    100%{
+        transform:
+            translate(-50%,-50%)
+            scale(1.65);
+
+        opacity:0;
+    }
+}
+
+@keyframes featureFlowerSelected{
+
+    0%{
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+    }
+
+    35%{
+        transform:
+            translate(-50%,-50%)
+            scale(1.18);
+    }
+
+    100%{
+        transform:
+            translate(-50%,-50%)
+            scale(1.10);
+    }
+}
+
+/* =========================================================
+   FEATURE SVG
+========================================================= */
 
 .feature-svg{
     position:absolute;
     inset:0;
+
     width:100%;
     height:100%;
+
     z-index:6;
+
     pointer-events:none;
 }
 
 .feature-line{
     fill:none;
+
     stroke-width:1.5;
+
     stroke-linecap:round;
+
     stroke-opacity:.18;
 }
 
@@ -693,12 +742,21 @@ body{
     stroke:#7da46f;
 }
 
+/* =========================================================
+   FEATURE CENTER
+========================================================= */
+
 .feature-center{
     position:absolute;
+
     left:50%;
     top:49%;
-    transform:translate(-50%,-50%);
+
+    transform:
+        translate(-50%,-50%);
+
     z-index:20;
+
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -707,27 +765,58 @@ body{
 .feature-center .flower{
     width:115px;
     height:115px;
+
     border-radius:50%;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     background:
-        radial-gradient(circle,#fff8c9 0 17%,transparent 18%),
-        radial-gradient(circle at 35% 35%,#ffb5d0 0 23%,transparent 24%),
-        radial-gradient(circle at 65% 35%,#ffb5d0 0 23%,transparent 24%),
-        radial-gradient(circle at 35% 65%,#ffb5d0 0 23%,transparent 24%),
-        radial-gradient(circle at 65% 65%,#ffb5d0 0 23%,transparent 24%),
+        radial-gradient(
+            circle,
+            #fff8c9 0 17%,
+            transparent 18%
+        ),
+        radial-gradient(
+            circle at 35% 35%,
+            #ffb5d0 0 23%,
+            transparent 24%
+        ),
+        radial-gradient(
+            circle at 65% 35%,
+            #ffb5d0 0 23%,
+            transparent 24%
+        ),
+        radial-gradient(
+            circle at 35% 65%,
+            #ffb5d0 0 23%,
+            transparent 24%
+        ),
+        radial-gradient(
+            circle at 65% 65%,
+            #ffb5d0 0 23%,
+            transparent 24%
+        ),
         #fff;
-    box-shadow:0 10px 30px rgba(90,110,80,.13);
+
+    box-shadow:
+        0 10px 30px rgba(90,110,80,.13);
+
     font-size:45px;
 }
 
 .feature-center .title{
     margin-top:7px;
+
     padding:7px 14px;
+
     background:rgba(255,255,255,.9);
+
     border-radius:20px;
+
     border:1px solid #dce7d7;
+
     font-size:12px;
     font-weight:800;
     color:#536354;
@@ -739,9 +828,13 @@ body{
 
 .butterfly{
     position:absolute;
+
     z-index:25;
+
     pointer-events:none;
-    animation:fly 5s ease-in-out infinite;
+
+    animation:
+        fly 5s ease-in-out infinite;
 }
 
 .b1{
@@ -779,59 +872,560 @@ body{
 }
 
 /* =========================================================
-   EMBEDDING INFO
+   CO-OCCURRENCE
 ========================================================= */
 
-.embedding-box{
-    padding:25px;
+.co-field{
+    position:relative;
+
+    height:700px;
+
+    overflow:hidden;
+
     background:
-        linear-gradient(135deg,#f9fcf7,#f1f7ee);
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(255,255,255,.95),
+            transparent 30%
+        ),
+        linear-gradient(
+            180deg,
+            #f7fbf4,
+            #e8f3e1
+        );
 }
 
-.embedding-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
+.co-community{
+    position:absolute;
+
+    z-index:2;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
 }
 
-.embedding-item{
-    padding:20px;
-    text-align:center;
-    background:#fff;
-    border:1px solid #dce7d7;
-    border-radius:18px;
+.co-community.ai{
+    width:390px;
+    height:320px;
+
+    left:25%;
+    top:45%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,193,216,.18),
+            rgba(255,193,216,.06) 50%,
+            transparent 72%
+        );
 }
 
-.embedding-value{
-    font-size:24px;
-    font-weight:800;
-    color:#527157;
+.co-community.vision{
+    width:390px;
+    height:320px;
+
+    left:76%;
+    top:44%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(190,214,252,.18),
+            rgba(190,214,252,.06) 50%,
+            transparent 72%
+        );
 }
 
-.embedding-label{
-    margin-top:7px;
-    color:#7d897e;
+.co-community.data{
+    width:360px;
+    height:260px;
+
+    left:50%;
+    top:83%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(249,218,158,.18),
+            rgba(249,218,158,.06) 50%,
+            transparent 72%
+        );
+}
+
+.co-group-title{
+    position:absolute;
+
+    z-index:15;
+
+    padding:7px 14px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.88);
+
+    border:1px solid #dce6d8;
+
     font-size:11px;
+    font-weight:800;
 }
 
-.embedding-description{
-    margin-top:20px;
-    padding:16px 18px;
-    border-radius:15px;
-    background:#f8fbf5;
-    color:#617061;
-    font-size:12px;
-    line-height:1.8;
+.co-group-title.ai{
+    left:10%;
+    top:11%;
+    color:#c9577d;
+}
+
+.co-group-title.vision{
+    right:10%;
+    top:11%;
+    color:#527bb5;
+}
+
+.co-group-title.data{
+    left:50%;
+    bottom:5%;
+    transform:translateX(-50%);
+    color:#b07820;
 }
 
 /* =========================================================
-   FOOTER
+   CO FLOWERS
 ========================================================= */
+
+.co-flower{
+    position:absolute;
+
+    z-index:10;
+
+    transform:
+        translate(-50%,-50%);
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:
+        transform .28s cubic-bezier(.2,.8,.2,1),
+        filter .3s ease;
+
+    user-select:none;
+}
+
+.co-flower:hover{
+    transform:
+        translate(-50%,-50%)
+        scale(1.16);
+
+    filter:
+        drop-shadow(
+            0 7px 10px rgba(60,80,60,.20)
+        );
+
+    z-index:30;
+}
+
+.co-flower .icon{
+    line-height:1;
+
+    filter:
+        drop-shadow(
+            0 4px 4px rgba(70,80,70,.14)
+        );
+
+    transition:
+        filter .3s ease,
+        transform .3s ease;
+}
+
+.co-flower .name{
+    margin-top:4px;
+
+    padding:4px 8px;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.88);
+
+    border:1px solid #dce6d8;
+
+    font-size:9px;
+    color:#536053;
+
+    white-space:nowrap;
+}
+
+.co-flower .count{
+    margin-top:2px;
+
+    color:#899589;
+
+    font-size:9px;
+
+    font-weight:700;
+}
+
+/* =========================================================
+   CO SELECTED
+========================================================= */
+
+.co-flower.selected{
+    z-index:50;
+
+    transform:
+        translate(-50%,-50%)
+        scale(1.10);
+
+    animation:
+        flowerSelected .75s ease-out;
+}
+
+.co-flower.selected .icon{
+    filter:
+        drop-shadow(
+            0 0 5px rgba(255,220,100,1)
+        )
+        drop-shadow(
+            0 0 12px rgba(255,200,70,.95)
+        )
+        drop-shadow(
+            0 0 22px rgba(255,215,100,.78)
+        )
+        drop-shadow(
+            0 0 35px rgba(255,225,130,.45)
+        );
+
+    animation:
+        softFlowerGlow .8s ease-out;
+}
+
+.co-flower.selected .name{
+    border-color:
+        rgba(255,205,90,.65);
+
+    box-shadow:
+        0 0 8px rgba(255,210,90,.30);
+}
+
+.co-flower.selected:before{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:28px;
+
+    width:70px;
+    height:70px;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,225,110,.50) 0%,
+            rgba(255,215,90,.28) 35%,
+            rgba(255,210,80,.12) 55%,
+            transparent 75%
+        );
+
+    filter:blur(2px);
+
+    z-index:-1;
+
+    pointer-events:none;
+
+    animation:
+        yellowGlow 1s ease-out;
+}
+
+@keyframes softFlowerGlow{
+
+    0%{
+        filter:
+            drop-shadow(
+                0 0 2px rgba(255,220,100,.4)
+            );
+    }
+
+    40%{
+        filter:
+            drop-shadow(
+                0 0 7px rgba(255,220,100,1)
+            )
+            drop-shadow(
+                0 0 18px rgba(255,200,70,.95)
+            )
+            drop-shadow(
+                0 0 30px rgba(255,215,100,.8)
+            );
+    }
+
+    100%{
+        filter:
+            drop-shadow(
+                0 0 5px rgba(255,220,100,1)
+            )
+            drop-shadow(
+                0 0 12px rgba(255,200,70,.9)
+            )
+            drop-shadow(
+                0 0 22px rgba(255,215,100,.7)
+            )
+            drop-shadow(
+                0 0 35px rgba(255,225,130,.4)
+            );
+    }
+}
+
+@keyframes yellowGlow{
+
+    0%{
+        transform:
+            translate(-50%,-50%)
+            scale(.55);
+
+        opacity:0;
+    }
+
+    30%{
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+
+        opacity:1;
+    }
+
+    100%{
+        transform:
+            translate(-50%,-50%)
+            scale(1.65);
+
+        opacity:0;
+    }
+}
+
+@keyframes flowerSelected{
+
+    0%{
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+    }
+
+    35%{
+        transform:
+            translate(-50%,-50%)
+            scale(1.18);
+    }
+
+    100%{
+        transform:
+            translate(-50%,-50%)
+            scale(1.10);
+    }
+}
+
+/* =========================================================
+   CO SVG
+========================================================= */
+
+.co-svg{
+    position:absolute;
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    z-index:6;
+
+    pointer-events:none;
+}
+
+.co-line{
+    fill:none;
+
+    stroke:#8ba382;
+
+    stroke-width:1.8;
+
+    stroke-opacity:.32;
+
+    stroke-linecap:round;
+}
+
+.co-line.medium{
+    stroke-width:2.5;
+    stroke-opacity:.43;
+}
+
+.co-line.strong{
+    stroke-width:3.5;
+    stroke-opacity:.55;
+}
+
+/* =========================================================
+   CO CENTER
+========================================================= */
+
+.co-center{
+    position:absolute;
+
+    z-index:20;
+
+    left:50%;
+    top:48%;
+
+    transform:
+        translate(-50%,-50%);
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.co-center .icon{
+    width:92px;
+    height:92px;
+
+    position:relative;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #fff6b8 0 13%,
+            transparent 14%
+        ),
+        radial-gradient(
+            circle at 50% 18%,
+            #f4a6c2 0 24%,
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 82% 50%,
+            #f4a6c2 0 24%,
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 50% 82%,
+            #f4a6c2 0 24%,
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 18% 50%,
+            #f4a6c2 0 24%,
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 28% 28%,
+            #f7bdd2 0 17%,
+            transparent 18%
+        ),
+        radial-gradient(
+            circle at 72% 28%,
+            #f7bdd2 0 17%,
+            transparent 18%
+        ),
+        radial-gradient(
+            circle at 72% 72%,
+            #f7bdd2 0 17%,
+            transparent 18%
+        ),
+        radial-gradient(
+            circle at 28% 72%,
+            #f7bdd2 0 17%,
+            transparent 18%
+        ),
+        #fff;
+
+    box-shadow:
+        0 8px 24px rgba(60,80,60,.16);
+
+    animation:
+        centerBloom 4s ease-in-out infinite;
+}
+
+.co-center .icon:after{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:17px;
+    height:17px;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:#fff1a6;
+
+    box-shadow:
+        0 0 0 5px rgba(255,241,166,.28);
+}
+
+@keyframes centerBloom{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.05);
+    }
+}
+
+.co-center .name{
+    margin-top:8px;
+
+    padding:7px 14px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.92);
+
+    border:1px solid #dce7d7;
+
+    font-size:11px;
+    font-weight:800;
+}
+
+/* =========================================================
+   INSIGHT / FOOTER
+========================================================= */
+
+.insight{
+    padding:18px 20px;
+
+    background:#f8fbf5;
+
+    border-top:1px solid #e5ede1;
+
+    color:#617061;
+
+    font-size:13px;
+
+    line-height:1.8;
+}
 
 footer{
     padding:30px;
+
     text-align:center;
+
     color:#8c988e;
+
     font-size:12px;
 }
 
@@ -853,8 +1447,8 @@ footer{
         height:850px;
     }
 
-    .embedding-grid{
-        grid-template-columns:repeat(2,1fr);
+    .research-field{
+        height:560px;
     }
 }
 
@@ -927,489 +1521,434 @@ footer{
     .plot{
         height:430px;
     }
-
-    .embedding-grid{
-        grid-template-columns:1fr;
-    }
 }
+
 </style>
+
 </head>
 
 <body>
 
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
 <header class="header">
 
-    <div class="header-butterfly one">🦋</div>
-    <div class="header-butterfly two">🦋</div>
+```
+<div class="header-butterfly one">🦋</div>
+<div class="header-butterfly two">🦋</div>
 
-    <div class="header-flower one">🌷</div>
-    <div class="header-flower two">🌼</div>
+<div class="header-flower one">🌷</div>
+<div class="header-flower two">🌼</div>
 
-    <div class="header-inner">
+<div class="header-inner">
 
-        <h1>🌱🌼 AI RESEARCH FLOWER FIELD</h1>
+    <h1>
+        🌱🌼 AI RESEARCH FLOWER FIELD
+    </h1>
 
-        <div class="subtitle">
-            Research Keywords Growing Together · Scopus Research Visualization ·
-            Final Dataset: 5,427 Articles | 2021–2026
-        </div>
-
+    <div class="subtitle">
+        Research Keywords Growing Together ·
+        Scopus Research Visualization ·
+        Dataset: 5,427 final articles | 2021–2026
     </div>
+
+</div>
+```
 
 </header>
 
 <main class="container">
 
-<!-- =======================================================
+<!-- =========================================================
      KPI
-======================================================= -->
+========================================================= -->
 
 <section class="kpis">
 
-    <div class="kpi">
-        <div class="kpi-label">📚 ARTICLES</div>
-        <div class="kpi-value">5,427</div>
-        <div class="kpi-small">Final dataset after EID cross-subject deduplication</div>
+```
+<div class="kpi">
+
+    <div class="kpi-label">
+        📚 ARTICLES
     </div>
 
-    <div class="kpi">
-        <div class="kpi-label">🔑 UNIQUE AUTHOR KEYWORDS</div>
-        <div class="kpi-value">18,136</div>
-        <div class="kpi-small">Normalized unique keywords in final dataset</div>
+    <div class="kpi-value">
+        5,427
     </div>
 
-    <div class="kpi">
-        <div class="kpi-label">📅 YEAR RANGE</div>
-        <div class="kpi-value">2021–2026</div>
-        <div class="kpi-small">Publication years represented in final dataset</div>
+    <div class="kpi-small">
+        Final dataset after EID cross-subject deduplication
     </div>
 
-    <div class="kpi">
-        <div class="kpi-label">🏷️ RESEARCH AREAS</div>
-        <div class="kpi-value">10</div>
-        <div class="kpi-small">Computer Science subject areas</div>
+</div>
+
+
+<div class="kpi">
+
+    <div class="kpi-label">
+        🔑 UNIQUE AUTHOR KEYWORDS
     </div>
+
+    <div class="kpi-value">
+        18,136
+    </div>
+
+    <div class="kpi-small">
+        Distinct normalized author keywords
+    </div>
+
+</div>
+
+
+<div class="kpi">
+
+    <div class="kpi-label">
+        📅 YEAR RANGE
+    </div>
+
+    <div class="kpi-value">
+        2021–2026
+    </div>
+
+    <div class="kpi-small">
+        Publication years
+    </div>
+
+</div>
+
+
+<div class="kpi">
+
+    <div class="kpi-label">
+        🏷️ RESEARCH AREAS
+    </div>
+
+    <div class="kpi-value">
+        10
+    </div>
+
+    <div class="kpi-small">
+        Subject groups
+    </div>
+
+</div>
+```
 
 </section>
 
-
 <section class="grid">
 
-<!-- =======================================================
+<!-- =========================================================
      TOP KEYWORDS
-======================================================= -->
+========================================================= -->
 
 <div class="card">
 
-    <div class="card-head">
-        <div class="card-title">🌼 Top Keywords</div>
+```
+<div class="card-head">
 
-        <div class="card-sub">
-            Top-10 normalized Author Keywords · Final Dataset
-        </div>
-
-        <div class="card-flower">🌷</div>
+    <div class="card-title">
+        🌼 Top Keywords
     </div>
 
-    <div id="keywords" class="plot"></div>
+    <div class="card-sub">
+        Top-20 Author Keywords · Final Dataset
+    </div>
 
-    <div class="explanation">
-        <b>🌼 Explanation:</b><br>
-        This chart shows the 10 most frequently occurring normalized
-        Author Keywords in the final dataset. A longer bar represents a
-        keyword that appears in more articles. The frequency is based on
-        keyword occurrence after keyword normalization.
+    <div class="card-flower">
+        🌷
     </div>
 
 </div>
 
+<div id="keywords" class="plot"></div>
+```
 
-<!-- =======================================================
+</div>
+
+<!-- =========================================================
      TOP AUTHORS
-======================================================= -->
+========================================================= -->
 
 <div class="card">
 
-    <div class="card-head">
-        <div class="card-title">🌷 Top Authors</div>
+```
+<div class="card-head">
 
-        <div class="card-sub">
-            Top-10 Authors · Final Dataset
-        </div>
-
-        <div class="card-flower">🌷</div>
+    <div class="card-title">
+        🌷 Top Authors
     </div>
 
-    <div id="authors" class="plot"></div>
+    <div class="card-sub">
+        Top-10 Authors · Final Dataset
+    </div>
 
-    <div class="explanation">
-        <b>🌷 Explanation:</b><br>
-        This chart presents the 10 authors with the highest number of
-        publications in the final dataset. Larger markers represent a
-        higher publication count. Hover over a flower to see the author's
-        name and publication count.
+    <div class="card-flower">
+        🌷
     </div>
 
 </div>
 
+<div id="authors" class="plot"></div>
+```
 
-<!-- =======================================================
+</div>
+
+<!-- =========================================================
      PUBLICATIONS BY YEAR
-======================================================= -->
+========================================================= -->
 
 <div class="card">
 
-    <div class="card-head">
-        <div class="card-title">📈 Publications by Year</div>
+```
+<div class="card-head">
 
-        <div class="card-sub">
-            Publication count · 2021–2026
-        </div>
-
-        <div class="card-flower">🌼</div>
+    <div class="card-title">
+        📈 Publications by Year
     </div>
 
-    <div id="years" class="plot"></div>
+    <div class="card-sub">
+        Publication count · Final Dataset
+    </div>
 
-    <div class="explanation">
-        <b>📈 Explanation:</b><br>
-        This timeline shows how many articles were included in the final
-        dataset for each publication year. The line makes it possible to
-        observe changes in publication volume across the 2021–2026 period.
+    <div class="card-flower">
+        🌼
     </div>
 
 </div>
 
+<div id="years" class="plot"></div>
+```
 
-<!-- =======================================================
+</div>
+
+<!-- =========================================================
      RESEARCH AREAS
-======================================================= -->
+========================================================= -->
 
 <div class="card">
 
-    <div class="card-head">
-        <div class="card-title">🌿 Research Areas</div>
+```
+<div class="card-head">
 
-        <div class="card-sub">
-            10 Computer Science subject areas · Final Dataset
-        </div>
-
-        <div class="card-flower">🌻</div>
+    <div class="card-title">
+        🌿 Research Areas
     </div>
 
-    <div id="subjects" class="research-field">
-
-        <div class="research-center-label">
-
-            <div class="research-center-flower">🌸</div>
-
-            <div class="research-center-number">10</div>
-
-            <div class="research-center-text">
-                Research Areas
-            </div>
-
-        </div>
-
-        <div id="researchPie"></div>
-
+    <div class="card-sub">
+        Calculated from Subject · Final Dataset · 10 groups
     </div>
 
-    <div class="explanation">
-        <b>🌿 Explanation:</b><br>
-        This donut chart shows the distribution of articles across the
-        10 Computer Science research areas. Each slice represents one
-        subject area and its size corresponds to the number of articles.
-        Hover over a slice to see the exact article count and percentage.
-        Click a slice to separate it slightly from the rest of the chart.
+    <div class="card-flower">
+        🌻
     </div>
 
 </div>
 
 
-<!-- =======================================================
-     CO-OCCURRENCE
-======================================================= -->
+<div id="subjects" class="research-field">
+
+    <div class="research-center-label">
+
+        <div class="research-center-flower">
+            🌸
+        </div>
+
+        <div class="research-center-number">
+            10
+        </div>
+
+        <div class="research-center-text">
+            Research Areas
+        </div>
+
+    </div>
+
+    <div id="researchPie"></div>
+
+</div>
+```
+
+</div>
+
+<!-- =========================================================
+     KEYWORD CO-OCCURRENCE
+========================================================= -->
 
 <div class="card full">
 
-    <div class="card-head">
+```
+<div class="card-head">
 
-        <div class="card-title">
-            🌺 Keyword Co-occurrence Garden
-        </div>
-
-        <div class="card-sub">
-            Top-10 Author Keywords · Relationships from the final dataset
-        </div>
-
-        <div class="card-flower">🦋</div>
-
+    <div class="card-title">
+        🌺 Keyword Co-occurrence Garden
     </div>
 
-    <div class="co-field" id="coField">
-
-        <div class="co-community ai"></div>
-        <div class="co-community vision"></div>
-        <div class="co-community data"></div>
-
-        <div class="co-group-title ai">
-            🌸 AI &amp; Machine Learning
-        </div>
-
-        <div class="co-group-title vision">
-            🌼 Vision &amp; Language
-        </div>
-
-        <div class="co-group-title data">
-            🌻 Data &amp; Computing
-        </div>
-
-        <svg id="coSvg" class="co-svg"></svg>
-
-        <div class="butterfly b1">🦋</div>
-        <div class="butterfly b2">🦋</div>
-        <div class="butterfly b3">🦋</div>
-        <div class="butterfly b4">🦋</div>
-
-        <div class="co-center">
-
-            <div class="icon"></div>
-
-            <div class="name" id="coCenterName">
-                Artificial Intelligence
-            </div>
-
-        </div>
-
+    <div class="card-sub">
+        Keyword relationships · Final Dataset
     </div>
 
-    <div class="explanation">
-
-        <b>🌺 Explanation:</b><br>
-
-        🌸 Flowers represent the Top-10 most frequent Author Keywords
-        from the final dataset.<br>
-
-        🌿 Lines represent keyword co-occurrence, meaning the two
-        keywords appear together in the same article.<br>
-
-        📏 Thicker lines represent stronger co-occurrence relationships,
-        while thinner lines represent weaker relationships.<br>
-
-        🌺 The central flower represents the most frequent keyword:
-        <b>Deep Learning</b> / <b>Artificial Intelligence</b> depending
-        on the central relationship being displayed.<br>
-
-        🌱 The surrounding communities are visual groupings used to
-        make relationships easier to read; they are visualization
-        groupings rather than additional research-area classifications.<br>
-
-        🦋 Butterflies are decorative elements only.
-        
+    <div class="card-flower">
+        🦋
     </div>
 
 </div>
 
 
-<!-- =======================================================
+<div
+    class="co-field"
+    id="coField"
+>
+
+    <div class="co-community ai"></div>
+
+    <div class="co-community vision"></div>
+
+    <div class="co-community data"></div>
+
+
+    <div class="co-group-title ai">
+        🌸 AI &amp; Machine Learning
+    </div>
+
+    <div class="co-group-title vision">
+        🌼 Vision &amp; Language
+    </div>
+
+    <div class="co-group-title data">
+        🌻 Data &amp; Computing
+    </div>
+
+
+    <svg
+        id="coSvg"
+        class="co-svg"
+    ></svg>
+
+
+    <div class="butterfly b1">🦋</div>
+    <div class="butterfly b2">🦋</div>
+    <div class="butterfly b3">🦋</div>
+    <div class="butterfly b4">🦋</div>
+
+
+    <div class="co-center">
+
+        <div class="icon"></div>
+
+        <div
+            class="name"
+            id="coCenterName"
+        >
+            Deep Learning
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="insight">
+
+    <b>🌺 How to read this garden</b>
+
+    <br>
+
+    🌸 Flowers represent the Top-10 author keywords from the
+    final dataset.
+
+    · 🌿 Lines show how often two keywords occur together
+    in the same article.
+
+    · 🌺 The central flower is the most frequent keyword.
+
+    · 📏 Larger flowers mean higher keyword frequency.
+
+    · 🦋 Butterflies are decorative only.
+
+</div>
+```
+
+</div>
+
+<!-- =========================================================
      FEATURE VECTOR GARDEN
-======================================================= -->
+========================================================= -->
 
 <div class="card full">
 
-    <div class="card-head">
+```
+<div class="card-head">
 
-        <div class="card-title">
-            🌸 Feature Vector Garden
-        </div>
-
-        <div class="card-sub">
-            Keyword communities derived from the final dataset
-        </div>
-
-        <div class="card-flower">🦋</div>
-
+    <div class="card-title">
+        🌸 Feature Vector Garden
     </div>
 
-    <div class="feature-field" id="featureField">
-
-        <div class="feature-group ai"></div>
-        <div class="feature-group vision"></div>
-        <div class="feature-group data"></div>
-        <div class="feature-group tech"></div>
-
-        <div class="butterfly b1">🦋</div>
-        <div class="butterfly b2">🦋</div>
-        <div class="butterfly b3">🦋</div>
-        <div class="butterfly b4">🦋</div>
-        <div class="butterfly b5">🦋</div>
-
-        <div class="group-title ai">
-            🌸 AI &amp; Machine Learning
-        </div>
-
-        <div class="group-title vision">
-            🌼 Vision &amp; Language
-        </div>
-
-        <div class="group-title data">
-            🌻 Data &amp; Computing
-        </div>
-
-        <div class="group-title tech">
-            🌷 Emerging Technology
-        </div>
-
-        <svg class="feature-svg" id="featureSvg"></svg>
-
-        <div class="feature-center">
-
-            <div class="flower">
-                🌺
-            </div>
-
-            <div class="title">
-                5,427 Articles
-            </div>
-
-        </div>
-
+    <div class="card-sub">
+        Top keywords grouped into related research communities
     </div>
 
-    <div class="explanation">
-
-        <b>🌸 Explanation:</b><br>
-
-        🌸 <b>AI &amp; Machine Learning</b> — represents keywords
-        related to artificial intelligence and machine-learning methods,
-        including Deep Learning, Artificial Intelligence,
-        Machine Learning and Federated Learning.<br>
-
-        🌼 <b>Vision &amp; Language</b> — represents keywords related
-        to visual computing and language models, including Computer Vision
-        and Large Language Models.<br>
-
-        🌻 <b>Data &amp; Computing</b> — represents computing and hardware
-        technologies such as FPGA and related computational concepts.<br>
-
-        🌷 <b>Emerging Technology</b> — represents newer or application-oriented
-        technologies such as Virtual Reality.<br>
-
-        🌱 The four areas are visualization groupings created to organize
-        related keywords. They are not the same thing as the 10 official
-        Research Areas shown in the donut chart.<br>
-
-        📏 Larger flowers indicate higher keyword frequency.<br>
-
-        🖱️ Click a flower to highlight the selected keyword.<br>
-
-        🦋 Butterflies are decorative only.
-
+    <div class="card-flower">
+        🦋
     </div>
 
 </div>
 
 
-<!-- =======================================================
-     EMBEDDING
-======================================================= -->
+<div
+    class="feature-field"
+    id="featureField"
+>
 
-<div class="card full">
+    <div class="feature-group ai"></div>
+    <div class="feature-group vision"></div>
+    <div class="feature-group data"></div>
+    <div class="feature-group tech"></div>
 
-    <div class="card-head">
 
-        <div class="card-title">
-            🧠 Text Embedding
-        </div>
+    <div class="butterfly b1">🦋</div>
+    <div class="butterfly b2">🦋</div>
+    <div class="butterfly b3">🦋</div>
+    <div class="butterfly b4">🦋</div>
+    <div class="butterfly b5">🦋</div>
 
-        <div class="card-sub">
-            SPECTER2 representation of the final article dataset
-        </div>
 
-        <div class="card-flower">🌸</div>
-
+    <div class="group-title ai">
+        🌸 AI &amp; Machine Learning
     </div>
 
-    <div class="embedding-box">
+    <div class="group-title vision">
+        🌼 Vision &amp; Language
+    </div>
 
-        <div class="embedding-grid">
+    <div class="group-title data">
+        🌻 Data &amp; Computing
+    </div>
 
-            <div class="embedding-item">
+    <div class="group-title tech">
+        🌷 Emerging Technology
+    </div>
 
-                <div class="embedding-value">
-                    5,427
-                </div>
 
-                <div class="embedding-label">
-                    Articles
-                </div>
+    <svg
+        class="feature-svg"
+        id="featureSvg"
+    ></svg>
 
-            </div>
 
-            <div class="embedding-item">
+    <div class="feature-center">
 
-                <div class="embedding-value">
-                    SPECTER2
-                </div>
-
-                <div class="embedding-label">
-                    Embedding Model
-                </div>
-
-            </div>
-
-            <div class="embedding-item">
-
-                <div class="embedding-value">
-                    768
-                </div>
-
-                <div class="embedding-label">
-                    Dimensions
-                </div>
-
-            </div>
-
-            <div class="embedding-item">
-
-                <div class="embedding-value">
-                    5,427 × 768
-                </div>
-
-                <div class="embedding-label">
-                    Feature Matrix
-                </div>
-
-            </div>
-
+        <div class="flower">
+            🌺
         </div>
 
-        <div class="embedding-description">
-
-            <b>🧠 Explanation:</b><br>
-
-            Each article was converted from text into a numerical vector
-            using the <b>SPECTER2</b> model. The text used for embedding
-            consists of <b>Title + Abstract + Author Keywords + Index Keywords</b>.
-
-            <br><br>
-
-            One article is represented by a vector containing
-            <b>768 numerical features</b>. Therefore, the complete feature
-            matrix contains <b>5,427 rows × 768 columns</b>.
-
-            <br><br>
-
-            These vectors can be used for downstream analysis such as
-            document similarity, clustering, dimensionality reduction,
-            and research visualization.
-
-            <br><br>
-
-            <b>Data quality:</b>
-            NaN = 0 · Inf = 0
-
+        <div
+            class="title"
+            id="featureCenterTitle"
+        >
+            5,427 Articles
         </div>
 
     </div>
@@ -1417,70 +1956,42 @@ footer{
 </div>
 
 
-<!-- =======================================================
-     DATA PIPELINE
-======================================================= -->
+<div class="insight">
 
-<div class="card full">
+    <b>🌱 Keyword communities</b>
 
-    <div class="card-head">
+    <br>
 
-        <div class="card-title">
-            🌱 Research Data Pipeline
-        </div>
+    🌸 <b>AI &amp; Machine Learning</b> —
+    Deep Learning, Artificial Intelligence, Machine Learning,
+    Federated Learning, Generative AI, Reinforcement Learning,
+    Attention Mechanism
 
-        <div class="card-sub">
-            From Scopus records to research visualization
-        </div>
+    <br>
 
-        <div class="card-flower">🌿</div>
+    🌼 <b>Vision &amp; Language</b> —
+    Large Language Models, Computer Vision, Transformer,
+    Large Language Model, Natural Language Processing,
+    Convolutional Neural Network, Neural Networks
 
-    </div>
+    <br>
 
-    <div class="explanation" style="border-top:none;">
+    🌻 <b>Data &amp; Computing</b> —
+    FPGA, Edge Computing, Quantum Computing
 
-        <b>🌱 Explanation:</b><br><br>
+    <br>
 
-        <b>1. Data Collection</b><br>
-        Scopus records from 10 Computer Science subject groups were
-        collected and combined using Python and Pandas.
+    🌷 <b>Emerging Technology</b> —
+    Virtual Reality, Computer-Aided Design,
+    Human-Computer Interaction
 
-        <br><br>
+    <br><br>
 
-        <b>2. Data Cleaning</b><br>
-        Missing values, text formatting, whitespace, newline characters
-        and unwanted copyright text were cleaned using Python,
-        Pandas and Regular Expressions.
+    🧠 <b>Embedding Model:</b>
+    SPECTER2 · 768 dimensions · 5,427 × 768 Feature Matrix
 
-        <br><br>
-
-        <b>3. Data Normalization</b><br>
-        Author Keywords were normalized so that similar word forms could
-        be represented consistently before frequency analysis.
-
-        <br><br>
-
-        <b>4. EID Cross-Subject Deduplication</b><br>
-        Articles with EIDs appearing across multiple subjects were removed
-        to prevent the same article from being counted more than once.
-        The dataset was reduced from <b>5,703</b> cleaned records to
-        <b>5,427 final articles</b>.
-
-        <br><br>
-
-        <b>5. Text Embedding</b><br>
-        Title, Abstract, Author Keywords and Index Keywords were combined
-        into embedding text and converted into 768-dimensional vectors
-        using SPECTER2.
-
-        <br><br>
-
-        <b>6. Data Analysis &amp; Visualization</b><br>
-        The final dataset was analyzed through keyword frequency,
-        author publication counts, publication trends, research areas,
-        keyword co-occurrence and keyword-community visualization.
-
-    </div>
+</div>
+```
 
 </div>
 
@@ -1488,51 +1999,79 @@ footer{
 
 </main>
 
-
 <footer>
 
-    🌱🌸 AI Research Flower Field · Scopus Final Dataset ·
-    5,427 Articles · 18,136 Unique Author Keywords ·
-    SPECTER2 768-D Embeddings · 🦋🌼
+```
+🌱🌸 AI Research Visualization ·
+Scopus Final Dataset ·
+5,427 Articles ·
+18,136 Unique Author Keywords ·
+SPECTER2 · 768-D ·
+🦋🌼
+```
 
 </footer>
-
 
 <script>
 
 /* =========================================================
    FINAL DATASET
+   Source: final summary.json
 ========================================================= */
 
 const DATA = {
 
-    articles:5427,
+    articles: 5427,
 
-    unique_keywords:18136,
+    unique_keywords: 18136,
 
-    years:{
-        "2021":13,
-        "2022":88,
-        "2023":90,
-        "2024":184,
-        "2025":4936,
-        "2026":116
+    embedding: {
+        model: "SPECTER2",
+        dimensions: 768,
+        matrix_shape: "5427 x 768",
+        nan_count: 0,
+        inf_count: 0
     },
 
-    subjects:{
-        "Computational Theory and Mathematics":595,
-        "Computer Graphics and Computer-Aided Design":592,
-        "Applications":574,
-        "Hardware":551,
-        "Software":545,
-        "Signal":541,
-        "Networks":540,
-        "Information Systems":512,
-        "Human":492,
-        "Artificial Intelligence":485
+
+    years: {
+
+        "2021": 13,
+        "2022": 88,
+        "2023": 90,
+        "2024": 184,
+        "2025": 4936,
+        "2026": 116
+
     },
 
-    top10:[
+
+    subjects: {
+
+        "Computational Theory and Mathematics": 595,
+
+        "Computer Graphics and Computer-Aided Design": 592,
+
+        "Applications": 574,
+
+        "Hardware": 551,
+
+        "Software": 545,
+
+        "Signal": 541,
+
+        "Networks": 540,
+
+        "Information Systems": 512,
+
+        "Human": 492,
+
+        "Artificial Intelligence": 485
+
+    },
+
+
+    top20: [
 
         {
             keyword:"Deep Learning",
@@ -1586,22 +2125,63 @@ const DATA = {
 
     ],
 
-    authors:[
 
-        {author:"Zhang Y.",count:133},
-        {author:"Wang Y.",count:126},
-        {author:"Liu Y.",count:105},
-        {author:"Li Y.",count:103},
-        {author:"Li J.",count:92},
-        {author:"Wang Z.",count:87},
-        {author:"Wang X.",count:79},
-        {author:"Zhang X.",count:78},
-        {author:"Zhang J.",count:70},
-        {author:"Li X.",count:68}
+    authors: [
+
+        {
+            author:"Zhang Y.",
+            count:133
+        },
+
+        {
+            author:"Wang Y.",
+            count:126
+        },
+
+        {
+            author:"Liu Y.",
+            count:105
+        },
+
+        {
+            author:"Li Y.",
+            count:103
+        },
+
+        {
+            author:"Li J.",
+            count:92
+        },
+
+        {
+            author:"Wang Z.",
+            count:87
+        },
+
+        {
+            author:"Wang X.",
+            count:79
+        },
+
+        {
+            author:"Zhang X.",
+            count:78
+        },
+
+        {
+            author:"Zhang J.",
+            count:70
+        },
+
+        {
+            author:"Li X.",
+            count:68
+        }
 
     ],
 
-    co:[
+
+    co: [
 
         {
             a:"Artificial Intelligence",
@@ -1661,87 +2241,61 @@ const DATA = {
             a:"Artificial Intelligence",
             b:"Virtual Reality",
             count:5
-        },
-
-        {
-            a:"Artificial Intelligence",
-            b:"Large Language Models",
-            count:4
-        },
-
-        {
-            a:"Artificial Intelligence",
-            b:"Generative AI",
-            count:4
-        },
-
-        {
-            a:"FPGA",
-            b:"Machine Learning",
-            count:4
-        },
-
-        {
-            a:"Federated Learning",
-            b:"Machine Learning",
-            count:3
-        },
-
-        {
-            a:"Deep Learning",
-            b:"Generative AI",
-            count:2
-        },
-
-        {
-            a:"Deep Learning",
-            b:"Large Language Models",
-            count:2
-        },
-
-        {
-            a:"Generative AI",
-            b:"Large Language Models",
-            count:2
-        },
-
-        {
-            a:"Deep Learning",
-            b:"Federated Learning",
-            count:2
-        },
-
-        {
-            a:"Large Language Models",
-            b:"Machine Learning",
-            count:1
-        },
-
-        {
-            a:"Machine Learning",
-            b:"Virtual Reality",
-            count:1
-        },
-
-        {
-            a:"Generative AI",
-            b:"Transformer",
-            count:1
-        },
-
-        {
-            a:"Computer Vision",
-            b:"Generative AI",
-            count:1
-        },
-
-        {
-            a:"Generative AI",
-            b:"Virtual Reality",
-            count:1
         }
 
-    ]
+    ],
+
+
+    groups: {
+
+        "AI & Machine Learning":[
+            "Deep Learning",
+            "Artificial Intelligence",
+            "Machine Learning",
+            "Federated Learning",
+            "Generative AI"
+        ],
+
+        "Vision & Language":[
+            "Large Language Models",
+            "Computer Vision",
+            "Transformer"
+        ],
+
+        "Data & Computing":[
+            "FPGA"
+        ],
+
+        "Emerging Technology":[
+            "Virtual Reality"
+        ]
+
+    },
+
+
+    positions: {
+
+        "Deep Learning":[13,27,"🌸"],
+
+        "Artificial Intelligence":[27,23,"🌸"],
+
+        "Machine Learning":[40,29,"🌸"],
+
+        "Federated Learning":[20,42,"🌺"],
+
+        "Generative AI":[34,47,"🌸"],
+
+        "Large Language Models":[59,27,"🌼"],
+
+        "Computer Vision":[72,23,"🌼"],
+
+        "Transformer":[84,31,"🪻"],
+
+        "FPGA":[16,74,"🌻"],
+
+        "Virtual Reality":[61,74,"🌷"]
+
+    }
 
 };
 
@@ -1755,6 +2309,7 @@ function fmt(n){
     return Number(n || 0).toLocaleString();
 
 }
+
 
 function baseLayout(){
 
@@ -1785,40 +2340,50 @@ function baseLayout(){
    TOP KEYWORDS
 ========================================================= */
 
-const keywordData=[...DATA.top10].reverse();
+const keywordData = [...DATA.top20].reverse();
 
 Plotly.newPlot(
 
     "keywords",
 
-    [{
+    [
 
-        type:"bar",
+        {
 
-        orientation:"h",
+            type:"bar",
 
-        y:keywordData.map(x=>x.keyword),
+            orientation:"h",
 
-        x:keywordData.map(x=>x.count),
-
-        marker:{
-
-            color:keywordData.map(
-                (x,i)=>`hsl(${330+i*4},65%,${78-i*2}%)`
+            y:keywordData.map(
+                x=>x.keyword
             ),
 
-            line:{
-                color:"#fff",
-                width:1
-            }
+            x:keywordData.map(
+                x=>x.count
+            ),
 
-        },
+            marker:{
 
-        hovertemplate:
-            "<b>%{y}</b><br>" +
-            "Articles: %{x}<extra></extra>"
+                color:keywordData.map(
+                    (x,i)=>
+                        `hsl(${330+i*2},65%,${78-i*1.7}%)`
+                ),
 
-    }],
+                line:{
+                    color:"#fff",
+                    width:1
+                }
+
+            },
+
+            hovertemplate:
+                "<b>%{y}</b>" +
+                "<br>Articles: %{x}" +
+                "<extra></extra>"
+
+        }
+
+    ],
 
     {
 
@@ -1847,8 +2412,10 @@ Plotly.newPlot(
     },
 
     {
+
         responsive:true,
         displaylogo:false
+
     }
 
 );
@@ -1862,53 +2429,67 @@ Plotly.newPlot(
 
     "authors",
 
-    [{
+    [
 
-        x:DATA.authors.map((d,i)=>i+1),
+        {
 
-        y:DATA.authors.map(d=>d.count),
-
-        text:DATA.authors.map(d=>d.author),
-
-        mode:"markers+text",
-
-        type:"scatter",
-
-        textposition:"top center",
-
-        marker:{
-
-            size:DATA.authors.map(
-                d=>Math.max(24,d.count/2.2)
+            x:DATA.authors.map(
+                (d,i)=>i+1
             ),
 
-            color:[
-                "#F48FB1",
-                "#BA8DE3",
-                "#81CFC1",
-                "#F6C85F",
-                "#89B8E8",
-                "#E99AC7",
-                "#A7C957",
-                "#F29E8F",
-                "#8DD3C7",
-                "#C4A7E7"
-            ],
+            y:DATA.authors.map(
+                d=>d.count
+            ),
 
-            opacity:.85,
+            text:DATA.authors.map(
+                d=>d.author
+            ),
 
-            line:{
-                color:"#fff",
-                width:3
-            }
+            mode:"markers+text",
 
-        },
+            type:"scatter",
 
-        hovertemplate:
-            "<b>%{text}</b><br>" +
-            "Publications: %{y}<extra></extra>"
+            textposition:"top center",
 
-    }],
+            marker:{
+
+                size:DATA.authors.map(
+                    d=>Math.max(
+                        24,
+                        d.count/2.2
+                    )
+                ),
+
+                color:[
+                    "#F48FB1",
+                    "#BA8DE3",
+                    "#81CFC1",
+                    "#F6C85F",
+                    "#89B8E8",
+                    "#E99AC7",
+                    "#A7C957",
+                    "#F29E8F",
+                    "#8DD3C7",
+                    "#C4A7E7"
+                ],
+
+                opacity:.85,
+
+                line:{
+                    color:"#fff",
+                    width:3
+                }
+
+            },
+
+            hovertemplate:
+                "<b>%{text}</b>" +
+                "<br>Publications: %{y}" +
+                "<extra></extra>"
+
+        }
+
+    ],
 
     {
 
@@ -1937,8 +2518,10 @@ Plotly.newPlot(
     },
 
     {
+
         responsive:true,
         displayModeBar:false
+
     }
 
 );
@@ -1948,43 +2531,55 @@ Plotly.newPlot(
    PUBLICATIONS BY YEAR
 ========================================================= */
 
-const yearKeys=Object.keys(DATA.years)
-    .sort((a,b)=>Number(a)-Number(b));
+const yearKeys =
+    Object.keys(DATA.years)
+    .sort(
+        (a,b)=>Number(a)-Number(b)
+    );
+
 
 Plotly.newPlot(
 
     "years",
 
-    [{
+    [
 
-        type:"scatter",
+        {
 
-        mode:"lines+markers",
+            type:"scatter",
 
-        x:yearKeys,
+            mode:"lines+markers",
 
-        y:yearKeys.map(y=>DATA.years[y]),
+            x:yearKeys,
 
-        line:{
-            width:3,
-            color:"#719873",
-            shape:"spline"
-        },
+            y:yearKeys.map(
+                y=>DATA.years[y]
+            ),
 
-        marker:{
-            size:7,
-            color:"#719873"
-        },
+            line:{
+                width:3,
+                color:"#719873",
+                shape:"spline"
+            },
 
-        fill:"tozeroy",
+            marker:{
+                size:7,
+                color:"#719873"
+            },
 
-        fillcolor:"rgba(113,152,115,.15)",
+            fill:"tozeroy",
 
-        hovertemplate:
-            "Year: %{x}<br>" +
-            "Articles: %{y}<extra></extra>"
+            fillcolor:
+                "rgba(113,152,115,.15)",
 
-    }],
+            hovertemplate:
+                "Year: %{x}" +
+                "<br>Articles: %{y}" +
+                "<extra></extra>"
+
+        }
+
+    ],
 
     {
 
@@ -2010,8 +2605,10 @@ Plotly.newPlot(
     },
 
     {
+
         responsive:true,
         displaylogo:false
+
     }
 
 );
@@ -2021,15 +2618,24 @@ Plotly.newPlot(
    RESEARCH AREAS DONUT
 ========================================================= */
 
-const pie=document.getElementById("researchPie");
+const pie =
+    document.getElementById(
+        "researchPie"
+    );
 
-const labels=Object.keys(DATA.subjects);
 
-const values=labels.map(
-    k=>DATA.subjects[k]
-);
+const labels =
+    Object.keys(DATA.subjects);
 
-const pieColors=[
+
+const values =
+    labels.map(
+        k=>DATA.subjects[k]
+    );
+
+
+const pieColors = [
+
     "#A9D58F",
     "#9FC1DF",
     "#E7C76E",
@@ -2040,65 +2646,82 @@ const pieColors=[
     "#D9B383",
     "#AAB8CD",
     "#9DC49A"
+
 ];
+
 
 document.querySelector(
     ".research-center-number"
-).textContent=labels.length;
+).textContent = labels.length;
+
 
 Plotly.newPlot(
 
     pie,
 
-    [{
+    [
 
-        type:"pie",
+        {
 
-        labels:labels,
+            type:"pie",
 
-        values:values,
+            labels:labels,
 
-        hole:.56,
+            values:values,
 
-        sort:false,
+            hole:.56,
 
-        direction:"clockwise",
+            sort:false,
 
-        rotation:-90,
+            direction:"clockwise",
 
-        textinfo:"label",
+            rotation:-90,
 
-        textposition:"outside",
+            textinfo:"label",
 
-        textfont:{
-            family:"Arial, Noto Sans Thai",
-            size:10,
-            color:"#526354"
-        },
+            textposition:"outside",
 
-        automargin:true,
+            textfont:{
 
-        marker:{
-            colors:pieColors,
+                family:
+                    "Arial, Noto Sans Thai",
 
-            line:{
-                color:"#fff",
-                width:3
-            }
-        },
+                size:10,
 
-        hovertemplate:
-            "<b>%{label}</b><br>" +
-            "%{value:,} Articles<br>" +
-            "Share: %{percent}<extra></extra>"
+                color:"#526354"
 
-    }],
+            },
+
+            automargin:true,
+
+            marker:{
+
+                colors:pieColors,
+
+                line:{
+                    color:"#fff",
+                    width:3
+                }
+
+            },
+
+            hovertemplate:
+                "<b>%{label}</b>" +
+                "<br>%{value:,} Articles" +
+                "<br>Share: %{percent}" +
+                "<extra></extra>"
+
+        }
+
+    ],
 
     {
 
-        paper_bgcolor:"rgba(0,0,0,0)",
+        paper_bgcolor:
+            "rgba(0,0,0,0)",
 
-        plot_bgcolor:"rgba(0,0,0,0)",
+        plot_bgcolor:
+            "rgba(0,0,0,0)",
 
         margin:{
             l:75,
@@ -2123,6 +2746,7 @@ Plotly.newPlot(
         displaylogo:false,
 
         modeBarButtonsToRemove:[
+
             "toImage",
             "zoom2d",
             "pan2d",
@@ -2133,6 +2757,7 @@ Plotly.newPlot(
             "hoverClosestCartesian",
             "hoverCompareCartesian",
             "toggleSpikelines"
+
         ]
 
     }
@@ -2141,24 +2766,33 @@ Plotly.newPlot(
 
 
 /* =========================================================
-   DONUT CLICK
+   RESEARCH AREA CLICK
 ========================================================= */
 
 pie.on(
     "plotly_click",
     e=>{
 
-        const i=e.points[0].pointNumber;
+        const i =
+            e.points[0].pointNumber;
 
-        const current=
-            Array.isArray(pie.data[0].pull)
+        const current =
+            Array.isArray(
+                pie.data[0].pull
+            )
             ?
             [...pie.data[0].pull]
             :
-            labels.map(()=>0);
+            labels.map(
+                ()=>0
+            );
 
-        const active=
-            Number(current[i]||0)>0;
+
+        const active =
+            Number(
+                current[i] || 0
+            ) > 0;
+
 
         Plotly.restyle(
 
@@ -2170,9 +2804,12 @@ pie.on(
                         (_,j)=>
                             j===i
                             ?
-                            (active?0:.10)
-                            :
-                            0
+                            (
+                                active
+                                ?0
+                                :.10
+                            )
+                            :0
                     )
                 ]
             },
@@ -2182,6 +2819,7 @@ pie.on(
         );
 
     }
+
 );
 
 
@@ -2191,14 +2829,19 @@ pie.on(
 
 (function(){
 
-    const field=
-        document.getElementById("featureField");
+    const field =
+        document.getElementById(
+            "featureField"
+        );
 
-    const svg=
-        document.getElementById("featureSvg");
+
+    const svg =
+        document.getElementById(
+            "featureSvg"
+        );
 
 
-    const groupMeta={
+    const groupMeta = {
 
         "AI & Machine Learning":{
             cls:"ai",
@@ -2223,189 +2866,180 @@ pie.on(
     };
 
 
-    /*
-       Top-10 final keywords organized into
-       visualization communities.
-    */
-
-    const groups={
-
-        "AI & Machine Learning":[
-            "Deep Learning",
-            "Artificial Intelligence",
-            "Machine Learning",
-            "Federated Learning"
-        ],
-
-        "Vision & Language":[
-            "Computer Vision",
-            "Large Language Models",
-            "Transformer"
-        ],
-
-        "Data & Computing":[
-            "FPGA"
-        ],
-
-        "Emerging Technology":[
-            "Virtual Reality",
-            "Generative AI"
-        ]
-
-    };
+    const groupByKeyword = {};
 
 
-    const groupByKeyword={};
-
-    Object.entries(groups).forEach(
+    Object.entries(
+        DATA.groups
+    ).forEach(
         ([g,arr])=>{
 
             arr.forEach(
-                k=>groupByKeyword[k]=g
+                k=>{
+                    groupByKeyword[k]=g;
+                }
             );
 
         }
     );
 
 
-    const max=Math.max(
-        ...DATA.top10.map(
-            d=>Number(d.count)||0
-        )
-    );
-
-
-    DATA.top10.forEach(d=>{
-
-        const g=
-            groupByKeyword[d.keyword];
-
-        if(!g) return;
-
-        const meta=
-            groupMeta[g];
-
-        const pos=
-            getPosition(d.keyword);
-
-
-        const flower=
-            document.createElement("div");
-
-        flower.className=
-            "feature-flower "+meta.cls;
-
-        flower.style.left=
-            pos[0]+"%";
-
-        flower.style.top=
-            pos[1]+"%";
-
-
-        const emoji=
-            document.createElement("div");
-
-        emoji.className="emoji";
-
-        emoji.style.fontSize=
-            (
-                28+
-                Math.sqrt(
-                    (Number(d.count)||0)/max
-                )*32
-            )+"px";
-
-        emoji.textContent=
-            meta.icon;
-
-
-        const label=
-            document.createElement("div");
-
-        label.className="label";
-
-        label.textContent=
-            d.keyword;
-
-
-        const count=
-            document.createElement("div");
-
-        count.className="count";
-
-        count.textContent=
-            fmt(d.count);
-
-
-        flower.append(
-            emoji,
-            label,
-            count
+    const max =
+        Math.max(
+            1,
+            ...DATA.top20.map(
+                d=>Number(d.count)||0
+            )
         );
 
 
-        flower.title=
-            d.keyword+
-            " | "+
-            g+
-            " | Frequency: "+
-            fmt(d.count);
+    DATA.top20.forEach(
+        d=>{
+
+            const pos =
+                DATA.positions[d.keyword]
+                ||
+                [50,50];
 
 
-        flower.addEventListener(
-            "click",
-            e=>{
+            const g =
+                groupByKeyword[
+                    d.keyword
+                ];
 
-                e.stopPropagation();
 
-                field
-                    .querySelectorAll(
-                        ".feature-flower"
-                    )
-                    .forEach(
-                        x=>x.classList.remove("selected")
-                    );
+            if(
+                !g ||
+                !groupMeta[g]
+            ){
 
-                flower.classList.add("selected");
+                return;
 
             }
-        );
 
 
-        field.appendChild(flower);
+            const meta =
+                groupMeta[g];
 
-    });
+
+            const flower =
+                document.createElement(
+                    "div"
+                );
 
 
-    function getPosition(keyword){
+            flower.className =
+                "feature-flower "+
+                meta.cls;
 
-        const positions={
 
-            "Deep Learning":[14,28],
+            flower.style.left =
+                pos[0]+"%";
 
-            "Artificial Intelligence":[27,22],
 
-            "Machine Learning":[39,31],
+            flower.style.top =
+                pos[1]+"%";
 
-            "Federated Learning":[21,43],
 
-            "Computer Vision":[70,23],
+            const emoji =
+                document.createElement(
+                    "div"
+                );
 
-            "Large Language Models":[84,30],
 
-            "Transformer":[77,43],
+            emoji.className =
+                "emoji";
 
-            "FPGA":[28,76],
 
-            "Virtual Reality":[70,75],
+            emoji.style.fontSize =
+                (
+                    28+
+                    Math.sqrt(
+                        (
+                            Number(d.count)||0
+                        )/max
+                    )*32
+                )+"px";
 
-            "Generative AI":[85,73]
 
-        };
+            emoji.textContent =
+                meta.icon;
 
-        return positions[keyword]||[50,50];
 
-    }
+            const label =
+                document.createElement(
+                    "div"
+                );
+
+
+            label.className =
+                "label";
+
+
+            label.textContent =
+                d.keyword;
+
+
+            const count =
+                document.createElement(
+                    "div"
+                );
+
+
+            count.className =
+                "count";
+
+
+            count.textContent =
+                fmt(d.count);
+
+
+            flower.append(
+                emoji,
+                label,
+                count
+            );
+
+
+            flower.title =
+                `${d.keyword} | ${g} | Frequency: ${fmt(d.count)}`;
+
+
+            flower.addEventListener(
+                "click",
+                e=>{
+
+                    e.stopPropagation();
+
+                    field
+                        .querySelectorAll(
+                            ".feature-flower"
+                        )
+                        .forEach(
+                            x=>
+                                x.classList.remove(
+                                    "selected"
+                                )
+                        );
+
+
+                    void flower.offsetWidth;
+
+
+                    flower.classList.add(
+                        "selected"
+                    );
+
+                }
+            );
+
+
+            field.appendChild(
+                flower
+            );
+
+        }
+    );
 
 
     field.addEventListener(
@@ -2417,7 +3051,10 @@ pie.on(
                     ".feature-flower"
                 )
                 .forEach(
-                    x=>x.classList.remove("selected")
+                    x=>
+                        x.classList.remove(
+                            "selected"
+                        )
                 );
 
         }
@@ -2426,82 +3063,110 @@ pie.on(
 
     function draw(){
 
-        const r=
+        const r =
             field.getBoundingClientRect();
 
-        const w=r.width;
-        const h=r.height;
+
+        const w =
+            r.width;
+
+
+        const h =
+            r.height;
+
 
         svg.setAttribute(
             "viewBox",
             `0 0 ${w} ${h}`
         );
 
+
         svg.innerHTML="";
 
 
-        Object.entries(groups)
-            .forEach(
-                ([g,arr])=>{
+        Object.entries(
+            DATA.groups
+        ).forEach(
+            ([g,arr])=>{
 
-                    const meta=
-                        groupMeta[g];
-
-                    const pts=
-                        arr
-                            .map(k=>getPosition(k))
-                            .filter(Boolean);
+                const meta =
+                    groupMeta[g];
 
 
-                    for(
-                        let i=0;
-                        i<pts.length-1;
-                        i++
-                    ){
-
-                        const a=pts[i];
-                        const b=pts[i+1];
+                if(!meta){
+                    return;
+                }
 
 
-                        const line=
-                            document.createElementNS(
-                                "http://www.w3.org/2000/svg",
-                                "line"
-                            );
+                const pts =
+                    arr
+                        .map(
+                            k=>
+                                DATA.positions[k]
+                        )
+                        .filter(Boolean);
 
 
-                        line.setAttribute(
-                            "x1",
-                            a[0]/100*w
-                        );
+                for(
+                    let i=0;
+                    i<pts.length-1;
+                    i++
+                ){
 
-                        line.setAttribute(
-                            "y1",
-                            a[1]/100*h
-                        );
+                    const a =
+                        pts[i];
 
-                        line.setAttribute(
-                            "x2",
-                            b[0]/100*w
-                        );
 
-                        line.setAttribute(
-                            "y2",
-                            b[1]/100*h
-                        );
+                    const b =
+                        pts[i+1];
 
-                        line.setAttribute(
-                            "class",
-                            "feature-line "+meta.cls
+
+                    const line =
+                        document.createElementNS(
+                            "http://www.w3.org/2000/svg",
+                            "line"
                         );
 
 
-                        svg.appendChild(line);
+                    line.setAttribute(
+                        "x1",
+                        a[0]/100*w
+                    );
 
-                    }
+
+                    line.setAttribute(
+                        "y1",
+                        a[1]/100*h
+                    );
+
+
+                    line.setAttribute(
+                        "x2",
+                        b[0]/100*w
+                    );
+
+
+                    line.setAttribute(
+                        "y2",
+                        b[1]/100*h
+                    );
+
+
+                    line.setAttribute(
+                        "class",
+                        "feature-line "+
+                        meta.cls
+                    );
+
+
+                    svg.appendChild(
+                        line
+                    );
 
                 }
-            );
+
+            }
+        );
 
     }
 
@@ -2510,6 +3175,7 @@ pie.on(
         draw,
         200
     );
+
 
     window.addEventListener(
         "resize",
@@ -2520,171 +3186,169 @@ pie.on(
 
 
 /* =========================================================
-   CO-OCCURRENCE GARDEN
+   KEYWORD CO-OCCURRENCE GARDEN
 ========================================================= */
 
 (function(){
 
-    const field=
-        document.getElementById("coField");
-
-    const svg=
-        document.getElementById("coSvg");
-
-
-    const positions={
-
-        "Deep Learning":{
-            x:50,
-            y:48
-        },
-
-        "Artificial Intelligence":{
-            x:28,
-            y:31
-        },
-
-        "Machine Learning":{
-            x:38,
-            y:44
-        },
-
-        "Federated Learning":{
-            x:20,
-            y:55
-        },
-
-        "Computer Vision":{
-            x:68,
-            y:30
-        },
-
-        "Large Language Models":{
-            x:82,
-            y:37
-        },
-
-        "FPGA":{
-            x:35,
-            y:77
-        },
-
-        "Virtual Reality":{
-            x:70,
-            y:76
-        },
-
-        "Generative AI":{
-            x:83,
-            y:58
-        },
-
-        "Transformer":{
-            x:62,
-            y:63
-        }
-
-    };
+    const field =
+        document.getElementById(
+            "coField"
+        );
 
 
-    const icons={
-
-        "Artificial Intelligence":"🌸",
-
-        "Machine Learning":"🌷",
-
-        "Deep Learning":"🌼",
-
-        "Federated Learning":"🌺",
-
-        "Computer Vision":"🌻",
-
-        "Large Language Models":"🪻",
-
-        "FPGA":"💮",
-
-        "Virtual Reality":"🌷",
-
-        "Generative AI":"🏵️",
-
-        "Transformer":"🪷"
-
-    };
+    const svg =
+        document.getElementById(
+            "coSvg"
+        );
 
 
-    const center=
-        "Deep Learning";
+    const positions = [
+
+        [13,39,"🌸"],
+
+        [25,30,"🌷"],
+
+        [34,43,"🌼"],
+
+        [21,56,"🌺"],
+
+        [65,31,"🌻"],
+
+        [83,35,"🪻"],
+
+        [67,56,"🪷"],
+
+        [83,56,"🏵️"],
+
+        [36,79,"💮"],
+
+        [63,79,"🌾"]
+
+    ];
+
+
+    const center =
+        DATA.top20[0].keyword;
+
 
     document.getElementById(
         "coCenterName"
-    ).textContent=center;
+    ).textContent =
+        center;
 
 
-    DATA.top10
-        .filter(d=>d.keyword!==center)
-        .forEach(d=>{
+    const flowers =
+        DATA.top20
+            .slice(1,10)
+            .map(
+                (d,i)=>({
 
-            const p=
-                positions[d.keyword];
+                    ...d,
 
-            if(!p) return;
+                    x:
+                        positions[i][0],
 
+                    y:
+                        positions[i][1],
 
-            const f=
-                document.createElement("div");
+                    icon:
+                        positions[i][2]
 
-            f.className="co-flower";
-
-            f.style.left=
-                p.x+"%";
-
-            f.style.top=
-                p.y+"%";
+                })
+            );
 
 
-            const icon=
-                document.createElement("div");
+    const max =
+        Math.max(
+            ...DATA.top20
+                .slice(0,10)
+                .map(
+                    d=>d.count
+                )
+        );
 
-            icon.className="icon";
 
-            icon.style.fontSize=
+    flowers.forEach(
+        d=>{
+
+            const f =
+                document.createElement(
+                    "div"
+                );
+
+
+            f.className =
+                "co-flower";
+
+
+            f.style.left =
+                d.x+"%";
+
+
+            f.style.top =
+                d.y+"%";
+
+
+            const icon =
+                document.createElement(
+                    "div"
+                );
+
+
+            icon.className =
+                "icon";
+
+
+            icon.style.fontSize =
                 (
                     28+
                     Math.sqrt(
-                        d.count/283
+                        d.count/max
                     )*38
                 )+"px";
 
-            icon.textContent=
-                icons[d.keyword]||"🌸";
+
+            icon.textContent =
+                d.icon;
 
 
-            const name=
-                document.createElement("div");
+            const name =
+                document.createElement(
+                    "div"
+                );
 
-            name.className="name";
 
-            name.textContent=
+            name.className =
+                "name";
+
+
+            name.textContent =
                 d.keyword;
 
 
-            const count=
-                document.createElement("div");
+            const c =
+                document.createElement(
+                    "div"
+                );
 
-            count.className="count";
 
-            count.textContent=
+            c.className =
+                "count";
+
+
+            c.textContent =
                 fmt(d.count);
 
 
             f.append(
                 icon,
                 name,
-                count
+                c
             );
 
 
-            f.title=
+            f.title =
                 d.keyword+
                 " | Frequency: "+
                 fmt(d.count);
@@ -2701,18 +3365,30 @@ pie.on(
                             ".co-flower"
                         )
                         .forEach(
-                            x=>x.classList.remove("selected")
+                            x=>
+                                x.classList.remove(
+                                    "selected"
+                                )
                         );
 
-                    f.classList.add("selected");
+
+                    void f.offsetWidth;
+
+
+                    f.classList.add(
+                        "selected"
+                    );
 
                 }
             );
 
 
-            field.appendChild(f);
+            field.appendChild(
+                f
+            );
 
-        });
+        }
+    );
 
 
     field.addEventListener(
@@ -2724,36 +3400,49 @@ pie.on(
                     ".co-flower"
                 )
                 .forEach(
-                    x=>x.classList.remove("selected")
+                    x=>
+                        x.classList.remove(
+                            "selected"
+                        )
                 );
 
         }
     );
 
 
-    function find(keyword){
+    const centerPos = {
 
-        if(keyword===center){
+        x:50,
+        y:48,
+        keyword:center
 
-            return {
-                x:50,
-                y:48
-            };
+    };
 
-        }
 
-        return positions[keyword];
-
-    }
+    const find =
+        k=>
+            k===center
+            ?
+            centerPos
+            :
+            flowers.find(
+                x=>
+                    x.keyword===k
+            );
 
 
     function draw(){
 
-        const r=
+        const r =
             field.getBoundingClientRect();
 
-        const w=r.width;
-        const h=r.height;
+
+        const w =
+            r.width;
+
+
+        const h =
+            r.height;
 
 
         svg.setAttribute(
@@ -2761,92 +3450,133 @@ pie.on(
             `0 0 ${w} ${h}`
         );
 
+
         svg.innerHTML="";
 
 
-        DATA.co.forEach(c=>{
+        DATA.co.forEach(
+            c=>{
 
-            const a=find(c.a);
-            const b=find(c.b);
-
-            if(!a||!b) return;
-
-
-            const x1=
-                a.x/100*w;
-
-            const y1=
-                a.y/100*h;
-
-            const x2=
-                b.x/100*w;
-
-            const y2=
-                b.y/100*h;
+                const a =
+                    find(c.a);
 
 
-            const dx=x2-x1;
-            const dy=y2-y1;
+                const b =
+                    find(c.b);
 
-            const d=
-                Math.hypot(dx,dy);
 
-            const curve=
-                Math.min(
-                    50,
-                    d*.20
+                if(!a || !b){
+                    return;
+                }
+
+
+                const x1 =
+                    a.x/100*w;
+
+
+                const y1 =
+                    a.y/100*h;
+
+
+                const x2 =
+                    b.x/100*w;
+
+
+                const y2 =
+                    b.y/100*h;
+
+
+                const dx =
+                    x2-x1;
+
+
+                const dy =
+                    y2-y1;
+
+
+                const d =
+                    Math.hypot(
+                        dx,
+                        dy
+                    );
+
+
+                const curve =
+                    Math.min(
+                        50,
+                        d*.20
+                    );
+
+
+                const cx =
+                    (
+                        x1+x2
+                    )/2
+                    -
+                    (
+                        d
+                        ?
+                        dy/d*curve
+                        :
+                        0
+                    );
+
+
+                const cy =
+                    (
+                        y1+y2
+                    )/2
+                    +
+                    (
+                        d
+                        ?
+                        dx/d*curve
+                        :
+                        0
+                    );
+
+
+                const path =
+                    document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "path"
+                    );
+
+
+                path.setAttribute(
+                    "d",
+                    `M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`
                 );
 
 
-            const cx=
-                (x1+x2)/2-
-                (d?dy/d*curve:0);
-
-            const cy=
-                (y1+y2)/2+
-                (d?dx/d*curve:0);
-
-
-            const path=
-                document.createElementNS(
-                    "http://www.w3.org/2000/svg",
-                    "path"
-                );
-
-
-            path.setAttribute(
-                "d",
-                `M ${x1} ${y1}
-                 Q ${cx} ${cy}
-                 ${x2} ${y2}`
-            );
-
-
-            path.setAttribute(
-                "class",
-                c.count>=20
-                ?
-                "co-line strong"
-                :
-                (
-                    c.count>=8
+                path.setAttribute(
+                    "class",
+                    c.count>=20
                     ?
-                    "co-line medium"
+                    "co-line strong"
                     :
-                    "co-line"
-                )
-            );
+                    (
+                        c.count>=8
+                        ?
+                        "co-line medium"
+                        :
+                        "co-line"
+                    )
+                );
 
 
-            path.setAttribute(
-                "title",
-                `${c.a} + ${c.b}: ${fmt(c.count)} co-occurrences`
-            );
+                path.setAttribute(
+                    "title",
+                    `${c.a} + ${c.b}: ${fmt(c.count)}`
+                );
 
 
-            svg.appendChild(path);
+                svg.appendChild(
+                    path
+                );
 
-        });
+            }
+        );
 
     }
 
@@ -2855,6 +3585,7 @@ pie.on(
         draw,
         200
     );
+
 
     window.addEventListener(
         "resize",
@@ -2867,4 +3598,3 @@ pie.on(
 
 </body>
 </html>
-```
