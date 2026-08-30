@@ -8,6 +8,8 @@
 
 <title>Scopus Data Analysis</title>
 
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
 
 <style>
 
@@ -2824,115 +2826,107 @@ document.getElementById('embedTextUsed').textContent=embedData.text_used_for_emb
 document.getElementById('siteFooter').textContent=`🌱🌸 Scopus Data Analysis · ${formatNumber(finalData.total_articles)} Articles (Final) · ${formatNumber(cleanData.total_articles)} Articles (Clean) · SPECTER2 ${embedData.dimensions}-D · 🦋🌼`;
 
 /* =========================================================
-   PURE SVG CHART HELPERS — NO EXTERNAL LIBRARY
+   PLOTLY CHARTS — SAME ENGINE AS tired.html
 ========================================================= */
-function makeSVG(w,h){
-    const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
-    svg.setAttribute('viewBox',`0 0 ${w} ${h}`);
-    svg.setAttribute('width','100%');
-    svg.setAttribute('height','100%');
-    svg.style.display='block';
-    return svg;
+function baseLayout(){
+    return {
+        paper_bgcolor:"#ffffff",
+        plot_bgcolor:"#ffffff",
+        font:{family:"Arial, Noto Sans Thai", color:"#405442"},
+        margin:{l:50,r:25,t:20,b:50}
+    };
 }
-function svgEl(tag,attrs={}){
-    const e=document.createElementNS('http://www.w3.org/2000/svg',tag);
-    Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));
-    return e;
-}
-function textEl(x,y,text,size=12,anchor='start',weight='400',fill='#526354'){
-    const t=svgEl('text',{x,y,'font-size':size,'text-anchor':anchor,'font-family':'Arial, Noto Sans Thai','font-weight':weight,fill});
-    t.textContent=text; return t;
-}
-function clear(el){el.innerHTML='';}
 
-/* TOP KEYWORDS BAR CHART */
+/* TOP KEYWORDS */
 (function(){
-    const host=document.getElementById('keywords'); clear(host);
-    const items=[...finalData.top_keywords]; const w=900,h=500;
-    const svg=makeSVG(w,h); const left=250,right=35,top=28,bottom=25;
-    const chartW=w-left-right, rowH=(h-top-bottom)/items.length;
-    const max=Math.max(...items.map(x=>x.count));
-    items.forEach((d,i)=>{
-        const y=top+i*rowH+7;
-        const bw=chartW*(d.count/max);
-        svg.append(textEl(left-12,y+rowH*.52,d.keyword,13,'end','700'));
-        svg.append(svgEl('rect',{x:left,y,width:chartW,height:24,rx:12,fill:'#f2f6ef'}));
-        svg.append(svgEl('rect',{x:left,y,width:bw,height:24,rx:12,fill:`hsl(${330+i*3},65%,${78-i*1.5}%)`}));
-        svg.append(textEl(left+bw+8,y+17,formatNumber(d.count),12,'start','700','#6d7a70'));
-    });
-    host.appendChild(svg);
-    document.getElementById('kwSummaryText').textContent=`จาก Final Dataset Keyword ที่พบมากที่สุดคือ ${items.slice(0,3).map(k=>`${k.keyword} ${formatNumber(k.count)} บทความ`).join(', ')}`;
+    const source=[...finalData.top_keywords];
+    const data=source.slice().reverse();
+    Plotly.newPlot('keywords',[{
+        type:'bar',orientation:'h',
+        y:data.map(x=>x.keyword),
+        x:data.map(x=>numberValue(x.count)),
+        marker:{
+            color:data.map((x,i)=>`hsl(${330+i*3},65%,${78-i*1.5}%)`),
+            line:{color:'#ffffff',width:1}
+        },
+        hovertemplate:'<b>%{y}</b><br>Articles: %{x}<extra></extra>'
+    }],{
+        ...baseLayout(),
+        margin:{l:190,r:30,t:20,b:50},
+        xaxis:{title:'Articles',gridcolor:'#f3e7ed',zeroline:false},
+        yaxis:{tickfont:{size:10}},showlegend:false
+    },{responsive:true,displaylogo:false});
+    document.getElementById('kwSummaryText').textContent=
+        `จาก Final Dataset Keyword ที่พบมากที่สุดคือ ${source.slice(0,3).map(k=>`${k.keyword} ${formatNumber(k.count)} บทความ`).join(', ')}`;
 })();
 
-/* TOP AUTHORS LOLLIPOP */
+/* TOP AUTHORS */
 (function(){
-    const host=document.getElementById('authors'); clear(host);
-    const items=finalData.top_authors; const w=900,h=500;
-    const svg=makeSVG(w,h); const left=80,right=35,top=35,bottom=55;
-    const chartW=w-left-right, chartH=h-top-bottom, max=Math.max(...items.map(x=>x.count));
-    const step=chartW/items.length;
-    svg.append(svgEl('line',{x1:left,y1:top+chartH,x2:w-right,y2:top+chartH,stroke:'#dbe5d7','stroke-width':2}));
-    items.forEach((d,i)=>{
-        const x=left+step*(i+.5), y=top+chartH-(d.count/max)*chartH*.9;
-        svg.append(svgEl('line',{x1:x,y1:top+chartH,x2:x,y2:y,stroke:'#cddbc9','stroke-width':5,'stroke-linecap':'round'}));
-        svg.append(svgEl('circle',{cx:x,cy:y,r:22,fill:['#F48FB1','#BA8DE3','#81CFC1','#F6C85F','#89B8E8','#E99AC7','#A7C957','#F29E8F','#8DD3C7','#C4A7E7'][i]}));
-        svg.append(textEl(x,y+5,formatNumber(d.count),11,'middle','800','#ffffff'));
-        svg.append(textEl(x,top+chartH+22,d.author,10,'middle','700'));
-    });
-    host.appendChild(svg);
+    const data=[...finalData.top_authors].sort((a,b)=>numberValue(b.count)-numberValue(a.count));
+    const colors=['#F48FB1','#BA8DE3','#81CFC1','#F6C85F','#89B8E8','#E99AC7','#A7C957','#F29E8F','#8DD3C7','#C4A7E7'];
+    Plotly.newPlot('authors',[{
+        x:data.map((d,i)=>i+1),
+        y:data.map(d=>numberValue(d.count)),
+        text:data.map(d=>d.author),
+        mode:'markers+text',type:'scatter',textposition:'top center',
+        marker:{size:data.map(d=>Math.max(24,d.count/2.2)),color:colors,opacity:.85,line:{color:'#fff',width:3}},
+        hovertemplate:'<b>%{text}</b><br>Publications: %{y}<extra></extra>'
+    }],{
+        ...baseLayout(),
+        xaxis:{visible:false,fixedrange:true},
+        yaxis:{title:'Publications',gridcolor:'#f0e5ec',zeroline:false},
+        margin:{l:55,r:35,t:55,b:35},showlegend:false
+    },{responsive:true,displayModeBar:false});
 })();
 
 /* PUBLICATIONS BY YEAR */
 (function(){
-    const host=document.getElementById('years'); clear(host);
-    const years=Object.keys(finalData.publications_by_year).sort((a,b)=>+a-+b);
-    const vals=years.map(y=>numberValue(finalData.publications_by_year[y]));
-    const w=900,h=500,left=75,right=30,top=35,bottom=60,chartW=w-left-right,chartH=h-top-bottom;
-    const svg=makeSVG(w,h), max=Math.max(...vals), step=chartW/(years.length-1);
-    for(let i=0;i<5;i++){
-        const y=top+chartH*i/4;
-        svg.append(svgEl('line',{x1:left,y1:y,x2:w-right,y2:y,stroke:'#edf2eb','stroke-width':1}));
-    }
-    const pts=years.map((yr,i)=>[left+i*step,top+chartH-(vals[i]/max)*chartH*.9]);
-    const area=`M ${pts[0][0]} ${top+chartH} L ${pts.map(p=>p.join(' ')).join(' L ')} L ${pts[pts.length-1][0]} ${top+chartH} Z`;
-    svg.append(svgEl('path',{d:area,fill:'#dcebdc',opacity:.75}));
-    svg.append(svgEl('polyline',{points:pts.map(p=>p.join(',')).join(' '),fill:'none',stroke:'#719873','stroke-width':4,'stroke-linejoin':'round'}));
-    pts.forEach((p,i)=>{
-        svg.append(svgEl('circle',{cx:p[0],cy:p[1],r:7,fill:'#719873',stroke:'#ffffff','stroke-width':3}));
-        svg.append(textEl(p[0],top+chartH+25,years[i],11,'middle','700'));
-        svg.append(textEl(p[0],p[1]-12,formatNumber(vals[i]),10,'middle','700','#617061'));
-    });
-    host.appendChild(svg);
+    const years=Object.keys(finalData.publications_by_year).sort((a,b)=>Number(a)-Number(b));
+    const counts=years.map(y=>numberValue(finalData.publications_by_year[y]));
+    Plotly.newPlot('years',[{
+        type:'scatter',mode:'lines+markers',x:years,y:counts,
+        line:{width:3,color:'#719873',shape:'spline'},
+        marker:{size:7,color:'#719873'},fill:'tozeroy',fillcolor:'rgba(113,152,115,.15)',
+        hovertemplate:'Year: %{x}<br>Articles: %{y}<extra></extra>'
+    }],{
+        ...baseLayout(),
+        xaxis:{title:'Year',gridcolor:'#edf2eb',zeroline:false},
+        yaxis:{title:'Articles',gridcolor:'#edf2eb',zeroline:false,rangemode:'tozero'},
+        hovermode:'x unified'
+    },{responsive:true,displaylogo:false});
 })();
 
 /* RESEARCH AREAS DONUT */
 (function(){
-    const host=document.getElementById('researchPie'); clear(host);
-    const entries=Object.entries(finalData.research_areas); const total=entries.reduce((s,[,v])=>s+v,0);
-    const w=900,h=500,cx=330,cy=245,r=150,inner=88;
-    const svg=makeSVG(w,h);
+    const pie=document.getElementById('researchPie');
+    const labels=Object.keys(finalData.research_areas);
+    const values=labels.map(x=>numberValue(finalData.research_areas[x]));
+    document.getElementById('researchCenterNumber').textContent=labels.length;
     const colors=['#A9D58F','#9FC1DF','#E7C76E','#DFA0A0','#BEA4DC','#DDA9C1','#91C8B5','#D9B383','#AAB8CD','#9DC49A'];
-    let angle=-Math.PI/2;
-    entries.forEach(([label,value],i)=>{
-        const a=value/total*Math.PI*2, end=angle+a;
-        const x1=cx+r*Math.cos(angle),y1=cy+r*Math.sin(angle),x2=cx+r*Math.cos(end),y2=cy+r*Math.sin(end);
-        const ix1=cx+inner*Math.cos(angle),iy1=cy+inner*Math.sin(angle),ix2=cx+inner*Math.cos(end),iy2=cy+inner*Math.sin(end);
-        const large=a>Math.PI?1:0;
-        const d=`M ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} L ${ix2} ${iy2} A ${inner} ${inner} 0 ${large} 0 ${ix1} ${iy1} Z`;
-        svg.append(svgEl('path',{d,fill:colors[i],stroke:'#ffffff','stroke-width':3}));
-        const mid=angle+a/2, lx=cx+(r+28)*Math.cos(mid), ly=cy+(r+28)*Math.sin(mid);
-        const anchor=Math.cos(mid)>0?'start':'end';
-        svg.append(textEl(lx,ly,label,10,anchor,'700'));
-        svg.append(textEl(lx,ly+13,`${value} (${(value/total*100).toFixed(1)}%)`,9,anchor,'400','#7b887d'));
-        angle=end;
+    Plotly.newPlot(pie,[{
+        type:'pie',labels,values,hole:.56,sort:false,direction:'clockwise',rotation:-90,
+        textinfo:'label',textposition:'outside',
+        textfont:{family:'Arial, Noto Sans Thai',size:10,color:'#526354'},
+        marker:{colors,line:{color:'#ffffff',width:3}},
+        hovertemplate:'<b>%{label}</b><br>%{value} Articles<extra></extra>'
+    }],{
+        paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',
+        margin:{l:65,r:65,t:35,b:35},showlegend:false
+    },{
+        responsive:true,displaylogo:false,
+        modeBarButtonsToRemove:['toImage','zoom2d','pan2d','select2d','lasso2d','autoScale2d','hoverClosestCartesian','hoverCompareCartesian','toggleSpikelines']
     });
-    svg.append(svgEl('circle',{cx,cy,r:inner-1,fill:'#fbfdf8',stroke:'#dbe7d7','stroke-width':2}));
-    svg.append(textEl(cx,cy-2,String(entries.length),30,'middle','800','#527157'));
-    svg.append(textEl(cx,cy+20,'Research Areas',11,'middle','800','#718071'));
-    host.appendChild(svg);
+    pie.on('plotly_click',function(event){
+        if(!event?.points?.length)return;
+        const index=event.points[0].pointNumber;
+        const current=pie.data[0].pull||[];
+        const next=labels.map((v,i)=>i===index?(Number(current[i]||0)>0?0:.10):0);
+        Plotly.restyle(pie,{pull:[next]},[0]);
+    });
+    window.addEventListener('resize',()=>Plotly.Plots.resize(pie));
 })();
 
-/* FREQUENCY GARDEN */
+/* FREQUENCY GARDEN — no network lines; flower size follows keyword frequency */
 (function(){
     const field=document.getElementById('featureField');
     const kws=finalData.top_keywords.slice(0,10);
@@ -2942,60 +2936,84 @@ function clear(el){el.innerHTML='';}
         {x:20,y:52,icon:'🌺'},{x:36,y:57,icon:'🌻'},{x:61,y:33,icon:'🪻'},
         {x:76,y:30,icon:'🪷'},{x:68,y:51,icon:'🏵️'},{x:84,y:51,icon:'💮'},{x:78,y:68,icon:'🌾'}
     ];
-    const max=Math.max(...kws.map(k=>k.count));
+    const max=Math.max(...kws.map(k=>numberValue(k.count)),1);
     kws.forEach((item,i)=>{
-        const p=pos[i], f=document.createElement('div'); f.className='feature-flower'; f.style.left=p.x+'%';f.style.top=p.y+'%';
-        const e=document.createElement('div');e.className='emoji';e.style.fontSize=(28+Math.sqrt(item.count/max)*30)+'px';e.textContent=p.icon;
-        const l=document.createElement('div');l.className='label';l.textContent=item.keyword;
-        const c=document.createElement('div');c.className='count';c.textContent=formatNumber(item.count);
-        f.append(e,l,c);f.title=`${item.keyword}\nFrequency: ${formatNumber(item.count)}`;
-        f.onclick=ev=>{ev.stopPropagation();field.querySelectorAll('.feature-flower').forEach(x=>x.classList.remove('selected'));void f.offsetWidth;f.classList.add('selected');};
-        field.appendChild(f);
+        const p=pos[i];
+        const flower=document.createElement('div');flower.className='feature-flower';flower.style.left=p.x+'%';flower.style.top=p.y+'%';
+        const emoji=document.createElement('div');emoji.className='emoji';emoji.style.fontSize=(28+Math.sqrt(numberValue(item.count)/max)*30)+'px';emoji.textContent=p.icon;
+        const label=document.createElement('div');label.className='label';label.textContent=item.keyword;
+        const count=document.createElement('div');count.className='count';count.textContent=formatNumber(item.count);
+        flower.append(emoji,label,count);
+        flower.title=`${item.keyword}\nFrequency: ${formatNumber(item.count)}`;
+        flower.addEventListener('click',e=>{
+            e.stopPropagation();field.querySelectorAll('.feature-flower').forEach(x=>x.classList.remove('selected'));void flower.offsetWidth;flower.classList.add('selected');
+        });
+        field.appendChild(flower);
     });
-    field.onclick=()=>field.querySelectorAll('.feature-flower').forEach(x=>x.classList.remove('selected'));
+    field.addEventListener('click',()=>field.querySelectorAll('.feature-flower').forEach(x=>x.classList.remove('selected')));
 })();
 
-/* CO-OCCURRENCE GARDEN */
+/* CO-OCCURRENCE GARDEN — uses keyword_cooccurrence_top10 directly */
 (function(){
-    const field=document.getElementById('coField'),svg=document.getElementById('coSvg');
-    const kws=finalData.top_keywords.slice(0,10), co=finalData.keyword_cooccurrence_top10;
+    const field=document.getElementById('coField');
+    const svg=document.getElementById('coSvg');
+    const kws=finalData.top_keywords.slice(0,10);
+    const co=Array.isArray(finalData.keyword_cooccurrence_top10)?finalData.keyword_cooccurrence_top10:[];
     const centerKeyword='Artificial Intelligence';
-    const pos=[
-        {x:12,y:37,icon:'🌸'},{x:24,y:28,icon:'🌷'},{x:37,y:38,icon:'🌼'},{x:21,y:57,icon:'🌺'},
-        {x:66,y:29,icon:'🌻'},{x:84,y:34,icon:'🪻'},{x:66,y:55,icon:'🪷'},{x:84,y:56,icon:'🏵️'},
-        {x:35,y:79,icon:'💮'},{x:64,y:79,icon:'🌾'}
+    const positions=[
+        {x:12,y:37,icon:'🌷'},{x:25,y:28,icon:'🌼'},{x:39,y:38,icon:'🌺'},{x:21,y:59,icon:'🌻'},
+        {x:66,y:29,icon:'🪻'},{x:84,y:34,icon:'🪷'},{x:68,y:54,icon:'🏵️'},{x:84,y:57,icon:'💮'},
+        {x:36,y:79,icon:'🌾'}
     ];
-    const nodes=new Map([[centerKeyword,{x:50,y:48,icon:'🌹',keyword:centerKeyword}]]);
-    kws.filter(k=>k.keyword!==centerKeyword).forEach((k,i)=>nodes.set(k.keyword,{...pos[i],keyword:k.keyword}));
-    /* Add any co-occurrence keyword not in Top-10 using spare slots. */
-    const extras=[...new Set(co.flatMap(x=>[x.a,x.b]))].filter(k=>!nodes.has(k));
-    extras.forEach((k,i)=>{const p=pos[kws.length-1+i]||{x:50+(i%2)*8-4,y:88,icon:'🌾'};nodes.set(k,{...p,keyword:k});});
-    const maxCo=Math.max(...co.map(x=>numberValue(x.count)),1);
-
-    function draw(){
-        const rect=field.getBoundingClientRect(),w=rect.width,h=rect.height; svg.setAttribute('viewBox',`0 0 ${w} ${h}`);svg.innerHTML='';
+    const nodes=new Map();
+    nodes.set(centerKeyword,{x:50,y:47,icon:'🌹',keyword:centerKeyword});
+    kws.filter(k=>k.keyword!==centerKeyword).forEach((k,i)=>nodes.set(k.keyword,{...positions[i],keyword:k.keyword}));
+    // Include Transformer and any other co-occurrence-only keyword as nodes.
+    const extraNames=[...new Set(co.flatMap(e=>[e.a,e.b]))].filter(k=>!nodes.has(k));
+    extraNames.forEach((k,i)=>{
+        const p=positions[kws.length-1+i]||{x:50+(i%2?20:-20),y:82+(i%3)*5,icon:'🌸'};
+        nodes.set(k,{...p,keyword:k});
+    });
+    function getPos(keyword){return nodes.get(keyword);}
+    function drawNetwork(){
+        const rect=field.getBoundingClientRect(),w=rect.width,h=rect.height;
+        svg.setAttribute('viewBox',`0 0 ${w} ${h}`);svg.innerHTML='';
         co.forEach(conn=>{
-            const a=nodes.get(conn.a),b=nodes.get(conn.b);if(!a||!b)return;
-            const x1=a.x/100*w,y1=a.y/100*h,x2=b.x/100*w,y2=b.y/100*h,dx=x2-x1,dy=y2-y1,d=Math.hypot(dx,dy)||1;
-            const midX=(x1+x2)/2,midY=(y1+y2)/2,curve=Math.min(55,d*.18),cx=midX-dy/d*curve,cy=midY+dx/d*curve;
-            const path=svgEl('path',{d:`M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`,class:numberValue(conn.count)>=20?'co-line strong':numberValue(conn.count)>=8?'co-line medium':'co-line'});svg.appendChild(path);
-            const t=svgEl('text',{x:(x1+x2)/2,y:(y1+y2)/2-7,'text-anchor':'middle','font-size':11,'font-family':'Arial, Noto Sans Thai','font-weight':'800',fill:'#60705f','paint-order':'stroke','stroke':'#ffffff','stroke-width':4});t.textContent=conn.count;svg.appendChild(t);
+            const a=getPos(conn.a),b=getPos(conn.b);if(!a||!b)return;
+            const x1=a.x/100*w,y1=a.y/100*h,x2=b.x/100*w,y2=b.y/100*h;
+            const dx=x2-x1,dy=y2-y1,d=Math.hypot(dx,dy)||1;
+            const midX=(x1+x2)/2,midY=(y1+y2)/2,curve=Math.min(55,d*.18);
+            const cx=midX-dy/d*curve,cy=midY+dx/d*curve;
+            const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+            path.setAttribute('d',`M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`);
+            path.setAttribute('class',numberValue(conn.count)>=20?'co-line strong':numberValue(conn.count)>=8?'co-line medium':'co-line');
+            svg.appendChild(path);
+            const label=document.createElementNS('http://www.w3.org/2000/svg','text');
+            label.setAttribute('x',(x1+x2)/2);label.setAttribute('y',(y1+y2)/2-6);label.setAttribute('text-anchor','middle');
+            label.setAttribute('font-size','11');label.setAttribute('font-family','Arial, Noto Sans Thai');label.setAttribute('font-weight','800');label.setAttribute('fill','#60705f');
+            label.setAttribute('paint-order','stroke');label.setAttribute('stroke','#ffffff');label.setAttribute('stroke-width','4');
+            label.textContent=formatNumber(conn.count);svg.appendChild(label);
         });
     }
-    const all=[...nodes.values()];
-    all.forEach(node=>{
+    const freqMap=new Map(kws.map(k=>[k.keyword,numberValue(k.count)]));
+    const maxCo=Math.max(...co.map(e=>numberValue(e.count)),1);
+    [...nodes.values()].forEach(node=>{
         if(node.keyword===centerKeyword)return;
-        const f=document.createElement('div');f.className='co-flower';f.style.left=node.x+'%';f.style.top=node.y+'%';
-        const strength=Math.max(...co.filter(x=>x.a===node.keyword||x.b===node.keyword).map(x=>numberValue(x.count)),0);
-        const icon=document.createElement('div');icon.className='icon';icon.style.fontSize=(30+Math.sqrt(strength/maxCo)*32)+'px';icon.textContent=node.icon;
+        const maxNodeCo=Math.max(...co.filter(e=>e.a===node.keyword||e.b===node.keyword).map(e=>numberValue(e.count)),0);
+        const flower=document.createElement('div');flower.className='co-flower';flower.style.left=node.x+'%';flower.style.top=node.y+'%';
+        const icon=document.createElement('div');icon.className='icon';icon.style.fontSize=(30+Math.sqrt(maxNodeCo/maxCo)*32)+'px';icon.textContent=node.icon;
         const name=document.createElement('div');name.className='name';name.textContent=node.keyword;
-        const freq=kws.find(k=>k.keyword===node.keyword);const count=document.createElement('div');count.className='count';count.textContent=freq?`Frequency: ${formatNumber(freq.count)}`:'Co-occurrence node';
-        f.append(icon,name,count);f.onclick=e=>{e.stopPropagation();field.querySelectorAll('.co-flower').forEach(x=>x.classList.remove('selected'));void f.offsetWidth;f.classList.add('selected');};field.appendChild(f);
+        const count=document.createElement('div');count.className='count';
+        count.textContent=freqMap.has(node.keyword)?`Frequency: ${formatNumber(freqMap.get(node.keyword))}`:'Co-occurrence node';
+        flower.append(icon,name,count);
+        flower.addEventListener('click',e=>{e.stopPropagation();field.querySelectorAll('.co-flower').forEach(x=>x.classList.remove('selected'));void flower.offsetWidth;flower.classList.add('selected');});
+        field.appendChild(flower);
     });
-    field.onclick=()=>field.querySelectorAll('.co-flower').forEach(x=>x.classList.remove('selected'));
+    field.addEventListener('click',()=>field.querySelectorAll('.co-flower').forEach(x=>x.classList.remove('selected')));
     document.getElementById('coCenterName').textContent=centerKeyword;
-    setTimeout(draw,50);window.addEventListener('resize',draw);
+    setTimeout(drawNetwork,50);window.addEventListener('resize',drawNetwork);
 })();
+
 </script>
 
 </body>
