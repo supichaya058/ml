@@ -1,6 +1,7 @@
+```html
 <!DOCTYPE html>
-
 <html lang="en">
+
 <head>
 
 <meta charset="utf-8"/>
@@ -30,7 +31,6 @@ body{
         Arial,
         "Noto Sans Thai",
         sans-serif;
-
     background:#f5f8f2;
     color:#405442;
 }
@@ -43,6 +43,7 @@ body{
 .header{
     position:relative;
     overflow:hidden;
+
     padding:35px 30px;
 
     background:
@@ -51,13 +52,11 @@ body{
             rgba(255,255,255,.9),
             transparent 20%
         ),
-
         radial-gradient(
             circle at 90% 30%,
             rgba(255,255,255,.9),
             transparent 20%
         ),
-
         linear-gradient(
             135deg,
             #dff1d8,
@@ -305,12 +304,11 @@ body{
 ========================================================= */
 
 .research-field{
-
     position:relative;
 
-    min-height:500px;
+    min-height:590px;
 
-    overflow:visible;
+    overflow:hidden;
 
     background:
 
@@ -347,17 +345,15 @@ body{
 }
 
 #researchPie{
-
     width:100%;
     height:500px;
 }
 
 .research-center-label{
-
     position:absolute;
 
     left:50%;
-    top:42%;
+    top:45%;
 
     transform:
         translate(-50%,-50%);
@@ -396,7 +392,6 @@ body{
 }
 
 .research-center-number{
-
     font-size:28px;
     line-height:1;
 
@@ -406,7 +401,6 @@ body{
 }
 
 .research-center-text{
-
     margin-top:7px;
 
     font-size:11px;
@@ -428,7 +422,6 @@ body{
 ========================================================= */
 
 .embedding-box{
-
     margin:15px 20px 20px;
 
     padding:18px;
@@ -448,7 +441,6 @@ body{
 }
 
 .embedding-title{
-
     font-size:13px;
     font-weight:800;
 
@@ -458,7 +450,6 @@ body{
 }
 
 .embedding-grid{
-
     display:grid;
 
     grid-template-columns:
@@ -468,7 +459,6 @@ body{
 }
 
 .embedding-item{
-
     padding:12px;
 
     border-radius:12px;
@@ -481,13 +471,11 @@ body{
 }
 
 .embedding-item .label{
-
     font-size:10px;
     color:#8a968b;
 }
 
 .embedding-item .value{
-
     margin-top:4px;
 
     font-size:18px;
@@ -502,7 +490,6 @@ body{
 ========================================================= */
 
 .feature-field{
-
     position:relative;
 
     height:760px;
@@ -543,7 +530,6 @@ body{
 }
 
 .feature-group{
-
     position:absolute;
 
     z-index:2;
@@ -554,7 +540,6 @@ body{
 }
 
 .feature-group.ai{
-
     width:470px;
     height:330px;
 
@@ -571,7 +556,6 @@ body{
 }
 
 .feature-group.vision{
-
     width:450px;
     height:320px;
 
@@ -588,7 +572,6 @@ body{
 }
 
 .feature-group.data{
-
     width:410px;
     height:250px;
 
@@ -605,7 +588,6 @@ body{
 }
 
 .feature-group.tech{
-
     width:410px;
     height:250px;
 
@@ -627,7 +609,6 @@ body{
 ========================================================= */
 
 .group-title{
-
     position:absolute;
 
     z-index:15;
@@ -655,34 +636,26 @@ body{
 }
 
 .group-title.ai{
-
     left:14%;
     top:18%;
-
     color:#c9577d;
 }
 
 .group-title.vision{
-
     right:14%;
     top:18%;
-
     color:#527bb5;
 }
 
 .group-title.data{
-
     left:22%;
     bottom:11%;
-
     color:#b07820;
 }
 
 .group-title.tech{
-
     right:22%;
     bottom:11%;
-
     color:#5d8755;
 }
 
@@ -692,7 +665,6 @@ body{
 ========================================================= */
 
 .feature-flower{
-
     position:absolute;
 
     z-index:10;
@@ -716,7 +688,6 @@ body{
 }
 
 .feature-flower:hover{
-
     transform:
         translate(-50%,-50%)
         scale(1.16);
@@ -731,7 +702,6 @@ body{
 }
 
 .feature-flower .emoji{
-
     position:relative;
 
     line-height:1;
@@ -744,7 +714,6 @@ body{
 }
 
 .feature-flower .label{
-
     margin-top:5px;
 
     padding:4px 8px;
@@ -772,7 +741,6 @@ body{
 }
 
 .feature-flower .count{
-
     margin-top:2px;
 
     color:#849085;
@@ -786,7 +754,6 @@ body{
 ========================================================= */
 
 .feature-flower.selected{
-
     z-index:50;
 
     transform:
@@ -798,7 +765,6 @@ body{
 }
 
 .feature-flower.selected .emoji{
-
     filter:
 
         drop-shadow(
@@ -826,7 +792,6 @@ body{
 }
 
 .feature-flower.selected .label{
-
     border-color:
         rgba(255,205,90,.65);
 
@@ -840,12 +805,10 @@ body{
 }
 
 .feature-flower.selected .count{
-
     color:#b28a32;
 }
 
 .feature-flower.selected::before{
-
     content:"";
 
     position:absolute;
@@ -995,7 +958,6 @@ body{
 ========================================================= */
 
 .feature-svg{
-
     position:absolute;
 
     inset:0;
@@ -1009,7 +971,6 @@ body{
 }
 
 .feature-line{
-
     fill:none;
 
     stroke-width:1.5;
@@ -1041,7 +1002,6 @@ body{
 ========================================================= */
 
 .feature-center{
-
     position:absolute;
 
     left:50%;
@@ -1060,7 +1020,6 @@ body{
 }
 
 .feature-center .flower{
-
     width:115px;
     height:115px;
 
@@ -1113,7 +1072,6 @@ body{
 }
 
 .feature-center .title{
-
     margin-top:7px;
 
     padding:7px 14px;
@@ -1140,7 +1098,6 @@ body{
 ========================================================= */
 
 .butterfly{
-
     position:absolute;
 
     z-index:25;
@@ -1193,7 +1150,6 @@ body{
 ========================================================= */
 
 .co-field{
-
     position:relative;
 
     height:700px;
@@ -1216,7 +1172,6 @@ body{
 }
 
 .co-community{
-
     position:absolute;
 
     z-index:2;
@@ -1228,7 +1183,6 @@ body{
 }
 
 .co-community.ai{
-
     width:390px;
     height:320px;
 
@@ -1245,7 +1199,6 @@ body{
 }
 
 .co-community.vision{
-
     width:390px;
     height:320px;
 
@@ -1262,7 +1215,6 @@ body{
 }
 
 .co-community.data{
-
     width:360px;
     height:260px;
 
@@ -1279,7 +1231,6 @@ body{
 }
 
 .co-group-title{
-
     position:absolute;
 
     z-index:15;
@@ -1300,23 +1251,18 @@ body{
 }
 
 .co-group-title.ai{
-
     left:10%;
     top:11%;
-
     color:#c9577d;
 }
 
 .co-group-title.vision{
-
     right:10%;
     top:11%;
-
     color:#527bb5;
 }
 
 .co-group-title.data{
-
     left:50%;
     bottom:5%;
 
@@ -1332,7 +1278,6 @@ body{
 ========================================================= */
 
 .co-flower{
-
     position:absolute;
 
     z-index:10;
@@ -1356,7 +1301,6 @@ body{
 }
 
 .co-flower:hover{
-
     transform:
         translate(-50%,-50%)
         scale(1.16);
@@ -1371,7 +1315,6 @@ body{
 }
 
 .co-flower .icon{
-
     line-height:1;
 
     filter:
@@ -1382,7 +1325,6 @@ body{
 }
 
 .co-flower .name{
-
     margin-top:4px;
 
     padding:4px 8px;
@@ -1404,7 +1346,6 @@ body{
 }
 
 .co-flower .count{
-
     margin-top:2px;
 
     color:#899589;
@@ -1420,7 +1361,6 @@ body{
 ========================================================= */
 
 .co-flower.selected{
-
     z-index:50;
 
     transform:
@@ -1432,7 +1372,6 @@ body{
 }
 
 .co-flower.selected .icon{
-
     filter:
         drop-shadow(
             0 0 5px
@@ -1456,7 +1395,6 @@ body{
 }
 
 .co-flower.selected .name{
-
     border-color:
         rgba(255,205,90,.65);
 
@@ -1466,7 +1404,6 @@ body{
 }
 
 .co-flower.selected::before{
-
     content:"";
 
     position:absolute;
@@ -1556,7 +1493,6 @@ body{
 ========================================================= */
 
 .co-svg{
-
     position:absolute;
 
     inset:0;
@@ -1570,7 +1506,6 @@ body{
 }
 
 .co-line{
-
     fill:none;
 
     stroke:#8ba382;
@@ -1583,13 +1518,11 @@ body{
 }
 
 .co-line.medium{
-
     stroke-width:2.5;
     stroke-opacity:.43;
 }
 
 .co-line.strong{
-
     stroke-width:3.5;
     stroke-opacity:.55;
 }
@@ -1600,7 +1533,6 @@ body{
 ========================================================= */
 
 .co-center{
-
     position:absolute;
 
     z-index:20;
@@ -1619,7 +1551,6 @@ body{
 }
 
 .co-center .icon{
-
     width:92px;
     height:92px;
 
@@ -1667,7 +1598,6 @@ body{
 }
 
 .co-center .icon::after{
-
     content:"";
 
     position:absolute;
@@ -1691,7 +1621,6 @@ body{
 }
 
 .co-center .name{
-
     margin-top:8px;
 
     padding:7px 14px;
@@ -1715,7 +1644,6 @@ body{
 ========================================================= */
 
 .co-legend{
-
     position:absolute;
 
     left:18px;
@@ -1748,7 +1676,6 @@ body{
 ========================================================= */
 
 .insight{
-
     padding:18px 20px;
 
     background:#f8fbf5;
@@ -1770,7 +1697,6 @@ body{
 ========================================================= */
 
 .explanation{
-
     margin-top:14px;
 
     padding:14px 16px;
@@ -1800,7 +1726,6 @@ body{
 }
 
 .explanation-title{
-
     font-weight:800;
 
     margin-bottom:4px;
@@ -1809,7 +1734,6 @@ body{
 }
 
 .explanation ul{
-
     margin:6px 0 0 18px;
     padding:0;
 }
@@ -1824,7 +1748,6 @@ body{
 ========================================================= */
 
 .process-flow{
-
     display:flex;
 
     align-items:center;
@@ -1839,7 +1762,6 @@ body{
 }
 
 .process-step{
-
     padding:14px 20px;
 
     border-radius:16px;
@@ -1878,7 +1800,6 @@ body{
 ========================================================= */
 
 footer{
-
     padding:30px;
 
     text-align:center;
@@ -1972,10 +1893,8 @@ footer{
     }
 
     .research-center-label{
-
         width:110px;
         height:110px;
-
         top:40%;
     }
 
@@ -1994,13 +1913,16 @@ footer{
     .plot{
         height:430px;
     }
+
 }
 
 </style>
 
 </head>
 
+
 <body>
+
 
 <!-- =========================================================
      HEADER
@@ -2038,7 +1960,9 @@ footer{
 
 </header>
 
+
 <main class="container">
+
 
 <!-- =========================================================
      KPI
@@ -2062,6 +1986,7 @@ footer{
 
 </div>
 
+
 <div class="kpi">
 
 <div class="kpi-label">
@@ -2078,6 +2003,7 @@ footer{
 
 </div>
 
+
 <div class="kpi">
 
 <div class="kpi-label">
@@ -2093,6 +2019,7 @@ footer{
 </div>
 
 </div>
+
 
 <div class="kpi">
 
@@ -2112,6 +2039,7 @@ footer{
 
 </section>
 
+
 <!-- =========================================================
      DATA PROCESSING FLOW
 ========================================================= -->
@@ -2130,49 +2058,86 @@ footer{
 
 </div>
 
+
 <div class="process-flow" id="processFlow">
 
 <div class="process-step">
-    <div class="n" id="flowClean">–</div>
-    <div class="l">Clean Dataset</div>
+
+<div class="n" id="flowClean">
+    –
 </div>
+
+<div class="l">
+    Clean Dataset
+</div>
+
+</div>
+
 
 <div class="process-arrow">
     →
 </div>
 
+
 <div class="process-step">
-    <div class="n">EID</div>
-    <div class="l">Cross-Subject Deduplication</div>
+
+<div class="n">
+    EID
 </div>
+
+<div class="l">
+    Cross-Subject Deduplication
+</div>
+
+</div>
+
 
 <div class="process-arrow">
     →
 </div>
 
+
 <div class="process-step">
-    <div class="n" id="flowFinal">–</div>
-    <div class="l">Final Dataset</div>
+
+<div class="n" id="flowFinal">
+    –
 </div>
+
+<div class="l">
+    Final Dataset
+</div>
+
+</div>
+
 
 <div class="process-arrow">
     →
 </div>
 
+
 <div class="process-step">
-    <div class="n">768-D</div>
-    <div class="l">SPECTER2 Embedding</div>
+
+<div class="n">
+    768-D
+</div>
+
+<div class="l">
+    SPECTER2 Embedding
+</div>
+
 </div>
 
 </div>
 
 </section>
 
+
 <!-- =========================================================
      DASHBOARD
 ========================================================= -->
 
 <section class="grid">
+
 
 <!-- =========================================================
      TOP KEYWORDS
@@ -2198,6 +2163,7 @@ footer{
 
 <div class="plot" id="keywords"></div>
 
+
 <div class="explanation">
 
 <div class="explanation-title">
@@ -2205,8 +2171,8 @@ footer{
 </div>
 
 <p>
-กราฟนี้แสดง Keyword ที่พบในบทความมากที่สุดหลังผ่านขั้นตอน Keyword Normalization (รวมตัวพิมพ์เล็ก/ใหญ่ให้เป็นรูปแบบเดียวกัน)
-โดยคำนวณจาก Final Dataset (หลังทำ EID) ทั้งหมด
+กราฟนี้แสดง Keyword ที่พบในบทความมากที่สุดหลังผ่านขั้นตอน Keyword Normalization
+โดยคำนวณจาก Final Dataset หลังทำ EID ทั้งหมด
 </p>
 
 <p id="kwSummaryText">
@@ -2216,6 +2182,7 @@ footer{
 </div>
 
 </div>
+
 
 <!-- =========================================================
      TOP AUTHORS
@@ -2241,6 +2208,7 @@ footer{
 
 <div class="plot" id="authors"></div>
 
+
 <div class="explanation">
 
 <div class="explanation-title">
@@ -2249,7 +2217,7 @@ footer{
 
 <p>
 กราฟนี้แสดงผู้เขียนที่ปรากฏในชุดข้อมูลมากที่สุด
-โดยจำนวนหมายถึงจำนวนบทความที่ผู้เขียนปรากฏใน Final Dataset (หลังทำ EID)
+โดยจำนวนหมายถึงจำนวนบทความที่ผู้เขียนปรากฏใน Final Dataset หลังทำ EID
 </p>
 
 <p>
@@ -2260,6 +2228,7 @@ footer{
 </div>
 
 </div>
+
 
 <!-- =========================================================
      PUBLICATIONS BY YEAR
@@ -2274,7 +2243,7 @@ footer{
 </div>
 
 <div class="card-sub">
-    Publication trend · Final Dataset (after EID deduplication)
+    Publication trend · Final Dataset after EID deduplication
 </div>
 
 <div class="card-flower">
@@ -2284,6 +2253,7 @@ footer{
 </div>
 
 <div class="plot" id="years"></div>
+
 
 <div class="explanation">
 
@@ -2300,6 +2270,7 @@ footer{
 </div>
 
 </div>
+
 
 <!-- =========================================================
      RESEARCH AREAS
@@ -2323,6 +2294,7 @@ footer{
 
 </div>
 
+
 <div class="research-field" id="subjects">
 
 <div class="research-center-label">
@@ -2331,7 +2303,8 @@ footer{
     🌸
 </div>
 
-<div class="research-center-number" id="researchCenterNumber">
+<div class="research-center-number"
+     id="researchCenterNumber">
     –
 </div>
 
@@ -2341,7 +2314,9 @@ footer{
 
 </div>
 
+
 <div id="researchPie"></div>
+
 
 <div class="explanation">
 
@@ -2350,8 +2325,14 @@ footer{
 </div>
 
 <p>
-ชุดข้อมูล Final (หลังทำ EID) ประกอบด้วยบทความด้าน Computer Science แบ่งเป็น Subject Groups ตามข้อมูลจริงในไฟล์
-จำนวนบทความต่อ Subject ที่แสดงในกราฟนี้รวมกันได้เท่ากับจำนวนบทความทั้งหมดใน Final Dataset
+ชุดข้อมูล Final หลังทำ EID ประกอบด้วยบทความด้าน Computer Science
+ที่ถูกแบ่งเป็น Subject Groups ตามข้อมูลจริงในไฟล์
+โดยจำนวนบทความในแต่ละ Subject แสดงด้วยขนาดของแต่ละส่วนใน Donut Chart
+</p>
+
+<p>
+เมื่อเลื่อนเมาส์ไปยังแต่ละส่วนจะแสดงชื่อ Research Area และจำนวนบทความ
+และสามารถคลิกเพื่อแยกส่วนของกราฟออกเล็กน้อยเพื่อเน้น Research Area นั้นได้
 </p>
 
 </div>
@@ -2359,6 +2340,7 @@ footer{
 </div>
 
 </div>
+
 
 <!-- =========================================================
      EMBEDDING
@@ -2382,6 +2364,7 @@ footer{
 
 </div>
 
+
 <div class="embedding-box">
 
 <div class="embedding-title">
@@ -2391,6 +2374,7 @@ footer{
 <p id="embedTextUsed">
     –
 </p>
+
 
 <div class="embedding-grid">
 
@@ -2406,6 +2390,7 @@ footer{
 
 </div>
 
+
 <div class="embedding-item">
 
 <div class="label">
@@ -2418,6 +2403,7 @@ footer{
 
 </div>
 
+
 <div class="embedding-item">
 
 <div class="label">
@@ -2429,6 +2415,7 @@ footer{
 </div>
 
 </div>
+
 
 <div class="embedding-item">
 
@@ -2444,7 +2431,9 @@ footer{
 
 </div>
 
-<div class="embedding-grid" style="margin-top:10px;">
+
+<div class="embedding-grid"
+     style="margin-top:10px;">
 
 <div class="embedding-item">
 
@@ -2458,6 +2447,7 @@ footer{
 
 </div>
 
+
 <div class="embedding-item">
 
 <div class="label">
@@ -2470,6 +2460,7 @@ footer{
 
 </div>
 
+
 <div class="embedding-item">
 
 <div class="label">
@@ -2481,6 +2472,7 @@ footer{
 </div>
 
 </div>
+
 
 <div class="embedding-item">
 
@@ -2497,6 +2489,7 @@ footer{
 </div>
 
 </div>
+
 
 <div class="explanation">
 
@@ -2526,6 +2519,7 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
 
 </div>
 
+
 <!-- =========================================================
      KEYWORD CO-OCCURRENCE
 ========================================================= -->
@@ -2539,7 +2533,7 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
 </div>
 
 <div class="card-sub">
-    Related keywords bloom together · Lines represent co-occurrence relationships (Final Dataset)
+    Related keywords bloom together · Final Dataset
 </div>
 
 <div class="card-flower">
@@ -2548,11 +2542,13 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
 
 </div>
 
+
 <div class="co-field" id="coField">
 
 <div class="co-community ai"></div>
 <div class="co-community vision"></div>
 <div class="co-community data"></div>
+
 
 <div class="co-group-title ai">
     🌸 AI &amp; Machine Learning
@@ -2566,7 +2562,10 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
     🌻 Data &amp; Computing
 </div>
 
-<svg class="co-svg" id="coSvg"></svg>
+
+<svg class="co-svg"
+     id="coSvg"></svg>
+
 
 <div class="butterfly b1">
     🦋
@@ -2584,17 +2583,20 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
     🦋
 </div>
 
+
 <div class="co-center">
 
 <div class="icon"></div>
 
-<div class="name" id="coCenterName">
+<div class="name"
+     id="coCenterName">
     Artificial Intelligence
 </div>
 
 </div>
 
 </div>
+
 
 <div class="explanation">
 
@@ -2603,8 +2605,9 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
 </div>
 
 <p>
-กราฟนี้แสดง Keyword Co-occurrence โดยดอกไม้แต่ละดอกแทน Top-10 Keyword ของ Final Dataset
-และเส้นแสดงจำนวนบทความที่ Keyword ทั้งสองปรากฏร่วมกันในบทความเดียวกันจริง (คำนวณจากไฟล์ข้อมูล)
+กราฟนี้แสดง Keyword Co-occurrence โดยดอกไม้แต่ละดอกแทน Top-10 Keyword
+ของ Final Dataset และเส้นแสดงจำนวนบทความที่ Keyword ทั้งสองปรากฏร่วมกัน
+ในบทความเดียวกันจริง
 </p>
 
 <p>
@@ -2615,6 +2618,7 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
 </div>
 
 </div>
+
 
 <!-- =========================================================
      KEYWORD FREQUENCY GARDEN
@@ -2638,12 +2642,16 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
 
 </div>
 
-<div class="feature-field" id="featureField">
+
+<div class="feature-field"
+     id="featureField">
+
 
 <div class="feature-group ai"></div>
 <div class="feature-group vision"></div>
 <div class="feature-group data"></div>
 <div class="feature-group tech"></div>
+
 
 <div class="butterfly b1">
     🦋
@@ -2665,6 +2673,7 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
     🦋
 </div>
 
+
 <div class="group-title ai">
     🌸 AI &amp; Machine Learning
 </div>
@@ -2681,7 +2690,10 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
     🌷 Emerging Technology
 </div>
 
-<svg class="feature-svg" id="featureSvg"></svg>
+
+<svg class="feature-svg"
+     id="featureSvg"></svg>
+
 
 <div class="feature-center">
 
@@ -2689,15 +2701,15 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
     🌺
 </div>
 
-<div class="title" id="featureCenterTitle">
+<div class="title"
+     id="featureCenterTitle">
     – Articles
 </div>
 
 </div>
 
-<!-- flowers injected by JS -->
-
 </div>
+
 
 <div class="explanation">
 
@@ -2706,8 +2718,9 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
 </div>
 
 <p>
-ส่วนนี้แสดง Keyword ที่มีความถี่สูงสุด 10 อันดับแรกหลังจากผ่าน Keyword Normalization
-เพื่อให้เห็น Research Themes ที่โดดเด่นในชุดข้อมูล Final (หลังทำ EID) ตัวเลขคำนวณจากไฟล์ข้อมูลจริงทั้งหมด
+ส่วนนี้แสดง Keyword ที่มีความถี่สูงสุด 10 อันดับแรกหลังจากผ่าน
+Keyword Normalization เพื่อให้เห็น Research Themes ที่โดดเด่น
+ในชุดข้อมูล Final หลังทำ EID
 </p>
 
 </div>
@@ -2718,30 +2731,32 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
 
 </main>
 
+
 <footer id="siteFooter">
 
 🌱🌸 Scopus Data Analysis
 
 </footer>
 
+
 <script>
 
 /* =========================================================
-   LOAD REAL DATA
-   ---------------------------------------------------------
-   sleep.html และ JSON ทั้ง 3 ไฟล์อยู่โฟลเดอร์เดียวกัน
-   ไม่ใช้ data/
+   DATA CONFIGURATION
 ========================================================= */
 
 const DATA_BASE = "./";
 
 
+/* =========================================================
+   LOAD JSON
+========================================================= */
+
 async function loadJSON(name){
 
-    const url =
-        DATA_BASE + name;
+    const url = DATA_BASE + name;
 
-    const res =
+    const response =
         await fetch(
             url,
             {
@@ -2749,18 +2764,68 @@ async function loadJSON(name){
             }
         );
 
-    if(!res.ok){
+    if(!response.ok){
 
         throw new Error(
-            `Failed to load ${name} (${res.status})`
+            `Failed to load ${name} (${response.status})`
         );
 
     }
 
-    return res.json();
+    return await response.json();
 
 }
 
+
+/* =========================================================
+   SAFE HELPERS
+========================================================= */
+
+function numberValue(value, fallback=0){
+
+    const n =
+        Number(value);
+
+    return Number.isFinite(n)
+        ? n
+        : fallback;
+
+}
+
+
+function safeArray(value){
+
+    return Array.isArray(value)
+        ? value
+        : [];
+
+}
+
+
+function safeObject(value){
+
+    return (
+        value &&
+        typeof value === "object" &&
+        !Array.isArray(value)
+    )
+        ? value
+        : {};
+
+}
+
+
+function formatNumber(value){
+
+    return numberValue(value)
+        .toLocaleString();
+
+}
+
+
+/* =========================================================
+   BASE PLOTLY LAYOUT
+========================================================= */
 
 function baseLayout(){
 
@@ -2771,7 +2836,8 @@ function baseLayout(){
         plot_bgcolor:"#ffffff",
 
         font:{
-            family:"Arial, Noto Sans Thai",
+            family:
+                "Arial, Noto Sans Thai",
             color:"#405442"
         },
 
@@ -2787,6 +2853,10 @@ function baseLayout(){
 }
 
 
+/* =========================================================
+   MAIN INIT
+========================================================= */
+
 (async function init(){
 
     let cleanData;
@@ -2794,13 +2864,16 @@ function baseLayout(){
     let embedData;
 
 
+    /* =====================================================
+       LOAD ALL DATA
+    ===================================================== */
+
     try{
 
         [
             cleanData,
             finalData,
             embedData
-
         ] =
         await Promise.all([
 
@@ -2820,22 +2893,23 @@ function baseLayout(){
 
 
         console.log(
-            "Clean data loaded:",
+            "Clean data:",
             cleanData
         );
 
         console.log(
-            "Final data loaded:",
+            "Final data:",
             finalData
         );
 
         console.log(
-            "Embedding data loaded:",
+            "Embedding data:",
             embedData
         );
 
 
-    }catch(err){
+    }
+    catch(error){
 
         const errorBox =
             document.createElement(
@@ -2867,16 +2941,15 @@ function baseLayout(){
 
             <p>
                 ไม่สามารถโหลดไฟล์ JSON จากโฟลเดอร์เดียวกับ
-                <strong>sleep.html</strong> ได้
+                <strong>HTML</strong> ได้
             </p>
 
             <p style="font-family:monospace;font-size:11px;">
-                ${err.message}
+                ${error.message}
             </p>
 
             <p>
-                กรุณาตรวจสอบว่าไฟล์ต่อไปนี้อยู่ระดับเดียวกับ
-                sleep.html:
+                กรุณาตรวจสอบว่าไฟล์ต่อไปนี้อยู่ระดับเดียวกับ HTML:
             </p>
 
             <ul>
@@ -2898,26 +2971,21 @@ function baseLayout(){
         `;
 
 
-        document
-            .querySelector(
+        const container =
+            document.querySelector(
                 ".container"
-            )
-            .insertBefore(
-
-                errorBox,
-
-                document
-                    .querySelector(
-                        ".container"
-                    )
-                    .firstChild
-
             );
+
+
+        container.insertBefore(
+            errorBox,
+            container.firstChild
+        );
 
 
         console.error(
             "Data loading error:",
-            err
+            error
         );
 
 
@@ -2927,7 +2995,85 @@ function baseLayout(){
 
 
     /* =====================================================
-       KPIs
+       NORMALIZE DATA
+    ===================================================== */
+
+    const finalResearchAreas =
+        safeObject(
+            finalData.research_areas
+        );
+
+
+    const finalTopKeywords =
+        safeArray(
+            finalData.top_keywords
+        )
+        .filter(
+            item =>
+                item &&
+                item.keyword
+        );
+
+
+    const finalTopAuthors =
+        safeArray(
+            finalData.top_authors
+        )
+        .filter(
+            item =>
+                item &&
+                item.author
+        );
+
+
+    const finalYears =
+        safeObject(
+            finalData.publications_by_year
+        );
+
+
+    const finalCooccurrence =
+        safeArray(
+            finalData.keyword_cooccurrence_top10
+        );
+
+
+    /* =====================================================
+       VALUES
+    ===================================================== */
+
+    const finalArticles =
+        numberValue(
+            finalData.total_articles
+        );
+
+
+    const cleanArticles =
+        numberValue(
+            cleanData.total_articles
+        );
+
+
+    const uniqueKeywords =
+        numberValue(
+            finalData.unique_keywords_normalized
+        );
+
+
+    const embeddingDimensions =
+        numberValue(
+            embedData.dimensions
+        );
+
+
+    const researchAreaCount =
+        Object.keys(
+            finalResearchAreas
+        ).length;
+
+
+    /* =====================================================
+       KPI
     ===================================================== */
 
     document
@@ -2935,8 +3081,9 @@ function baseLayout(){
             "kpiArticles"
         )
         .textContent =
-            finalData.total_articles
-                .toLocaleString();
+            formatNumber(
+                finalArticles
+            );
 
 
     document
@@ -2944,9 +3091,9 @@ function baseLayout(){
             "kpiKeywords"
         )
         .textContent =
-            finalData
-                .unique_keywords_normalized
-                .toLocaleString();
+            formatNumber(
+                uniqueKeywords
+            );
 
 
     document
@@ -2954,7 +3101,8 @@ function baseLayout(){
             "kpiDims"
         )
         .textContent =
-            embedData.dimensions;
+            embeddingDimensions ||
+            "–";
 
 
     document
@@ -2962,9 +3110,7 @@ function baseLayout(){
             "kpiAreas"
         )
         .textContent =
-            Object.keys(
-                finalData.research_areas
-            ).length;
+            researchAreaCount;
 
 
     /* =====================================================
@@ -2976,8 +3122,9 @@ function baseLayout(){
             "flowClean"
         )
         .textContent =
-            cleanData.total_articles
-                .toLocaleString();
+            formatNumber(
+                cleanArticles
+            );
 
 
     document
@@ -2985,8 +3132,9 @@ function baseLayout(){
             "flowFinal"
         )
         .textContent =
-            finalData.total_articles
-                .toLocaleString();
+            formatNumber(
+                finalArticles
+            );
 
 
     /* =====================================================
@@ -2998,7 +3146,8 @@ function baseLayout(){
             "embedTextUsed"
         )
         .textContent =
-            embedData.text_used_for_embedding;
+            embedData.text_used_for_embedding
+            || "–";
 
 
     document
@@ -3006,8 +3155,9 @@ function baseLayout(){
             "embArticles"
         )
         .textContent =
-            embedData.articles
-                .toLocaleString();
+            formatNumber(
+                embedData.articles
+            );
 
 
     document
@@ -3015,7 +3165,8 @@ function baseLayout(){
             "embModel"
         )
         .textContent =
-            embedData.model;
+            embedData.model
+            || "–";
 
 
     document
@@ -3023,7 +3174,8 @@ function baseLayout(){
             "embDims"
         )
         .textContent =
-            embedData.dimensions;
+            embedData.dimensions
+            || "–";
 
 
     document
@@ -3031,7 +3183,8 @@ function baseLayout(){
             "embShape"
         )
         .textContent =
-            embedData.matrix_shape;
+            embedData.matrix_shape
+            || "–";
 
 
     document
@@ -3039,7 +3192,9 @@ function baseLayout(){
             "embNan"
         )
         .textContent =
-            embedData.nan_count;
+            formatNumber(
+                embedData.nan_count
+            );
 
 
     document
@@ -3047,7 +3202,9 @@ function baseLayout(){
             "embInf"
         )
         .textContent =
-            embedData.inf_count;
+            formatNumber(
+                embedData.inf_count
+            );
 
 
     document
@@ -3055,8 +3212,9 @@ function baseLayout(){
             "embText"
         )
         .textContent =
-            embedData.articles
-                .toLocaleString();
+            formatNumber(
+                embedData.articles
+            );
 
 
     /* =====================================================
@@ -3071,24 +3229,57 @@ function baseLayout(){
 
         `🌱🌸 Scopus Data Analysis · ` +
 
-        `${finalData.total_articles.toLocaleString()} Articles (Final) · ` +
+        `${formatNumber(finalArticles)} Articles (Final) · ` +
 
-        `${cleanData.total_articles.toLocaleString()} Articles (Clean) · ` +
+        `${formatNumber(cleanArticles)} Articles (Clean) · ` +
 
-        `SPECTER2 ${embedData.dimensions}-D · 🦋🌼`;
+        `SPECTER2 ${embeddingDimensions || "–"}-D · 🦋🌼`;
 
 
     /* =====================================================
        TOP KEYWORDS
     ===================================================== */
 
-    (function(){
+    (function drawTopKeywords(){
 
         const data =
             [
-                ...finalData.top_keywords
+                ...finalTopKeywords
             ]
-            .reverse();
+            .sort(
+                (a,b) =>
+                    numberValue(a.count) -
+                    numberValue(b.count)
+            );
+
+
+        if(!data.length){
+
+            document
+                .getElementById(
+                    "keywords"
+                )
+                .innerHTML =
+                    `
+                    <div style="
+                        padding:40px;
+                        text-align:center;
+                        color:#89948a;
+                    ">
+                        No keyword data available
+                    </div>
+                    `;
+
+            return;
+
+        }
+
+
+        const colors =
+            data.map(
+                (x,i) =>
+                    `hsl(${330+i*2},65%,${78-i*1.8}%)`
+            );
 
 
         Plotly.newPlot(
@@ -3110,16 +3301,14 @@ function baseLayout(){
                 x:
                     data.map(
                         x =>
-                            x.count
+                            numberValue(
+                                x.count
+                            )
                     ),
 
                 marker:{
 
-                    color:
-                        data.map(
-                            (x,i) =>
-                                `hsl(${330+i*2},65%,${78-i*1.8}%)`
-                        ),
+                    color:colors,
 
                     line:{
                         color:"#ffffff",
@@ -3176,14 +3365,14 @@ function baseLayout(){
 
 
         const top3 =
-            finalData.top_keywords
+            finalTopKeywords
                 .slice(
                     0,
                     3
                 )
                 .map(
-                    k =>
-                        `${k.keyword} ${k.count.toLocaleString()} บทความ`
+                    keyword =>
+                        `${keyword.keyword} ${formatNumber(keyword.count)} บทความ`
                 )
                 .join(
                     ", "
@@ -3195,7 +3384,10 @@ function baseLayout(){
                 "kwSummaryText"
             )
             .textContent =
-                `จากข้อมูลจริง Keyword ที่พบมากที่สุดคือ ${top3}`;
+                top3
+                    ? `จากข้อมูลจริง Keyword ที่พบมากที่สุดคือ ${top3}`
+                    : "ไม่พบข้อมูล Keyword";
+
 
     })();
 
@@ -3204,17 +3396,39 @@ function baseLayout(){
        TOP AUTHORS
     ===================================================== */
 
-    (function(){
+    (function drawTopAuthors(){
 
         const data =
             [
-                ...finalData.top_authors
+                ...finalTopAuthors
             ]
             .sort(
                 (a,b) =>
-                    b.count -
-                    a.count
+                    numberValue(b.count) -
+                    numberValue(a.count)
             );
+
+
+        if(!data.length){
+
+            document
+                .getElementById(
+                    "authors"
+                )
+                .innerHTML =
+                    `
+                    <div style="
+                        padding:40px;
+                        text-align:center;
+                        color:#89948a;
+                    ">
+                        No author data available
+                    </div>
+                    `;
+
+            return;
+
+        }
 
 
         const floralColors = [
@@ -3248,7 +3462,9 @@ function baseLayout(){
                 y:
                     data.map(
                         item =>
-                            item.count
+                            numberValue(
+                                item.count
+                            )
                     ),
 
                 text:
@@ -3257,9 +3473,11 @@ function baseLayout(){
                             item.author
                     ),
 
-                mode:"markers+text",
+                mode:
+                    "markers+text",
 
-                type:"scatter",
+                type:
+                    "scatter",
 
                 textposition:
                     "top center",
@@ -3271,7 +3489,9 @@ function baseLayout(){
                             item =>
                                 Math.max(
                                     24,
-                                    item.count/2.2
+                                    numberValue(
+                                        item.count
+                                    ) / 2.2
                                 )
                         ),
 
@@ -3340,23 +3560,49 @@ function baseLayout(){
        PUBLICATIONS BY YEAR
     ===================================================== */
 
-    (function(){
+    (function drawYears(){
 
         const years =
             Object
                 .keys(
-                    finalData
-                        .publications_by_year
+                    finalYears
                 )
-                .sort();
+                .sort(
+                    (a,b) =>
+                        Number(a) -
+                        Number(b)
+                );
 
 
         const counts =
             years.map(
-                y =>
-                    finalData
-                        .publications_by_year[y]
+                year =>
+                    numberValue(
+                        finalYears[year]
+                    )
             );
+
+
+        if(!years.length){
+
+            document
+                .getElementById(
+                    "years"
+                )
+                .innerHTML =
+                    `
+                    <div style="
+                        padding:40px;
+                        text-align:center;
+                        color:#89948a;
+                    ">
+                        No publication-year data available
+                    </div>
+                    `;
+
+            return;
+
+        }
 
 
         Plotly.newPlot(
@@ -3367,7 +3613,8 @@ function baseLayout(){
 
                 type:"scatter",
 
-                mode:"lines+markers",
+                mode:
+                    "lines+markers",
 
                 x:years,
 
@@ -3438,7 +3685,7 @@ function baseLayout(){
        RESEARCH AREAS DONUT
     ===================================================== */
 
-    (function(){
+    (function drawResearchAreas(){
 
         const pie =
             document.getElementById(
@@ -3448,25 +3695,38 @@ function baseLayout(){
 
         const labels =
             Object.keys(
-                finalData.research_areas
+                finalResearchAreas
             );
 
 
         const values =
             labels.map(
-                l =>
-                    finalData
-                        .research_areas[l]
+                label =>
+                    numberValue(
+                        finalResearchAreas[label]
+                    )
             );
 
+
+        const totalAreas =
+            labels.length;
+
+
+        /* -----------------------------------------------
+           CENTER
+        ------------------------------------------------ */
 
         document
             .getElementById(
                 "researchCenterNumber"
             )
             .textContent =
-                labels.length;
+                totalAreas;
 
+
+        /* -----------------------------------------------
+           COLORS
+        ------------------------------------------------ */
 
         const colors = [
 
@@ -3483,6 +3743,10 @@ function baseLayout(){
 
         ];
 
+
+        /* -----------------------------------------------
+           DONUT
+        ------------------------------------------------ */
 
         Plotly.newPlot(
 
@@ -3509,26 +3773,41 @@ function baseLayout(){
                 textposition:"outside",
 
                 textfont:{
+
                     family:
                         "Arial, Noto Sans Thai",
+
                     size:10,
+
                     color:"#526354"
+
                 },
 
+                automargin:true,
+
                 marker:{
-                    colors:colors,
+
+                    colors:
+                        labels.map(
+                            (label,index) =>
+                                colors[
+                                    index %
+                                    colors.length
+                                ]
+                        ),
 
                     line:{
                         color:"#ffffff",
                         width:3
                     }
+
                 },
 
                 hovertemplate:
 
                     "<b>%{label}</b><br>" +
 
-                    "%{value} Articles" +
+                    "%{value:,} Articles" +
 
                     "<extra></extra>"
 
@@ -3543,13 +3822,21 @@ function baseLayout(){
                     "rgba(0,0,0,0)",
 
                 margin:{
-                    l:65,
-                    r:65,
-                    t:35,
-                    b:35
+                    l:90,
+                    r:90,
+                    t:40,
+                    b:55
                 },
 
-                showlegend:false
+                showlegend:false,
+
+                uniformtext:{
+
+                    minsize:9,
+
+                    mode:"hide"
+
+                }
 
             },
 
@@ -3579,6 +3866,10 @@ function baseLayout(){
         );
 
 
+        /* -----------------------------------------------
+           CLICK → PULL SLICE
+        ------------------------------------------------ */
+
         pie.on(
             "plotly_click",
             function(event){
@@ -3588,33 +3879,56 @@ function baseLayout(){
                     !event.points ||
                     !event.points.length
                 ){
+
                     return;
+
                 }
 
 
-                const index =
+                const clickedIndex =
                     event.points[0]
                         .pointNumber;
 
 
-                const current =
-                    pie.data[0].pull ||
-                    [];
+                const currentPull =
+                    Array.isArray(
+                        pie.data[0].pull
+                    )
+                        ? [
+                            ...pie.data[0].pull
+                        ]
+                        : labels.map(
+                            () => 0
+                        );
 
 
-                const next =
+                const alreadyPulled =
+                    Number(
+                        currentPull[
+                            clickedIndex
+                        ] || 0
+                    ) > 0;
+
+
+                const nextPull =
                     labels.map(
-                        (v,i) =>
-                            i === index
-                                ? (
-                                    Number(
-                                        current[i] ||
-                                        0
-                                    ) > 0
-                                        ? 0
-                                        : .10
-                                )
-                                : 0
+                        (label,index) => {
+
+                            if(
+                                index !==
+                                clickedIndex
+                            ){
+
+                                return 0;
+
+                            }
+
+
+                            return alreadyPulled
+                                ? 0
+                                : .10;
+
+                        }
                     );
 
 
@@ -3624,7 +3938,7 @@ function baseLayout(){
 
                     {
                         pull:[
-                            next
+                            nextPull
                         ]
                     },
 
@@ -3636,10 +3950,12 @@ function baseLayout(){
         );
 
 
+        /* -----------------------------------------------
+           RESIZE
+        ------------------------------------------------ */
+
         window.addEventListener(
-
             "resize",
-
             function(){
 
                 Plotly.Plots.resize(
@@ -3647,7 +3963,6 @@ function baseLayout(){
                 );
 
             }
-
         );
 
     })();
@@ -3659,22 +3974,80 @@ function baseLayout(){
 
     const featurePositions = [
 
-        {x:15,y:38,icon:"🌸",size:44},
-        {x:29,y:35,icon:"🌸",size:42},
-        {x:42,y:39,icon:"🌸",size:40},
-        {x:22,y:53,icon:"🌸",size:30},
-        {x:36,y:55,icon:"🌸",size:29},
+        {
+            x:15,
+            y:38,
+            icon:"🌸",
+            size:44
+        },
 
-        {x:61,y:36,icon:"🌼",size:29},
-        {x:75,y:35,icon:"🌼",size:28},
-        {x:69,y:52,icon:"🌼",size:28},
-        {x:83,y:51,icon:"🌼",size:27},
-        {x:80,y:64,icon:"🌼",size:26}
+        {
+            x:29,
+            y:35,
+            icon:"🌸",
+            size:42
+        },
+
+        {
+            x:42,
+            y:39,
+            icon:"🌸",
+            size:40
+        },
+
+        {
+            x:22,
+            y:53,
+            icon:"🌸",
+            size:30
+        },
+
+        {
+            x:36,
+            y:55,
+            icon:"🌸",
+            size:29
+        },
+
+        {
+            x:61,
+            y:36,
+            icon:"🌼",
+            size:29
+        },
+
+        {
+            x:75,
+            y:35,
+            icon:"🌼",
+            size:28
+        },
+
+        {
+            x:69,
+            y:52,
+            icon:"🌼",
+            size:28
+        },
+
+        {
+            x:83,
+            y:51,
+            icon:"🌼",
+            size:27
+        },
+
+        {
+            x:80,
+            y:64,
+            icon:"🌼",
+            size:26
+        }
 
     ];
 
 
-    (function(){
+    (function drawKeywordFrequencyGarden(){
 
         document
             .getElementById(
@@ -3682,9 +4055,9 @@ function baseLayout(){
             )
             .textContent =
 
-            finalData
-                .total_articles
-                .toLocaleString() +
+            formatNumber(
+                finalArticles
+            ) +
 
             " Articles";
 
@@ -3702,14 +4075,19 @@ function baseLayout(){
 
 
         const kws =
-            finalData.top_keywords;
+            finalTopKeywords
+                .slice(
+                    0,
+                    10
+                );
 
 
         kws.forEach(
-            (item,i)=>{
+            (item,index)=>{
 
                 const pos =
-                    featurePositions[i] ||
+                    featurePositions[index]
+                    ||
                     {
                         x:50,
                         y:50,
@@ -3779,8 +4157,9 @@ function baseLayout(){
 
 
                 count.textContent =
-                    item.count
-                        .toLocaleString();
+                    formatNumber(
+                        item.count
+                    );
 
 
                 flower.appendChild(
@@ -3798,9 +4177,9 @@ function baseLayout(){
 
                 flower.addEventListener(
                     "click",
-                    function(e){
+                    function(event){
 
-                        e.stopPropagation();
+                        event.stopPropagation();
 
 
                         field
@@ -3808,8 +4187,8 @@ function baseLayout(){
                                 ".feature-flower"
                             )
                             .forEach(
-                                o =>
-                                    o.classList.remove(
+                                other =>
+                                    other.classList.remove(
                                         "selected"
                                     )
                             );
@@ -3843,8 +4222,8 @@ function baseLayout(){
                         ".feature-flower"
                     )
                     .forEach(
-                        f =>
-                            f.classList.remove(
+                        flower =>
+                            flower.classList.remove(
                                 "selected"
                             )
                     );
@@ -3859,57 +4238,53 @@ function baseLayout(){
                 group:"ai",
 
                 points:[
-
                     featurePositions[0],
                     featurePositions[1],
                     featurePositions[2],
                     featurePositions[3],
                     featurePositions[4]
-
                 ]
+
             },
 
             {
                 group:"vision",
 
                 points:[
-
                     featurePositions[5],
                     featurePositions[6],
                     featurePositions[7],
                     featurePositions[8]
-
                 ]
+
             },
 
             {
                 group:"data",
 
                 points:[
-
                     featurePositions[4],
                     featurePositions[5],
                     featurePositions[7]
-
                 ]
+
             },
 
             {
                 group:"tech",
 
                 points:[
-
                     featurePositions[7],
                     featurePositions[8],
                     featurePositions[9]
-
                 ]
+
             }
 
         ];
 
 
-        function draw(){
+        function drawFeatureLines(){
 
             const rect =
                 field.getBoundingClientRect();
@@ -3924,11 +4299,8 @@ function baseLayout(){
 
 
             svg.setAttribute(
-
                 "viewBox",
-
                 `0 0 ${width} ${height}`
-
             );
 
 
@@ -3939,14 +4311,10 @@ function baseLayout(){
                 group=>{
 
                     for(
-
                         let i=0;
-
                         i <
                         group.points.length-1;
-
                         i++
-
                     ){
 
                         const a =
@@ -3961,7 +4329,9 @@ function baseLayout(){
                             !a ||
                             !b
                         ){
+
                             continue;
+
                         }
 
 
@@ -3976,48 +4346,33 @@ function baseLayout(){
 
 
                         line.setAttribute(
-
                             "x1",
-
-                            a.x/100*width
-
+                            a.x / 100 * width
                         );
 
 
                         line.setAttribute(
-
                             "y1",
-
-                            a.y/100*height
-
+                            a.y / 100 * height
                         );
 
 
                         line.setAttribute(
-
                             "x2",
-
-                            b.x/100*width
-
+                            b.x / 100 * width
                         );
 
 
                         line.setAttribute(
-
                             "y2",
-
-                            b.y/100*height
-
+                            b.y / 100 * height
                         );
 
 
                         line.setAttribute(
-
                             "class",
-
                             "feature-line " +
                             group.group
-
                         );
 
 
@@ -4034,14 +4389,14 @@ function baseLayout(){
 
 
         setTimeout(
-            draw,
+            drawFeatureLines,
             200
         );
 
 
         window.addEventListener(
             "resize",
-            draw
+            drawFeatureLines
         );
 
     })();
@@ -4051,7 +4406,7 @@ function baseLayout(){
        KEYWORD CO-OCCURRENCE GARDEN
     ===================================================== */
 
-    (function(){
+    (function drawCoOccurrenceGarden(){
 
         const field =
             document.getElementById(
@@ -4066,34 +4421,96 @@ function baseLayout(){
 
 
         const kws =
-            finalData.top_keywords;
+            finalTopKeywords
+                .slice(
+                    0,
+                    10
+                );
 
 
         const coPositions = [
 
-            {x:13,y:39,icon:"🌸"},
-            {x:25,y:30,icon:"🌷"},
-            {x:34,y:43,icon:"🌼"},
-            {x:21,y:56,icon:"🌺"},
-            {x:65,y:31,icon:"🌻"},
-            {x:83,y:35,icon:"🪻"},
-            {x:67,y:56,icon:"🪷"},
-            {x:83,y:56,icon:"🏵️"},
-            {x:36,y:79,icon:"💮"},
-            {x:63,y:79,icon:"🌾"}
+            {
+                x:13,
+                y:39,
+                icon:"🌸"
+            },
+
+            {
+                x:25,
+                y:30,
+                icon:"🌷"
+            },
+
+            {
+                x:34,
+                y:43,
+                icon:"🌼"
+            },
+
+            {
+                x:21,
+                y:56,
+                icon:"🌺"
+            },
+
+            {
+                x:65,
+                y:31,
+                icon:"🌻"
+            },
+
+            {
+                x:83,
+                y:35,
+                icon:"🪻"
+            },
+
+            {
+                x:67,
+                y:56,
+                icon:"🪷"
+            },
+
+            {
+                x:83,
+                y:56,
+                icon:"🏵️"
+            },
+
+            {
+                x:36,
+                y:79,
+                icon:"💮"
+            },
+
+            {
+                x:63,
+                y:79,
+                icon:"🌾"
+            }
 
         ];
+
+
+        const centerKeyword =
+            kws.length > 1
+                ? kws[1]
+                : (
+                    kws[0]
+                    ||
+                    {
+                        keyword:
+                            "Artificial Intelligence",
+                        count:0
+                    }
+                );
 
 
         const center = {
 
             keyword:
-
-                kws[1]
-
-                    ? kws[1].keyword
-
-                    : "Artificial Intelligence",
+                centerKeyword.keyword,
 
             x:50,
 
@@ -4114,26 +4531,25 @@ function baseLayout(){
             kws
 
                 .filter(
-                    k =>
-                        k.keyword !==
+                    keyword =>
+                        keyword.keyword !==
                         center.keyword
                 )
 
                 .map(
-                    (k,i)=>
+                    (keyword,index)=>
                         ({
-                            ...k,
+
+                            ...keyword,
 
                             ...(
-
-                                coPositions[i] ||
-
+                                coPositions[index]
+                                ||
                                 {
                                     x:50,
                                     y:50,
                                     icon:"🌸"
                                 }
-
                             )
 
                         })
@@ -4142,9 +4558,12 @@ function baseLayout(){
 
         const maxCount =
             Math.max(
+                1,
                 ...kws.map(
-                    k =>
-                        k.count
+                    keyword =>
+                        numberValue(
+                            keyword.count
+                        )
                 )
             );
 
@@ -4172,14 +4591,16 @@ function baseLayout(){
 
                 const ratio =
                     Math.sqrt(
-                        item.count /
+                        numberValue(
+                            item.count
+                        ) /
                         maxCount
                     );
 
 
                 const size =
                     28 +
-                    ratio*38;
+                    ratio * 38;
 
 
                 const icon =
@@ -4225,8 +4646,9 @@ function baseLayout(){
 
 
                 count.textContent =
-                    item.count
-                        .toLocaleString();
+                    formatNumber(
+                        item.count
+                    );
 
 
                 flower.appendChild(
@@ -4250,14 +4672,16 @@ function baseLayout(){
 
                     "\nFrequency: " +
 
-                    item.count;
+                    formatNumber(
+                        item.count
+                    );
 
 
                 flower.addEventListener(
                     "click",
-                    function(e){
+                    function(event){
 
-                        e.stopPropagation();
+                        event.stopPropagation();
 
 
                         field
@@ -4265,8 +4689,8 @@ function baseLayout(){
                                 ".co-flower"
                             )
                             .forEach(
-                                o =>
-                                    o.classList.remove(
+                                other =>
+                                    other.classList.remove(
                                         "selected"
                                     )
                             );
@@ -4300,8 +4724,8 @@ function baseLayout(){
                         ".co-flower"
                     )
                     .forEach(
-                        f =>
-                            f.classList.remove(
+                        flower =>
+                            flower.classList.remove(
                                 "selected"
                             )
                     );
@@ -4310,7 +4734,7 @@ function baseLayout(){
         );
 
 
-        function getPos(
+        function getPosition(
             keyword
         ){
 
@@ -4325,8 +4749,8 @@ function baseLayout(){
 
 
             return flowers.find(
-                f =>
-                    f.keyword ===
+                flower =>
+                    flower.keyword ===
                     keyword
             );
 
@@ -4348,185 +4772,195 @@ function baseLayout(){
 
 
             svg.setAttribute(
-
                 "viewBox",
-
                 `0 0 ${width} ${height}`
-
             );
 
 
             svg.innerHTML = "";
 
 
-            (
-                finalData
-                    .keyword_cooccurrence_top10
-                ||
-                []
-            )
-            .forEach(
-                conn=>{
+            finalCooccurrence
+                .forEach(
+                    connection=>{
 
-                    const from =
-                        getPos(
-                            conn.a
+                        const from =
+                            getPosition(
+                                connection.a
+                            );
+
+
+                        const to =
+                            getPosition(
+                                connection.b
+                            );
+
+
+                        if(
+                            !from ||
+                            !to
+                        ){
+
+                            return;
+
+                        }
+
+
+                        const x1 =
+                            from.x /
+                            100 *
+                            width;
+
+
+                        const y1 =
+                            from.y /
+                            100 *
+                            height;
+
+
+                        const x2 =
+                            to.x /
+                            100 *
+                            width;
+
+
+                        const y2 =
+                            to.y /
+                            100 *
+                            height;
+
+
+                        const midX =
+                            (x1+x2)/2;
+
+
+                        const midY =
+                            (y1+y2)/2;
+
+
+                        const dx =
+                            x2-x1;
+
+
+                        const dy =
+                            y2-y1;
+
+
+                        const distance =
+                            Math.sqrt(
+                                dx*dx +
+                                dy*dy
+                            );
+
+
+                        const curve =
+                            Math.min(
+                                50,
+                                distance*.20
+                            );
+
+
+                        let controlX =
+                            midX;
+
+
+                        let controlY =
+                            midY;
+
+
+                        if(
+                            distance > 0
+                        ){
+
+                            controlX =
+                                midX -
+                                dy /
+                                distance *
+                                curve;
+
+
+                            controlY =
+                                midY +
+                                dx /
+                                distance *
+                                curve;
+
+                        }
+
+
+                        const path =
+                            document.createElementNS(
+
+                                "http://www.w3.org/2000/svg",
+
+                                "path"
+
+                            );
+
+
+                        path.setAttribute(
+
+                            "d",
+
+                            `M ${x1} ${y1} ` +
+                            `Q ${controlX} ${controlY} ` +
+                            `${x2} ${y2}`
+
                         );
 
 
-                    const to =
-                        getPos(
-                            conn.b
+                        let className =
+                            "co-line";
+
+
+                        const connectionCount =
+                            numberValue(
+                                connection.count
+                            );
+
+
+                        if(
+                            connectionCount >=
+                            20
+                        ){
+
+                            className =
+                                "co-line strong";
+
+                        }
+                        else if(
+                            connectionCount >=
+                            8
+                        ){
+
+                            className =
+                                "co-line medium";
+
+                        }
+
+
+                        path.setAttribute(
+                            "class",
+                            className
                         );
 
 
-                    if(
-                        !from ||
-                        !to
-                    ){
+                        path.setAttribute(
+                            "title",
 
-                        return;
+                            `${connection.a} + ` +
+                            `${connection.b}: ` +
+                            `${formatNumber(connectionCount)}`
+
+                        );
+
+
+                        svg.appendChild(
+                            path
+                        );
 
                     }
-
-
-                    const x1 =
-                        from.x/100*width;
-
-
-                    const y1 =
-                        from.y/100*height;
-
-
-                    const x2 =
-                        to.x/100*width;
-
-
-                    const y2 =
-                        to.y/100*height;
-
-
-                    const midX =
-                        (x1+x2)/2;
-
-
-                    const midY =
-                        (y1+y2)/2;
-
-
-                    const dx =
-                        x2-x1;
-
-
-                    const dy =
-                        y2-y1;
-
-
-                    const distance =
-                        Math.sqrt(
-                            dx*dx +
-                            dy*dy
-                        );
-
-
-                    const curve =
-                        Math.min(
-                            50,
-                            distance*.20
-                        );
-
-
-                    let controlX =
-                        midX;
-
-
-                    let controlY =
-                        midY;
-
-
-                    if(
-                        distance>0
-                    ){
-
-                        controlX =
-                            midX -
-                            dy/distance*
-                            curve;
-
-
-                        controlY =
-                            midY +
-                            dx/distance*
-                            curve;
-
-                    }
-
-
-                    const path =
-                        document.createElementNS(
-
-                            "http://www.w3.org/2000/svg",
-
-                            "path"
-
-                        );
-
-
-                    path.setAttribute(
-
-                        "d",
-
-                        `M ${x1} ${y1} Q ${controlX} ${controlY} ${x2} ${y2}`
-
-                    );
-
-
-                    let cls =
-                        "co-line";
-
-
-                    if(
-                        conn.count >=
-                        20
-                    ){
-
-                        cls =
-                            "co-line strong";
-
-                    }
-
-                    else if(
-                        conn.count >=
-                        8
-                    ){
-
-                        cls =
-                            "co-line medium";
-
-                    }
-
-
-                    path.setAttribute(
-                        "class",
-                        cls
-                    );
-
-
-                    path.setAttribute(
-
-                        "title",
-
-                        `${conn.a} + ${conn.b}: ${conn.count}`
-
-                    );
-
-
-                    svg.appendChild(
-                        path
-                    );
-
-                }
-            );
+                );
 
         }
 
@@ -4544,9 +4978,12 @@ function baseLayout(){
 
     })();
 
+
 })();
 
 </script>
 
 </body>
+
 </html>
+```
