@@ -424,54 +424,6 @@ body{
 
 
 /* =========================================================
-   DATA QUALITY
-========================================================= */
-
-.quality-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:12px;
-
-    margin:15px 20px 20px;
-}
-
-.quality-box{
-
-    padding:14px;
-
-    background:#f8fbf5;
-
-    border:
-        1px solid
-        #e0eadc;
-
-    border-radius:14px;
-
-    text-align:center;
-}
-
-.quality-label{
-
-    font-size:11px;
-    color:#89948a;
-}
-
-.quality-value{
-
-    margin-top:5px;
-
-    font-size:21px;
-    font-weight:800;
-
-    color:#4d7453;
-}
-
-
-/* =========================================================
    EMBEDDING INFO
 ========================================================= */
 
@@ -1956,11 +1908,6 @@ footer{
         height:850px;
     }
 
-    .quality-grid{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
     .embedding-grid{
         grid-template-columns:
             repeat(2,1fr);
@@ -2038,10 +1985,6 @@ footer{
 
     .research-center-text{
         font-size:9px;
-    }
-
-    .quality-grid{
-        grid-template-columns:1fr;
     }
 
     .embedding-grid{
@@ -2396,90 +2339,6 @@ footer{
 
 </div>
 
-</div>
-
-</div>
-
-<!-- =========================================================
-     DATA QUALITY
-========================================================= -->
-
-<div class="card full">
-
-<div class="card-head">
-
-<div class="card-title">
-    ✅ Data Quality
-</div>
-
-<div class="card-sub">
-    Validation results on the Clean Dataset (pre-EID) — checked at source
-</div>
-
-<div class="card-flower">
-    🌱
-</div>
-
-</div>
-
-<div class="quality-grid">
-
-<div class="quality-box">
-
-<div class="quality-label">
-    Duplicate EID
-</div>
-
-<div class="quality-value" id="qDupEid">
-    –
-</div>
-
-</div>
-
-<div class="quality-box">
-
-<div class="quality-label">
-    Duplicate DOI
-</div>
-
-<div class="quality-value" id="qDupDoi">
-    –
-</div>
-
-</div>
-
-<div class="quality-box">
-
-<div class="quality-label">
-    Missing Title
-</div>
-
-<div class="quality-value" id="qMissTitle">
-    –
-</div>
-
-</div>
-
-<div class="quality-box">
-
-<div class="quality-label">
-    Missing Abstract
-</div>
-
-<div class="quality-value" id="qMissAbs">
-    –
-</div>
-
-</div>
-
-</div>
-
-<div class="explanation" style="margin:0 20px 20px;">
-<div class="explanation-title">💡 คำอธิบาย</div>
-<p>
-Duplicate DOI ที่พบในไฟล์ Clean ไม่ได้ถูกลบออกในขั้นตอนนี้ (การลบข้อมูลซ้ำจริงเกิดขึ้นในขั้นตอน EID cross-subject deduplication
-ที่ทำให้ข้อมูลลดลงเหลือชุด Final Dataset)
-</p>
 </div>
 
 </div>
@@ -2998,23 +2857,6 @@ function baseLayout(){
 
     document.getElementById("flowFinal").textContent =
         finalData.total_articles.toLocaleString();
-
-
-    /* =====================================================
-       DATA QUALITY
-    ===================================================== */
-
-    document.getElementById("qDupEid").textContent =
-        cleanData.data_quality.duplicate_eid;
-
-    document.getElementById("qDupDoi").textContent =
-        cleanData.data_quality.duplicate_doi;
-
-    document.getElementById("qMissTitle").textContent =
-        cleanData.data_quality.missing_title;
-
-    document.getElementById("qMissAbs").textContent =
-        cleanData.data_quality.missing_abstract;
 
 
     /* =====================================================
