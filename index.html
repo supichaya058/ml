@@ -938,6 +938,32 @@ body{
     stroke-opacity:.55
 }
 
+/* =========================================================
+   TRANSFORMER COMMUNITY CONNECTION
+========================================================= */
+
+.co-line.transformer-link{
+    fill:none;
+    stroke:#9b82bd;
+    stroke-width:1.7;
+    stroke-opacity:.30;
+    stroke-linecap:round;
+    stroke-dasharray:5 5;
+    animation:transformerLinkPulse 3s ease-in-out infinite
+}
+
+@keyframes transformerLinkPulse{
+
+    0%,100%{
+        stroke-opacity:.20
+    }
+
+    50%{
+        stroke-opacity:.42
+    }
+
+}
+
 .co-center{
     position:absolute;
     z-index:20;
@@ -1105,6 +1131,7 @@ footer{
     .plot{
         height:430px
     }
+
 }
 
 </style>
@@ -1435,7 +1462,7 @@ footer{
         </div>
 
         <div class="card-sub">
-            Top-10 Author Keywords · Lines represent co-occurrence in the same article
+            Top-10 Author Keywords · Solid lines represent co-occurrence · Dashed lines show keyword community connections
         </div>
 
         <div class="card-flower">
@@ -1492,15 +1519,22 @@ footer{
         <p>
             แสดงความสัมพันธ์ระหว่าง Keywords
             โดยดอกไม้แต่ละดอกแทน Keyword
-            และเส้นที่เชื่อมระหว่างดอกไม้แสดงว่า
+            และเส้นทึบที่เชื่อมระหว่างดอกไม้แสดงว่า
             Keywords สองคำปรากฏร่วมกันในบทความเดียวกัน
             แนวคิดนี้เรียกว่า
             <strong>Keyword Co-occurrence</strong>
             หาก Keywords สองคำมีการปรากฏร่วมกันหลายครั้ง
             จะเห็นความสัมพันธ์ระหว่างคำเหล่านั้นชัดเจนขึ้น
-            ทำให้สามารถมองเห็นกลุ่มแนวคิดหรือหัวข้อวิจัย
-            ที่มักเกิดขึ้นร่วมกันในบทความ
-            โดยดอกไม้ตรงกลางแสดง Keyword ที่มีความถี่สูงสุด
+            ส่วนเส้นประใช้แสดง
+            <strong>Keyword Community Connection</strong>
+            สำหรับคำที่อยู่ในกลุ่มแนวคิดเดียวกันแต่ในข้อมูล
+            ที่แสดงในส่วนนี้ยังไม่มีค่า Co-occurrence โดยตรง
+            โดยเฉพาะ
+            <strong>Transformer</strong>
+            ซึ่งเชื่อมโยงกับคำในกลุ่ม
+            <strong>Vision &amp; Language</strong>
+            เพื่อให้เห็นตำแหน่งของคำดังกล่าวในเครือข่าย
+            โดยไม่สร้างตัวเลข Co-occurrence ขึ้นมาเอง
         </p>
 
     </div>
@@ -1808,6 +1842,10 @@ const DATA = {
         }
     ],
 
+    /* =====================================================
+       REAL CO-OCCURRENCE DATA PROVIDED
+    ===================================================== */
+
     co:[
         {
             a:"Artificial Intelligence",
@@ -1946,6 +1984,23 @@ const DATA = {
         }
     ],
 
+    /* =====================================================
+       TRANSFORMER COMMUNITY LINKS
+       
+       These are NOT presented as co-occurrence counts.
+       They only make Transformer visually connected to
+       keywords in the same Vision & Language community.
+    ===================================================== */
+
+    transformerLinks:[
+        "Large Language Models",
+        "Computer Vision",
+        "Large Language Model",
+        "Natural Language Processing",
+        "Convolutional Neural Network",
+        "Neural Networks"
+    ],
+
     groups:{
 
         "AI & Machine Learning":[
@@ -1980,34 +2035,6 @@ const DATA = {
             "Human-Computer Interaction"
         ]
 
-    },
-
-    positions:{
-
-        "Deep Learning":[13,27,"🌸"],
-        "Artificial Intelligence":[27,23,"🌸"],
-        "Machine Learning":[40,29,"🌸"],
-        "Federated Learning":[20,42,"🌺"],
-        "Generative Ai":[34,47,"🌸"],
-        "Reinforcement Learning":[45,42,"🌸"],
-        "Attention Mechanism":[29,35,"🌷"],
-
-        "Large Language Models":[59,27,"🌼"],
-        "Computer Vision":[72,23,"🌼"],
-        "Transformer":[84,31,"🪻"],
-        "Large Language Model":[67,41,"🪷"],
-        "Natural Language Processing":[81,47,"🏵️"],
-        "Convolutional Neural Network":[74,57,"🌼"],
-        "Neural Networks":[60,50,"🌼"],
-
-        "FPGA":[16,74,"🌻"],
-        "Edge Computing":[30,82,"🌻"],
-        "Quantum Computing":[44,72,"🌻"],
-
-        "Virtual Reality":[61,74,"🌷"],
-        "Computer-Aided Design":[74,83,"🌷"],
-        "Human-Computer Interaction":[86,73,"🌷"]
-
     }
 
 };
@@ -2018,6 +2045,7 @@ const DATA = {
 ========================================================= */
 
 const floralColors=[
+
     "#F48FB1",
     "#BA8DE3",
     "#81CFC1",
@@ -2028,13 +2056,16 @@ const floralColors=[
     "#F29E8F",
     "#8DD3C7",
     "#C4A7E7"
+
 ];
+
 
 function fmt(n){
 
     return Number(n || 0).toLocaleString();
 
 }
+
 
 function baseLayout(){
 
@@ -2139,8 +2170,10 @@ Plotly.newPlot(
     },
 
     {
+
         responsive:true,
         displaylogo:false
+
     }
 
 );
@@ -2228,8 +2261,10 @@ Plotly.newPlot(
     },
 
     {
+
         responsive:true,
         displayModeBar:false
+
     }
 
 );
@@ -2308,8 +2343,10 @@ Plotly.newPlot(
     },
 
     {
+
         responsive:true,
         displaylogo:false
+
     }
 
 );
@@ -2333,6 +2370,7 @@ const values=
     );
 
 const pieColors=[
+
     "#A9D58F",
     "#9FC1DF",
     "#E7C76E",
@@ -2343,7 +2381,9 @@ const pieColors=[
     "#D9B383",
     "#AAB8CD",
     "#9DC49A"
+
 ];
+
 
 document
     .querySelector(
@@ -2541,6 +2581,7 @@ pie.on(
 
     const groupByKeyword={};
 
+
     Object.entries(
         DATA.groups
     ).forEach(
@@ -2549,6 +2590,35 @@ pie.on(
             k=>groupByKeyword[k]=g
         )
     );
+
+
+    const positions={
+
+        "Deep Learning":[13,27],
+        "Artificial Intelligence":[27,23],
+        "Machine Learning":[40,29],
+        "Federated Learning":[20,42],
+        "Generative Ai":[34,47],
+        "Reinforcement Learning":[45,42],
+        "Attention Mechanism":[29,35],
+
+        "Large Language Models":[59,27],
+        "Computer Vision":[72,23],
+        "Transformer":[84,31],
+        "Large Language Model":[67,41],
+        "Natural Language Processing":[81,47],
+        "Convolutional Neural Network":[74,57],
+        "Neural Networks":[60,50],
+
+        "FPGA":[16,74],
+        "Edge Computing":[30,82],
+        "Quantum Computing":[44,72],
+
+        "Virtual Reality":[61,74],
+        "Computer-Aided Design":[74,83],
+        "Human-Computer Interaction":[86,73]
+
+    };
 
 
     const max=
@@ -2563,12 +2633,14 @@ pie.on(
     DATA.top20.forEach(d=>{
 
         const pos=
-            DATA.positions[d.keyword]
+            positions[d.keyword]
             ||
             [50,50];
 
+
         const g=
             groupByKeyword[d.keyword];
+
 
         if(
             !g ||
@@ -2587,12 +2659,14 @@ pie.on(
                 "div"
             );
 
+
         flower.className=
-            "feature-flower "+
-            meta.cls;
+            "feature-flower "+meta.cls;
+
 
         flower.style.left=
             pos[0]+"%";
+
 
         flower.style.top=
             pos[1]+"%";
@@ -2603,7 +2677,9 @@ pie.on(
                 "div"
             );
 
+
         emoji.className="emoji";
+
 
         emoji.style.fontSize=
             (
@@ -2616,6 +2692,7 @@ pie.on(
             )+
             "px";
 
+
         emoji.textContent=
             meta.icon;
 
@@ -2625,7 +2702,9 @@ pie.on(
                 "div"
             );
 
+
         label.className="label";
+
 
         label.textContent=
             d.keyword;
@@ -2636,7 +2715,9 @@ pie.on(
                 "div"
             );
 
+
         count.className="count";
+
 
         count.textContent=
             fmt(d.count);
@@ -2690,6 +2771,7 @@ pie.on(
     field.addEventListener(
         "click",
         ()=>{
+
             field
                 .querySelectorAll(
                     ".feature-flower"
@@ -2700,6 +2782,7 @@ pie.on(
                         "selected"
                     )
                 );
+
         }
     );
 
@@ -2717,6 +2800,7 @@ pie.on(
             "viewBox",
             `0 0 ${w} ${h}`
         );
+
 
         svg.innerHTML="";
 
@@ -2737,7 +2821,7 @@ pie.on(
                 const pts=
                     arr
                     .map(
-                        k=>DATA.positions[k]
+                        k=>positions[k]
                     )
                     .filter(Boolean);
 
@@ -2782,8 +2866,7 @@ pie.on(
 
                     line.setAttribute(
                         "class",
-                        "feature-line "+
-                        meta.cls
+                        "feature-line "+meta.cls
                     );
 
 
@@ -2803,6 +2886,7 @@ pie.on(
         draw,
         200
     );
+
 
     window.addEventListener(
         "resize",
@@ -2829,21 +2913,40 @@ pie.on(
         );
 
 
+    /* =====================================================
+       FIXED POSITIONS FOR TOP-10 KEYWORDS
+
+       Transformer = position 9
+    ===================================================== */
+
     const positions=[
 
         [13,39,"🌸"],
+
         [25,30,"🌷"],
+
         [34,43,"🌼"],
+
         [21,56,"🌺"],
+
         [65,31,"🌻"],
+
         [83,35,"🪻"],
+
         [67,56,"🪷"],
+
         [83,56,"🏵️"],
+
         [36,79,"💮"],
+
         [63,79,"🌾"]
 
     ];
 
+
+    /* =====================================================
+       CENTER KEYWORD
+    ===================================================== */
 
     const center=
         DATA.top20[0].keyword;
@@ -2854,6 +2957,13 @@ pie.on(
     ).textContent=
         center;
 
+
+    /* =====================================================
+       TOP-10 FLOWERS
+
+       slice(1,10) includes Transformer because
+       Transformer is DATA.top20 index 9.
+    ===================================================== */
 
     const flowers=
         DATA.top20
@@ -2883,6 +2993,10 @@ pie.on(
         );
 
 
+    /* =====================================================
+       CREATE FLOWERS
+    ===================================================== */
+
     flowers.forEach(
         d=>{
 
@@ -2891,11 +3005,14 @@ pie.on(
                     "div"
                 );
 
+
             f.className=
                 "co-flower";
 
+
             f.style.left=
                 d.x+"%";
+
 
             f.style.top=
                 d.y+"%";
@@ -2906,7 +3023,9 @@ pie.on(
                     "div"
                 );
 
+
             icon.className="icon";
+
 
             icon.style.fontSize=
                 (
@@ -2918,6 +3037,7 @@ pie.on(
                 )+
                 "px";
 
+
             icon.textContent=
                 d.icon;
 
@@ -2927,7 +3047,9 @@ pie.on(
                     "div"
                 );
 
+
             name.className="name";
+
 
             name.textContent=
                 d.keyword;
@@ -2938,7 +3060,9 @@ pie.on(
                     "div"
                 );
 
+
             c.className="count";
+
 
             c.textContent=
                 fmt(d.count);
@@ -2963,6 +3087,7 @@ pie.on(
 
                     e.stopPropagation();
 
+
                     field
                         .querySelectorAll(
                             ".co-flower"
@@ -2974,7 +3099,9 @@ pie.on(
                             )
                         );
 
+
                     void f.offsetWidth;
+
 
                     f.classList.add(
                         "selected"
@@ -2995,6 +3122,7 @@ pie.on(
     field.addEventListener(
         "click",
         ()=>{
+
             field
                 .querySelectorAll(
                     ".co-flower"
@@ -3005,16 +3133,29 @@ pie.on(
                         "selected"
                     )
                 );
+
         }
     );
 
 
+    /* =====================================================
+       CENTER POSITION
+    ===================================================== */
+
     const centerPos={
+
         x:50,
+
         y:48,
+
         keyword:center
+
     };
 
+
+    /* =====================================================
+       FIND KEYWORD POSITION
+    ===================================================== */
 
     const find=
         k=>
@@ -3027,13 +3168,104 @@ pie.on(
         );
 
 
+    /* =====================================================
+       CREATE CURVED PATH
+    ===================================================== */
+
+    function createCurvedPath(
+        a,
+        b,
+        w,
+        h
+    ){
+
+        const x1=
+            a.x/100*w;
+
+        const y1=
+            a.y/100*h;
+
+        const x2=
+            b.x/100*w;
+
+        const y2=
+            b.y/100*h;
+
+
+        const dx=
+            x2-x1;
+
+        const dy=
+            y2-y1;
+
+
+        const distance=
+            Math.hypot(
+                dx,
+                dy
+            );
+
+
+        const curve=
+            Math.min(
+                50,
+                distance*.20
+            );
+
+
+        const cx=
+            (x1+x2)/2-
+            (
+                distance
+                ?
+                dy/distance*curve
+                :
+                0
+            );
+
+
+        const cy=
+            (y1+y2)/2+
+            (
+                distance
+                ?
+                dx/distance*curve
+                :
+                0
+            );
+
+
+        return {
+
+            d:
+                `M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`,
+
+            x1,
+            y1,
+            x2,
+            y2
+
+        };
+
+    }
+
+
+    /* =====================================================
+       DRAW
+    ===================================================== */
+
     function draw(){
 
         const r=
             field.getBoundingClientRect();
 
-        const w=r.width;
-        const h=r.height;
+
+        const w=
+            r.width;
+
+
+        const h=
+            r.height;
 
 
         svg.setAttribute(
@@ -3041,8 +3273,13 @@ pie.on(
             `0 0 ${w} ${h}`
         );
 
+
         svg.innerHTML="";
 
+
+        /* =================================================
+           1. REAL CO-OCCURRENCE LINES
+        ================================================= */
 
         DATA.co.forEach(
             c=>{
@@ -3050,67 +3287,24 @@ pie.on(
                 const a=
                     find(c.a);
 
+
                 const b=
                     find(c.b);
 
 
                 if(!a || !b){
+
                     return;
+
                 }
 
 
-                const x1=
-                    a.x/100*w;
-
-                const y1=
-                    a.y/100*h;
-
-                const x2=
-                    b.x/100*w;
-
-                const y2=
-                    b.y/100*h;
-
-
-                const dx=
-                    x2-x1;
-
-                const dy=
-                    y2-y1;
-
-                const d=
-                    Math.hypot(
-                        dx,
-                        dy
-                    );
-
-
-                const curve=
-                    Math.min(
-                        50,
-                        d*.20
-                    );
-
-
-                const cx=
-                    (x1+x2)/2-
-                    (
-                        d
-                        ?
-                        dy/d*curve
-                        :
-                        0
-                    );
-
-
-                const cy=
-                    (y1+y2)/2+
-                    (
-                        d
-                        ?
-                        dx/d*curve
-                        :
-                        0
+                const pathData=
+                    createCurvedPath(
+                        a,
+                        b,
+                        w,
+                        h
                     );
 
 
@@ -3123,7 +3317,7 @@ pie.on(
 
                 path.setAttribute(
                     "d",
-                    `M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`
+                    pathData.d
                 );
 
 
@@ -3145,7 +3339,7 @@ pie.on(
 
                 path.setAttribute(
                     "title",
-                    `${c.a} + ${c.b}: ${fmt(c.count)}`
+                    `${c.a} + ${c.b}: ${fmt(c.count)} co-occurrences`
                 );
 
 
@@ -3156,18 +3350,96 @@ pie.on(
             }
         );
 
+
+        /* =================================================
+           2. TRANSFORMER COMMUNITY CONNECTIONS
+
+           IMPORTANT:
+           These are visual community links only.
+           They DO NOT claim a co-occurrence count.
+        ================================================= */
+
+        const transformer=
+            find("Transformer");
+
+
+        if(transformer){
+
+            DATA.transformerLinks.forEach(
+                keyword=>{
+
+                    const target=
+                        find(keyword);
+
+
+                    if(!target){
+
+                        return;
+
+                    }
+
+
+                    const pathData=
+                        createCurvedPath(
+                            transformer,
+                            target,
+                            w,
+                            h
+                        );
+
+
+                    const path=
+                        document.createElementNS(
+                            "http://www.w3.org/2000/svg",
+                            "path"
+                        );
+
+
+                    path.setAttribute(
+                        "d",
+                        pathData.d
+                    );
+
+
+                    path.setAttribute(
+                        "class",
+                        "co-line transformer-link"
+                    );
+
+
+                    path.setAttribute(
+                        "title",
+                        `Transformer ↔ ${keyword} · Vision & Language community connection`
+                    );
+
+
+                    svg.appendChild(
+                        path
+                    );
+
+                }
+            );
+
+        }
+
     }
 
+
+    /* =====================================================
+       INITIAL DRAW
+    ===================================================== */
 
     setTimeout(
         draw,
         200
     );
 
+
     window.addEventListener(
         "resize",
         draw
     );
+
 
 })();
 
