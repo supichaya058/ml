@@ -2131,22 +2131,41 @@ footer{
 </div>
 
 <div class="process-flow" id="processFlow">
-    <div class="process-step"><div class="n" id="flowClean">–</div><div class="l">Clean Dataset</div></div>
-    <div class="process-arrow">→</div>
-    <div class="process-step"><div class="n">EID</div><div class="l">Cross-Subject Deduplication</div></div>
-    <div class="process-arrow">→</div>
-    <div class="process-step"><div class="n" id="flowFinal">–</div><div class="l">Final Dataset</div></div>
-    <div class="process-arrow">→</div>
-    <div class="process-step"><div class="n">768-D</div><div class="l">SPECTER2 Embedding</div></div>
+
+```
+<div class="process-step">
+    <div class="n" id="flowClean">–</div>
+    <div class="l">Clean Dataset</div>
 </div>
 
-<div class="explanation" style="margin:0 20px 20px;">
-<div class="explanation-title">💡 คำอธิบาย</div>
-<p>
-เว็บนี้ใช้ข้อมูล 2 ชุด ตามหน้าที่: <strong>Clean Dataset</strong> (ก่อนทำ EID) สำหรับภาพรวมทั่วไปในส่วนนี้
-และ <strong>Final Dataset</strong> (หลังทำ EID) สำหรับกราฟ Keyword, Author, ปีที่ตีพิมพ์, Research Areas และ Embedding ด้านล่าง
-ตัวเลขทั้งหมดคำนวณจากไฟล์ข้อมูลจริง ไม่มีการใส่ค่าคงที่ในโค้ด
-</p>
+<div class="process-arrow">
+    →
+</div>
+
+<div class="process-step">
+    <div class="n">EID</div>
+    <div class="l">Cross-Subject Deduplication</div>
+</div>
+
+<div class="process-arrow">
+    →
+</div>
+
+<div class="process-step">
+    <div class="n" id="flowFinal">–</div>
+    <div class="l">Final Dataset</div>
+</div>
+
+<div class="process-arrow">
+    →
+</div>
+
+<div class="process-step">
+    <div class="n">768-D</div>
+    <div class="l">SPECTER2 Embedding</div>
+</div>
+```
+
 </div>
 
 </section>
@@ -2713,44 +2732,62 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
    LOAD REAL DATA
    ---------------------------------------------------------
    sleep.html และ JSON ทั้ง 3 ไฟล์อยู่โฟลเดอร์เดียวกัน
-   ดังนั้นไม่ใช้ /data/ อีกต่อไป
+   ไม่ใช้ data/
 ========================================================= */
 
 const DATA_BASE = "./";
 
+
 async function loadJSON(name){
 
-    const url = DATA_BASE + name;
+    const url =
+        DATA_BASE + name;
 
-    const res = await fetch(url, {
-        cache:"no-store"
-    });
+    const res =
+        await fetch(
+            url,
+            {
+                cache:"no-store"
+            }
+        );
 
     if(!res.ok){
+
         throw new Error(
             `Failed to load ${name} (${res.status})`
         );
+
     }
 
     return res.json();
+
 }
 
+
 function baseLayout(){
+
     return {
+
         paper_bgcolor:"#ffffff",
+
         plot_bgcolor:"#ffffff",
+
         font:{
             family:"Arial, Noto Sans Thai",
             color:"#405442"
         },
+
         margin:{
             l:50,
             r:25,
             t:20,
             b:50
         }
+
     };
+
 }
+
 
 (async function init(){
 
@@ -2758,37 +2795,71 @@ function baseLayout(){
     let finalData;
     let embedData;
 
+
     try{
 
         [
             cleanData,
             finalData,
             embedData
-        ] = await Promise.all([
 
-            loadJSON("clean_summary.json"),
+        ] =
+        await Promise.all([
 
-            loadJSON("final_summary.json"),
+            loadJSON(
+                "clean_summary.json"
+            ),
 
-            loadJSON("embedding_summary.json")
+            loadJSON(
+                "final_summary.json"
+            ),
+
+            loadJSON(
+                "embedding_summary.json"
+            )
 
         ]);
 
-        console.log("Clean data loaded:", cleanData);
-        console.log("Final data loaded:", finalData);
-        console.log("Embedding data loaded:", embedData);
+
+        console.log(
+            "Clean data loaded:",
+            cleanData
+        );
+
+        console.log(
+            "Final data loaded:",
+            finalData
+        );
+
+        console.log(
+            "Embedding data loaded:",
+            embedData
+        );
+
 
     }catch(err){
 
-        const errorBox = document.createElement("div");
+        const errorBox =
+            document.createElement(
+                "div"
+            );
 
-        errorBox.className = "explanation";
 
-        errorBox.style.marginBottom = "20px";
+        errorBox.className =
+            "explanation";
 
-        errorBox.style.borderColor = "#e3b7b7";
 
-        errorBox.style.color = "#7a4646";
+        errorBox.style.marginBottom =
+            "20px";
+
+
+        errorBox.style.borderColor =
+            "#e3b7b7";
+
+
+        errorBox.style.color =
+            "#7a4646";
+
 
         errorBox.innerHTML = `
 
@@ -2811,23 +2882,49 @@ function baseLayout(){
             </p>
 
             <ul>
-                <li>clean_summary.json</li>
-                <li>final_summary.json</li>
-                <li>embedding_summary.json</li>
+
+                <li>
+                    clean_summary.json
+                </li>
+
+                <li>
+                    final_summary.json
+                </li>
+
+                <li>
+                    embedding_summary.json
+                </li>
+
             </ul>
 
         `;
 
+
         document
-            .querySelector(".container")
+            .querySelector(
+                ".container"
+            )
             .insertBefore(
+
                 errorBox,
-                document.querySelector(".container").firstChild
+
+                document
+                    .querySelector(
+                        ".container"
+                    )
+                    .firstChild
+
             );
 
-        console.error("Data loading error:", err);
+
+        console.error(
+            "Data loading error:",
+            err
+        );
+
 
         return;
+
     }
 
 
@@ -2835,64 +2932,144 @@ function baseLayout(){
        KPIs
     ===================================================== */
 
-    document.getElementById("kpiArticles").textContent =
-        finalData.total_articles.toLocaleString();
+    document
+        .getElementById(
+            "kpiArticles"
+        )
+        .textContent =
+            finalData.total_articles
+                .toLocaleString();
 
-    document.getElementById("kpiKeywords").textContent =
-        finalData.unique_keywords_normalized.toLocaleString();
 
-    document.getElementById("kpiDims").textContent =
-        embedData.dimensions;
+    document
+        .getElementById(
+            "kpiKeywords"
+        )
+        .textContent =
+            finalData
+                .unique_keywords_normalized
+                .toLocaleString();
 
-    document.getElementById("kpiAreas").textContent =
-        Object.keys(finalData.research_areas).length;
+
+    document
+        .getElementById(
+            "kpiDims"
+        )
+        .textContent =
+            embedData.dimensions;
+
+
+    document
+        .getElementById(
+            "kpiAreas"
+        )
+        .textContent =
+            Object.keys(
+                finalData.research_areas
+            ).length;
 
 
     /* =====================================================
        PROCESS FLOW
     ===================================================== */
 
-    document.getElementById("flowClean").textContent =
-        cleanData.total_articles.toLocaleString();
+    document
+        .getElementById(
+            "flowClean"
+        )
+        .textContent =
+            cleanData.total_articles
+                .toLocaleString();
 
-    document.getElementById("flowFinal").textContent =
-        finalData.total_articles.toLocaleString();
+
+    document
+        .getElementById(
+            "flowFinal"
+        )
+        .textContent =
+            finalData.total_articles
+                .toLocaleString();
 
 
     /* =====================================================
        EMBEDDING INFO
     ===================================================== */
 
-    document.getElementById("embedTextUsed").textContent =
-        embedData.text_used_for_embedding;
+    document
+        .getElementById(
+            "embedTextUsed"
+        )
+        .textContent =
+            embedData.text_used_for_embedding;
 
-    document.getElementById("embArticles").textContent =
-        embedData.articles.toLocaleString();
 
-    document.getElementById("embModel").textContent =
-        embedData.model;
+    document
+        .getElementById(
+            "embArticles"
+        )
+        .textContent =
+            embedData.articles
+                .toLocaleString();
 
-    document.getElementById("embDims").textContent =
-        embedData.dimensions;
 
-    document.getElementById("embShape").textContent =
-        embedData.matrix_shape;
+    document
+        .getElementById(
+            "embModel"
+        )
+        .textContent =
+            embedData.model;
 
-    document.getElementById("embNan").textContent =
-        embedData.nan_count;
 
-    document.getElementById("embInf").textContent =
-        embedData.inf_count;
+    document
+        .getElementById(
+            "embDims"
+        )
+        .textContent =
+            embedData.dimensions;
 
-    document.getElementById("embText").textContent =
-        embedData.articles.toLocaleString();
+
+    document
+        .getElementById(
+            "embShape"
+        )
+        .textContent =
+            embedData.matrix_shape;
+
+
+    document
+        .getElementById(
+            "embNan"
+        )
+        .textContent =
+            embedData.nan_count;
+
+
+    document
+        .getElementById(
+            "embInf"
+        )
+        .textContent =
+            embedData.inf_count;
+
+
+    document
+        .getElementById(
+            "embText"
+        )
+        .textContent =
+            embedData.articles
+                .toLocaleString();
 
 
     /* =====================================================
        FOOTER
     ===================================================== */
 
-    document.getElementById("siteFooter").innerHTML =
+    document
+        .getElementById(
+            "siteFooter"
+        )
+        .innerHTML =
 
         `🌱🌸 Scopus Data Analysis · ` +
 
@@ -2910,10 +3087,16 @@ function baseLayout(){
     (function(){
 
         const data =
-            [...finalData.top_keywords].reverse();
+            [
+                ...finalData.top_keywords
+            ]
+            .reverse();
+
 
         Plotly.newPlot(
+
             "keywords",
+
             [{
 
                 type:"bar",
@@ -2922,12 +3105,14 @@ function baseLayout(){
 
                 y:
                     data.map(
-                        x => x.keyword
+                        x =>
+                            x.keyword
                     ),
 
                 x:
                     data.map(
-                        x => x.count
+                        x =>
+                            x.count
                     ),
 
                 marker:{
@@ -2946,11 +3131,15 @@ function baseLayout(){
                 },
 
                 hovertemplate:
+
                     "<b>%{y}</b><br>" +
+
                     "Articles: %{x}" +
+
                     "<extra></extra>"
 
             }],
+
             {
 
                 ...baseLayout(),
@@ -2976,23 +3165,37 @@ function baseLayout(){
                 showlegend:false
 
             },
+
             {
+
                 responsive:true,
+
                 displaylogo:false
+
             }
+
         );
+
 
         const top3 =
             finalData.top_keywords
-            .slice(0,3)
-            .map(
-                k =>
-                    `${k.keyword} ${k.count.toLocaleString()} บทความ`
-            )
-            .join(", ");
+                .slice(
+                    0,
+                    3
+                )
+                .map(
+                    k =>
+                        `${k.keyword} ${k.count.toLocaleString()} บทความ`
+                )
+                .join(
+                    ", "
+                );
+
 
         document
-            .getElementById("kwSummaryText")
+            .getElementById(
+                "kwSummaryText"
+            )
             .textContent =
                 `จากข้อมูลจริง Keyword ที่พบมากที่สุดคือ ${top3}`;
 
@@ -3006,13 +3209,18 @@ function baseLayout(){
     (function(){
 
         const data =
-            [...finalData.top_authors]
+            [
+                ...finalData.top_authors
+            ]
             .sort(
                 (a,b) =>
-                    b.count - a.count
+                    b.count -
+                    a.count
             );
 
+
         const floralColors = [
+
             "#F48FB1",
             "#BA8DE3",
             "#81CFC1",
@@ -3023,10 +3231,14 @@ function baseLayout(){
             "#F29E8F",
             "#8DD3C7",
             "#C4A7E7"
+
         ];
 
+
         Plotly.newPlot(
+
             "authors",
+
             [{
 
                 x:
@@ -3078,11 +3290,15 @@ function baseLayout(){
                 },
 
                 hovertemplate:
+
                     "<b>%{text}</b><br>" +
+
                     "Publications: %{y}" +
+
                     "<extra></extra>"
 
             }],
+
             {
 
                 ...baseLayout(),
@@ -3108,10 +3324,15 @@ function baseLayout(){
                 showlegend:false
 
             },
+
             {
+
                 responsive:true,
+
                 displayModeBar:false
+
             }
+
         );
 
     })();
@@ -3124,18 +3345,26 @@ function baseLayout(){
     (function(){
 
         const years =
-            Object.keys(
-                finalData.publications_by_year
-            ).sort();
+            Object
+                .keys(
+                    finalData
+                        .publications_by_year
+                )
+                .sort();
+
 
         const counts =
             years.map(
                 y =>
-                    finalData.publications_by_year[y]
+                    finalData
+                        .publications_by_year[y]
             );
 
+
         Plotly.newPlot(
+
             "years",
+
             [{
 
                 type:"scatter",
@@ -3163,11 +3392,15 @@ function baseLayout(){
                     "rgba(113,152,115,.15)",
 
                 hovertemplate:
+
                     "Year: %{x}<br>" +
+
                     "Articles: %{y}" +
+
                     "<extra></extra>"
 
             }],
+
             {
 
                 ...baseLayout(),
@@ -3189,10 +3422,15 @@ function baseLayout(){
                     "x unified"
 
             },
+
             {
+
                 responsive:true,
+
                 displaylogo:false
+
             }
+
         );
 
     })();
@@ -3209,16 +3447,20 @@ function baseLayout(){
                 "researchPie"
             );
 
+
         const labels =
             Object.keys(
                 finalData.research_areas
             );
 
+
         const values =
             labels.map(
                 l =>
-                    finalData.research_areas[l]
+                    finalData
+                        .research_areas[l]
             );
+
 
         document
             .getElementById(
@@ -3227,7 +3469,9 @@ function baseLayout(){
             .textContent =
                 labels.length;
 
+
         const colors = [
+
             "#A9D58F",
             "#9FC1DF",
             "#E7C76E",
@@ -3238,10 +3482,14 @@ function baseLayout(){
             "#D9B383",
             "#AAB8CD",
             "#9DC49A"
+
         ];
 
+
         Plotly.newPlot(
+
             pie,
+
             [{
 
                 type:"pie",
@@ -3263,13 +3511,15 @@ function baseLayout(){
                 textposition:"outside",
 
                 textfont:{
-                    family:"Arial, Noto Sans Thai",
+                    family:
+                        "Arial, Noto Sans Thai",
                     size:10,
                     color:"#526354"
                 },
 
                 marker:{
                     colors:colors,
+
                     line:{
                         color:"#ffffff",
                         width:3
@@ -3277,11 +3527,15 @@ function baseLayout(){
                 },
 
                 hovertemplate:
+
                     "<b>%{label}</b><br>" +
+
                     "%{value} Articles" +
+
                     "<extra></extra>"
 
             }],
+
             {
 
                 paper_bgcolor:
@@ -3300,6 +3554,7 @@ function baseLayout(){
                 showlegend:false
 
             },
+
             {
 
                 responsive:true,
@@ -3307,6 +3562,7 @@ function baseLayout(){
                 displaylogo:false,
 
                 modeBarButtonsToRemove:[
+
                     "toImage",
                     "zoom2d",
                     "pan2d",
@@ -3317,10 +3573,13 @@ function baseLayout(){
                     "hoverClosestCartesian",
                     "hoverCompareCartesian",
                     "toggleSpikelines"
+
                 ]
 
             }
+
         );
+
 
         pie.on(
             "plotly_click",
@@ -3334,42 +3593,63 @@ function baseLayout(){
                     return;
                 }
 
+
                 const index =
-                    event.points[0].pointNumber;
+                    event.points[0]
+                        .pointNumber;
+
 
                 const current =
-                    pie.data[0].pull || [];
+                    pie.data[0].pull ||
+                    [];
+
 
                 const next =
                     labels.map(
                         (v,i) =>
                             i === index
-                            ? (
-                                Number(
-                                    current[i] || 0
-                                ) > 0
-                                    ? 0
-                                    : .10
-                            )
-                            : 0
+                                ? (
+                                    Number(
+                                        current[i] ||
+                                        0
+                                    ) > 0
+                                        ? 0
+                                        : .10
+                                )
+                                : 0
                     );
 
+
                 Plotly.restyle(
+
                     pie,
+
                     {
-                        pull:[next]
+                        pull:[
+                            next
+                        ]
                     },
+
                     [0]
+
                 );
 
             }
         );
 
+
         window.addEventListener(
+
             "resize",
+
             function(){
-                Plotly.Plots.resize(pie);
+
+                Plotly.Plots.resize(
+                    pie
+                );
+
             }
+
         );
 
     })();
@@ -3403,21 +3683,29 @@ function baseLayout(){
                 "featureCenterTitle"
             )
             .textContent =
-                finalData.total_articles.toLocaleString() +
-                " Articles";
+
+            finalData
+                .total_articles
+                .toLocaleString() +
+
+            " Articles";
+
 
         const field =
             document.getElementById(
                 "featureField"
             );
 
+
         const svg =
             document.getElementById(
                 "featureSvg"
             );
 
+
         const kws =
             finalData.top_keywords;
+
 
         kws.forEach(
             (item,i)=>{
@@ -3431,16 +3719,20 @@ function baseLayout(){
                         size:30
                     };
 
+
                 const flower =
                     document.createElement(
                         "div"
                     );
 
+
                 flower.className =
                     "feature-flower";
 
+
                 flower.style.left =
                     pos.x + "%";
+
 
                 flower.style.top =
                     pos.y + "%";
@@ -3451,11 +3743,14 @@ function baseLayout(){
                         "div"
                     );
 
+
                 emoji.className =
                     "emoji";
 
+
                 emoji.style.fontSize =
                     pos.size + "px";
+
 
                 emoji.textContent =
                     pos.icon;
@@ -3466,8 +3761,10 @@ function baseLayout(){
                         "div"
                     );
 
+
                 label.className =
                     "label";
+
 
                 label.textContent =
                     item.keyword;
@@ -3478,11 +3775,14 @@ function baseLayout(){
                         "div"
                     );
 
+
                 count.className =
                     "count";
 
+
                 count.textContent =
-                    item.count.toLocaleString();
+                    item.count
+                        .toLocaleString();
 
 
                 flower.appendChild(
@@ -3504,6 +3804,7 @@ function baseLayout(){
 
                         e.stopPropagation();
 
+
                         field
                             .querySelectorAll(
                                 ".feature-flower"
@@ -3515,7 +3816,9 @@ function baseLayout(){
                                     )
                             );
 
+
                         void flower.offsetWidth;
+
 
                         flower.classList.add(
                             "selected"
@@ -3558,11 +3861,13 @@ function baseLayout(){
                 group:"ai",
 
                 points:[
+
                     featurePositions[0],
                     featurePositions[1],
                     featurePositions[2],
                     featurePositions[3],
                     featurePositions[4]
+
                 ]
             },
 
@@ -3570,10 +3875,12 @@ function baseLayout(){
                 group:"vision",
 
                 points:[
+
                     featurePositions[5],
                     featurePositions[6],
                     featurePositions[7],
                     featurePositions[8]
+
                 ]
             },
 
@@ -3581,9 +3888,11 @@ function baseLayout(){
                 group:"data",
 
                 points:[
+
                     featurePositions[4],
                     featurePositions[5],
                     featurePositions[7]
+
                 ]
             },
 
@@ -3591,9 +3900,11 @@ function baseLayout(){
                 group:"tech",
 
                 points:[
+
                     featurePositions[7],
                     featurePositions[8],
                     featurePositions[9]
+
                 ]
             }
 
@@ -3605,16 +3916,23 @@ function baseLayout(){
             const rect =
                 field.getBoundingClientRect();
 
+
             const width =
                 rect.width;
+
 
             const height =
                 rect.height;
 
+
             svg.setAttribute(
+
                 "viewBox",
+
                 `0 0 ${width} ${height}`
+
             );
+
 
             svg.innerHTML = "";
 
@@ -3623,52 +3941,87 @@ function baseLayout(){
                 group=>{
 
                     for(
+
                         let i=0;
-                        i<group.points.length-1;
+
+                        i <
+                        group.points.length-1;
+
                         i++
+
                     ){
 
                         const a =
                             group.points[i];
 
+
                         const b =
                             group.points[i+1];
 
-                        if(!a || !b){
+
+                        if(
+                            !a ||
+                            !b
+                        ){
                             continue;
                         }
 
+
                         const line =
                             document.createElementNS(
+
                                 "http://www.w3.org/2000/svg",
+
                                 "line"
+
                             );
 
+
                         line.setAttribute(
+
                             "x1",
+
                             a.x/100*width
+
                         );
 
+
                         line.setAttribute(
+
                             "y1",
+
                             a.y/100*height
+
                         );
 
+
                         line.setAttribute(
+
                             "x2",
+
                             b.x/100*width
+
                         );
 
+
                         line.setAttribute(
+
                             "y2",
+
                             b.y/100*height
+
                         );
 
+
                         line.setAttribute(
+
                             "class",
+
                             "feature-line " +
                             group.group
+
                         );
+
 
                         svg.appendChild(
                             line
@@ -3681,10 +4034,12 @@ function baseLayout(){
 
         }
 
+
         setTimeout(
             draw,
             200
         );
+
 
         window.addEventListener(
             "resize",
@@ -3705,10 +4060,12 @@ function baseLayout(){
                 "coField"
             );
 
+
         const svg =
             document.getElementById(
                 "coSvg"
             );
+
 
         const kws =
             finalData.top_keywords;
@@ -3733,8 +4090,11 @@ function baseLayout(){
         const center = {
 
             keyword:
+
                 kws[1]
+
                     ? kws[1].keyword
+
                     : "Artificial Intelligence",
 
             x:50,
@@ -3765,14 +4125,19 @@ function baseLayout(){
                     (k,i)=>
                         ({
                             ...k,
+
                             ...(
+
                                 coPositions[i] ||
+
                                 {
                                     x:50,
                                     y:50,
                                     icon:"🌸"
                                 }
+
                             )
+
                         })
                 );
 
@@ -3794,11 +4159,14 @@ function baseLayout(){
                         "div"
                     );
 
+
                 flower.className =
                     "co-flower";
 
+
                 flower.style.left =
                     item.x + "%";
+
 
                 flower.style.top =
                     item.y + "%";
@@ -3810,8 +4178,10 @@ function baseLayout(){
                         maxCount
                     );
 
+
                 const size =
-                    28 + ratio*38;
+                    28 +
+                    ratio*38;
 
 
                 const icon =
@@ -3819,11 +4189,14 @@ function baseLayout(){
                         "div"
                     );
 
+
                 icon.className =
                     "icon";
 
+
                 icon.style.fontSize =
                     size + "px";
+
 
                 icon.textContent =
                     item.icon;
@@ -3834,8 +4207,10 @@ function baseLayout(){
                         "div"
                     );
 
+
                 name.className =
                     "name";
+
 
                 name.textContent =
                     item.keyword;
@@ -3846,20 +4221,25 @@ function baseLayout(){
                         "div"
                     );
 
+
                 count.className =
                     "count";
 
+
                 count.textContent =
-                    item.count.toLocaleString();
+                    item.count
+                        .toLocaleString();
 
 
                 flower.appendChild(
                     icon
                 );
 
+
                 flower.appendChild(
                     name
                 );
+
 
                 flower.appendChild(
                     count
@@ -3867,8 +4247,11 @@ function baseLayout(){
 
 
                 flower.title =
+
                     item.keyword +
+
                     "\nFrequency: " +
+
                     item.count;
 
 
@@ -3877,6 +4260,7 @@ function baseLayout(){
                     function(e){
 
                         e.stopPropagation();
+
 
                         field
                             .querySelectorAll(
@@ -3889,7 +4273,9 @@ function baseLayout(){
                                     )
                             );
 
+
                         void flower.offsetWidth;
+
 
                         flower.classList.add(
                             "selected"
@@ -3926,14 +4312,19 @@ function baseLayout(){
         );
 
 
-        function getPos(keyword){
+        function getPos(
+            keyword
+        ){
 
             if(
                 keyword ===
                 center.keyword
             ){
+
                 return center;
+
             }
+
 
             return flowers.find(
                 f =>
@@ -3949,23 +4340,31 @@ function baseLayout(){
             const rect =
                 field.getBoundingClientRect();
 
+
             const width =
                 rect.width;
+
 
             const height =
                 rect.height;
 
 
             svg.setAttribute(
+
                 "viewBox",
+
                 `0 0 ${width} ${height}`
+
             );
+
 
             svg.innerHTML = "";
 
 
             (
-                finalData.keyword_cooccurrence_top10 ||
+                finalData
+                    .keyword_cooccurrence_top10
+                ||
                 []
             )
             .forEach(
@@ -3975,6 +4374,7 @@ function baseLayout(){
                         getPos(
                             conn.a
                         );
+
 
                     const to =
                         getPos(
@@ -3986,18 +4386,23 @@ function baseLayout(){
                         !from ||
                         !to
                     ){
+
                         return;
+
                     }
 
 
                     const x1 =
                         from.x/100*width;
 
+
                     const y1 =
                         from.y/100*height;
 
+
                     const x2 =
                         to.x/100*width;
+
 
                     const y2 =
                         to.y/100*height;
@@ -4006,6 +4411,7 @@ function baseLayout(){
                     const midX =
                         (x1+x2)/2;
 
+
                     const midY =
                         (y1+y2)/2;
 
@@ -4013,13 +4419,14 @@ function baseLayout(){
                     const dx =
                         x2-x1;
 
+
                     const dy =
                         y2-y1;
 
 
                     const distance =
                         Math.sqrt(
-                            dx*dx+
+                            dx*dx +
                             dy*dy
                         );
 
@@ -4034,6 +4441,7 @@ function baseLayout(){
                     let controlX =
                         midX;
 
+
                     let controlY =
                         midY;
 
@@ -4047,6 +4455,7 @@ function baseLayout(){
                             dy/distance*
                             curve;
 
+
                         controlY =
                             midY +
                             dx/distance*
@@ -4057,14 +4466,20 @@ function baseLayout(){
 
                     const path =
                         document.createElementNS(
+
                             "http://www.w3.org/2000/svg",
+
                             "path"
+
                         );
 
 
                     path.setAttribute(
+
                         "d",
+
                         `M ${x1} ${y1} Q ${controlX} ${controlY} ${x2} ${y2}`
+
                     );
 
 
@@ -4073,7 +4488,8 @@ function baseLayout(){
 
 
                     if(
-                        conn.count >= 20
+                        conn.count >=
+                        20
                     ){
 
                         cls =
@@ -4082,7 +4498,8 @@ function baseLayout(){
                     }
 
                     else if(
-                        conn.count >= 8
+                        conn.count >=
+                        8
                     ){
 
                         cls =
@@ -4098,8 +4515,11 @@ function baseLayout(){
 
 
                     path.setAttribute(
+
                         "title",
+
                         `${conn.a} + ${conn.b}: ${conn.count}`
+
                     );
 
 
@@ -4117,6 +4537,7 @@ function baseLayout(){
             drawNetwork,
             200
         );
+
 
         window.addEventListener(
             "resize",
