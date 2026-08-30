@@ -1,0 +1,25 @@
+
+{
+  "articles": 5427,
+  "model": "SPECTER2",
+  "dimensions": 768,
+  "matrix_shape": "5427 x 768",
+  "nan_count": 0,
+  "inf_count": 0,
+  "text_used_for_embedding": [
+    "Title",
+    "Abstract",
+    "Author Keywords",
+    "Index Keywords"
+  ],
+  "embedding_text_column": "embedding_text",
+  "description": "SPECTER2 embeddings generated from the final deduplicated dataset. Each article is represented as a 768-dimensional vector.",
+  "feature_matrix": {
+    "rows": 5427,
+    "columns": 768,
+    "shape": "5427 x 768",
+    "nan": 0,
+    "inf": 0
+  }
+}
+
