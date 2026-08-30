@@ -1596,6 +1596,22 @@ body{
 
 
 /* =========================================================
+   CO-EDGE LABELS
+========================================================= */
+
+.co-edge-label{
+    font-family:Arial,"Noto Sans Thai",sans-serif;
+    font-size:11px;
+    font-weight:800;
+    fill:#657365;
+    paint-order:stroke;
+    stroke:#ffffff;
+    stroke-width:4px;
+    stroke-linejoin:round;
+    pointer-events:none;
+}
+
+/* =========================================================
    CO CENTER
 ========================================================= */
 
@@ -2064,9 +2080,7 @@ footer{
     📚 ARTICLES (FINAL)
 </div>
 
-<div class="kpi-value" id="kpiArticles">
-    –
-</div>
+<div class="kpi-value" id="kpiArticles">5,427</div>
 
 <div class="kpi-small">
     Articles after EID deduplication
@@ -2080,9 +2094,7 @@ footer{
     🔑 UNIQUE KEYWORDS
 </div>
 
-<div class="kpi-value" id="kpiKeywords">
-    –
-</div>
+<div class="kpi-value" id="kpiKeywords">18,136</div>
 
 <div class="kpi-small">
     Unique normalized keywords (final dataset)
@@ -2096,9 +2108,7 @@ footer{
     🧠 EMBEDDING FEATURES
 </div>
 
-<div class="kpi-value" id="kpiDims">
-    –
-</div>
+<div class="kpi-value" id="kpiDims">768</div>
 
 <div class="kpi-small">
     SPECTER2 dimensions
@@ -2112,9 +2122,7 @@ footer{
     🏷️ RESEARCH AREAS
 </div>
 
-<div class="kpi-value" id="kpiAreas">
-    –
-</div>
+<div class="kpi-value" id="kpiAreas">10</div>
 
 <div class="kpi-small">
     Subject groups
@@ -2145,7 +2153,7 @@ footer{
 <div class="process-flow" id="processFlow">
 
 <div class="process-step">
-    <div class="n" id="flowClean">–</div>
+    <div class="n" id="flowClean">5,703</div>
     <div class="l">Clean Dataset</div>
 </div>
 
@@ -2163,7 +2171,7 @@ footer{
 </div>
 
 <div class="process-step">
-    <div class="n" id="flowFinal">–</div>
+    <div class="n" id="flowFinal">5,427</div>
     <div class="l">Final Dataset</div>
 </div>
 
@@ -2221,9 +2229,7 @@ footer{
 โดยคำนวณจาก Final Dataset (หลังทำ EID) ทั้งหมด
 </p>
 
-<p id="kwSummaryText">
-กำลังโหลดข้อมูล...
-</p>
+<p id="kwSummaryText">Deep Learning 283 บทความ · Artificial Intelligence 247 บทความ · Machine Learning 204 บทความ</p>
 
 </div>
 
@@ -2400,9 +2406,7 @@ footer{
     Text used for embedding
 </div>
 
-<p id="embedTextUsed">
-    –
-</p>
+<p id="embedTextUsed">Title + Abstract + Author Keywords + Index Keywords</p>
 
 <div class="embedding-grid">
 
@@ -2412,9 +2416,7 @@ footer{
     Articles
 </div>
 
-<div class="value" id="embArticles">
-    –
-</div>
+<div class="value" id="embArticles">5,427</div>
 
 </div>
 
@@ -2424,9 +2426,7 @@ footer{
     Embedding Model
 </div>
 
-<div class="value" id="embModel">
-    –
-</div>
+<div class="value" id="embModel">SPECTER2</div>
 
 </div>
 
@@ -2436,9 +2436,7 @@ footer{
     Feature Dimensions
 </div>
 
-<div class="value" id="embDims">
-    –
-</div>
+<div class="value" id="embDims">768</div>
 
 </div>
 
@@ -2448,9 +2446,7 @@ footer{
     Matrix Shape
 </div>
 
-<div class="value" id="embShape">
-    –
-</div>
+<div class="value" id="embShape">5427 x 768</div>
 
 </div>
 
@@ -2464,9 +2460,7 @@ footer{
     NaN
 </div>
 
-<div class="value" id="embNan">
-    –
-</div>
+<div class="value" id="embNan">0</div>
 
 </div>
 
@@ -2476,9 +2470,7 @@ footer{
     Infinity
 </div>
 
-<div class="value" id="embInf">
-    –
-</div>
+<div class="value" id="embInf">0</div>
 
 </div>
 
@@ -2488,9 +2480,7 @@ footer{
     Embedding Text
 </div>
 
-<div class="value" id="embText">
-    –
-</div>
+<div class="value" id="embText">4 fields</div>
 
 </div>
 
@@ -2701,9 +2691,7 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
     🌺
 </div>
 
-<div class="title" id="featureCenterTitle">
-    – Articles
-</div>
+<div class="title" id="featureCenterTitle">5,427 Articles</div>
 
 </div>
 
@@ -2935,6 +2923,18 @@ document.getElementById("siteFooter").innerHTML=
     `🌱🌸 Scopus Data Analysis · ${formatNumber(finalData.total_articles)} Articles (Final) · ${formatNumber(cleanData.total_articles)} Articles (Clean) · SPECTER2 ${embedData.dimensions}-D · 🦋🌼`;
 
 /* =========================================================
+   PLOTLY FALLBACK
+========================================================= */
+if(typeof Plotly === "undefined"){
+    ["keywords","authors","years","researchPie"].forEach(id=>{
+        const el=document.getElementById(id);
+        if(el){
+            el.innerHTML="<div style='padding:30px;text-align:center;color:#718071;'>Visualization library unavailable. Data values are still shown on this page.</div>";
+        }
+    });
+}
+
+/* =========================================================
    TOP KEYWORDS — FREQUENCY
 ========================================================= */
 (function(){
@@ -2944,7 +2944,7 @@ document.getElementById("siteFooter").innerHTML=
         document.getElementById("keywords").innerHTML="<div class='explanation'>ไม่มีข้อมูล Top Keywords</div>";
         return;
     }
-    Plotly.newPlot("keywords",[{
+    if(typeof Plotly !== "undefined") Plotly.newPlot("keywords",[{
         type:"bar",
         orientation:"h",
         y:data.map(d=>d.keyword),
@@ -2975,7 +2975,7 @@ document.getElementById("siteFooter").innerHTML=
         return;
     }
     const floralColors=["#F48FB1","#BA8DE3","#81CFC1","#F6C85F","#89B8E8","#E99AC7","#A7C957","#F29E8F","#8DD3C7","#C4A7E7"];
-    Plotly.newPlot("authors",[{
+    if(typeof Plotly !== "undefined") Plotly.newPlot("authors",[{
         x:data.map((d,i)=>i+1),
         y:data.map(d=>numberValue(d.count)),
         text:data.map(d=>d.author),
@@ -3009,7 +3009,7 @@ document.getElementById("siteFooter").innerHTML=
         document.getElementById("years").innerHTML="<div class='explanation'>ไม่มีข้อมูล Publications by Year</div>";
         return;
     }
-    Plotly.newPlot("years",[{
+    if(typeof Plotly !== "undefined") Plotly.newPlot("years",[{
         type:"scatter",
         mode:"lines+markers",
         x:years,
@@ -3040,7 +3040,7 @@ document.getElementById("siteFooter").innerHTML=
         return;
     }
     const colors=["#A9D58F","#9FC1DF","#E7C76E","#DFA0A0","#BEA4DC","#DDA9C1","#91C8B5","#D9B383","#AAB8CD","#9DC49A"];
-    Plotly.newPlot(pie,[{
+    if(typeof Plotly !== "undefined") Plotly.newPlot(pie,[{
         type:"pie",
         labels,
         values,
@@ -3059,14 +3059,14 @@ document.getElementById("siteFooter").innerHTML=
         margin:{l:65,r:65,t:35,b:35},
         showlegend:false
     },{responsive:true,displaylogo:false,modeBarButtonsToRemove:["toImage","zoom2d","pan2d","select2d","lasso2d","autoScale2d","resetScale2d","hoverClosestCartesian","hoverCompareCartesian","toggleSpikelines"]});
-    pie.on("plotly_click",function(event){
+    if(typeof Plotly !== "undefined") pie.on("plotly_click",function(event){
         if(!event?.points?.length)return;
         const index=event.points[0].pointNumber;
         const current=pie.data[0].pull||[];
         const next=labels.map((_,i)=>i===index?(Number(current[i]||0)>0?0:.10):0);
         Plotly.restyle(pie,{pull:[next]},[0]);
     });
-    window.addEventListener("resize",()=>Plotly.Plots.resize(pie));
+    if(typeof Plotly !== "undefined") window.addEventListener("resize",()=>Plotly.Plots.resize(pie));
 })();
 
 /* =========================================================
