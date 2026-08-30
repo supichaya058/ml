@@ -574,9 +574,36 @@ body{
 
 .feature-line{
     fill:none;
+    stroke:#9aaa94;
     stroke-width:1.5;
     stroke-linecap:round;
-    stroke-opacity:.18
+    stroke-opacity:.25;
+}
+
+.feature-line.ai{
+    stroke:#d77d9d;
+}
+
+.feature-line.vision{
+    stroke:#7099d0;
+}
+
+.feature-line.data{
+    stroke:#d5a34b;
+}
+
+.feature-line.tech{
+    stroke:#7da46f;
+}
+
+.feature-line.medium{
+    stroke-width:2.5;
+    stroke-opacity:.42;
+}
+
+.feature-line.strong{
+    stroke-width:3.5;
+    stroke-opacity:.60;
 }
 
 .feature-line.ai{
@@ -2705,98 +2732,100 @@ pie.on(
 
 
     function draw(){
+  const r=field.getBoundingClientRect();
+  const w=r.width;
+  const h=r.height;
 
-        const r=
-            field.getBoundingClientRect();
+  svg.setAttribute('viewBox',`0 0 ${w} ${h}`);
+  svg.innerHTML='';
 
-        const w=r.width;
-        const h=r.height;
+  /*
+   * เชื่อมเส้นตามข้อมูล Keyword Co-occurrence จริง
+   * ไม่ใช่เชื่อมตามลำดับของกลุ่ม
+   */
+  DATA.co.forEach(c=>{
 
+    const a=DATA.positions[c.a];
+    const b=DATA.positions[c.b];
 
-        svg.setAttribute(
-            "viewBox",
-            `0 0 ${w} ${h}`
-        );
+    // ถ้าไม่มีตำแหน่งของ keyword ตัวใดตัวหนึ่ง ให้ข้าม
+    if(!a || !b) return;
 
-        svg.innerHTML="";
+    const x1=(a[0]/100)*w;
+    const y1=(a[1]/100)*h;
 
+    const x2=(b[0]/100)*w;
+    const y2=(b[1]/100)*h;
 
-        Object.entries(
-            DATA.groups
-        ).forEach(
-            ([g,arr])=>{
+    const dx=x2-x1;
+    const dy=y2-y1;
 
-                const meta=
-                    groupMeta[g];
+    const distance=Math.sqrt(dx*dx+dy*dy);
 
-                if(!meta){
-                    return;
-                }
+    // ทำเส้นโค้งเล็กน้อยเพื่อไม่ให้ทับกัน
+    const curve=Math.min(45,distance*0.18);
 
+    const cx=(x1+x2)/2-(distance ? dy/distance*curve : 0);
+    const cy=(y1+y2)/2+(distance ? dx/distance*curve : 0);
 
-                const pts=
-                    arr
-                    .map(
-                        k=>DATA.positions[k]
-                    )
-                    .filter(Boolean);
+    const path=document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'path'
+    );
 
+    path.setAttribute(
+      'd',
+      `M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`
+    );
 
-                for(
-                    let i=0;
-                    i<pts.length-1;
-                    i++
-                ){
+    /*
+     * ความหนาของเส้นตามจำนวนการเกิดร่วมกัน
+     */
+    let className='feature-line';
 
-                    const a=pts[i];
-                    const b=pts[i+1];
-
-
-                    const line=
-                        document.createElementNS(
-                            "http://www.w3.org/2000/svg",
-                            "line"
-                        );
-
-
-                    line.setAttribute(
-                        "x1",
-                        a[0]/100*w
-                    );
-
-                    line.setAttribute(
-                        "y1",
-                        a[1]/100*h
-                    );
-
-                    line.setAttribute(
-                        "x2",
-                        b[0]/100*w
-                    );
-
-                    line.setAttribute(
-                        "y2",
-                        b[1]/100*h
-                    );
-
-
-                    line.setAttribute(
-                        "class",
-                        "feature-line "+
-                        meta.cls
-                    );
-
-
-                    svg.appendChild(
-                        line
-                    );
-
-                }
-
-            }
-        );
-
+    if(c.count >= 20){
+      className+=' strong';
     }
+    else if(c.count >= 8){
+      className+=' medium';
+    }
+
+    path.setAttribute('class',className);
+
+    /*
+     * ทำให้เส้นที่มีความสัมพันธ์สูงมองเห็นชัด
+     */
+    const opacity =
+      c.count >= 20 ? 0.60 :
+      c.count >= 8  ? 0.42 :
+      c.count >= 3  ? 0.30 :
+                       0.20;
+
+    const width =
+      c.count >= 20 ? 3.5 :
+      c.count >= 8  ? 2.6 :
+      c.count >= 3  ? 2.0 :
+                       1.4;
+
+    path.style.strokeOpacity=opacity;
+    path.style.strokeWidth=width;
+
+    /*
+     * Tooltip เมื่อเอาเมาส์ไปวางบนเส้น
+     */
+    const title=document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'title'
+    );
+
+    title.textContent=
+      `${c.a} ↔ ${c.b} | Co-occurrence: ${fmt(c.count)}`;
+
+    path.appendChild(title);
+
+    svg.appendChild(path);
+  });
+}
 
 
     setTimeout(
