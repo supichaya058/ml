@@ -8,7 +8,6 @@
 
 <title>Scopus Data Analysis</title>
 
-<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 
 <style>
 
@@ -297,6 +296,8 @@ body{
 
 .plot{
     height:500px;
+    min-height:500px;
+    overflow:hidden;
 }
 
 
@@ -2726,74 +2727,19 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
 
 <script>
 /* =========================================================
-   EMBEDDED DATA
-   ---------------------------------------------------------
-   This page is self-contained. It does NOT fetch JSON files.
-   The values below are the actual clean/final/embedding summaries
-   supplied for this project, so tired.html works directly on GitHub Pages.
+   EMBEDDED DATA — SELF CONTAINED
 ========================================================= */
 
 const cleanData = {
-    total_articles: 5703,
-    description: "Cleaned Scopus dataset before EID cross-subject deduplication",
-    unique_keywords_normalized: 18908,
-    top_keywords: [
-        {keyword:"Deep Learning",count:299},
-        {keyword:"Artificial Intelligence",count:274},
-        {keyword:"Machine Learning",count:214},
-        {keyword:"Large Language Models",count:71},
-        {keyword:"Federated Learning",count:63},
-        {keyword:"Computer Vision",count:61},
-        {keyword:"Generative AI",count:61},
-        {keyword:"FPGA",count:56},
-        {keyword:"Virtual Reality",count:55},
-        {keyword:"Edge Computing",count:49}
-    ],
-    top_authors: [
-        {author:"Zhang Y.",count:142},
-        {author:"Wang Y.",count:131},
-        {author:"Liu Y.",count:111},
-        {author:"Li Y.",count:108},
-        {author:"Li J.",count:96},
-        {author:"Wang Z.",count:92},
-        {author:"Zhang X.",count:82},
-        {author:"Wang X.",count:80},
-        {author:"Zhang J.",count:72},
-        {author:"Li X.",count:72}
-    ],
-    publications_by_year: {
-        "2021":13,
-        "2022":88,
-        "2023":90,
-        "2024":184,
-        "2025":5212,
-        "2026":116
-    },
-    research_areas: {
-        "Applications":600,
-        "Computational Theory and Mathematics":597,
-        "Hardware":596,
-        "Computer Graphics and Computer-Aided Design":595,
-        "Artificial Intelligence":591,
-        "Networks":550,
-        "Software":545,
-        "Human":544,
-        "Information Systems":543,
-        "Signal":542
-    },
-    data_quality: {
-        duplicate_eid:0,
-        duplicate_doi:73,
-        missing_title:0,
-        missing_abstract:0
-    }
+    total_articles:5703,
+    unique_keywords_normalized:18908,
+    publications_by_year:{"2021":13,"2022":88,"2023":90,"2024":184,"2025":5212,"2026":116}
 };
 
 const finalData = {
     total_articles:5427,
-    description:"Final dataset after EID cross-subject deduplication, used for keyword/embedding analysis",
     unique_keywords_normalized:18136,
-    top_keywords: [
+    top_keywords:[
         {keyword:"Deep Learning",count:283},
         {keyword:"Artificial Intelligence",count:247},
         {keyword:"Machine Learning",count:204},
@@ -2805,27 +2751,13 @@ const finalData = {
         {keyword:"Generative AI",count:52},
         {keyword:"Transformer",count:48}
     ],
-    top_authors: [
-        {author:"Zhang Y.",count:133},
-        {author:"Wang Y.",count:126},
-        {author:"Liu Y.",count:105},
-        {author:"Li Y.",count:103},
-        {author:"Li J.",count:92},
-        {author:"Wang Z.",count:87},
-        {author:"Wang X.",count:79},
-        {author:"Zhang X.",count:78},
-        {author:"Zhang J.",count:70},
-        {author:"Li X.",count:68}
+    top_authors:[
+        {author:"Zhang Y.",count:133},{author:"Wang Y.",count:126},{author:"Liu Y.",count:105},
+        {author:"Li Y.",count:103},{author:"Li J.",count:92},{author:"Wang Z.",count:87},
+        {author:"Wang X.",count:79},{author:"Zhang X.",count:78},{author:"Zhang J.",count:70},{author:"Li X.",count:68}
     ],
-    publications_by_year: {
-        "2021":13,
-        "2022":88,
-        "2023":90,
-        "2024":184,
-        "2025":4936,
-        "2026":116
-    },
-    research_areas: {
+    publications_by_year:{"2021":13,"2022":88,"2023":90,"2024":184,"2025":4936,"2026":116},
+    research_areas:{
         "Computational Theory and Mathematics":595,
         "Computer Graphics and Computer-Aided Design":592,
         "Applications":574,
@@ -2837,7 +2769,7 @@ const finalData = {
         "Human":492,
         "Artificial Intelligence":485
     },
-    keyword_cooccurrence_top10: [
+    keyword_cooccurrence_top10:[
         {a:"Artificial Intelligence",b:"Machine Learning",count:39},
         {a:"Artificial Intelligence",b:"Deep Learning",count:26},
         {a:"Deep Learning",b:"Machine Learning",count:24},
@@ -2865,381 +2797,205 @@ const finalData = {
 };
 
 const embedData = {
-    articles:5427,
-    model:"SPECTER2",
-    dimensions:768,
-    matrix_shape:"5427 x 768",
-    nan_count:0,
-    inf_count:0,
+    articles:5427, model:"SPECTER2", dimensions:768, matrix_shape:"5427 x 768",
+    nan_count:0, inf_count:0,
     text_used_for_embedding:"Title + Abstract + Author Keywords + Index Keywords"
 };
 
-function numberValue(value){
-    const n=Number(value);
-    return Number.isFinite(n)?n:0;
-}
+function numberValue(v){const n=Number(v);return Number.isFinite(n)?n:0;}
+function formatNumber(v){return numberValue(v).toLocaleString();}
+function getYearRange(d){const y=Object.keys(d.publications_by_year||{}).map(Number).sort((a,b)=>a-b);return y.length?`${y[0]}–${y[y.length-1]}`:"–";}
 
-function formatNumber(value){
-    return numberValue(value).toLocaleString();
-}
-
-function getYearRange(data){
-    const source=data && data.publications_by_year ? data.publications_by_year : {};
-    const years=Object.keys(source).map(Number).filter(Number.isFinite).sort((a,b)=>a-b);
-    return years.length ? `${years[0]}–${years[years.length-1]}` : "–";
-}
-
-function baseLayout(){
-    return {
-        paper_bgcolor:"#ffffff",
-        plot_bgcolor:"#ffffff",
-        font:{family:"Arial, Noto Sans Thai",color:"#405442"},
-        margin:{l:50,r:25,t:20,b:50}
-    };
-}
+/* PAGE VALUES */
+document.getElementById('kpiArticles').textContent=formatNumber(finalData.total_articles);
+document.getElementById('kpiKeywords').textContent=formatNumber(finalData.unique_keywords_normalized);
+document.getElementById('kpiYearRange').textContent=getYearRange(finalData);
+document.getElementById('kpiAreas').textContent=Object.keys(finalData.research_areas).length;
+document.getElementById('flowClean').textContent=formatNumber(cleanData.total_articles);
+document.getElementById('flowFinal').textContent=formatNumber(finalData.total_articles);
+document.getElementById('embArticles').textContent=formatNumber(embedData.articles);
+document.getElementById('embModel').textContent=embedData.model;
+document.getElementById('embDims').textContent=formatNumber(embedData.dimensions);
+document.getElementById('embShape').textContent=embedData.matrix_shape;
+document.getElementById('embNan').textContent=formatNumber(embedData.nan_count);
+document.getElementById('embInf').textContent=formatNumber(embedData.inf_count);
+document.getElementById('embText').textContent='4 fields';
+document.getElementById('embedTextUsed').textContent=embedData.text_used_for_embedding;
+document.getElementById('siteFooter').textContent=`🌱🌸 Scopus Data Analysis · ${formatNumber(finalData.total_articles)} Articles (Final) · ${formatNumber(cleanData.total_articles)} Articles (Clean) · SPECTER2 ${embedData.dimensions}-D · 🦋🌼`;
 
 /* =========================================================
-   BASIC PAGE VALUES
+   PURE SVG CHART HELPERS — NO EXTERNAL LIBRARY
 ========================================================= */
+function makeSVG(w,h){
+    const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    svg.setAttribute('viewBox',`0 0 ${w} ${h}`);
+    svg.setAttribute('width','100%');
+    svg.setAttribute('height','100%');
+    svg.style.display='block';
+    return svg;
+}
+function svgEl(tag,attrs={}){
+    const e=document.createElementNS('http://www.w3.org/2000/svg',tag);
+    Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));
+    return e;
+}
+function textEl(x,y,text,size=12,anchor='start',weight='400',fill='#526354'){
+    const t=svgEl('text',{x,y,'font-size':size,'text-anchor':anchor,'font-family':'Arial, Noto Sans Thai','font-weight':weight,fill});
+    t.textContent=text; return t;
+}
+function clear(el){el.innerHTML='';}
 
-document.getElementById("kpiArticles").textContent=formatNumber(finalData.total_articles);
-document.getElementById("kpiKeywords").textContent=formatNumber(finalData.unique_keywords_normalized);
-document.getElementById("kpiYearRange").textContent=getYearRange(finalData);
-document.getElementById("kpiAreas").textContent=Object.keys(finalData.research_areas).length.toLocaleString();
-
-document.getElementById("flowClean").textContent=formatNumber(cleanData.total_articles);
-document.getElementById("flowFinal").textContent=formatNumber(finalData.total_articles);
-
-document.getElementById("embedTextUsed").textContent=embedData.text_used_for_embedding;
-document.getElementById("embArticles").textContent=formatNumber(embedData.articles);
-document.getElementById("embModel").textContent=embedData.model;
-document.getElementById("embDims").textContent=formatNumber(embedData.dimensions);
-document.getElementById("embShape").textContent=embedData.matrix_shape;
-document.getElementById("embNan").textContent=formatNumber(embedData.nan_count);
-document.getElementById("embInf").textContent=formatNumber(embedData.inf_count);
-document.getElementById("embText").textContent="4 fields";
-
-document.getElementById("siteFooter").innerHTML=
-    `🌱🌸 Scopus Data Analysis · ${formatNumber(finalData.total_articles)} Articles (Final) · ${formatNumber(cleanData.total_articles)} Articles (Clean) · SPECTER2 ${embedData.dimensions}-D · 🦋🌼`;
-
-/* =========================================================
-   PLOTLY FALLBACK
-========================================================= */
-if(typeof Plotly === "undefined"){
-    ["keywords","authors","years","researchPie"].forEach(id=>{
-        const el=document.getElementById(id);
-        if(el){
-            el.innerHTML="<div style='padding:30px;text-align:center;color:#718071;'>Visualization library unavailable. Data values are still shown on this page.</div>";
-        }
+/* TOP KEYWORDS BAR CHART */
+(function(){
+    const host=document.getElementById('keywords'); clear(host);
+    const items=[...finalData.top_keywords]; const w=900,h=500;
+    const svg=makeSVG(w,h); const left=250,right=35,top=28,bottom=25;
+    const chartW=w-left-right, rowH=(h-top-bottom)/items.length;
+    const max=Math.max(...items.map(x=>x.count));
+    items.forEach((d,i)=>{
+        const y=top+i*rowH+7;
+        const bw=chartW*(d.count/max);
+        svg.append(textEl(left-12,y+rowH*.52,d.keyword,13,'end','700'));
+        svg.append(svgEl('rect',{x:left,y,width:chartW,height:24,rx:12,fill:'#f2f6ef'}));
+        svg.append(svgEl('rect',{x:left,y,width:bw,height:24,rx:12,fill:`hsl(${330+i*3},65%,${78-i*1.5}%)`}));
+        svg.append(textEl(left+bw+8,y+17,formatNumber(d.count),12,'start','700','#6d7a70'));
     });
-}
-
-/* =========================================================
-   TOP KEYWORDS — FREQUENCY
-========================================================= */
-(function(){
-    const source=Array.isArray(finalData.top_keywords)?finalData.top_keywords.slice(0,10):[];
-    const data=[...source].sort((a,b)=>numberValue(a.count)-numberValue(b.count));
-    if(!data.length){
-        document.getElementById("keywords").innerHTML="<div class='explanation'>ไม่มีข้อมูล Top Keywords</div>";
-        return;
-    }
-    if(typeof Plotly !== "undefined") Plotly.newPlot("keywords",[{
-        type:"bar",
-        orientation:"h",
-        y:data.map(d=>d.keyword),
-        x:data.map(d=>numberValue(d.count)),
-        marker:{
-            color:data.map((d,i)=>`hsl(${330+i*2},65%,${78-i*1.8}%)`),
-            line:{color:"#ffffff",width:1}
-        },
-        hovertemplate:"<b>%{y}</b><br>Articles: %{x}<extra></extra>"
-    }],{
-        ...baseLayout(),
-        margin:{l:190,r:30,t:20,b:50},
-        xaxis:{title:"Articles",gridcolor:"#f3e7ed",zeroline:false},
-        yaxis:{tickfont:{size:10}},
-        showlegend:false
-    },{responsive:true,displaylogo:false});
-    document.getElementById("kwSummaryText").textContent=
-        `จาก Final Dataset Keyword ที่พบมากที่สุดคือ ${source.slice(0,3).map(k=>`${k.keyword} ${formatNumber(k.count)} บทความ`).join(", ")}`;
+    host.appendChild(svg);
+    document.getElementById('kwSummaryText').textContent=`จาก Final Dataset Keyword ที่พบมากที่สุดคือ ${items.slice(0,3).map(k=>`${k.keyword} ${formatNumber(k.count)} บทความ`).join(', ')}`;
 })();
 
-/* =========================================================
-   TOP AUTHORS
-========================================================= */
+/* TOP AUTHORS LOLLIPOP */
 (function(){
-    const data=[...(finalData.top_authors||[])].sort((a,b)=>numberValue(b.count)-numberValue(a.count));
-    if(!data.length){
-        document.getElementById("authors").innerHTML="<div class='explanation'>ไม่มีข้อมูล Top Authors</div>";
-        return;
-    }
-    const floralColors=["#F48FB1","#BA8DE3","#81CFC1","#F6C85F","#89B8E8","#E99AC7","#A7C957","#F29E8F","#8DD3C7","#C4A7E7"];
-    if(typeof Plotly !== "undefined") Plotly.newPlot("authors",[{
-        x:data.map((d,i)=>i+1),
-        y:data.map(d=>numberValue(d.count)),
-        text:data.map(d=>d.author),
-        mode:"markers+text",
-        type:"scatter",
-        textposition:"top center",
-        marker:{
-            size:data.map(d=>Math.max(24,numberValue(d.count)/2.2)),
-            color:floralColors,
-            opacity:.85,
-            line:{color:"#fff",width:3}
-        },
-        hovertemplate:"<b>%{text}</b><br>Publications: %{y}<extra></extra>"
-    }],{
-        ...baseLayout(),
-        xaxis:{visible:false,fixedrange:true},
-        yaxis:{title:"Publications",gridcolor:"#f0e5ec",zeroline:false},
-        margin:{l:55,r:35,t:55,b:35},
-        showlegend:false
-    },{responsive:true,displayModeBar:false});
-})();
-
-/* =========================================================
-   PUBLICATIONS BY YEAR
-========================================================= */
-(function(){
-    const source=finalData.publications_by_year||{};
-    const years=Object.keys(source).sort((a,b)=>Number(a)-Number(b));
-    const counts=years.map(y=>numberValue(source[y]));
-    if(!years.length){
-        document.getElementById("years").innerHTML="<div class='explanation'>ไม่มีข้อมูล Publications by Year</div>";
-        return;
-    }
-    if(typeof Plotly !== "undefined") Plotly.newPlot("years",[{
-        type:"scatter",
-        mode:"lines+markers",
-        x:years,
-        y:counts,
-        line:{width:3,color:"#719873",shape:"spline"},
-        marker:{size:7,color:"#719873"},
-        fill:"tozeroy",
-        fillcolor:"rgba(113,152,115,.15)",
-        hovertemplate:"Year: %{x}<br>Articles: %{y}<extra></extra>"
-    }],{
-        ...baseLayout(),
-        xaxis:{title:"Year",gridcolor:"#edf2eb",zeroline:false},
-        yaxis:{title:"Articles",gridcolor:"#edf2eb",zeroline:false,rangemode:"tozero"},
-        hovermode:"x unified"
-    },{responsive:true,displaylogo:false});
-})();
-
-/* =========================================================
-   RESEARCH AREAS
-========================================================= */
-(function(){
-    const pie=document.getElementById("researchPie");
-    const labels=Object.keys(finalData.research_areas||{});
-    const values=labels.map(x=>numberValue(finalData.research_areas[x]));
-    document.getElementById("researchCenterNumber").textContent=labels.length;
-    if(!labels.length){
-        pie.innerHTML="<div class='explanation'>ไม่มีข้อมูล Research Areas</div>";
-        return;
-    }
-    const colors=["#A9D58F","#9FC1DF","#E7C76E","#DFA0A0","#BEA4DC","#DDA9C1","#91C8B5","#D9B383","#AAB8CD","#9DC49A"];
-    if(typeof Plotly !== "undefined") Plotly.newPlot(pie,[{
-        type:"pie",
-        labels,
-        values,
-        hole:.56,
-        sort:false,
-        direction:"clockwise",
-        rotation:-90,
-        textinfo:"label",
-        textposition:"outside",
-        textfont:{family:"Arial, Noto Sans Thai",size:10,color:"#526354"},
-        marker:{colors,line:{color:"#ffffff",width:3}},
-        hovertemplate:"<b>%{label}</b><br>%{value} Articles<extra></extra>"
-    }],{
-        paper_bgcolor:"rgba(0,0,0,0)",
-        plot_bgcolor:"rgba(0,0,0,0)",
-        margin:{l:65,r:65,t:35,b:35},
-        showlegend:false
-    },{responsive:true,displaylogo:false,modeBarButtonsToRemove:["toImage","zoom2d","pan2d","select2d","lasso2d","autoScale2d","resetScale2d","hoverClosestCartesian","hoverCompareCartesian","toggleSpikelines"]});
-    if(typeof Plotly !== "undefined") pie.on("plotly_click",function(event){
-        if(!event?.points?.length)return;
-        const index=event.points[0].pointNumber;
-        const current=pie.data[0].pull||[];
-        const next=labels.map((_,i)=>i===index?(Number(current[i]||0)>0?0:.10):0);
-        Plotly.restyle(pie,{pull:[next]},[0]);
+    const host=document.getElementById('authors'); clear(host);
+    const items=finalData.top_authors; const w=900,h=500;
+    const svg=makeSVG(w,h); const left=80,right=35,top=35,bottom=55;
+    const chartW=w-left-right, chartH=h-top-bottom, max=Math.max(...items.map(x=>x.count));
+    const step=chartW/items.length;
+    svg.append(svgEl('line',{x1:left,y1:top+chartH,x2:w-right,y2:top+chartH,stroke:'#dbe5d7','stroke-width':2}));
+    items.forEach((d,i)=>{
+        const x=left+step*(i+.5), y=top+chartH-(d.count/max)*chartH*.9;
+        svg.append(svgEl('line',{x1:x,y1:top+chartH,x2:x,y2:y,stroke:'#cddbc9','stroke-width':5,'stroke-linecap':'round'}));
+        svg.append(svgEl('circle',{cx:x,cy:y,r:22,fill:['#F48FB1','#BA8DE3','#81CFC1','#F6C85F','#89B8E8','#E99AC7','#A7C957','#F29E8F','#8DD3C7','#C4A7E7'][i]}));
+        svg.append(textEl(x,y+5,formatNumber(d.count),11,'middle','800','#ffffff'));
+        svg.append(textEl(x,top+chartH+22,d.author,10,'middle','700'));
     });
-    if(typeof Plotly !== "undefined") window.addEventListener("resize",()=>Plotly.Plots.resize(pie));
+    host.appendChild(svg);
 })();
 
-/* =========================================================
-   KEYWORD FREQUENCY GARDEN
-   ---------------------------------------------------------
-   Frequency only: flowers represent individual keyword frequency.
-   There are NO connecting lines here.
-========================================================= */
+/* PUBLICATIONS BY YEAR */
 (function(){
-    const field=document.getElementById("featureField");
-    const kws=Array.isArray(finalData.top_keywords)?finalData.top_keywords.slice(0,10):[];
-    document.getElementById("featureCenterTitle").textContent=`${formatNumber(finalData.total_articles)} Articles`;
+    const host=document.getElementById('years'); clear(host);
+    const years=Object.keys(finalData.publications_by_year).sort((a,b)=>+a-+b);
+    const vals=years.map(y=>numberValue(finalData.publications_by_year[y]));
+    const w=900,h=500,left=75,right=30,top=35,bottom=60,chartW=w-left-right,chartH=h-top-bottom;
+    const svg=makeSVG(w,h), max=Math.max(...vals), step=chartW/(years.length-1);
+    for(let i=0;i<5;i++){
+        const y=top+chartH*i/4;
+        svg.append(svgEl('line',{x1:left,y1:y,x2:w-right,y2:y,stroke:'#edf2eb','stroke-width':1}));
+    }
+    const pts=years.map((yr,i)=>[left+i*step,top+chartH-(vals[i]/max)*chartH*.9]);
+    const area=`M ${pts[0][0]} ${top+chartH} L ${pts.map(p=>p.join(' ')).join(' L ')} L ${pts[pts.length-1][0]} ${top+chartH} Z`;
+    svg.append(svgEl('path',{d:area,fill:'#dcebdc',opacity:.75}));
+    svg.append(svgEl('polyline',{points:pts.map(p=>p.join(',')).join(' '),fill:'none',stroke:'#719873','stroke-width':4,'stroke-linejoin':'round'}));
+    pts.forEach((p,i)=>{
+        svg.append(svgEl('circle',{cx:p[0],cy:p[1],r:7,fill:'#719873',stroke:'#ffffff','stroke-width':3}));
+        svg.append(textEl(p[0],top+chartH+25,years[i],11,'middle','700'));
+        svg.append(textEl(p[0],p[1]-12,formatNumber(vals[i]),10,'middle','700','#617061'));
+    });
+    host.appendChild(svg);
+})();
 
-    const positions=[
-        {x:13,y:35,icon:"🌸"},{x:28,y:30,icon:"🌷"},{x:43,y:36,icon:"🌼"},
-        {x:20,y:52,icon:"🌺"},{x:36,y:57,icon:"🌻"},{x:61,y:33,icon:"🪻"},
-        {x:76,y:30,icon:"🪷"},{x:68,y:51,icon:"🏵️"},{x:84,y:51,icon:"💮"},{x:78,y:68,icon:"🌾"}
+/* RESEARCH AREAS DONUT */
+(function(){
+    const host=document.getElementById('researchPie'); clear(host);
+    const entries=Object.entries(finalData.research_areas); const total=entries.reduce((s,[,v])=>s+v,0);
+    const w=900,h=500,cx=330,cy=245,r=150,inner=88;
+    const svg=makeSVG(w,h);
+    const colors=['#A9D58F','#9FC1DF','#E7C76E','#DFA0A0','#BEA4DC','#DDA9C1','#91C8B5','#D9B383','#AAB8CD','#9DC49A'];
+    let angle=-Math.PI/2;
+    entries.forEach(([label,value],i)=>{
+        const a=value/total*Math.PI*2, end=angle+a;
+        const x1=cx+r*Math.cos(angle),y1=cy+r*Math.sin(angle),x2=cx+r*Math.cos(end),y2=cy+r*Math.sin(end);
+        const ix1=cx+inner*Math.cos(angle),iy1=cy+inner*Math.sin(angle),ix2=cx+inner*Math.cos(end),iy2=cy+inner*Math.sin(end);
+        const large=a>Math.PI?1:0;
+        const d=`M ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} L ${ix2} ${iy2} A ${inner} ${inner} 0 ${large} 0 ${ix1} ${iy1} Z`;
+        svg.append(svgEl('path',{d,fill:colors[i],stroke:'#ffffff','stroke-width':3}));
+        const mid=angle+a/2, lx=cx+(r+28)*Math.cos(mid), ly=cy+(r+28)*Math.sin(mid);
+        const anchor=Math.cos(mid)>0?'start':'end';
+        svg.append(textEl(lx,ly,label,10,anchor,'700'));
+        svg.append(textEl(lx,ly+13,`${value} (${(value/total*100).toFixed(1)}%)`,9,anchor,'400','#7b887d'));
+        angle=end;
+    });
+    svg.append(svgEl('circle',{cx,cy,r:inner-1,fill:'#fbfdf8',stroke:'#dbe7d7','stroke-width':2}));
+    svg.append(textEl(cx,cy-2,String(entries.length),30,'middle','800','#527157'));
+    svg.append(textEl(cx,cy+20,'Research Areas',11,'middle','800','#718071'));
+    host.appendChild(svg);
+})();
+
+/* FREQUENCY GARDEN */
+(function(){
+    const field=document.getElementById('featureField');
+    const kws=finalData.top_keywords.slice(0,10);
+    document.getElementById('featureCenterTitle').textContent=`${formatNumber(finalData.total_articles)} Articles`;
+    const pos=[
+        {x:13,y:35,icon:'🌸'},{x:28,y:30,icon:'🌷'},{x:43,y:36,icon:'🌼'},
+        {x:20,y:52,icon:'🌺'},{x:36,y:57,icon:'🌻'},{x:61,y:33,icon:'🪻'},
+        {x:76,y:30,icon:'🪷'},{x:68,y:51,icon:'🏵️'},{x:84,y:51,icon:'💮'},{x:78,y:68,icon:'🌾'}
     ];
-
+    const max=Math.max(...kws.map(k=>k.count));
     kws.forEach((item,i)=>{
-        const pos=positions[i]||{x:50,y:50,icon:"🌸"};
-        const flower=document.createElement("div");
-        flower.className="feature-flower";
-        flower.style.left=pos.x+"%";
-        flower.style.top=pos.y+"%";
-
-        const emoji=document.createElement("div");
-        emoji.className="emoji";
-        const ratio=Math.sqrt(numberValue(item.count)/Math.max(...kws.map(k=>numberValue(k.count)),1));
-        emoji.style.fontSize=(28+ratio*30)+"px";
-        emoji.textContent=pos.icon;
-
-        const label=document.createElement("div");
-        label.className="label";
-        label.textContent=item.keyword;
-
-        const count=document.createElement("div");
-        count.className="count";
-        count.textContent=formatNumber(item.count);
-
-        flower.append(emoji,label,count);
-        flower.title=`${item.keyword}\nFrequency: ${formatNumber(item.count)}`;
-
-        flower.addEventListener("click",e=>{
-            e.stopPropagation();
-            field.querySelectorAll(".feature-flower").forEach(x=>x.classList.remove("selected"));
-            void flower.offsetWidth;
-            flower.classList.add("selected");
-        });
-        field.appendChild(flower);
+        const p=pos[i], f=document.createElement('div'); f.className='feature-flower'; f.style.left=p.x+'%';f.style.top=p.y+'%';
+        const e=document.createElement('div');e.className='emoji';e.style.fontSize=(28+Math.sqrt(item.count/max)*30)+'px';e.textContent=p.icon;
+        const l=document.createElement('div');l.className='label';l.textContent=item.keyword;
+        const c=document.createElement('div');c.className='count';c.textContent=formatNumber(item.count);
+        f.append(e,l,c);f.title=`${item.keyword}\nFrequency: ${formatNumber(item.count)}`;
+        f.onclick=ev=>{ev.stopPropagation();field.querySelectorAll('.feature-flower').forEach(x=>x.classList.remove('selected'));void f.offsetWidth;f.classList.add('selected');};
+        field.appendChild(f);
     });
-
-    field.addEventListener("click",()=>field.querySelectorAll(".feature-flower").forEach(x=>x.classList.remove("selected")));
+    field.onclick=()=>field.querySelectorAll('.feature-flower').forEach(x=>x.classList.remove('selected'));
 })();
 
-/* =========================================================
-   KEYWORD CO-OCCURRENCE GARDEN
-   ---------------------------------------------------------
-   Co-occurrence only: edges come from keyword_cooccurrence_top10.
-   Line thickness + label = number of documents where both keywords occur.
-========================================================= */
+/* CO-OCCURRENCE GARDEN */
 (function(){
-    const field=document.getElementById("coField");
-    const svg=document.getElementById("coSvg");
-    const kws=Array.isArray(finalData.top_keywords)?finalData.top_keywords.slice(0,10):[];
-    const coData=Array.isArray(finalData.keyword_cooccurrence_top10)?finalData.keyword_cooccurrence_top10:[];
-
-    const allKeywords=[...new Set([
-        ...kws.map(k=>k.keyword),
-        ...coData.flatMap(x=>[x.a,x.b])
-    ])];
-
-    const preferredCenter="Artificial Intelligence";
-    const centerKeyword=allKeywords.includes(preferredCenter)?preferredCenter:(allKeywords[0]||"Artificial Intelligence");
-    const center={keyword:centerKeyword,x:50,y:48,icon:"🌹"};
-    document.getElementById("coCenterName").textContent=centerKeyword;
-
-    const positions=[
-        {x:13,y:38,icon:"🌸"},{x:25,y:29,icon:"🌷"},{x:34,y:41,icon:"🌼"},{x:21,y:56,icon:"🌺"},
-        {x:66,y:30,icon:"🌻"},{x:84,y:34,icon:"🪻"},{x:67,y:55,icon:"🪷"},{x:84,y:55,icon:"🏵️"},
-        {x:35,y:78,icon:"💮"},{x:64,y:78,icon:"🌾"},{x:50,y:20,icon:"🌹"}
+    const field=document.getElementById('coField'),svg=document.getElementById('coSvg');
+    const kws=finalData.top_keywords.slice(0,10), co=finalData.keyword_cooccurrence_top10;
+    const centerKeyword='Artificial Intelligence';
+    const pos=[
+        {x:12,y:37,icon:'🌸'},{x:24,y:28,icon:'🌷'},{x:37,y:38,icon:'🌼'},{x:21,y:57,icon:'🌺'},
+        {x:66,y:29,icon:'🌻'},{x:84,y:34,icon:'🪻'},{x:66,y:55,icon:'🪷'},{x:84,y:56,icon:'🏵️'},
+        {x:35,y:79,icon:'💮'},{x:64,y:79,icon:'🌾'}
     ];
+    const nodes=new Map([[centerKeyword,{x:50,y:48,icon:'🌹',keyword:centerKeyword}]]);
+    kws.filter(k=>k.keyword!==centerKeyword).forEach((k,i)=>nodes.set(k.keyword,{...pos[i],keyword:k.keyword}));
+    /* Add any co-occurrence keyword not in Top-10 using spare slots. */
+    const extras=[...new Set(co.flatMap(x=>[x.a,x.b]))].filter(k=>!nodes.has(k));
+    extras.forEach((k,i)=>{const p=pos[kws.length-1+i]||{x:50+(i%2)*8-4,y:88,icon:'🌾'};nodes.set(k,{...p,keyword:k});});
+    const maxCo=Math.max(...co.map(x=>numberValue(x.count)),1);
 
-    const remaining=allKeywords.filter(k=>k!==centerKeyword);
-    const nodeMap=new Map([[centerKeyword,center]]);
-
-    remaining.forEach((keyword,i)=>{
-        const pos=positions[i]||{x:50,y:85,icon:"🌸"};
-        nodeMap.set(keyword,{keyword,x:pos.x,y:pos.y,icon:pos.icon});
-    });
-
-    const maxCo=Math.max(...coData.map(x=>numberValue(x.count)),1);
-
-    remaining.forEach(keyword=>{
-        const freq=kws.find(k=>k.keyword===keyword);
-        const node=nodeMap.get(keyword);
-        const flower=document.createElement("div");
-        flower.className="co-flower";
-        flower.style.left=node.x+"%";
-        flower.style.top=node.y+"%";
-
-        const incident=coData.filter(x=>x.a===keyword||x.b===keyword);
-        const strength=Math.max(...incident.map(x=>numberValue(x.count)),0);
-        const size=30+Math.sqrt(strength/Math.max(maxCo,1))*32;
-
-        const icon=document.createElement("div");
-        icon.className="icon";
-        icon.style.fontSize=size+"px";
-        icon.textContent=node.icon;
-
-        const name=document.createElement("div");
-        name.className="name";
-        name.textContent=keyword;
-
-        const count=document.createElement("div");
-        count.className="count";
-        count.textContent=freq?`Frequency: ${formatNumber(freq.count)}`:"Co-occurrence node";
-
-        flower.append(icon,name,count);
-        flower.title=keyword;
-        flower.addEventListener("click",e=>{
-            e.stopPropagation();
-            field.querySelectorAll(".co-flower").forEach(x=>x.classList.remove("selected"));
-            void flower.offsetWidth;
-            flower.classList.add("selected");
-        });
-        field.appendChild(flower);
-    });
-
-    field.addEventListener("click",()=>field.querySelectorAll(".co-flower").forEach(x=>x.classList.remove("selected")));
-
-    function drawNetwork(){
-        const rect=field.getBoundingClientRect();
-        const width=rect.width;
-        const height=rect.height;
-        svg.setAttribute("viewBox",`0 0 ${width} ${height}`);
-        svg.innerHTML="";
-
-        coData.forEach(conn=>{
-            const from=nodeMap.get(conn.a);
-            const to=nodeMap.get(conn.b);
-            if(!from||!to||from===to)return;
-
-            const x1=from.x/100*width, y1=from.y/100*height;
-            const x2=to.x/100*width, y2=to.y/100*height;
-            const midX=(x1+x2)/2, midY=(y1+y2)/2;
-            const dx=x2-x1, dy=y2-y1;
-            const distance=Math.sqrt(dx*dx+dy*dy)||1;
-            const curve=Math.min(55,distance*.18);
-            const controlX=midX-dy/distance*curve;
-            const controlY=midY+dx/distance*curve;
-
-            const path=document.createElementNS("http://www.w3.org/2000/svg","path");
-            path.setAttribute("d",`M ${x1} ${y1} Q ${controlX} ${controlY} ${x2} ${y2}`);
-            path.setAttribute("class",numberValue(conn.count)>=20?"co-line strong":numberValue(conn.count)>=8?"co-line medium":"co-line");
-            path.setAttribute("title",`${conn.a} + ${conn.b}: ${formatNumber(conn.count)} articles`);
-            svg.appendChild(path);
-
-            const label=document.createElementNS("http://www.w3.org/2000/svg","text");
-            const lx=(x1+x2)/2, ly=(y1+y2)/2-5;
-            label.setAttribute("x",lx);
-            label.setAttribute("y",ly);
-            label.setAttribute("text-anchor","middle");
-            label.setAttribute("class","co-edge-label");
-            label.textContent=conn.count;
-            svg.appendChild(label);
+    function draw(){
+        const rect=field.getBoundingClientRect(),w=rect.width,h=rect.height; svg.setAttribute('viewBox',`0 0 ${w} ${h}`);svg.innerHTML='';
+        co.forEach(conn=>{
+            const a=nodes.get(conn.a),b=nodes.get(conn.b);if(!a||!b)return;
+            const x1=a.x/100*w,y1=a.y/100*h,x2=b.x/100*w,y2=b.y/100*h,dx=x2-x1,dy=y2-y1,d=Math.hypot(dx,dy)||1;
+            const midX=(x1+x2)/2,midY=(y1+y2)/2,curve=Math.min(55,d*.18),cx=midX-dy/d*curve,cy=midY+dx/d*curve;
+            const path=svgEl('path',{d:`M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`,class:numberValue(conn.count)>=20?'co-line strong':numberValue(conn.count)>=8?'co-line medium':'co-line'});svg.appendChild(path);
+            const t=svgEl('text',{x:(x1+x2)/2,y:(y1+y2)/2-7,'text-anchor':'middle','font-size':11,'font-family':'Arial, Noto Sans Thai','font-weight':'800',fill:'#60705f','paint-order':'stroke','stroke':'#ffffff','stroke-width':4});t.textContent=conn.count;svg.appendChild(t);
         });
     }
-
-    setTimeout(drawNetwork,100);
-    window.addEventListener("resize",drawNetwork);
+    const all=[...nodes.values()];
+    all.forEach(node=>{
+        if(node.keyword===centerKeyword)return;
+        const f=document.createElement('div');f.className='co-flower';f.style.left=node.x+'%';f.style.top=node.y+'%';
+        const strength=Math.max(...co.filter(x=>x.a===node.keyword||x.b===node.keyword).map(x=>numberValue(x.count)),0);
+        const icon=document.createElement('div');icon.className='icon';icon.style.fontSize=(30+Math.sqrt(strength/maxCo)*32)+'px';icon.textContent=node.icon;
+        const name=document.createElement('div');name.className='name';name.textContent=node.keyword;
+        const freq=kws.find(k=>k.keyword===node.keyword);const count=document.createElement('div');count.className='count';count.textContent=freq?`Frequency: ${formatNumber(freq.count)}`:'Co-occurrence node';
+        f.append(icon,name,count);f.onclick=e=>{e.stopPropagation();field.querySelectorAll('.co-flower').forEach(x=>x.classList.remove('selected'));void f.offsetWidth;f.classList.add('selected');};field.appendChild(f);
+    });
+    field.onclick=()=>field.querySelectorAll('.co-flower').forEach(x=>x.classList.remove('selected'));
+    document.getElementById('coCenterName').textContent=centerKeyword;
+    setTimeout(draw,50);window.addEventListener('resize',draw);
 })();
-
 </script>
 
 </body>
