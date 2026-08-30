@@ -1,13 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="en">
-
 <head>
-
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-
 <title>Scopus Data Analysis</title>
-
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 
 <style>
@@ -42,7 +39,6 @@ body{
 .header{
     position:relative;
     overflow:hidden;
-
     padding:35px 30px;
 
     background:
@@ -92,7 +88,6 @@ body{
     position:absolute;
     pointer-events:none;
     opacity:.75;
-
     animation:
         fly 6s ease-in-out infinite;
 }
@@ -140,6 +135,7 @@ body{
             translate(15px,-12px)
             rotate(6deg);
     }
+
 }
 
 
@@ -160,12 +156,9 @@ body{
 
 .kpis{
     display:grid;
-
     grid-template-columns:
         repeat(4,1fr);
-
     gap:15px;
-
     margin-bottom:20px;
 }
 
@@ -192,10 +185,12 @@ body{
     content:"🌼";
 
     position:absolute;
+
     right:12px;
     bottom:2px;
 
     font-size:38px;
+
     opacity:.12;
 }
 
@@ -498,26 +493,26 @@ body{
     background:
 
         radial-gradient(
-            ellipse at 20% 30%,
-            rgba(255,204,224,.15),
+            ellipse at 18% 28%,
+            rgba(255,190,215,.15),
             transparent 27%
         ),
 
         radial-gradient(
-            ellipse at 80% 30%,
-            rgba(192,216,255,.15),
+            ellipse at 82% 28%,
+            rgba(180,210,250,.15),
             transparent 27%
         ),
 
         radial-gradient(
-            ellipse at 25% 80%,
-            rgba(255,224,157,.15),
+            ellipse at 20% 78%,
+            rgba(247,211,143,.15),
             transparent 25%
         ),
 
         radial-gradient(
-            ellipse at 75% 80%,
-            rgba(197,231,187,.16),
+            ellipse at 80% 78%,
+            rgba(190,225,182,.16),
             transparent 25%
         ),
 
@@ -527,6 +522,11 @@ body{
             #eaf4e5
         );
 }
+
+
+/* =========================================================
+   FOUR KEYWORD GROUPS
+========================================================= */
 
 .feature-group{
     position:absolute;
@@ -538,73 +538,85 @@ body{
     border-radius:50%;
 }
 
+
+/* AI & INTELLIGENT SYSTEMS */
+
 .feature-group.ai{
-    width:470px;
-    height:330px;
+    width:450px;
+    height:300px;
 
     left:3%;
-    top:17%;
+    top:16%;
 
     background:
         radial-gradient(
             ellipse,
-            rgba(255,190,215,.20),
-            rgba(255,190,215,.06) 48%,
+            rgba(255,190,215,.22),
+            rgba(255,190,215,.07) 48%,
             transparent 72%
         );
 }
 
-.feature-group.vision{
-    width:450px;
-    height:320px;
 
-    right:3%;
-    top:17%;
-
-    background:
-        radial-gradient(
-            ellipse,
-            rgba(180,210,250,.20),
-            rgba(180,210,250,.06) 48%,
-            transparent 72%
-        );
-}
-
-.feature-group.data{
-    width:410px;
-    height:250px;
-
-    left:11%;
-    bottom:5%;
-
-    background:
-        radial-gradient(
-            ellipse,
-            rgba(247,211,143,.20),
-            rgba(247,211,143,.06) 48%,
-            transparent 72%
-        );
-}
+/* EMERGING TECHNOLOGY */
 
 .feature-group.tech{
-    width:410px;
-    height:250px;
+    width:430px;
+    height:300px;
 
-    right:11%;
-    bottom:5%;
+    right:3%;
+    top:16%;
 
     background:
         radial-gradient(
             ellipse,
             rgba(190,225,182,.22),
-            rgba(190,225,182,.06) 48%,
+            rgba(190,225,182,.07) 48%,
+            transparent 72%
+        );
+}
+
+
+/* DATA & COMPUTING */
+
+.feature-group.data{
+    width:420px;
+    height:260px;
+
+    left:8%;
+    bottom:5%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(247,211,143,.22),
+            rgba(247,211,143,.07) 48%,
+            transparent 72%
+        );
+}
+
+
+/* APPLICATIONS & DOMAIN */
+
+.feature-group.application{
+    width:420px;
+    height:260px;
+
+    right:8%;
+    bottom:5%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(210,190,235,.22),
+            rgba(210,190,235,.07) 48%,
             transparent 72%
         );
 }
 
 
 /* =========================================================
-   GROUP TITLE
+   GROUP TITLES
 ========================================================= */
 
 .group-title{
@@ -617,7 +629,7 @@ body{
     border-radius:25px;
 
     background:
-        rgba(255,255,255,.88);
+        rgba(255,255,255,.90);
 
     border:
         1px solid
@@ -634,28 +646,44 @@ body{
         blur(4px);
 }
 
+
+/* AI */
+
 .group-title.ai{
-    left:14%;
-    top:18%;
+    left:12%;
+    top:17%;
+
     color:#c9577d;
 }
 
-.group-title.vision{
-    right:14%;
-    top:18%;
-    color:#527bb5;
+
+/* Emerging */
+
+.group-title.tech{
+    right:12%;
+    top:17%;
+
+    color:#5d8755;
 }
 
+
+/* Data */
+
 .group-title.data{
-    left:22%;
-    bottom:11%;
+    left:17%;
+    bottom:10%;
+
     color:#b07820;
 }
 
-.group-title.tech{
-    right:22%;
-    bottom:11%;
-    color:#5d8755;
+
+/* Applications */
+
+.group-title.application{
+    right:17%;
+    bottom:10%;
+
+    color:#8266a4;
 }
 
 
@@ -724,7 +752,7 @@ body{
     border-radius:14px;
 
     background:
-        rgba(255,255,255,.86);
+        rgba(255,255,255,.88);
 
     border:
         1px solid
@@ -901,6 +929,7 @@ body{
                 rgba(255,225,130,.4)
             );
     }
+
 }
 
 @keyframes featureYellowGlow{
@@ -928,6 +957,7 @@ body{
 
         opacity:0;
     }
+
 }
 
 @keyframes featureFlowerSelected{
@@ -949,6 +979,7 @@ body{
             translate(-50%,-50%)
             scale(1.10);
     }
+
 }
 
 
@@ -983,16 +1014,16 @@ body{
     stroke:#d77d9d;
 }
 
-.feature-line.vision{
-    stroke:#7099d0;
+.feature-line.tech{
+    stroke:#7da46f;
 }
 
 .feature-line.data{
     stroke:#d5a34b;
 }
 
-.feature-line.tech{
-    stroke:#7da46f;
+.feature-line.application{
+    stroke:#967bb7;
 }
 
 
@@ -1350,7 +1381,6 @@ body{
     color:#899589;
 
     font-size:9px;
-
     font-weight:700;
 }
 
@@ -1463,6 +1493,7 @@ body{
 
         opacity:0;
     }
+
 }
 
 @keyframes flowerSelected{
@@ -1484,6 +1515,7 @@ body{
             translate(-50%,-50%)
             scale(1.10);
     }
+
 }
 
 
@@ -1750,7 +1782,6 @@ body{
     display:flex;
 
     align-items:center;
-
     justify-content:center;
 
     flex-wrap:wrap;
@@ -1779,12 +1810,15 @@ body{
 .process-step .n{
     font-size:22px;
     font-weight:800;
+
     color:#426a48;
 }
 
 .process-step .l{
     margin-top:4px;
+
     font-size:11px;
+
     color:#8a968b;
 }
 
@@ -1832,6 +1866,7 @@ footer{
         grid-template-columns:
             repeat(2,1fr);
     }
+
 }
 
 @media(max-width:650px){
@@ -1852,13 +1887,14 @@ footer{
         width:350px;
         height:280px;
         left:2%;
+        top:14%;
     }
 
-    .feature-group.vision{
+    .feature-group.tech{
         width:350px;
         height:280px;
         right:2%;
-        top:37%;
+        top:36%;
     }
 
     .feature-group.data{
@@ -1868,7 +1904,7 @@ footer{
         bottom:4%;
     }
 
-    .feature-group.tech{
+    .feature-group.application{
         width:320px;
         height:220px;
         right:3%;
@@ -1877,6 +1913,26 @@ footer{
 
     .feature-center{
         top:34%;
+    }
+
+    .group-title.ai{
+        left:8%;
+        top:15%;
+    }
+
+    .group-title.tech{
+        right:8%;
+        top:37%;
+    }
+
+    .group-title.data{
+        left:10%;
+        bottom:9%;
+    }
+
+    .group-title.application{
+        right:8%;
+        bottom:9%;
     }
 
     .co-field{
@@ -1919,9 +1975,7 @@ footer{
 
 </head>
 
-
 <body>
-
 
 <!-- =========================================================
      HEADER
@@ -1959,9 +2013,7 @@ footer{
 
 </header>
 
-
 <main class="container">
-
 
 <!-- =========================================================
      KPI
@@ -1985,7 +2037,6 @@ footer{
 
 </div>
 
-
 <div class="kpi">
 
 <div class="kpi-label">
@@ -2002,7 +2053,6 @@ footer{
 
 </div>
 
-
 <div class="kpi">
 
 <div class="kpi-label">
@@ -2018,7 +2068,6 @@ footer{
 </div>
 
 </div>
-
 
 <div class="kpi">
 
@@ -2038,7 +2087,6 @@ footer{
 
 </section>
 
-
 <!-- =========================================================
      DATA PROCESSING FLOW
 ========================================================= -->
@@ -2057,7 +2105,6 @@ footer{
 
 </div>
 
-
 <div class="process-flow" id="processFlow">
 
 <div class="process-step">
@@ -2072,11 +2119,9 @@ footer{
 
 </div>
 
-
 <div class="process-arrow">
     →
 </div>
-
 
 <div class="process-step">
 
@@ -2090,11 +2135,9 @@ footer{
 
 </div>
 
-
 <div class="process-arrow">
     →
 </div>
-
 
 <div class="process-step">
 
@@ -2108,11 +2151,9 @@ footer{
 
 </div>
 
-
 <div class="process-arrow">
     →
 </div>
-
 
 <div class="process-step">
 
@@ -2130,13 +2171,11 @@ footer{
 
 </section>
 
-
 <!-- =========================================================
      DASHBOARD
 ========================================================= -->
 
 <section class="grid">
-
 
 <!-- =========================================================
      TOP KEYWORDS
@@ -2162,7 +2201,6 @@ footer{
 
 <div class="plot" id="keywords"></div>
 
-
 <div class="explanation">
 
 <div class="explanation-title">
@@ -2181,7 +2219,6 @@ footer{
 </div>
 
 </div>
-
 
 <!-- =========================================================
      TOP AUTHORS
@@ -2207,7 +2244,6 @@ footer{
 
 <div class="plot" id="authors"></div>
 
-
 <div class="explanation">
 
 <div class="explanation-title">
@@ -2227,7 +2263,6 @@ footer{
 </div>
 
 </div>
-
 
 <!-- =========================================================
      PUBLICATIONS BY YEAR
@@ -2253,7 +2288,6 @@ footer{
 
 <div class="plot" id="years"></div>
 
-
 <div class="explanation">
 
 <div class="explanation-title">
@@ -2269,7 +2303,6 @@ footer{
 </div>
 
 </div>
-
 
 <!-- =========================================================
      RESEARCH AREAS
@@ -2293,7 +2326,6 @@ footer{
 
 </div>
 
-
 <div class="research-field" id="subjects">
 
 <div class="research-center-label">
@@ -2313,9 +2345,7 @@ footer{
 
 </div>
 
-
 <div id="researchPie"></div>
-
 
 <div class="explanation">
 
@@ -2340,7 +2370,6 @@ footer{
 
 </div>
 
-
 <!-- =========================================================
      EMBEDDING
 ========================================================= -->
@@ -2363,7 +2392,6 @@ footer{
 
 </div>
 
-
 <div class="embedding-box">
 
 <div class="embedding-title">
@@ -2373,7 +2401,6 @@ footer{
 <p id="embedTextUsed">
     –
 </p>
-
 
 <div class="embedding-grid">
 
@@ -2389,7 +2416,6 @@ footer{
 
 </div>
 
-
 <div class="embedding-item">
 
 <div class="label">
@@ -2402,7 +2428,6 @@ footer{
 
 </div>
 
-
 <div class="embedding-item">
 
 <div class="label">
@@ -2414,7 +2439,6 @@ footer{
 </div>
 
 </div>
-
 
 <div class="embedding-item">
 
@@ -2429,7 +2453,6 @@ footer{
 </div>
 
 </div>
-
 
 <div class="embedding-grid"
      style="margin-top:10px;">
@@ -2446,7 +2469,6 @@ footer{
 
 </div>
 
-
 <div class="embedding-item">
 
 <div class="label">
@@ -2459,7 +2481,6 @@ footer{
 
 </div>
 
-
 <div class="embedding-item">
 
 <div class="label">
@@ -2471,7 +2492,6 @@ footer{
 </div>
 
 </div>
-
 
 <div class="embedding-item">
 
@@ -2488,7 +2508,6 @@ footer{
 </div>
 
 </div>
-
 
 <div class="explanation">
 
@@ -2518,7 +2537,6 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
 
 </div>
 
-
 <!-- =========================================================
      KEYWORD CO-OCCURRENCE
 ========================================================= -->
@@ -2541,13 +2559,11 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
 
 </div>
 
-
 <div class="co-field" id="coField">
 
 <div class="co-community ai"></div>
 <div class="co-community vision"></div>
 <div class="co-community data"></div>
-
 
 <div class="co-group-title ai">
     🌸 AI &amp; Machine Learning
@@ -2561,10 +2577,8 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
     🌻 Data &amp; Computing
 </div>
 
-
 <svg class="co-svg"
-     id="coSvg"></svg>
-
+  id="coSvg"></svg>
 
 <div class="butterfly b1">
     🦋
@@ -2582,7 +2596,6 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
     🦋
 </div>
 
-
 <div class="co-center">
 
 <div class="icon"></div>
@@ -2595,7 +2608,6 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
 </div>
 
 </div>
-
 
 <div class="explanation">
 
@@ -2618,7 +2630,6 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
 
 </div>
 
-
 <!-- =========================================================
      KEYWORD FREQUENCY GARDEN
 ========================================================= -->
@@ -2632,7 +2643,7 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
 </div>
 
 <div class="card-sub">
-    Top-10 keywords of the Final Dataset, grouped visually
+    Top-10 keywords of the Final Dataset · Four research theme groups
 </div>
 
 <div class="card-flower">
@@ -2641,16 +2652,24 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
 
 </div>
 
-
 <div class="feature-field"
      id="featureField">
 
+<!-- =====================================================
+     FOUR VISUAL GROUP BACKGROUNDS
+===================================================== -->
 
 <div class="feature-group ai"></div>
-<div class="feature-group vision"></div>
-<div class="feature-group data"></div>
+
 <div class="feature-group tech"></div>
 
+<div class="feature-group data"></div>
+
+<div class="feature-group application"></div>
+
+<!-- =====================================================
+     BUTTERFLIES
+===================================================== -->
 
 <div class="butterfly b1">
     🦋
@@ -2672,27 +2691,32 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
     🦋
 </div>
 
+<!-- =====================================================
+     FOUR GROUP TITLES
+===================================================== -->
 
 <div class="group-title ai">
-    🌸 AI &amp; Machine Learning
-</div>
-
-<div class="group-title vision">
-    🌼 Vision &amp; Language
-</div>
-
-<div class="group-title data">
-    🌻 Data &amp; Computing
+    🌹 AI &amp; Intelligent Systems
 </div>
 
 <div class="group-title tech">
     🌷 Emerging Technology
 </div>
 
+<div class="group-title data">
+    🌻 Data &amp; Computing
+</div>
+
+<div class="group-title application">
+    🌸 Applications &amp; Domain
+</div>
 
 <svg class="feature-svg"
-     id="featureSvg"></svg>
+  id="featureSvg"></svg>
 
+<!-- =====================================================
+     CENTER
+===================================================== -->
 
 <div class="feature-center">
 
@@ -2709,7 +2733,6 @@ SPECTER2 ถูกใช้ในขั้นตอน Text Embedding เพื�
 
 </div>
 
-
 <div class="explanation">
 
 <div class="explanation-title">
@@ -2722,6 +2745,15 @@ Keyword Normalization เพื่อให้เห็น Research Themes ท�
 ในชุดข้อมูล Final หลังทำ EID
 </p>
 
+<p>
+Keyword ทั้ง 10 รายการถูกจัดกลุ่มเชิงธีมออกเป็น 4 กลุ่ม ได้แก่
+🌻 Data &amp; Computing,
+🌷 Emerging Technology,
+🌹 AI &amp; Intelligent Systems
+และ 🌸 Applications &amp; Domain
+เพื่อช่วยให้เห็นภาพรวมของประเภท Research Theme ที่ปรากฏในชุดข้อมูล
+</p>
+
 </div>
 
 </div>
@@ -2730,13 +2762,9 @@ Keyword Normalization เพื่อให้เห็น Research Themes ท�
 
 </main>
 
-
 <footer id="siteFooter">
-
 🌱🌸 Scopus Data Analysis
-
 </footer>
-
 
 <script>
 
@@ -2753,7 +2781,8 @@ const DATA_BASE = "./";
 
 async function loadJSON(name){
 
-    const url = DATA_BASE + name;
+    const url =
+        DATA_BASE + name;
 
     const response =
         await fetch(
@@ -2780,7 +2809,10 @@ async function loadJSON(name){
    SAFE HELPERS
 ========================================================= */
 
-function numberValue(value, fallback=0){
+function numberValue(
+    value,
+    fallback=0
+){
 
     const n =
         Number(value);
@@ -2906,7 +2938,6 @@ function baseLayout(){
             embedData
         );
 
-
     }
     catch(error){
 
@@ -2915,22 +2946,17 @@ function baseLayout(){
                 "div"
             );
 
-
         errorBox.className =
             "explanation";
-
 
         errorBox.style.marginBottom =
             "20px";
 
-
         errorBox.style.borderColor =
             "#e3b7b7";
 
-
         errorBox.style.color =
             "#7a4646";
-
 
         errorBox.innerHTML = `
 
@@ -2969,24 +2995,20 @@ function baseLayout(){
 
         `;
 
-
         const container =
             document.querySelector(
                 ".container"
             );
-
 
         container.insertBefore(
             errorBox,
             container.firstChild
         );
 
-
         console.error(
             "Data loading error:",
             error
         );
-
 
         return;
 
@@ -3387,7 +3409,6 @@ function baseLayout(){
                     ? `จากข้อมูลจริง Keyword ที่พบมากที่สุดคือ ${top3}`
                     : "ไม่พบข้อมูล Keyword";
 
-
     })();
 
 
@@ -3711,10 +3732,6 @@ function baseLayout(){
             labels.length;
 
 
-        /* -----------------------------------------------
-           CENTER
-        ------------------------------------------------ */
-
         document
             .getElementById(
                 "researchCenterNumber"
@@ -3722,10 +3739,6 @@ function baseLayout(){
             .textContent =
                 totalAreas;
 
-
-        /* -----------------------------------------------
-           COLORS
-        ------------------------------------------------ */
 
         const colors = [
 
@@ -3742,10 +3755,6 @@ function baseLayout(){
 
         ];
 
-
-        /* -----------------------------------------------
-           DONUT
-        ------------------------------------------------ */
 
         Plotly.newPlot(
 
@@ -3865,10 +3874,6 @@ function baseLayout(){
         );
 
 
-        /* -----------------------------------------------
-           CLICK → PULL SLICE
-        ------------------------------------------------ */
-
         pie.on(
             "plotly_click",
             function(event){
@@ -3922,7 +3927,6 @@ function baseLayout(){
 
                             }
 
-
                             return alreadyPulled
                                 ? 0
                                 : .10;
@@ -3949,10 +3953,6 @@ function baseLayout(){
         );
 
 
-        /* -----------------------------------------------
-           RESIZE
-        ------------------------------------------------ */
-
         window.addEventListener(
             "resize",
             function(){
@@ -3969,82 +3969,370 @@ function baseLayout(){
 
     /* =====================================================
        KEYWORD FREQUENCY GARDEN
+       FOUR GROUPS
     ===================================================== */
 
     const featurePositions = [
 
+        /* -------------------------------
+           AI & INTELLIGENT SYSTEMS
+        -------------------------------- */
+
         {
-            x:15,
-            y:38,
-            icon:"🌸",
+            x:14,
+            y:37,
+            group:"ai",
+            icon:"🌹",
             size:44
         },
 
         {
-            x:29,
-            y:35,
-            icon:"🌸",
-            size:42
+            x:27,
+            y:34,
+            group:"ai",
+            icon:"🌹",
+            size:41
         },
 
         {
-            x:42,
-            y:39,
-            icon:"🌸",
-            size:40
+            x:39,
+            y:40,
+            group:"ai",
+            icon:"🌹",
+            size:38
         },
 
-        {
-            x:22,
-            y:53,
-            icon:"🌸",
-            size:30
-        },
 
-        {
-            x:36,
-            y:55,
-            icon:"🌸",
-            size:29
-        },
+        /* -------------------------------
+           EMERGING TECHNOLOGY
+        -------------------------------- */
 
         {
             x:61,
             y:36,
-            icon:"🌼",
-            size:29
+            group:"tech",
+            icon:"🌷",
+            size:42
         },
 
         {
             x:75,
-            y:35,
-            icon:"🌼",
-            size:28
+            y:34,
+            group:"tech",
+            icon:"🌷",
+            size:39
         },
 
         {
-            x:69,
-            y:52,
-            icon:"🌼",
-            size:28
+            x:86,
+            y:43,
+            group:"tech",
+            icon:"🌷",
+            size:35
+        },
+
+
+        /* -------------------------------
+           DATA & COMPUTING
+        -------------------------------- */
+
+        {
+            x:19,
+            y:61,
+            group:"data",
+            icon:"🌻",
+            size:38
         },
 
         {
-            x:83,
-            y:51,
-            icon:"🌼",
-            size:27
+            x:34,
+            y:62,
+            group:"data",
+            icon:"🌻",
+            size:35
+        },
+
+
+        /* -------------------------------
+           APPLICATIONS & DOMAIN
+        -------------------------------- */
+
+        {
+            x:66,
+            y:61,
+            group:"application",
+            icon:"🌸",
+            size:37
         },
 
         {
-            x:80,
-            y:64,
-            icon:"🌼",
-            size:26
+            x:81,
+            y:62,
+            group:"application",
+            icon:"🌸",
+            size:34
         }
 
     ];
 
+
+    /* =====================================================
+       KEYWORD CLASSIFIER
+    ===================================================== */
+
+    function classifyKeyword(keyword){
+
+        const text =
+            String(keyword || "")
+                .toLowerCase()
+                .trim();
+
+
+        /* -----------------------------------------------
+           AI & INTELLIGENT SYSTEMS
+        ------------------------------------------------ */
+
+        const aiWords = [
+
+            "artificial intelligence",
+            "machine learning",
+            "deep learning",
+            "neural network",
+            "neural networks",
+            "reinforcement learning",
+            "computer vision",
+            "natural language processing",
+            "nlp",
+            "intelligent system",
+            "intelligent systems",
+            "generative ai",
+            "generative artificial intelligence",
+            "large language model",
+            "large language models",
+            "llm",
+            "transformer",
+            "fuzzy",
+            "classification",
+            "object detection",
+            "image recognition",
+            "pattern recognition"
+
+        ];
+
+
+        /* -----------------------------------------------
+           DATA & COMPUTING
+        ------------------------------------------------ */
+
+        const dataWords = [
+
+            "data science",
+            "data mining",
+            "big data",
+            "data analysis",
+            "data analytics",
+            "database",
+            "databases",
+            "data management",
+            "data processing",
+            "information retrieval",
+            "information system",
+            "information systems",
+            "cloud computing",
+            "distributed computing",
+            "high performance computing",
+            "parallel computing",
+            "computing",
+            "algorithm",
+            "algorithms",
+            "optimization",
+            "statistics",
+            "statistical"
+
+        ];
+
+
+        /* -----------------------------------------------
+           EMERGING TECHNOLOGY
+        ------------------------------------------------ */
+
+        const techWords = [
+
+            "internet of things",
+            "iot",
+            "blockchain",
+            "edge computing",
+            "quantum computing",
+            "5g",
+            "6g",
+            "wireless sensor",
+            "wireless sensors",
+            "robotics",
+            "robot",
+            "augmented reality",
+            "virtual reality",
+            "mixed reality",
+            "extended reality",
+            "smart city",
+            "smart cities",
+            "digital twin",
+            "metaverse",
+            "autonomous",
+            "cyber physical",
+            "wearable",
+            "wearables"
+
+        ];
+
+
+        /* -----------------------------------------------
+           APPLICATIONS & DOMAIN
+        ------------------------------------------------ */
+
+        const applicationWords = [
+
+            "healthcare",
+            "health care",
+            "medical",
+            "medicine",
+            "clinical",
+            "bioinformatics",
+            "agriculture",
+            "smart agriculture",
+            "education",
+            "e-learning",
+            "learning analytics",
+            "finance",
+            "financial",
+            "business",
+            "marketing",
+            "social media",
+            "transportation",
+            "traffic",
+            "energy",
+            "environment",
+            "manufacturing",
+            "industry",
+            "industrial",
+            "security",
+            "cybersecurity",
+            "cyber security",
+            "software engineering",
+            "software development",
+            "human computer interaction",
+            "hci"
+
+        ];
+
+
+        function containsKeyword(
+            words
+        ){
+
+            return words.some(
+                word =>
+                    text.includes(
+                        word
+                    )
+            );
+
+        }
+
+
+        if(
+            containsKeyword(
+                aiWords
+            )
+        ){
+
+            return "ai";
+
+        }
+
+
+        if(
+            containsKeyword(
+                techWords
+            )
+        ){
+
+            return "tech";
+
+        }
+
+
+        if(
+            containsKeyword(
+                dataWords
+            )
+        ){
+
+            return "data";
+
+        }
+
+
+        if(
+            containsKeyword(
+                applicationWords
+            )
+        ){
+
+            return "application";
+
+        }
+
+
+        /* -----------------------------------------------
+           FALLBACK
+           Keeps all 4 groups populated when possible.
+        ------------------------------------------------ */
+
+        return null;
+
+    }
+
+
+    /* =====================================================
+       GROUP DEFINITIONS
+    ===================================================== */
+
+    const featureGroups = {
+
+        ai:{
+            name:
+                "AI & Intelligent Systems",
+            icon:
+                "🌹"
+        },
+
+        tech:{
+            name:
+                "Emerging Technology",
+            icon:
+                "🌷"
+        },
+
+        data:{
+            name:
+                "Data & Computing",
+            icon:
+                "🌻"
+        },
+
+        application:{
+            name:
+                "Applications & Domain",
+            icon:
+                "🌸"
+        }
+
+    };
+
+
+    /* =====================================================
+       DRAW KEYWORD FREQUENCY GARDEN
+    ===================================================== */
 
     (function drawKeywordFrequencyGarden(){
 
@@ -4081,8 +4369,117 @@ function baseLayout(){
                 );
 
 
-        kws.forEach(
-            (item,index)=>{
+        if(!kws.length){
+
+            return;
+
+        }
+
+
+        /* =================================================
+           FIRST PASS — CLASSIFY KEYWORDS
+        ================================================= */
+
+        const classified =
+            kws.map(
+                (item,index)=>({
+
+                    item,
+                    index,
+                    group:
+                        classifyKeyword(
+                            item.keyword
+                        )
+
+                })
+            );
+
+
+        /* =================================================
+           ENSURE FOUR GROUPS ARE REPRESENTED
+        ================================================= */
+
+        const groupOrder = [
+
+            "ai",
+            "tech",
+            "data",
+            "application"
+
+        ];
+
+
+        const usedGroups =
+            new Set(
+                classified
+                    .map(
+                        item =>
+                            item.group
+                    )
+                    .filter(Boolean)
+            );
+
+
+        const missingGroups =
+            groupOrder.filter(
+                group =>
+                    !usedGroups.has(
+                        group
+                    )
+            );
+
+
+        const unclassified =
+            classified.filter(
+                item =>
+                    !item.group
+            );
+
+
+        let fallbackIndex = 0;
+
+
+        unclassified.forEach(
+            entry=>{
+
+                if(
+                    missingGroups.length
+                ){
+
+                    entry.group =
+                        missingGroups.shift();
+
+                }
+                else{
+
+                    entry.group =
+                        groupOrder[
+                            fallbackIndex %
+                            groupOrder.length
+                        ];
+
+                    fallbackIndex++;
+
+                }
+
+            }
+        );
+
+
+        /* =================================================
+           CREATE FLOWERS
+        ================================================= */
+
+        classified.forEach(
+            (entry,index)=>{
+
+                const item =
+                    entry.item;
+
+
+                const group =
+                    entry.group;
+
 
                 const pos =
                     featurePositions[index]
@@ -4090,7 +4487,10 @@ function baseLayout(){
                     {
                         x:50,
                         y:50,
-                        icon:"🌸",
+                        group:group,
+                        icon:
+                            featureGroups[group]
+                                .icon,
                         size:30
                     };
 
@@ -4103,6 +4503,10 @@ function baseLayout(){
 
                 flower.className =
                     "feature-flower";
+
+
+                flower.dataset.group =
+                    group;
 
 
                 flower.style.left =
@@ -4128,7 +4532,8 @@ function baseLayout(){
 
 
                 emoji.textContent =
-                    pos.icon;
+                    featureGroups[group]
+                        .icon;
 
 
                 const label =
@@ -4165,13 +4570,31 @@ function baseLayout(){
                     emoji
                 );
 
+
                 flower.appendChild(
                     label
                 );
 
+
                 flower.appendChild(
                     count
                 );
+
+
+                flower.title =
+
+                    featureGroups[group]
+                        .name +
+
+                    "\n" +
+
+                    item.keyword +
+
+                    "\nFrequency: " +
+
+                    formatNumber(
+                        item.count
+                    );
 
 
                 flower.addEventListener(
@@ -4212,6 +4635,10 @@ function baseLayout(){
         );
 
 
+        /* =================================================
+           CLICK OUTSIDE → CLEAR SELECTION
+        ================================================= */
+
         field.addEventListener(
             "click",
             function(){
@@ -4231,57 +4658,52 @@ function baseLayout(){
         );
 
 
-        const lines = [
+        /* =================================================
+           BUILD GROUP LINES
+        ================================================= */
 
-            {
-                group:"ai",
+        const lines = [];
 
-                points:[
-                    featurePositions[0],
-                    featurePositions[1],
-                    featurePositions[2],
-                    featurePositions[3],
-                    featurePositions[4]
-                ]
 
-            },
+        groupOrder.forEach(
+            group=>{
 
-            {
-                group:"vision",
+                const points =
+                    classified
+                        .filter(
+                            entry =>
+                                entry.group ===
+                                group
+                        )
+                        .map(
+                            entry =>
+                                featurePositions[
+                                    entry.index
+                                ]
+                        )
+                        .filter(Boolean);
 
-                points:[
-                    featurePositions[5],
-                    featurePositions[6],
-                    featurePositions[7],
-                    featurePositions[8]
-                ]
 
-            },
+                if(
+                    points.length > 1
+                ){
 
-            {
-                group:"data",
+                    lines.push({
 
-                points:[
-                    featurePositions[4],
-                    featurePositions[5],
-                    featurePositions[7]
-                ]
+                        group,
+                        points
 
-            },
+                    });
 
-            {
-                group:"tech",
-
-                points:[
-                    featurePositions[7],
-                    featurePositions[8],
-                    featurePositions[9]
-                ]
+                }
 
             }
+        );
 
-        ];
 
+        /* =================================================
+           DRAW LINES
+        ================================================= */
 
         function drawFeatureLines(){
 
@@ -4396,6 +4818,25 @@ function baseLayout(){
         window.addEventListener(
             "resize",
             drawFeatureLines
+        );
+
+
+        /* =================================================
+           DEBUG
+        ================================================= */
+
+        console.log(
+            "Keyword Frequency Garden groups:",
+            classified.map(
+                entry => ({
+                    keyword:
+                        entry.item.keyword,
+                    group:
+                        featureGroups[
+                            entry.group
+                        ].name
+                })
+            )
         );
 
     })();
@@ -4746,7 +5187,6 @@ function baseLayout(){
 
             }
 
-
             return flowers.find(
                 flower =>
                     flower.keyword ===
@@ -4889,22 +5329,16 @@ function baseLayout(){
 
                         const path =
                             document.createElementNS(
-
                                 "http://www.w3.org/2000/svg",
-
                                 "path"
-
                             );
 
 
                         path.setAttribute(
-
                             "d",
-
                             `M ${x1} ${y1} ` +
                             `Q ${controlX} ${controlY} ` +
                             `${x2} ${y2}`
-
                         );
 
 
@@ -4946,11 +5380,9 @@ function baseLayout(){
 
                         path.setAttribute(
                             "title",
-
                             `${connection.a} + ` +
                             `${connection.b}: ` +
                             `${formatNumber(connectionCount)}`
-
                         );
 
 
@@ -4977,11 +5409,9 @@ function baseLayout(){
 
     })();
 
-
 })();
 
 </script>
 
 </body>
-
 </html>
